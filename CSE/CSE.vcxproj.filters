@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Actions">
+      <UniqueIdentifier>{b6fe2839-39be-47a7-a1cb-4c28aa055234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors">
+      <UniqueIdentifier>{b96abc4c-3224-4101-bb1d-05c63cf7a1ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="char1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="char2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="BeginStory.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="OK.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="DramaManager.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC_Actor.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Actor.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoryBook.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Punch.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Hug.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundedNum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Insult.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Apologize.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Intervene.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Greet.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="BeginStory.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="OK.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="DramaManager.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Actor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Actor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoryBook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Punch.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Hug.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Bounded.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Insult.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Apologize.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Intervene.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Greet.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="placeholder.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="menu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="menupressed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="stage.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="text frame2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="char1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="char2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="arial.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
+</Project>

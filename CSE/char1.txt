@@ -1,0 +1,25 @@
+name = A
+image = char1.png
+x = 0
+y = 0
+
+angry = 0.0
+happy = 0.0
+
+sAgreeable = -0.4
+sConscientious = -0.3
+sExtraverted = -0.1
+sNeurotic = -0.5
+sOpen = 0.1
+
+pAgreeable = 0.0
+pConscientious = 0.0
+pExtraverted = 0.0
+pNeurotic = 0.0
+pOpen = 0.0
+
+pPAgreeable = 0.0
+pPConscientious = 0.0
+pPExtraverted = 0.0
+pPNeurotic = 0.0
+pPOpen = 0.0
