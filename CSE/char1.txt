@@ -1,7 +1,7 @@
-name = A
-image = char1.png
+name = Ash
+image = ash.png
 x = 0
-y = 0
+y = 200
 
 angry = 0.0
 happy = 0.0

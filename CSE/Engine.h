@@ -29,18 +29,17 @@ class Engine
 {
 protected:
 	
-	Menu menu;
 	Input input;
 	HistoryBook historyBook;
 	Planner planner;
 	WorldState worldstate;
 
-	DramaManager *Fate = new DramaManager("fate", historyBook);
-	Player_Actor *Protagonist = new Player_Actor("protagonist", historyBook);
-	NPC_Actor *Char1 = new NPC_Actor("char1.txt", historyBook);
-	NPC_Actor *Char2 = new NPC_Actor("char2.txt", historyBook);
+	Player_Actor *Protagonist = new Player_Actor("You", historyBook);
+	NPC_Actor* Char1 = new NPC_Actor("char1.txt", historyBook);
+	NPC_Actor* Char2 = new NPC_Actor("char2.txt", historyBook);
+	DramaManager *Fate = new DramaManager(Char1, Char2, historyBook);
 
-	std::queue<Action> plans;
+	//std::queue<Action> plans;
 	Actor *actors[MAX_ACTORS];	//Array of the 4 actors in the scene.
 	
 	sf::Clock clock;

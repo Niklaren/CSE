@@ -2,8 +2,9 @@
 #include "Action.h"
 #include "Actor.h"
 
-Action::Action(int momentsFromExecution_)
+Action::Action(Actor* subject_, int momentsFromExecution_)
 {
+	subject = subject_;
 	momentsFromExecution = momentsFromExecution_;
 }
 
@@ -27,13 +28,8 @@ void Action::React()
 std::string Action::GetSentence(){
 	std::string eventText = "";
 	std::string ssubject = subject->GetName();
-	std::string sobject = "";
-	if (HasObject())
-	{
-		sobject = object->GetName();
-	}
 
-	eventText = ssubject + " " + verb + " " + sobject + ".";
+	eventText = ssubject + " " + verb + "s.";
 
 	return eventText;
 }

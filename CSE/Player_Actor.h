@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Actor.h"
+#include "Menu.h"
 
 class Player_Actor : public Actor
 {
-
-	//options ??
+public: // ??? for now
+	//options ?
+	Menu menu;
 
 public:
 	Player_Actor(string name, HistoryBook& hb);

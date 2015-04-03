@@ -11,6 +11,8 @@ class HistoryBook
 {
 	std::vector<Action*> eventHistory;
 	
+	int time = 0;
+
 	sf::Font font;
 	//sf::Text eventsText;
 	sf::Texture texture;
@@ -22,9 +24,10 @@ public:
 
 	void EventHappened(Action*);
 	void LookupEvent(std::string);
-	int CountEvents();
-	int TimeElapsedSince();
-	bool HaventDoneEventBefore(std::string);
+	int CountEvents() { return eventHistory.size(); }
+	int TimeElapsedSince(std::string);
+	int TimeSinceStart(){ return time; }
+	bool HaventDoneEventBefore(Actor*, std::string);
 	bool HaventDoneEventSince(std::string, int moments);
 	Action* GetLastEvent() { return eventHistory.back(); } //??
 

@@ -26,16 +26,25 @@ protected:
 
 	int momentsFromExecution;
 
+	//bool interruptable = true;
+
 	virtual void Init() {}
 
 	double Blend(double a, double b, double weight);
 
 public:
-	Action(int momentsFromExecution_);
+	Action(Actor* subject_, int momentsFromExecution_);
 	Action();
 	~Action();
 
+	std::string GetVerb() { return verb; }
+
+	bool HasSubject(){ if (subject != NULL) { return true; } return false; }
+	Actor* Get_Subject() { assert(subject != NULL); return subject; }
 	void SetSubject(Actor* a){ subject = a; }
+
+	bool HasObject(){ if (object != NULL) { return true; } return false; }
+	Actor* Get_Object() { assert(object != NULL); return object; }
 	void SetObject(Actor* a){ object = a; }
 
 	virtual std::string GetSentence();
@@ -43,22 +52,18 @@ public:
 	virtual void React();
 	virtual void ExecuteConsequences(WorldState*) { return; }
 	virtual void EmotionalReaction(NPC_Actor*) = 0;
-	virtual void NPC_CalculateInclination(NPC_Actor*){ return; }
-	virtual void CalculateInclination(Actor*){ return; }
+	virtual float NPC_CalculateInclination(){ return 0; }
+	//virtual int CalculateInclination(Actor*){ return 0; }
 
 	virtual bool GetUsable() { return true; }
 	std::vector<WorldStateProperty> GetConditions() { return conditions; }
 	std::vector<WorldStateProperty> GetEffects() { return effects; }
 
-	std::string GetVerb() { return verb; }
-	bool HasSubject(){ if (subject != NULL) { return true; } return false; }
-	Actor* GetSubject() { assert(subject != NULL); return subject; }
-	bool HasObject(){ if (object != NULL) { return true; } return false; }
-	Actor* GetObject() { assert(object != NULL); return object; }
-
 	bool ReadyToExecute();
 	void MomentsPass();
 	int MomentsSinceExecution() { return -momentsFromExecution; }
 	void AddExecutiontime(int time) { momentsFromExecution += time; }
-};
 
+	//bool Interruptable(){ return Interruptable; }
+	//void SetInterruptable(bool i){ Interruptable=i; }
+};

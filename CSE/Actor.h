@@ -1,6 +1,8 @@
 #pragma once
 
 #include "BeginStory.h"
+#include "Prepare.h"
+
 #include "OK.h"
 #include "Punch.h"
 #include "Hug.h"
@@ -30,7 +32,6 @@ protected:
 	vector<Action*> plans;
 	string name;
 
-	HistoryBook* historyBook;
 
 public:
 	Actor(string name, HistoryBook& hb);
@@ -48,5 +49,7 @@ public:
 	void DiscardPlan(int index) { plans.erase(plans.begin()+index); }
 	
 	void TimeForward();
+
+	HistoryBook* historyBook;
 };
 

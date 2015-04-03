@@ -46,6 +46,7 @@ public:
 
 	void LoadFromFile(string FileName);
 	void AddAction(string ActionName);
+	void AddAction(string ActionName, Actor* target);
 	void RemoveAction(string ActionName);
 
 	bool Draw(sf::RenderWindow&);
@@ -63,7 +64,7 @@ public:
 
 	void ClearPlans();
 	void RePlan();
-	virtual void Plan(string);
+	virtual void Plan(Action*, int );
 	virtual void Plan(string verb, int moments, Actor* target);
 
 	virtual string GetName() { return name; }

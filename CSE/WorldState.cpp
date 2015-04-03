@@ -12,6 +12,7 @@ WorldState::WorldState()
 	WSProperties[WSP_FireBuilt].SetWSProperty(WSP_FireBuilt, WST_bool, false);
 	WSProperties[WSP_WoodCollected].SetWSProperty(WSP_WoodCollected, WST_bool, false);
 	WSProperties[WSP_WaterFetched].SetWSProperty(WSP_WaterFetched, WST_int, 0);
+	WSProperties[WSP_Greeting].SetWSProperty(WSP_Greeting, WST_bool, false);
 	WSProperties[WSP_Punched].SetWSProperty(WSP_Punched, WST_bool, false);
 }
 

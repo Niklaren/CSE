@@ -1,12 +1,12 @@
 #pragma once
 
 //forward declaration
-#include "Action.h"
+#include "ActionTargeted.h"
 //class Action;
 
 
 
-class BeginStory : public Action
+class BeginStory : public ActionTargeted
 {
 public:
 	Actor* extraActor;
@@ -19,7 +19,7 @@ public:
 	virtual std::string GetSentence();
 
 	void ExecuteConsequences(WorldState*);
-	virtual void NPC_CalculateInclination(NPC_Actor*);
+	//virtual float NPC_CalculateInclination();
 	virtual void EmotionalReaction(NPC_Actor*);
 };
 

@@ -5,36 +5,78 @@
 
 
 Hug::Hug(Actor* subject_, Actor* object_, int moments_ = 1)
-	: Action(moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
+	Init();
+
 	subject = subject_;
-	verb = "Hug";
 	object = object_;
 }
 
+Hug::Hug()
+{
+	Init();
+}
 
 Hug::~Hug()
 {
 }
 
-void Hug::ExecuteConsequences(WorldState* ws)
+void Hug::Init()
 {
+	verb = "Hug";
+
+	//effect
+	WorldStateProperty effect1, effect2;
+	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+	effects.push_back(effect1);
+	effect2.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Hug);
+	effects.push_back(effect2);
+
+	// conditions
+	// same location as target??
+
 }
 
-void Hug::NPC_CalculateInclination(NPC_Actor* affectingActor)
+std::string Hug::GetSentence()
 {
-	if ((affectingActor == object) && (subject->GetName() != "protagonist")){
-		//affectingActor->Plan("Apologize", subject);
+	if (subject->GetName() == "You"){
+		if (object->GetName() == "Ash")
+			return "You give Ash a hug.";
+		else if (object->GetName() == "Brooke")
+			return "You give Brooke a hug.";
 	}
-	return;
+	else if (subject->GetName() == "Ash"){
+		return "Ash hugs you tightly.";
+	}
+	else{
+		return "Brooke hugs you.";
+	}
+	return "hugs!!!";
+}
+
+void Hug::ExecuteConsequences(WorldState* ws)
+{
+
 }
 
 void Hug::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
-		affectingActor->Change_Agreeable(0.5);
-		affectingActor->Change_pAgreeable(0.2);
-		double happyChange = affectingActor->EmotionalCoefficient() * 0.1;
-		affectingActor->Change_Happy(happyChange);
+
 	}
+	if (affectingActor == subject){
+
+	}
+}
+
+float Hug::NPC_CalculateInclination()
+{
+	double a = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_Extraverted();
+	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
+	double r = Blend(a, b, w) / 2;
+	if (!(subject->historyBook->HaventDoneEventBefore(object, "Hug")))	// if the object has hugged during the history we
+		r += 0.1;														// may be more inclined to hug
+	return r;
 }

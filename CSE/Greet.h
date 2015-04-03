@@ -1,15 +1,20 @@
 #pragma once
-#include "Action.h"
+#include "ActionTargeted.h"
 
 class Greet :
-	public Action
+	public ActionTargeted
 {
 public:
 	Greet(Actor* subject_, Actor* object_, int moments_);
+	Greet();
 	~Greet();
+	void Init();
+
+	std::string GetSentence();
+
+	virtual bool GetUsable();
 
 	void ExecuteConsequences(WorldState*);
-	void NPC_CalculateInclination(NPC_Actor*);
 	void EmotionalReaction(NPC_Actor*);
+	float NPC_CalculateInclination();
 };
-

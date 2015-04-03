@@ -1,8 +1,8 @@
 #pragma once
-#include "Action.h"
+#include "ActionTargeted.h"
 
 class Punch :
-	public Action
+	public ActionTargeted
 {
 public:
 	Punch();
@@ -10,8 +10,11 @@ public:
 	~Punch();
 
 	void Init();
+
+	std::string GetSentence();
+
 	void ExecuteConsequences(WorldState*);
-	void NPC_CalculateInclination(NPC_Actor*);
+	float NPC_CalculateInclination();
 	void EmotionalReaction(NPC_Actor*);
 };
 

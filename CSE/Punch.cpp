@@ -8,7 +8,7 @@
 
 
 Punch::Punch(Actor* subject_, Actor* object_, int moments_=1)
-	: Action(moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
 	Init();
 
@@ -32,16 +32,12 @@ void Punch::Init()
 
 	// effects
 	WorldStateProperty effect1, effect2;
-	effect1.SetWSProperty(WSP_Punched, WST_bool, true);
+	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
 	effects.push_back(effect1);
-
-
 
 	// conditions
 	// same location as target??
-	WorldStateProperty condition1;
-	condition1.SetWSProperty(WSP_Insulted, WST_bool, true);
-	conditions.push_back(condition1);
+
 }
 
 void Punch::ExecuteConsequences(WorldState* ws)
@@ -50,7 +46,7 @@ void Punch::ExecuteConsequences(WorldState* ws)
 
 }
 
-void Punch::NPC_CalculateInclination(NPC_Actor* affectingActor)
+float Punch::NPC_CalculateInclination()
 {
 	/*if (affectingActor == object){
 		double punch_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
@@ -59,8 +55,8 @@ void Punch::NPC_CalculateInclination(NPC_Actor* affectingActor)
 			affectingActor->Plan("Punch", 1, subject); // return the punch to the puncher
 		if (apologize_inclination > 0)
 			affectingActor->Plan("Apologize", 1, subject);
-	}
-	return;*/
+	}*/
+	return 0;
 }
 
 void Punch::EmotionalReaction(NPC_Actor* affectingActor)
@@ -70,4 +66,12 @@ void Punch::EmotionalReaction(NPC_Actor* affectingActor)
 		double angerChange = affectingActor->EmotionalCoefficient() * 0.15;
 		affectingActor->Change_Angry(angerChange);
 	}
+}
+
+std::string Punch::GetSentence()
+{
+	if (subject->GetName() == "You"){
+		return "you make a joke about it. Ash laughs.";
+	}
+	return subject->GetName() + " laughs it off. all good.";
 }

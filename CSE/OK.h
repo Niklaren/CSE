@@ -14,10 +14,12 @@ private:
 
 public:
 	OK(Actor* subject_, int moments_);
+	OK();
 	~OK();
 	
+	std::string GetSentence();
 
-	void CalculateInclination(Actor*);
+	float CalculateInclination();
 	void EmotionalReaction(NPC_Actor*); // Ok has no emotional reaction??
 
 };

@@ -5,9 +5,8 @@
 
 
 Intervene::Intervene(Actor* subject_, NPC_Actor* a1_, NPC_Actor* a2_, int moments_ = 1)
-	: Action(moments_)
+	: Action(subject_, moments_)
 {
-	subject = subject_;
 	verb = "Intervene";
 	a1 = a1_;
 	a2 = a2_;
@@ -28,9 +27,9 @@ void Intervene::ExecuteConsequences(WorldState* ws)
 {
 }
 
-void Intervene::NPC_CalculateInclination(NPC_Actor* affectingActor)
+float Intervene::NPC_CalculateInclination()
 {
-	return;
+	return 0;
 }
 
 void Intervene::EmotionalReaction(NPC_Actor* affectingActor)

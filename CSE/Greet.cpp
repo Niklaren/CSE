@@ -5,31 +5,87 @@
 
 
 Greet::Greet(Actor* subject_, Actor* object_, int moments_ = 1)
-	: Action(moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
-	subject = subject_;
-	verb = "Greet";
-	object = object_;
+	Init();
+
 }
 
+Greet::Greet()
+{
+	Init();
+}
 
 Greet::~Greet()
 {
 }
 
-void Greet::ExecuteConsequences(WorldState* ws)
+void Greet::Init()
 {
+	verb = "Greet";
+
+	//effect
+	WorldStateProperty effect1, effect2;
+	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+	effects.push_back(effect1);
+	effect1.SetWSProperty(WSP_Greeting, WST_bool, true);
+	effects.push_back(effect1);
+
+	// conditions
+	// none
+
 }
 
-void Greet::NPC_CalculateInclination(NPC_Actor* affectingActor)
+std::string Greet::GetSentence()
 {
-	// if i've not already greeted and greet inclination
-	return;
+	if (subject->GetName() == "You"){
+		if (object->GetName() == "Ash")
+			return "Your old pal Ash, it's been awhile. Hi!";
+		else if (object->GetName() == "Brooke")
+			return "The friend Ash told you About, Brooke.";
+	}
+	else if (subject->GetName() == "Ash"){
+		return "Ash greets you warmly.";
+	}
+	else{
+		return "Brooke says hi. nice to meet you.";
+	}
+	return "greetings";
+}
+
+bool Greet::GetUsable()
+{
+	if (!(subject->historyBook->HaventDoneEventBefore(subject, verb))) // if we've done it before
+			return false;
+	if (subject->historyBook->TimeSinceStart() > 5) // if we've moved passed greeting stage
+		return false;
+	return true;
+}
+
+void Greet::ExecuteConsequences(WorldState* ws)
+{
+	
 }
 
 void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 {
+	
 	if (affectingActor == object){
-
+		Goal g;
+		g.SetRelevance(0.7f);
+		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+		affectingActor->AddGoal(g);
 	}
+	if (affectingActor == subject){
+		
+	}
+}
+
+float Greet::NPC_CalculateInclination()
+{
+	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
+	double result = Blend(a, b, w);
+	return float(result);
 }

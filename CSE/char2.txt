@@ -1,7 +1,7 @@
-name = B
-image = char2.png
-x = 200
-y = 0
+name = Brooke
+image = brooke.png
+x = 240
+y = 200
 
 angry = 0.0
 happy = 0.0

@@ -5,10 +5,8 @@
 
 
 Insult::Insult(Actor* subject_, Actor* object_, int moments_ = 1)
-	: Action(moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
-	subject = subject_;
-	object = object_;
 
 	Init();
 }
@@ -65,7 +63,7 @@ void Insult::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-void Insult::NPC_CalculateInclination(NPC_Actor* affectingActor)
+float Insult::NPC_CalculateInclination()
 {
 	/*if (affectingActor == object){
 		double punch_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
@@ -75,6 +73,6 @@ void Insult::NPC_CalculateInclination(NPC_Actor* affectingActor)
 		else if (insult_inclination > 0.0)
 			affectingActor->Plan("Insult", 1, subject);
 
-	}
-	return;*/
+	}*/
+	return 0;
 }

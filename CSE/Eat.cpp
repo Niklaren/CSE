@@ -5,11 +5,8 @@
 
 
 Eat::Eat(Actor* subject_, int moments_ = 1)
-	: Action(moments_)
+	: Action(subject_, moments_)
 {
-	subject = subject_;
-	//object = object_;
-
 	Init();
 }
 
@@ -53,15 +50,12 @@ void Eat::ExecuteConsequences(WorldState* ws)
 
 void Eat::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	if (affectingActor == object){
-
-	}
 	if (affectingActor == subject){
 
 	}
 }
 
-void Eat::NPC_CalculateInclination(NPC_Actor* affectingActor)
+float Eat::NPC_CalculateInclination()
 {
-
+	return 0;
 }

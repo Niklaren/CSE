@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Input.h"
 #include "Option.h"
 #include <vector>
 #include <string>
@@ -27,5 +28,7 @@ public:
 	bool OptionClicked(float mouseX, float mouseY, string &name);
 
 	void Reset();
+
+	bool HandleMenu(Input input);
 };
 

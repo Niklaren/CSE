@@ -5,39 +5,77 @@
 
 
 Apologize::Apologize(Actor* subject_, Actor* object_, int moments_ = 1)
-	: Action(moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
-	subject = subject_;
-	verb = "Apologize";
-	object = object_;
+	Init();
+
 }
 
+Apologize::Apologize()
+{
+	Init();
+}
 
 Apologize::~Apologize()
 {
 }
 
-void Apologize::ExecuteConsequences(WorldState* ws)
+void Apologize::Init()
 {
+	verb = "Apologize";
+
+	//effect
+	WorldStateProperty effect1, effect2;
+	//effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
+	//effects.push_back(effect1);
+
+
+	// conditions
+	// none
+
 }
 
-void Apologize::NPC_CalculateInclination(NPC_Actor* affectingActor)
+std::string Apologize::GetSentence()
 {
-	if (affectingActor == object){
-		//double Apolo_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
-		//double hug_inclination = affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
-		//else if (hug_inclination > 0.0)
-		affectingActor->Plan("Hug", 1, subject);
-
+	if (subject->GetName() == "You"){
+		return "I'm sorry I was so late, I got totally lost.\nWhere is this place?";
 	}
-	return;
+	return subject->GetName() + " Apologizes";
+}
+
+bool Apologize::GetUsable()
+{
+	if (!(subject->historyBook->HaventDoneEventBefore(subject, verb))) // if we've done it before
+		return false;
+	if (subject->historyBook->TimeSinceStart() > 5) // if we've moved passed Apologizeing stage
+		return false;
+	return true;
+}
+
+void Apologize::ExecuteConsequences(WorldState* ws)
+{
+
 }
 
 void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
 {
+
 	if (affectingActor == object){
-		affectingActor->Change_Agreeable(0.1);
-		double angerChange = affectingActor->EmotionalCoefficient() * -0.15;
-		affectingActor->Change_Angry(angerChange);
+		Goal g;
+		g.SetRelevance(0.7f);
+		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
+		affectingActor->AddGoal(g);
 	}
+	if (affectingActor == subject){
+
+	}
+}
+
+float Apologize::NPC_CalculateInclination()
+{
+	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
+	double result = Blend(a, b, w);
+	return float(result);
 }

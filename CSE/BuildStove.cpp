@@ -5,9 +5,9 @@
 
 
 BuildStove::BuildStove(Actor* subject_, int moments_ = 1)
-	: Action(moments_)
+	: Action(subject_, moments_)
 {
-	subject = subject_;
+	//subject = subject_;
 	//object = object_;
 
 	Init();
@@ -56,15 +56,12 @@ void BuildStove::ExecuteConsequences(WorldState* ws)
 
 void BuildStove::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	if (affectingActor == object){
-
-	}
 	if (affectingActor == subject){
 
 	}
 }
 
-void BuildStove::NPC_CalculateInclination(NPC_Actor* affectingActor)
+float BuildStove::NPC_CalculateInclination()
 {
-
+	return 0;
 }

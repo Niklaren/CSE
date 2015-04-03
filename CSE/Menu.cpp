@@ -8,14 +8,15 @@ Menu::Menu()
 	menuRect.left = 550;
 	menuRect.top = 0;
 	
-	AddOption("OK",0, 0, 1);
-	AddOption("A", 2, 0, 1);
-	AddOption("B", 3, 0, 1);
-	AddOption("Hug", 0, 1, 1);
-	AddOption("Apologize", 1, 1, 3);
-	AddOption("Punch", 0, 2, 2);
-	AddOption("Insult", 2, 2, 2);
-	AddOption("Intervene", 0, 3, 2);
+	AddOption("OK",			0, 0, 1);
+	AddOption("A",			2, 0, 1);
+	AddOption("B",			3, 0, 1);
+	AddOption("Hug",		0, 1, 1);
+	AddOption("Apologize",	1, 1, 3);
+	AddOption("Greet",		0, 2, 2);
+	AddOption("Joke",		0, 3, 2);
+	AddOption("Insult",		2, 3, 2);
+	//AddOption("Intervene",	1, 4, 3);
 
 }
 
@@ -70,4 +71,40 @@ void Menu::Reset()
 	for (int optionNum = 0; optionNum < Get_NumberOfOptions(); optionNum++){
 		options[optionNum].pressed = false;
 	}
+}
+
+bool Menu::HandleMenu(Input input)
+{
+	/*if (input.LMjustReleased()){
+		string optionName = "";
+		if (menu.OptionClicked(input.MouseX, input.MouseY, optionName)){
+			if (optionName == "A" && actionName != ""){
+				Protagonist->Plan(actionName, Char1);
+				executePlans = true;
+				actionName = "";
+				Protagonist->menu.Reset();
+			}
+			else if (optionName == "B" && actionName != ""){
+				Protagonist->Plan(actionName, Char2);
+				executePlans = true;
+				actionName = "";
+				Protagonist->menu.Reset();
+			}
+			else if (optionName == "OK"){
+				executePlans = true;
+				actionName = "";
+				menu.Reset();
+			}
+			else if (optionName == "Intervene"){
+				Protagonist->Plan(optionName, Char1, Char2);
+				executePlans = true;
+				actionName = "";
+				menu.Reset();
+			}
+			else if (optionName != "OK" && optionName != "A" && optionName != "B"){
+				actionName = optionName;
+			}
+		}
+	}*/
+	return false;
 }

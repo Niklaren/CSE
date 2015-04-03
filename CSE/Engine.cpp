@@ -14,10 +14,9 @@ Engine::Engine()
 	actors[2] = Char1;
 	actors[3] = Char2;
 
-	Fate->Plan("Begin", Char1, Char2);
+	//Fate->Plan("Begin", Char1, Char2);
 
-	Char1->AddAction("Insult");
-	Char1->AddAction("Punch");
+	Char1->AddAction("OK");
 	Char1->AddAction("Eat");
 	Char1->AddAction("CookGood");
 	Char1->AddAction("CookBad");
@@ -25,6 +24,18 @@ Engine::Engine()
 	Char1->AddAction("FetchWater");
 	Char1->AddAction("FetchWood");
 	Char1->AddAction("Unpack");
+
+	Char1->AddAction("Insult", Protagonist);
+	Char1->AddAction("Punch", Protagonist);
+	Char1->AddAction("Greet", Protagonist);
+	Char1->AddAction("Hug", Protagonist);
+	
+	Char2->AddAction("OK");
+
+	Char2->AddAction("Insult", Protagonist);
+	Char2->AddAction("Punch", Protagonist);
+	Char2->AddAction("Greet", Protagonist);
+	Char2->AddAction("Hug", Protagonist);
 
 	Char1->SetPlanner(&planner);
 	Char2->SetPlanner(&planner);
@@ -40,7 +51,7 @@ Engine::Engine()
 
 	clock.restart();
 
-	stageTexture.loadFromFile("stage.png");
+	stageTexture.loadFromFile("camp.bmp");
 	stageSprite.setTexture(stageTexture);
 }
 
@@ -51,7 +62,6 @@ Engine::~Engine()
 
 void Engine::Operate()
 {
-
 	// move time forward
 	time = sf::seconds(5.0f) - clock.getElapsedTime();
 
@@ -66,6 +76,9 @@ void Engine::Operate()
 	if (executePlans){
 		executePlans = false;
 		clock.restart();
+
+		// check termination conditions
+		Fate->CheckForPlanning();
 
 		// the last moment has passed and next moment is occuring.
 		for (int actor_iter(0); actor_iter < MAX_ACTORS; actor_iter++){
@@ -125,10 +138,11 @@ void Engine::Operate()
 			std::cout << "no goals remain 2" << std::endl;
 		if (Char2->AcquireGoal() == true)
 			Char2->RePlan();
+
 	}
 
 	input.update();
-	// check termination conditions
+
 
 }
 
@@ -136,29 +150,29 @@ void Engine::GetUserInput()
 {
 	if (input.LMjustReleased()){
 		string optionName = "";
-		if (menu.OptionClicked(input.MouseX, input.MouseY, optionName)){
+		if (Protagonist->menu.OptionClicked(input.MouseX, input.MouseY, optionName)){
 			if (optionName == "A" && actionName != ""){
 				Protagonist->Plan(actionName,Char1);
 				executePlans = true;
 				actionName = "";
-				menu.Reset();
+				Protagonist->menu.Reset();
 			}
 			else if (optionName == "B" && actionName != ""){
 				Protagonist->Plan(actionName,Char2);
 				executePlans = true;
 				actionName = "";
-				menu.Reset();
+				Protagonist->menu.Reset();
 			}
 			else if (optionName == "OK"){
 				executePlans = true;
 				actionName = "";
-				menu.Reset();
+				Protagonist->menu.Reset();
 			}
 			else if (optionName == "Intervene"){
 				Protagonist->Plan(optionName, Char1, Char2);
 				executePlans = true;
 				actionName = "";
-				menu.Reset();
+				Protagonist->menu.Reset();
 			}
 			else if (optionName != "OK" && optionName != "A" && optionName != "B"){
 				actionName = optionName;
@@ -179,7 +193,7 @@ void Engine::Redraw(sf::RenderWindow &window)
 
 	historyBook.Draw(window);
 
-	menu.Draw(window);
+	Protagonist->menu.Draw(window);
 
 	window.display();
 }

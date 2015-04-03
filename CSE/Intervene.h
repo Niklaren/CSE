@@ -13,6 +13,6 @@ public:
 
 	virtual void React();
 	void ExecuteConsequences(WorldState*);
-	void NPC_CalculateInclination(NPC_Actor*);
+	float NPC_CalculateInclination();
 	void EmotionalReaction(NPC_Actor*);
 };

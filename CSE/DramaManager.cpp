@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "DramaManager.h"
+#include "NPC_Actor.h"
 
-
-DramaManager::DramaManager(string name, HistoryBook& hb)
-	: Actor(name,hb)
+DramaManager::DramaManager(NPC_Actor * c1, NPC_Actor * c2, HistoryBook& hb)
+	: Actor("fate",hb)
 {
-
+	char1 = c1;
+	char2 = c2;
 }
 
 
@@ -23,12 +24,9 @@ void DramaManager::React()
 void DramaManager::Plan(string action)
 {
 	if (action == "Begin")
-	{
-
-	}
-	else if (action == "."){
-
-	}
+		plans.push_back(new BeginStory(this, char1, char2, 1));
+	else if (action == "Prepare")
+		plans.push_back(new Prepare(char1, 1));
 	else{
 		// error
 	}
@@ -58,4 +56,13 @@ void DramaManager::Plan(string action, Actor* object_, Actor* extra_)
 	else{
 		// error
 	}
+}
+
+void DramaManager::CheckForPlanning()
+{
+	if (historyBook->TimeSinceStart() == 0)
+		Plan("Begin");
+	if (historyBook->TimeSinceStart() == 5)
+		Plan("Prepare");
+
 }

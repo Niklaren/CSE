@@ -15,7 +15,7 @@ Engine engine;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	sf::RenderWindow window(sf::VideoMode(750, 400), "CSE");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "CSE");
 	
 	//window.setPosition(sf::Vector2i(10, 50));
 	//window.setSize(sf::Vector2u(640, 480));

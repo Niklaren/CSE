@@ -19,7 +19,7 @@ HistoryBook::HistoryBook()
 
 	texture.loadFromFile("text frame2.png");
 	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(0, 250));
+	sprite.setPosition(sf::Vector2f(0, 450));
 }
 
 
@@ -33,25 +33,49 @@ void HistoryBook::EventHappened(Action* newestEvent_)
 	eventHistory.push_back(event);
 }
 
-void HistoryBook::LookupEvent(string action)
+void HistoryBook::LookupEvent(string event)
 {}
+
+int HistoryBook::TimeElapsedSince(std::string event)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->GetVerb() == event)
+			return eventHistory[i]->MomentsSinceExecution();
+	}
+	return -1;
+}
+
+bool HistoryBook::HaventDoneEventBefore(Actor* a, std::string event)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if ((eventHistory[i]->GetVerb() == event) && (a->GetName() == eventHistory[i]->Get_Subject()->GetName()))
+			return false;
+	}
+	return true;
+}
+
+bool HistoryBook::HaventDoneEventSince(std::string, int moments)
+{
+
+	return false;
+}
 
 bool HistoryBook::Draw(sf::RenderWindow &window)
 {
 	window.draw(sprite);
 	
-	float textY = 260;
+	float textY = 460;
 
-	for (int event_iter = eventHistory.size()-1; event_iter >= 0; event_iter--){
-		if (eventHistory[event_iter]->MomentsSinceExecution() == 0){
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->MomentsSinceExecution() == 0){
 			sf::Text eventsText;
 			eventsText.setFont(font);
-			eventsText.setPosition(sf::Vector2f(50, textY));
+			eventsText.setPosition(sf::Vector2f(10, textY));
 			eventsText.setCharacterSize(24);
 
-			eventsText.setString(eventHistory[event_iter]->GetSentence());
+			eventsText.setString(eventHistory[i]->GetSentence());
 			window.draw(eventsText);
-			textY += 40;
+			textY += 30;
 		}
 	}
 
@@ -63,4 +87,5 @@ void HistoryBook::TimeForward()
 	for (unsigned int event_iter(0); event_iter < eventHistory.size(); event_iter++){
 		eventHistory[event_iter]->MomentsPass();
 	}
+	time++;
 }

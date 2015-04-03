@@ -28,28 +28,47 @@ void Player_Actor::Plan(string action)
 	}
 }
 
-void Player_Actor::Plan(string action, Actor* object)
+void Player_Actor::Plan(string action, Actor* object_)
 {
-	if (action == "OK"){
-		OK* ok_ = new OK(this, 1);
-		plans.push_back(ok_);
+	// actions that do not have an object;
+	if (action == "OK")
+		plans.push_back(new OK(this, 1));
+	else if (action == "Eat")
+		plans.push_back(new Eat(this, 1));
+	else if (action == "CookGood")
+		plans.push_back(new CookGood(this, 1));
+	else if (action == "CookBad")
+		plans.push_back(new CookBad(this, 1));
+	else if (action == "FetchWater")
+		plans.push_back(new FetchWater(this, 1));
+	else if (action == "FetchWood")
+		plans.push_back(new FetchWood(this, 1));
+	else if (action == "Unpack")
+		plans.push_back(new Unpack(this, 1));
+	else if (action == "BuildStove")
+		plans.push_back(new BuildStove(this, 1));
+	else{
+		//error
 	}
-	else if (action == "Punch"){
-		Punch* punch_ = new Punch(this, object, 1);
-		plans.push_back(punch_);
+
+
+	// actions that have an object;
+	if (!object_)
+	{
+		std::cout << "object null" << std::endl;
+		return;
 	}
-	else if (action == "Hug"){
-		Hug* hug_ = new Hug(this, object, 1);
-		plans.push_back(hug_);
-	}
-	if (action == "Apologize"){
-		Apologize* apologize_ = new Apologize(this, object, 1);
-		plans.push_back(apologize_);
-	}
-	else if (action == "Insult"){
-		Insult* insult_ = new Insult(this, object, 1);
-		plans.push_back(insult_);
-	}
+
+	if (action == "Joke")
+		plans.push_back(new Punch(this, object_, 1));
+	else if (action == "Hug")
+		plans.push_back(new Hug(this, object_, 1));
+	else if (action == "Greet")
+		plans.push_back(new Greet(this, object_, 1));
+	if (action == "Apologize")
+		plans.push_back(new Apologize(this, object_, 1));
+	else if (action == "Insult")
+		plans.push_back(new Insult(this, object_, 1));
 	else{
 		//error
 	}

@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionTargeted.h"
 class Insult :
-	public Action
+	public ActionTargeted
 {
 public:
 	Insult(Actor* subject_, Actor* object_, int moments_);
@@ -12,6 +12,6 @@ public:
 
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
-	void NPC_CalculateInclination(NPC_Actor*);
+	float NPC_CalculateInclination();
 };
 

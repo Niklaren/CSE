@@ -150,28 +150,37 @@ void NPC_Actor::LoadFromFile(string FileName)
 
 void NPC_Actor::AddAction(string action)
 {
-	if (action == "Insult"){
-		Insult* insult_ = new Insult();
-		availableActions.push_back(insult_);
-	}
-	if (action == "Punch"){
-		Punch* punch_ = new Punch();
-		availableActions.push_back(punch_);
-	}
-	if (action == "Eat")
-		availableActions.push_back(new Eat());
-	if (action == "CookGood")
-		availableActions.push_back(new CookGood());
-	if (action == "CookBad")
-		availableActions.push_back(new CookBad());
-	if (action == "FetchWater")
-		availableActions.push_back(new FetchWater());
-	if (action == "FetchWood")
-		availableActions.push_back(new FetchWood());
-	if (action == "Unpack")
-		availableActions.push_back(new Unpack());
-	if (action == "BuildStove")
-		availableActions.push_back(new BuildStove());
+	if (action == "OK")
+		availableActions.push_back(new OK(this, 0));
+	else if (action == "Eat")
+		availableActions.push_back(new Eat(this, 0));
+	else if (action == "CookGood")
+		availableActions.push_back(new CookGood(this, 0));
+	else if (action == "CookBad")
+		availableActions.push_back(new CookBad(this, 0));
+	else if (action == "FetchWater")
+		availableActions.push_back(new FetchWater(this, 0));
+	else if (action == "FetchWood")
+		availableActions.push_back(new FetchWood(this, 0));
+	else if (action == "Unpack")
+		availableActions.push_back(new Unpack(this, 0));
+	else if (action == "BuildStove")
+		availableActions.push_back(new BuildStove(this, 0));
+}
+
+void NPC_Actor::AddAction(string action, Actor* object_ = NULL)
+{
+	if (!object_)
+		return;
+
+	else if (action == "Greet")
+		availableActions.push_back(new Greet(this, object_, 0));
+	else if (action == "Hug")
+		availableActions.push_back(new Hug(this, object_, 0));
+	else if (action == "Insult")
+		availableActions.push_back(new Insult(this, object_, 0));
+	else if (action == "Punch")
+		availableActions.push_back(new Punch(this, object_, 0));
 }
 
 void NPC_Actor::RemoveAction(string action)
@@ -189,11 +198,11 @@ void NPC_Actor::React()
 {
 	//Action reactingEvent = historyBook.GetLastEvent();
 	
-	std::cout << GetName() << std::endl;
+	std::cout << GetName() + " r" << std::endl;
 	
 	historyBook->GetLastEvent()->ExecuteConsequences(ws);
 	historyBook->GetLastEvent()->EmotionalReaction(this);
-	historyBook->GetLastEvent()->NPC_CalculateInclination(this);
+	//historyBook->GetLastEvent()->NPC_CalculateInclination(this);
 	
 
 	/*if (reactingEvent.GetVerb() == "Begin"){
@@ -244,22 +253,60 @@ void NPC_Actor::RePlan()
 	ClearPlans();
 	std::vector<Action*> newplan = planner->Plan(this, *ws, current);
 	for (unsigned i = 0; i < newplan.size(); i++){
-		Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
+		//Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
+		Plan(newplan[i], 1+i);
 	}
 }
 
-void NPC_Actor::Plan(string action)
+void NPC_Actor::Plan(Action* action, int moments = 1)
 {
+	if (action->GetVerb() == "OK")
+		plans.push_back(new OK(this, moments));
+	else if (action->GetVerb() == "Eat")
+		plans.push_back(new Eat(this, moments));
+	else if (action->GetVerb() == "CookGood")
+		plans.push_back(new CookGood(this, moments));
+	else if (action->GetVerb() == "CookBad")
+		plans.push_back(new CookBad(this, moments));
+	else if (action->GetVerb() == "FetchWater")
+		plans.push_back(new FetchWater(this, moments));
+	else if (action->GetVerb() == "FetchWood")
+		plans.push_back(new FetchWood(this, moments));
+	else if (action->GetVerb() == "Unpack")
+		plans.push_back(new Unpack(this, moments));
+	else if (action->GetVerb() == "BuildStove")
+		plans.push_back(new BuildStove(this, moments));
+	else{
+		//error
+	}
 
+	// actions that have an object;
+	if (!(action->HasObject()))
+	{
+		std::cout << "object null" << std::endl;
+		return;
+	}
+
+	if (action->GetVerb() == "Punch")
+		plans.push_back(new Punch(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Hug")
+		plans.push_back(new Hug(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Greet")
+		plans.push_back(new Greet(this, action->Get_Object(), moments));
+	if (action->GetVerb() == "Apologize")
+		plans.push_back(new Apologize(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Insult")
+		plans.push_back(new Insult(this, action->Get_Object(), moments));
+	else{
+		//error
+	}
 }
 
 void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 {
 	// actions that do not have an object;
-	if (action == "OK"){
-		OK* ok_ = new OK(this, moments);
-		plans.push_back(ok_);
-	}
+	if (action == "OK")
+		plans.push_back(new OK(this, moments));
 	else if (action == "Eat")
 		plans.push_back(new Eat(this, moments));
 	else if(action == "CookGood")
@@ -278,7 +325,6 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		//error
 	}
 
-
 	// actions that have an object;
 	if (!object_)
 	{
@@ -286,22 +332,16 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		return;
 	}
 
-	if (action == "Punch"){
-		Punch* punch_ = new Punch(this, object_, moments);
-		plans.push_back(punch_);
-	}
-	else if (action == "Hug"){
-		Hug* hug_ = new Hug(this, object_, moments);
-		plans.push_back(hug_);
-	}
-	if (action == "Apologize"){
-		Apologize* apologize_ = new Apologize(this, object_, moments);
-		plans.push_back(apologize_);
-	}
-	else if (action == "Insult"){
-		Insult* insult_ = new Insult(this, object_, moments);
-		plans.push_back(insult_);
-	}
+	if (action == "Punch")
+		plans.push_back(new Punch(this, object_, moments));
+	else if (action == "Hug")
+		plans.push_back(new Hug(this, object_, moments));
+	else if (action == "Greet")
+		plans.push_back(new Greet(this, object_, moments));
+	if (action == "Apologize")
+		plans.push_back(new Apologize(this, object_, moments));
+	else if (action == "Insult")
+		plans.push_back(new Insult(this, object_, moments));
 	else{
 		//error
 	}

@@ -42,9 +42,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
@@ -102,12 +99,6 @@
     <ClInclude Include="Apologize.h">
       <Filter>Source Files\Actions\old</Filter>
     </ClInclude>
-    <ClInclude Include="Greet.h">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Hug.h">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClInclude>
     <ClInclude Include="Insult.h">
       <Filter>Source Files\Actions\old</Filter>
     </ClInclude>
@@ -132,6 +123,21 @@
     <ClInclude Include="BeginStory.h">
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="Greet.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Hug.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionTargeted.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Prepare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -139,9 +145,6 @@
     </ClCompile>
     <ClCompile Include="CSE.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Source Files\Actors</Filter>
@@ -197,12 +200,6 @@
     <ClCompile Include="Apologize.cpp">
       <Filter>Source Files\Actions\old</Filter>
     </ClCompile>
-    <ClCompile Include="Greet.cpp">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Hug.cpp">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClCompile>
     <ClCompile Include="Insult.cpp">
       <Filter>Source Files\Actions\old</Filter>
     </ClCompile>
@@ -227,6 +224,21 @@
     <ClCompile Include="Unpack.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Greet.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Hug.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionTargeted.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Prepare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="placeholder.bmp">
@@ -250,10 +262,16 @@
     <Image Include="char2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="camp.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="arial.ttf">
       <Filter>Resource Files</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
