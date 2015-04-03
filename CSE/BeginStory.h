@@ -18,6 +18,7 @@ public:
 
 	virtual std::string GetSentence();
 
+	void ExecuteConsequences(WorldState*);
 	virtual void NPC_CalculateInclination(NPC_Actor*);
 	virtual void EmotionalReaction(NPC_Actor*);
 };

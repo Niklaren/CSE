@@ -16,6 +16,28 @@ Engine::Engine()
 
 	Fate->Plan("Begin", Char1, Char2);
 
+	Char1->AddAction("Insult");
+	Char1->AddAction("Punch");
+	Char1->AddAction("Eat");
+	Char1->AddAction("CookGood");
+	Char1->AddAction("CookBad");
+	Char1->AddAction("BuildStove");
+	Char1->AddAction("FetchWater");
+	Char1->AddAction("FetchWood");
+	Char1->AddAction("Unpack");
+
+	Char1->SetPlanner(&planner);
+	Char2->SetPlanner(&planner);
+	Char1->SetWorldState(&worldstate);
+	Char2->SetWorldState(&worldstate);
+
+	//Goal g(0.5, Char2);
+	//g.SetWSProperty(WSP_Punched, WST_bool, true);
+	//Char1->AddGoal(g);
+	//Char1->AcquireGoal(); //
+
+	//Char1->RePlan();
+
 	clock.restart();
 
 	stageTexture.loadFromFile("stage.png");
@@ -87,6 +109,22 @@ void Engine::Operate()
 				}
 			}
 		}// next actor
+
+		// after all actions have fired
+		if (Char1->GetNumPlans() == 0)
+			Char1->RemoveCurrentGoal();
+		if (Char1->GetNumGoals() == 0)
+			std::cout << "no goals remain 1" << std::endl;
+		if (Char1->AcquireGoal() == true) //if we find a more important goal
+			Char1->RePlan();
+		actors[2]->GetNumPlans();
+
+		if (Char2->GetNumPlans() == 0)
+			Char2->RemoveCurrentGoal();
+		if (Char2->GetNumGoals() == 0)
+			std::cout << "no goals remain 2" << std::endl;
+		if (Char2->AcquireGoal() == true)
+			Char2->RePlan();
 	}
 
 	input.update();

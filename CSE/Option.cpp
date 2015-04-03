@@ -54,7 +54,7 @@ bool Option::Draw(sf::RenderWindow &window)
 	if (pressed)
 		texture.loadFromFile("menupressed.png", textureRect);
 	else
-		!texture.loadFromFile("menu.png", textureRect);
+		texture.loadFromFile("menu.png", textureRect);
 
 	
 	sprite.setTexture(texture);

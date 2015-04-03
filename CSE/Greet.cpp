@@ -8,12 +8,16 @@ Greet::Greet(Actor* subject_, Actor* object_, int moments_ = 1)
 	: Action(moments_)
 {
 	subject = subject_;
-	verb = "Greets";
+	verb = "Greet";
 	object = object_;
 }
 
 
 Greet::~Greet()
+{
+}
+
+void Greet::ExecuteConsequences(WorldState* ws)
 {
 }
 

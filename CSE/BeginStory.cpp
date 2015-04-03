@@ -29,17 +29,25 @@ BeginStory::~BeginStory()
 {
 }
 
+void BeginStory::ExecuteConsequences(WorldState* ws)
+{
+}
+
 void BeginStory::NPC_CalculateInclination(NPC_Actor* affectingActor)
 {
-	std::string inclination;
-
+	Goal g;
+	g.SetRelevance(0.6f);
+	g.SetWSProperty(WSP_FoodEaten, WST_bool, true);
+	affectingActor->AddGoal(g);
+	/*
 	// calculate inclination here
-	inclination = "Punch";
+	//inclination = "Punch";
 
 	//affectingActor
-	affectingActor->Plan("Insult", extraActor);
+	affectingActor->Plan("Insult", 1, extraActor);
 
 	return;
+	*/
 }
 
 void BeginStory::EmotionalReaction(NPC_Actor* reactingActor)

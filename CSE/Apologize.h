@@ -7,6 +7,7 @@ public:
 	Apologize(Actor* subject_, Actor* object_, int moments_);
 	~Apologize();
 
+	void ExecuteConsequences(WorldState*);
 	void NPC_CalculateInclination(NPC_Actor*);
 	void EmotionalReaction(NPC_Actor*);
 };

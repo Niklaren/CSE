@@ -8,6 +8,13 @@
 #include "Apologize.h"
 #include "Intervene.h"
 #include "Greet.h"
+#include "Eat.h"
+#include "CookGood.h"
+#include "CookBad.h"
+#include "BuildStove.h"
+#include "FetchWater.h"
+#include "FetchWood.h"
+#include "Unpack.h"
 
 //#include <string>
 #include <list>

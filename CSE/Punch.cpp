@@ -10,28 +10,57 @@
 Punch::Punch(Actor* subject_, Actor* object_, int moments_=1)
 	: Action(moments_)
 {
+	Init();
+
 	subject = subject_;
-	verb = "punches";
 	object = object_;
 }
 
+Punch::Punch()
+{
+	Init();
+}
 
 Punch::~Punch()
 {
 
 }
 
+void Punch::Init()
+{
+	verb = "Punch";
+
+	// effects
+	WorldStateProperty effect1, effect2;
+	effect1.SetWSProperty(WSP_Punched, WST_bool, true);
+	effects.push_back(effect1);
+
+
+
+	// conditions
+	// same location as target??
+	WorldStateProperty condition1;
+	condition1.SetWSProperty(WSP_Insulted, WST_bool, true);
+	conditions.push_back(condition1);
+}
+
+void Punch::ExecuteConsequences(WorldState* ws)
+{
+
+
+}
+
 void Punch::NPC_CalculateInclination(NPC_Actor* affectingActor)
 {
-	if (affectingActor == object){
+	/*if (affectingActor == object){
 		double punch_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
 		double apologize_inclination = affectingActor->Get_Agreeable();
 		if (punch_inclination > 0)
-			affectingActor->Plan("Punch", subject); // return the punch to the puncher
+			affectingActor->Plan("Punch", 1, subject); // return the punch to the puncher
 		if (apologize_inclination > 0)
-			affectingActor->Plan("Apologize", subject);
+			affectingActor->Plan("Apologize", 1, subject);
 	}
-	return;
+	return;*/
 }
 
 void Punch::EmotionalReaction(NPC_Actor* affectingActor)

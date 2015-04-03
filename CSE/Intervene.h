@@ -12,6 +12,7 @@ public:
 	~Intervene();
 
 	virtual void React();
+	void ExecuteConsequences(WorldState*);
 	void NPC_CalculateInclination(NPC_Actor*);
 	void EmotionalReaction(NPC_Actor*);
 };

@@ -7,6 +7,9 @@ Action::Action(int momentsFromExecution_)
 	momentsFromExecution = momentsFromExecution_;
 }
 
+Action::Action()
+{
+}
 
 Action::~Action()
 {

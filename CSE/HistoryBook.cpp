@@ -29,8 +29,8 @@ HistoryBook::~HistoryBook()
 
 void HistoryBook::EventHappened(Action* newestEvent_)
 {
-	//Action* newestEvent = newestEvent_;
-	eventHistory.push_back(newestEvent_);
+	Action* event = newestEvent_;
+	eventHistory.push_back(event);
 }
 
 void HistoryBook::LookupEvent(string action)
@@ -60,7 +60,7 @@ bool HistoryBook::Draw(sf::RenderWindow &window)
 
 void HistoryBook::TimeForward()
 {
-	for (int event_iter(0); event_iter < eventHistory.size(); event_iter++){
+	for (unsigned int event_iter(0); event_iter < eventHistory.size(); event_iter++){
 		eventHistory[event_iter]->MomentsPass();
 	}
 }

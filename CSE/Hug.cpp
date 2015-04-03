@@ -8,12 +8,16 @@ Hug::Hug(Actor* subject_, Actor* object_, int moments_ = 1)
 	: Action(moments_)
 {
 	subject = subject_;
-	verb = "hugs";
+	verb = "Hug";
 	object = object_;
 }
 
 
 Hug::~Hug()
+{
+}
+
+void Hug::ExecuteConsequences(WorldState* ws)
 {
 }
 

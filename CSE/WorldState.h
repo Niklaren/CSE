@@ -1,43 +1,20 @@
 #pragma once
 
 #include "HistoryBook.h"
-
-enum eWorldStateEvents
-{
-	WSP_FoodCooked = 0
-};
-enum eWorldStateProperties_Key
-{
-	WSP_Invalid = -1,
-	WSP_FoodAvailable,
-	WSP_Count
-};
-const string WorldStateProperties_Key[WSP_Count]
-{
-	"WSP_FoodAvailable"
-};
-enum eWorldStateProperties_Type
-{
-	WST_int,
-	WST_bool,
-	WST_variable
-};
-
-
-//custom key/value Pair
-struct WorldStateProperty
-{
-
-	eWorldStateProperties_Key Key;
-	eWorldStateProperties_Type Type;
-	int value;
-};
-
+#include "WorldStateProperty.h"
 
 class WorldState
 {
 public:
 	WorldState();
 	~WorldState();
+
+	void LoadFromFile(string FileName);
+	bool MeetsWorldState(vector<WorldStateProperty>);
+	bool MeetsWorldState(WorldStateProperty wsp);
+
+	//eventhistory?
+//protected:
+	WorldStateProperty WSProperties[WSP_Count];
 };
 

@@ -2,13 +2,23 @@
 
 #include "Actor.h"
 #include "BoundedNum.h"
+#include "Goal.h"
+#include "Planner.h"
+#include "WorldState.h"
 
 #include <SFML/Graphics.hpp>
+#include <list>
+#include <vector>
+
+class Planner;
+class Goal;
+class WorldState;
 
 enum Trait{ open, conscientious, extraverted, agreeable, neurotic };
 
 class NPC_Actor : public Actor
 {
+private:	
 	BoundedNum selfTraits[5];
 
 	BoundedNum perceivedTraits[5];
@@ -17,6 +27,12 @@ class NPC_Actor : public Actor
 
 	BoundedNum happy;
 	BoundedNum angry;
+
+	vector<Action*> availableActions;
+	vector<Goal> goals;
+	Goal current;
+	Planner* planner;
+	WorldState* ws;
 
 	sf::Texture texture;
 	sf::Sprite sprite;
@@ -28,14 +44,27 @@ public:
 	NPC_Actor(string filename, HistoryBook& hb);
 	~NPC_Actor();
 
-	void loadConfig(string FileName);
+	void LoadFromFile(string FileName);
+	void AddAction(string ActionName);
+	void RemoveAction(string ActionName);
 
 	bool Draw(sf::RenderWindow&);
-	
+
 	virtual void React();
-	virtual void Plan(string);
-	virtual void Plan(string, Actor*);
 	//void EmotionalReaction(); // Not sure where this should be located???
+
+	
+	void SetWorldState(WorldState* w) { ws = w; }
+	void SetPlanner(Planner* p) { planner = p; }
+	void AddGoal(Goal);
+	bool AcquireGoal();
+	void RemoveCurrentGoal();
+	int GetNumGoals() { return goals.size(); }
+
+	void ClearPlans();
+	void RePlan();
+	virtual void Plan(string);
+	virtual void Plan(string verb, int moments, Actor* target);
 
 	virtual string GetName() { return name; }
 
@@ -46,6 +75,10 @@ public:
 	double Get_Angry() { return angry.Value(); }
 
 	double EmotionalCoefficient() { return (selfTraits[neurotic].Value() + 1); }
+
+	vector<Action*> Get_AvailableActions() { return availableActions; }
+	int Get_NumActions() { return availableActions.size(); }
+	Action* Get_AvailableAction(int i) { return availableActions[i]; }
 
 	void Change_Conscientious(double);
 	void Change_Extraverted(double);

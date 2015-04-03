@@ -1,17 +1,18 @@
 #pragma once
 #include "Action.h"
-class Insult :
+class FetchWood :
 	public Action
 {
 public:
-	Insult(Actor* subject_, Actor* object_, int moments_);
-	Insult();
-	~Insult();
+	FetchWood(Actor* subject_, int moments_);
+	FetchWood();
+	~FetchWood();
 
 	void Init();
+
+	std::string GetSentence();
 
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
 	void NPC_CalculateInclination(NPC_Actor*);
 };
-

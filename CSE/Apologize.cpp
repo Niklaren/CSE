@@ -8,12 +8,16 @@ Apologize::Apologize(Actor* subject_, Actor* object_, int moments_ = 1)
 	: Action(moments_)
 {
 	subject = subject_;
-	verb = "apologizes to";
+	verb = "Apologize";
 	object = object_;
 }
 
 
 Apologize::~Apologize()
+{
+}
+
+void Apologize::ExecuteConsequences(WorldState* ws)
 {
 }
 
@@ -23,7 +27,7 @@ void Apologize::NPC_CalculateInclination(NPC_Actor* affectingActor)
 		//double Apolo_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
 		//double hug_inclination = affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())
 		//else if (hug_inclination > 0.0)
-			affectingActor->Plan("Hug", subject);
+		affectingActor->Plan("Hug", 1, subject);
 
 	}
 	return;

@@ -8,6 +8,7 @@ public:
 	Hug(Actor* subject_, Actor* object_, int moments_);
 	~Hug();
 
+	void ExecuteConsequences(WorldState*);
 	void NPC_CalculateInclination(NPC_Actor*);
 	void EmotionalReaction(NPC_Actor*);
 };
