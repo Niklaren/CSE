@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "WorldStateProperty.h"
+#include "Stage.h"
 
 //forward declaration
 class Actor;
@@ -18,6 +19,7 @@ protected:
 	Actor* subject;
 	std::string verb;
 	Actor* object;
+	Stage* locationOccured;
 
 	std::vector<WorldStateProperty> conditions;
 	std::vector<WorldStateProperty> effects;
@@ -47,10 +49,14 @@ public:
 	Actor* Get_Object() { assert(object != NULL); return object; }
 	void SetObject(Actor* a){ object = a; }
 
+	bool HasLocation(){ if (locationOccured != NULL) { return true; } return false; }
+	Stage* Get_Location() { assert(locationOccured != NULL); return locationOccured; }
+	void SetLocationt(Stage* l){ locationOccured = l; }
+
 	virtual std::string GetSentence();
 
 	virtual void React();
-	virtual void ExecuteConsequences(WorldState*) { return; }
+	virtual void ExecuteConsequences(WorldState*);
 	virtual void EmotionalReaction(NPC_Actor*) = 0;
 	virtual float NPC_CalculateInclination(){ return 0; }
 	//virtual int CalculateInclination(Actor*){ return 0; }
@@ -59,7 +65,7 @@ public:
 	std::vector<WorldStateProperty> GetConditions() { return conditions; }
 	std::vector<WorldStateProperty> GetEffects() { return effects; }
 
-	bool ReadyToExecute();
+	virtual bool ReadyToExecute();
 	void MomentsPass();
 	int MomentsSinceExecution() { return -momentsFromExecution; }
 	void AddExecutiontime(int time) { momentsFromExecution += time; }

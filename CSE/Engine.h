@@ -33,10 +33,19 @@ protected:
 	HistoryBook historyBook;
 	Planner planner;
 	WorldState worldstate;
+	Menu menu;
 
-	Player_Actor *Protagonist = new Player_Actor("You", historyBook);
-	NPC_Actor* Char1 = new NPC_Actor("char1.txt", historyBook);
-	NPC_Actor* Char2 = new NPC_Actor("char2.txt", historyBook);
+	Stage* offStage = new Stage("stage.png", "offStage");
+	Stage* camp = new Stage("camp.bmp", "camp");
+	Stage* path = new Stage("path.png", "path");
+	Stage* forest = new Stage("forest.png", "forest");
+	Stage* cabin = new Stage("huntsmanCabin.png", "cabin");
+	Stage* lodge = new Stage("grandmasLodge.png", "lodge");
+	
+
+	Player_Actor *Protagonist = new Player_Actor("You", path, historyBook);
+	NPC_Actor* Char1 = new NPC_Actor("char1.txt", &worldstate, &planner, camp, historyBook);
+	NPC_Actor* Char2 = new NPC_Actor("char2.txt", &worldstate, &planner, camp, historyBook);
 	DramaManager *Fate = new DramaManager(Char1, Char2, historyBook);
 
 	//std::queue<Action> plans;
@@ -45,7 +54,6 @@ protected:
 	sf::Clock clock;
 	sf::Time time;
 	bool executePlans = true;
-	string actionName;
 
 	sf::Sprite stageSprite;
 	sf::Texture stageTexture;

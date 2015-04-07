@@ -13,6 +13,8 @@ public:
 	bool MeetsWorldState(vector<WorldStateProperty>);
 	bool MeetsWorldState(WorldStateProperty wsp);
 
+	bool IsCloser(WorldStateProperty effect, WorldStateProperty goal);
+
 	//eventhistory?
 //protected:
 	WorldStateProperty WSProperties[WSP_Count];

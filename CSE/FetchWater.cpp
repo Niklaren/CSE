@@ -4,10 +4,10 @@
 #include "NPC_Actor.h"
 
 
-FetchWater::FetchWater(Actor* subject_, int moments_ = 1)
+FetchWater::FetchWater(Actor* subject_, Stage* l, int moments_ = 1)
 	: Action(subject_, moments_)
 {
-
+	locationOccured = l;
 	Init();
 }
 
@@ -31,7 +31,9 @@ void FetchWater::Init()
 	effects.push_back(effect1);
 
 	// conditions
-	// location?
+	WorldStateProperty condition1;
+	condition1.SetWSProperty(WSP_Location, WST_variable);
+	conditions.push_back(condition1);
 
 }
 
@@ -42,6 +44,8 @@ std::string FetchWater::GetSentence()
 
 void FetchWater::ExecuteConsequences(WorldState* ws)
 {
+	Action::ExecuteConsequences(ws);
+
 	ws->WSProperties[WSP_WaterFetched].SetWSProperty(WSP_WaterFetched, WST_int, 1); // switch this to a +1
 
 }

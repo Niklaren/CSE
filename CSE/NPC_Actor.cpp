@@ -40,9 +40,13 @@ NPC_Actor::NPC_Actor(string name, string FileName, int x, int y, HistoryBook& hb
 	perceivedPTraits[open].setValue(0.0);
 }
 
-NPC_Actor::NPC_Actor(string FileName, HistoryBook& hb)
+NPC_Actor::NPC_Actor(string FileName, WorldState* w, Planner* p, Stage* l, HistoryBook& hb)
 	: Actor(hb)
 {
+	location = l;
+	SetPlanner(p);
+	SetWorldState(w);
+	
 	LoadFromFile(FileName);
 
 }
@@ -148,52 +152,6 @@ void NPC_Actor::LoadFromFile(string FileName)
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 }
 
-void NPC_Actor::AddAction(string action)
-{
-	if (action == "OK")
-		availableActions.push_back(new OK(this, 0));
-	else if (action == "Eat")
-		availableActions.push_back(new Eat(this, 0));
-	else if (action == "CookGood")
-		availableActions.push_back(new CookGood(this, 0));
-	else if (action == "CookBad")
-		availableActions.push_back(new CookBad(this, 0));
-	else if (action == "FetchWater")
-		availableActions.push_back(new FetchWater(this, 0));
-	else if (action == "FetchWood")
-		availableActions.push_back(new FetchWood(this, 0));
-	else if (action == "Unpack")
-		availableActions.push_back(new Unpack(this, 0));
-	else if (action == "BuildStove")
-		availableActions.push_back(new BuildStove(this, 0));
-}
-
-void NPC_Actor::AddAction(string action, Actor* object_ = NULL)
-{
-	if (!object_)
-		return;
-
-	else if (action == "Greet")
-		availableActions.push_back(new Greet(this, object_, 0));
-	else if (action == "Hug")
-		availableActions.push_back(new Hug(this, object_, 0));
-	else if (action == "Insult")
-		availableActions.push_back(new Insult(this, object_, 0));
-	else if (action == "Punch")
-		availableActions.push_back(new Punch(this, object_, 0));
-}
-
-void NPC_Actor::RemoveAction(string action)
-{
-	//std::vector<Action*>::reverse_iterator rit;
-	//for (rit = availableActions.rbegin(); rit != availableActions.rend(); ++rit)
-	for (unsigned i = availableActions.size(); i-- > 0;)	
-	{
-		if (availableActions[i]->GetVerb() == action)
-			availableActions.erase(availableActions.begin()+i);
-	}
-}
-
 void NPC_Actor::React()
 {
 	//Action reactingEvent = historyBook.GetLastEvent();
@@ -202,19 +160,25 @@ void NPC_Actor::React()
 	
 	historyBook->GetLastEvent()->ExecuteConsequences(ws);
 	historyBook->GetLastEvent()->EmotionalReaction(this);
-	//historyBook->GetLastEvent()->NPC_CalculateInclination(this);
-	
 
-	/*if (reactingEvent.GetVerb() == "Begin"){
-		BeginStory bs;
-		bs.EmotionalReaction(this);
-		string NewPlan = bs.CalculateInclination(this);
-
-	}*/
+	// if we we are the object of the last event we have to replan.
+	if (historyBook->GetLastEvent()->HasObject()){
+		if (historyBook->GetLastEvent()->Get_Object()->GetName() == name)
+		{
+			AcquireGoal();
+			RePlan();
+		}
+	}
 }
 
 void NPC_Actor::AddGoal(Goal newgoal)
 {
+	for (unsigned i = goals.size(); i-- > 0;){
+		if (goals[i].Key == newgoal.Key){
+			// if theres already a goal for this property we must overwrite it
+			goals.erase(goals.begin()+i);
+		}
+	}
 	goals.emplace_back(newgoal);
 }
 
@@ -230,7 +194,6 @@ bool NPC_Actor::AcquireGoal()
 	}
 	return acquired;
 }
-
 
 void NPC_Actor::RemoveCurrentGoal()
 {
@@ -262,16 +225,14 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 {
 	if (action->GetVerb() == "OK")
 		plans.push_back(new OK(this, moments));
+	else if (action->GetVerb() == "Travel")
+		plans.push_back(new Travel(this, moments));
 	else if (action->GetVerb() == "Eat")
 		plans.push_back(new Eat(this, moments));
 	else if (action->GetVerb() == "CookGood")
 		plans.push_back(new CookGood(this, moments));
 	else if (action->GetVerb() == "CookBad")
 		plans.push_back(new CookBad(this, moments));
-	else if (action->GetVerb() == "FetchWater")
-		plans.push_back(new FetchWater(this, moments));
-	else if (action->GetVerb() == "FetchWood")
-		plans.push_back(new FetchWood(this, moments));
 	else if (action->GetVerb() == "Unpack")
 		plans.push_back(new Unpack(this, moments));
 	else if (action->GetVerb() == "BuildStove")
@@ -279,6 +240,12 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 	else{
 		//error
 	}
+
+	//location specific
+	if (action->GetVerb() == "FetchWater")
+		plans.push_back(new FetchWater(this, action->Get_Location(), moments));
+	else if (action->GetVerb() == "FetchWood")
+		plans.push_back(new FetchWood(this, moments));
 
 	// actions that have an object;
 	if (!(action->HasObject()))
@@ -302,6 +269,14 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 	}
 }
 
+void NPC_Actor::Plan(string action, Stage* l)
+{
+	// actions that do not have an object;
+	if (action == "Travel")
+		plans.push_back(new Travel(this, l, 1));
+
+}
+
 void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 {
 	// actions that do not have an object;
@@ -313,8 +288,8 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		plans.push_back(new CookGood(this, moments));
 	else if(action == "CookBad")
 		plans.push_back(new CookBad(this, moments));
-	else if(action == "FetchWater")
-		plans.push_back(new FetchWater(this, moments));
+	//else if(action == "FetchWater")
+	//	plans.push_back(new FetchWater(this, moments));
 	else if(action == "FetchWood")
 		plans.push_back(new FetchWood(this, moments));
 	else if(action == "Unpack")

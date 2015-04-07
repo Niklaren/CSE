@@ -1,17 +1,20 @@
 #pragma once
 
 #include "Actor.h"
-#include "Menu.h"
+
 
 class Player_Actor : public Actor
 {
 public: // ??? for now
-	//options ?
-	Menu menu;
+	vector<string> s_availableActions;
 
 public:
-	Player_Actor(string name, HistoryBook& hb);
+	Player_Actor(string name, Stage* startlocation, HistoryBook& hb);
 	~Player_Actor();
+
+	virtual void AddAction(string ActionName);
+	virtual void RemoveAction(string ActionName);
+	vector<string> Get_AvailableActions() { return s_availableActions; }
 
 	virtual void React();
 	virtual void Plan(string);
@@ -20,6 +23,5 @@ public:
 
 	virtual string GetName() { return name; }
 	//optionspicked()
-	//void Plan(wstring);
 };
 

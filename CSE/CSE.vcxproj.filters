@@ -22,8 +22,17 @@
     <Filter Include="Source Files\GOAP">
       <UniqueIdentifier>{3b87f3ea-5001-410b-81ec-442ac757b3d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Actions\old">
+    <Filter Include="Source Files\Actions\fate">
+      <UniqueIdentifier>{93582da0-c494-45ea-a293-347024df6ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\generic">
       <UniqueIdentifier>{84f0a760-1f40-4193-bbcc-6e85ad356ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\campsite">
+      <UniqueIdentifier>{641af5cc-9aa5-45da-aed7-3d1b6cf5cec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\Riding Hood">
+      <UniqueIdentifier>{7b20d362-3f39-456d-9ce5-dfcc85e0a9f1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +78,6 @@
     <ClInclude Include="Option.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoundedNum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Planner.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
@@ -84,50 +90,20 @@
     <ClInclude Include="Goal.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
-    <ClInclude Include="Eat.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="CookBad.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="CookGood.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="FetchWater.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Apologize.h">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="Insult.h">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="Intervene.h">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="OK.h">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="Punch.h">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClInclude>
-    <ClInclude Include="BuildStove.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Unpack.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="FetchWood.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="BeginStory.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Greet.h">
-      <Filter>Source Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Hug.h">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Source Files\Actions</Filter>
@@ -135,8 +111,59 @@
     <ClInclude Include="ActionTargeted.h">
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="BeginStory.h">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClInclude>
     <ClInclude Include="Prepare.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildStove.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="CookBad.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="CookGood.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="Eat.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="FetchWater.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="FetchWood.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="Unpack.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="Greet.h">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Hug.h">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundedNum.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Sleep.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="ErectTent.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="PrepareBeds.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="Register.h">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClInclude>
+    <ClInclude Include="Travel.h">
+      <Filter>Source Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +197,6 @@
     <ClCompile Include="Option.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bounded.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Planner.cpp">
       <Filter>Source Files\GOAP</Filter>
     </ClCompile>
@@ -185,50 +209,20 @@
     <ClCompile Include="Goal.cpp">
       <Filter>Source Files\GOAP</Filter>
     </ClCompile>
-    <ClCompile Include="Eat.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="CookBad.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="CookGood.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="FetchWater.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Apologize.cpp">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Insult.cpp">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Intervene.cpp">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="OK.cpp">
-      <Filter>Source Files\Actions\old</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Punch.cpp">
-      <Filter>Source Files\Actions\old</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildStove.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="FetchWood.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="BeginStory.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Unpack.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Greet.cpp">
-      <Filter>Source Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Hug.cpp">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp">
       <Filter>Source Files\Actions</Filter>
@@ -236,7 +230,58 @@
     <ClCompile Include="ActionTargeted.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="BeginStory.cpp">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClCompile>
     <ClCompile Include="Prepare.cpp">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildStove.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="CookBad.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="CookGood.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="Eat.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="FetchWater.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="FetchWood.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="Unpack.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="Greet.cpp">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Hug.cpp">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Bounded.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Sleep.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="Register.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="PrepareBeds.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="ErectTent.cpp">
+      <Filter>Source Files\Actions\campsite</Filter>
+    </ClCompile>
+    <ClCompile Include="Travel.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,6 +308,21 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="camp.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="menuUnavailable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="huntsmanCabin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="path.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="forest.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="grandmasLodge.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -16,12 +16,18 @@ Engine::Engine()
 
 	//Fate->Plan("Begin", Char1, Char2);
 
+	/*Char1->SetPlanner(&planner);
+	Char2->SetPlanner(&planner);
+	Char1->SetWorldState(&worldstate);
+	Char2->SetWorldState(&worldstate);*/
+
 	Char1->AddAction("OK");
+	Char1->AddAction("Travel");
 	Char1->AddAction("Eat");
 	Char1->AddAction("CookGood");
 	Char1->AddAction("CookBad");
 	Char1->AddAction("BuildStove");
-	Char1->AddAction("FetchWater");
+	Char1->AddAction("FetchWater", forest);
 	Char1->AddAction("FetchWood");
 	Char1->AddAction("Unpack");
 
@@ -37,10 +43,7 @@ Engine::Engine()
 	Char2->AddAction("Greet", Protagonist);
 	Char2->AddAction("Hug", Protagonist);
 
-	Char1->SetPlanner(&planner);
-	Char2->SetPlanner(&planner);
-	Char1->SetWorldState(&worldstate);
-	Char2->SetWorldState(&worldstate);
+	Protagonist->AddAction("Greet");
 
 	//Goal g(0.5, Char2);
 	//g.SetWSProperty(WSP_Punched, WST_bool, true);
@@ -51,8 +54,8 @@ Engine::Engine()
 
 	clock.restart();
 
-	stageTexture.loadFromFile("camp.bmp");
-	stageSprite.setTexture(stageTexture);
+	//stageTexture.loadFromFile("camp.bmp");
+	//stageSprite.setTexture(stageTexture);
 }
 
 Engine::~Engine()
@@ -65,7 +68,7 @@ void Engine::Operate()
 	// move time forward
 	time = sf::seconds(5.0f) - clock.getElapsedTime();
 
-	GetUserInput();
+	//
 
 	//if (time.asSeconds() < 0.0f)
 	//{
@@ -77,14 +80,14 @@ void Engine::Operate()
 		executePlans = false;
 		clock.restart();
 
-		// check termination conditions
-		Fate->CheckForPlanning();
-
 		// the last moment has passed and next moment is occuring.
 		for (int actor_iter(0); actor_iter < MAX_ACTORS; actor_iter++){
 			actors[actor_iter]->TimeForward();
 		}
 		historyBook.TimeForward();
+
+		// check termination conditions
+		Fate->CheckForPlanning();
 
 		//  plans execute
 		for (int actor_iter(0); actor_iter < MAX_ACTORS; actor_iter++){ // every actor in Actors[]
@@ -94,7 +97,7 @@ void Engine::Operate()
 			// if actor is in the scene? // can do this in ready to execute??
 
 			// for every plan
-			for (int plan_iter = actors[actor_iter]->GetNumPlans()-1; plan_iter >= 0; plan_iter--){
+			for (int plan_iter = 0; plan_iter < actors[actor_iter]->GetNumPlans(); plan_iter++){
 				// OK to Execute?()
 				if (actors[actor_iter]->GetPlan(plan_iter)->ReadyToExecute()){
 					// no? break from loop
@@ -106,7 +109,7 @@ void Engine::Operate()
 					// execute consequences
 					// fate react
 					Fate->React();
-					// player react ?? can the player not just reacy whenever to the last event?
+					// player react ?? can the player not just react whenever to the last event?
 
 					historyBook.GetLastEvent()->React(); // replaces the below
 					//// Object react // might some actions not have objects?
@@ -117,7 +120,15 @@ void Engine::Operate()
 					//if (historyBook.GetLastEvent()->HasSubject()){
 					//	historyBook.GetLastEvent()->GetSubject()->React();
 					//}
+
 					// discard plan
+					//actors[actor_iter]->DiscardPlan(plan_iter);
+				}
+			}
+
+			for (int plan_iter = actors[actor_iter]->GetNumPlans(); plan_iter-- > 0;){
+				// cleanup plans past their execution time
+				if (actors[actor_iter]->GetPlan(plan_iter)->MomentsSinceExecution() >= 0){
 					actors[actor_iter]->DiscardPlan(plan_iter);
 				}
 			}
@@ -139,7 +150,10 @@ void Engine::Operate()
 		if (Char2->AcquireGoal() == true)
 			Char2->RePlan();
 
+		menu.Reset(Protagonist->Get_AvailableActions());
 	}
+
+	GetUserInput();
 
 	input.update();
 
@@ -148,36 +162,18 @@ void Engine::Operate()
 
 void Engine::GetUserInput()
 {
-	if (input.LMjustReleased()){
-		string optionName = "";
-		if (Protagonist->menu.OptionClicked(input.MouseX, input.MouseY, optionName)){
-			if (optionName == "A" && actionName != ""){
-				Protagonist->Plan(actionName,Char1);
-				executePlans = true;
-				actionName = "";
-				Protagonist->menu.Reset();
-			}
-			else if (optionName == "B" && actionName != ""){
-				Protagonist->Plan(actionName,Char2);
-				executePlans = true;
-				actionName = "";
-				Protagonist->menu.Reset();
-			}
-			else if (optionName == "OK"){
-				executePlans = true;
-				actionName = "";
-				Protagonist->menu.Reset();
-			}
-			else if (optionName == "Intervene"){
-				Protagonist->Plan(optionName, Char1, Char2);
-				executePlans = true;
-				actionName = "";
-				Protagonist->menu.Reset();
-			}
-			else if (optionName != "OK" && optionName != "A" && optionName != "B"){
-				actionName = optionName;
-			}
-		}
+	string action;
+	string target;
+	
+	if (menu.HandleMenu(input, action, target)){
+		executePlans = true;
+
+		if (target == "A")
+			Protagonist->Plan(action, Char1);
+		else if (target == "B")
+			Protagonist->Plan(action, Char2);
+		else
+			Protagonist->Plan(action);
 	}
 }
 
@@ -185,15 +181,18 @@ void Engine::Redraw(sf::RenderWindow &window)
 {
 	window.clear();
 
-	window.draw(stageSprite);
+	//window.draw(stageSprite);
+	Protagonist->GetLocation()->Draw(window);
 
 	//window.draw xxx
-	Char1->Draw(window);
-	Char2->Draw(window);
+	if (Char1->GetLocation() == Protagonist->GetLocation())
+		Char1->Draw(window);
+	if (Char2->GetLocation() == Protagonist->GetLocation())
+		Char2->Draw(window);
 
-	historyBook.Draw(window);
+	historyBook.Draw(window); //also pass in player location?
 
-	Protagonist->menu.Draw(window);
+	menu.Draw(window);
 
 	window.display();
 }

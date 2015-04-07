@@ -24,7 +24,7 @@ void DramaManager::React()
 void DramaManager::Plan(string action)
 {
 	if (action == "Begin")
-		plans.push_back(new BeginStory(this, char1, char2, 1));
+		plans.push_back(new BeginStory(this, char1, 0));
 	else if (action == "Prepare")
 		plans.push_back(new Prepare(char1, 1));
 	else{
@@ -47,8 +47,7 @@ void DramaManager::Plan(string action, Actor* object_, Actor* extra_)
 	if (action == "Begin")
 	{
 		//initialise with a story begin plan
-		BeginStory* beginStory_ = new BeginStory(this, object_, extra_, 1);
-		plans.push_back(beginStory_);
+		plans.push_back(new BeginStory(this, object_, 0));
 	}
 	else if (action == "."){
 
@@ -60,9 +59,9 @@ void DramaManager::Plan(string action, Actor* object_, Actor* extra_)
 
 void DramaManager::CheckForPlanning()
 {
-	if (historyBook->TimeSinceStart() == 0)
+	if (historyBook->TimeSinceStart() == 1)
 		Plan("Begin");
-	if (historyBook->TimeSinceStart() == 5)
+	if (historyBook->TimeSinceStart() == 6)
 		Plan("Prepare");
 
 }

@@ -25,6 +25,14 @@ void Action::React()
 
 }
 
+void Action::ExecuteConsequences(WorldState*)
+{
+	if (!locationOccured)
+	{
+		locationOccured = subject->GetLocation();
+	}
+}
+
 std::string Action::GetSentence(){
 	std::string eventText = "";
 	std::string ssubject = subject->GetName();
@@ -39,6 +47,7 @@ bool Action::ReadyToExecute() {
 		{ return true; } 
 	return false; 
 }
+
 void Action::MomentsPass() {
 	momentsFromExecution--;
 	return;

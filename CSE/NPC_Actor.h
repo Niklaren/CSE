@@ -28,7 +28,6 @@ private:
 	BoundedNum happy;
 	BoundedNum angry;
 
-	vector<Action*> availableActions;
 	vector<Goal> goals;
 	Goal current;
 	Planner* planner;
@@ -41,19 +40,15 @@ private:
 
 public:
 	NPC_Actor(string name, string BitmapFilename, int x, int y, HistoryBook& hb);
-	NPC_Actor(string filename, HistoryBook& hb);
+	NPC_Actor(string filename, WorldState* w, Planner* p, Stage* l, HistoryBook& hb);
 	~NPC_Actor();
 
 	void LoadFromFile(string FileName);
-	void AddAction(string ActionName);
-	void AddAction(string ActionName, Actor* target);
-	void RemoveAction(string ActionName);
 
 	bool Draw(sf::RenderWindow&);
 
 	virtual void React();
 	//void EmotionalReaction(); // Not sure where this should be located???
-
 	
 	void SetWorldState(WorldState* w) { ws = w; }
 	void SetPlanner(Planner* p) { planner = p; }
@@ -66,6 +61,7 @@ public:
 	void RePlan();
 	virtual void Plan(Action*, int );
 	virtual void Plan(string verb, int moments, Actor* target);
+	virtual void Plan(string action, Stage* l);
 
 	virtual string GetName() { return name; }
 
@@ -76,10 +72,6 @@ public:
 	double Get_Angry() { return angry.Value(); }
 
 	double EmotionalCoefficient() { return (selfTraits[neurotic].Value() + 1); }
-
-	vector<Action*> Get_AvailableActions() { return availableActions; }
-	int Get_NumActions() { return availableActions.size(); }
-	Action* Get_AvailableAction(int i) { return availableActions[i]; }
 
 	void Change_Conscientious(double);
 	void Change_Extraverted(double);

@@ -44,6 +44,10 @@ public:
 private:
 	bool BuildPaths(Node*, vector<Node*>&, vector<Action*>, WorldState);
 	bool IsInState(); // may not be necessary if world state class can check equality
+	bool IsCloser();
+
+	bool Check_Conditions(vector<WorldStateProperty> a, vector<WorldStateProperty> b);
+	vector<WorldStateProperty> makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects);
 
 	
 };

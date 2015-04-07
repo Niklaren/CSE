@@ -29,6 +29,7 @@ enum eWorldStateProperties_Key
 	WSP_Greeting,
 	WSP_Insulted,
 	WSP_Punched,
+	WSP_Location,
 	WSP_Count
 };
 //const string WorldStateProperties_Key[WSP_Count]
@@ -120,6 +121,12 @@ struct WorldStateProperty
 			evalue = e_;
 	}
 
+	void SetWSProperty(eWorldStateProperties_Key Key_, eWorldStateProperties_Type Type_)
+	{
+		Key = Key_;
+		Type = Type_;
+	}
+
 	WorldStateProperty& operator=(const WorldStateProperty& other)
 	{
 		Key = other.Key;
@@ -143,8 +150,12 @@ struct WorldStateProperty
 				return true;
 			if ((Type == WST_worldStateEvent) && (evalue == other.evalue))
 				return true;
+			if (Type == WST_variable)
+				return true;
 		}
 		
 		return false;
 	}
+
+
 };

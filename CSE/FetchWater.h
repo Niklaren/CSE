@@ -4,7 +4,7 @@ class FetchWater :
 	public Action
 {
 public:
-	FetchWater(Actor* subject_, int moments_);
+	FetchWater(Actor* subject_, Stage* location, int moments_);
 	FetchWater();
 	~FetchWater();
 
@@ -12,7 +12,7 @@ public:
 
 	std::string GetSentence();
 
-	void ExecuteConsequences(WorldState*);
-	void EmotionalReaction(NPC_Actor*);
+	virtual void ExecuteConsequences(WorldState*);
+	virtual void EmotionalReaction(NPC_Actor*);
 	float NPC_CalculateInclination();
 };

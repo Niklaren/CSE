@@ -6,8 +6,6 @@
 #include "NPC_Actor.h"
 
 //function prototype
-bool Check_Conditions(vector<WorldStateProperty> a, vector<WorldStateProperty> b);
-vector<WorldStateProperty> makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects);
 
 Planner::Planner()
 {
@@ -51,19 +49,6 @@ std::vector<Action*> Planner::Plan(NPC_Actor* actor, WorldState ws, WorldStatePr
 		if (solutions[i]->runningCost > cheapest->runningCost)
 			cheapest = solutions[i];
 	}
-
-	//actor->ClearPlans();
-
-	/*Node* n = cheapest;
-	while (n != nullptr)
-	{
-		if (n->action != nullptr)
-		{
-			//actor->Plan(n->action->GetVerb);
-			// this may have to be a bit clever
-		}
-		n = n->parent;
-	}*/
 
 	vector<Action*> result;
 	queue<Action*> qresult;
@@ -118,7 +103,7 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 
 // function to check if the effect(s) of an action will fulfil at least one of the goal conditions
 
-bool Check_Conditions(vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
+bool Planner::Check_Conditions(vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
 {
 	bool match = false;
 	for (unsigned int ie(0); ie < effect.size(); ie++){
@@ -130,7 +115,7 @@ bool Check_Conditions(vector<WorldStateProperty> effect, vector<WorldStateProper
 	return match;
 }
 
-vector<WorldStateProperty> makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects)
+vector<WorldStateProperty> Planner::makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects)
 {
 	vector<WorldStateProperty> newGoal = oldGoal;
 

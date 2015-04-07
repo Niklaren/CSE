@@ -13,7 +13,7 @@ public:
 
 	BeginStory();
 	//BeginStory(Actor &subject_);
-	BeginStory(Actor* subject_, Actor* object_, Actor* extra_, int moments_);
+	BeginStory(Actor* subject_, Actor* object_, int moments_);
 	~BeginStory();
 
 	virtual std::string GetSentence();

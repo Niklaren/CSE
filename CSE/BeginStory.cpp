@@ -15,13 +15,13 @@
 //
 //}
 
-BeginStory::BeginStory(Actor* subject_, Actor* object_, Actor* extra_, int moments_=0)
+BeginStory::BeginStory(Actor* subject_, Actor* object_, int moments_=0)
 	: ActionTargeted(subject_, object_, moments_)
 {
 	subject = subject_;
 	verb = "Begin";
 	object = object_;
-	extraActor = extra_;
+	//extraActor = extra_;
 }
 
 
@@ -48,11 +48,16 @@ void BeginStory::ExecuteConsequences(WorldState* ws)
 
 void BeginStory::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	/*Goal g;
-	g.SetRelevance(0.6f);
-	g.SetWSProperty(WSP_FoodEaten, WST_bool, true);
-	affectingActor->AddGoal(g);
-	*/
+	if (affectingActor == object){
+		//Goal g;
+		//g.SetRelevance(0.7f);
+		//g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+		//affectingActor->AddGoal(g);
+		Goal g;
+		g.SetRelevance(0.7f);
+		g.SetWSProperty(WSP_WaterFetched, WST_int, 1);
+		affectingActor->AddGoal(g);
+	}
 }
 
 std::string BeginStory::GetSentence()

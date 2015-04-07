@@ -69,7 +69,6 @@ void Greet::ExecuteConsequences(WorldState* ws)
 
 void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	
 	if (affectingActor == object){
 		Goal g;
 		g.SetRelevance(0.7f);

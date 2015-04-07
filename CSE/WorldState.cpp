@@ -45,3 +45,24 @@ bool WorldState::MeetsWorldState(WorldStateProperty wsp)
 
 	return true;
 }
+
+bool WorldState::IsCloser(WorldStateProperty effect, WorldStateProperty goal)
+{
+	if ((effect.Key != goal.Key) || (effect.Type != goal.Type))
+		return false;
+
+	if ((goal.Type == WST_bool) && (effect.bvalue == goal.bvalue) && (WSProperties[goal.Key].bvalue != goal.bvalue))
+		return true;
+	if (goal.Type == WST_int){
+		int real_diff = goal.ivalue - WSProperties[goal.Key].ivalue;
+		int eff_diff = goal.ivalue - (WSProperties[goal.Key].ivalue + effect.ivalue);
+		if (eff_diff < real_diff)
+			return true;
+	}
+	if ((goal.Type == WST_float) && (effect.fvalue == goal.fvalue) && (WSProperties[goal.Key].fvalue != goal.fvalue))
+		return true;
+	if ((goal.Type == WST_worldStateEvent) && (effect.evalue == goal.evalue))
+		return true;
+
+	return false;
+}

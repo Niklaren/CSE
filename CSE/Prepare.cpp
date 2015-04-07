@@ -36,4 +36,5 @@ void Prepare::EmotionalReaction(NPC_Actor* affectingActor)
 std::string Prepare::GetSentence()
 {
 	return "Well, we've stood here chatting for long enough.\nYou were already late and it will be dark soon.\nAsh suggests we get some food prepared.";
+
 }
