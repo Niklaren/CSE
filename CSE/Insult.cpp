@@ -25,13 +25,9 @@ void Insult::Init()
 {
 	verb = "Insult";
 
-	WorldStateProperty effect1, effect2, effect3;
-	effect1.SetWSProperty(WSP_Insulted, WST_bool, true);
-	effects.push_back(effect1);
-	effect2.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Punch); // an punch can be responded to with an insult
-	effects.push_back(effect2);
-	effect3.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Insult); // an insult can be responded to with an insult
-	effects.push_back(effect3);
+	//WorldStateProperty effect1, effect2, effect3;
+	//effect3.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Insult); // an insult can be responded to with an insult
+	//effects.push_back(effect3);
 
 	// no conditions
 	// same location as target??
@@ -40,7 +36,7 @@ void Insult::Init()
 
 void Insult::ExecuteConsequences(WorldState* ws)
 {
-	ws->WSProperties[WSP_Insulted].SetWSProperty(WSP_Insulted, WST_bool, true);
+	//ws->WSProperties[WSP_Insulted].SetWSProperty(WSP_Insulted, WST_bool, true);
 
 	// some effects may only be symbolic or resuable, so it may be wrong to
 	// apply every effect indiscriminately (as below)

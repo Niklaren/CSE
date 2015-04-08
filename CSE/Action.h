@@ -55,7 +55,7 @@ public:
 
 	virtual std::string GetSentence();
 
-	virtual void React();
+	virtual bool React();
 	virtual void ExecuteConsequences(WorldState*);
 	virtual void EmotionalReaction(NPC_Actor*) = 0;
 	virtual float NPC_CalculateInclination(){ return 0; }

@@ -6,7 +6,7 @@
 
 HistoryBook::HistoryBook()
 {
-	if (!font.loadFromFile("arial.ttf"))
+	if (!font.loadFromFile("Assets/arial.ttf"))
 	{	/*error;*/	}
 	//eventsText.setFont(font);
 	//eventsText.setPosition(sf::Vector2f(50, 260));
@@ -17,7 +17,7 @@ HistoryBook::HistoryBook()
 	//eventsRect.top = 250;
 	//eventsRect.bottom = 300;
 
-	texture.loadFromFile("text frame2.png");
+	texture.loadFromFile("Assets/text frame2.png");
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(0, 450));
 }
@@ -60,18 +60,18 @@ bool HistoryBook::HaventDoneEventSince(std::string, int moments)
 	return false;
 }
 
-bool HistoryBook::Draw(sf::RenderWindow &window)
+bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 {
 	window.draw(sprite);
 	
 	float textY = 460;
 
 	for (unsigned i = eventHistory.size(); i-- > 0;){
-		if (eventHistory[i]->MomentsSinceExecution() == 0){
+		if ((eventHistory[i]->MomentsSinceExecution() == 0) && (eventHistory[i]->Get_Location()==s)){
 			sf::Text eventsText;
 			eventsText.setFont(font);
 			eventsText.setPosition(sf::Vector2f(10, textY));
-			eventsText.setCharacterSize(24);
+			eventsText.setCharacterSize(20);
 
 			eventsText.setString(eventHistory[i]->GetSentence());
 			window.draw(eventsText);

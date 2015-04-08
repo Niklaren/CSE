@@ -31,9 +31,9 @@ void FetchWater::Init()
 	effects.push_back(effect1);
 
 	// conditions
-	WorldStateProperty condition1;
-	condition1.SetWSProperty(WSP_Location, WST_variable);
-	conditions.push_back(condition1);
+	//WorldStateProperty condition1;
+	//condition1.SetWSProperty(WSP_Location, WST_variable);
+	//conditions.push_back(condition1);
 
 }
 

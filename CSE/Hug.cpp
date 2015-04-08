@@ -76,7 +76,7 @@ float Hug::NPC_CalculateInclination()
 	double b = static_cast<NPC_Actor*>(subject)->Get_Extraverted();
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double r = Blend(a, b, w) / 2;
-	if (!(subject->historyBook->HaventDoneEventBefore(object, "Hug")))	// if the object has hugged during the history we
+	if (!(subject->GetHistory()->HaventDoneEventBefore(object, "Hug")))	// if the object has hugged during the history we
 		r += 0.1;														// may be more inclined to hug
 	return r;
 }

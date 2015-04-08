@@ -8,49 +8,40 @@ Engine::Engine()
 	//input = input_;
 
 
-	//Actor *Actors[4] = { Fate, &Protagonist, &Char1, &Char2 };
-	actors[0] = Fate;
-	actors[1] = Protagonist;
-	actors[2] = Char1;
-	actors[3] = Char2;
+	//Actor *Actors[4] = { Fate, &Protagonist, &Wolf, &Lumberjack };
+	//actors[0] = Fate;
+	//actors[1] = Protagonist;
+	//actors[2] = Wolf;
+	//actors[3] = Lumberjack;
+	actors.push_back(Fate);
+	actors.push_back(Protagonist);
+	actors.push_back(Wolf);
+	actors.push_back(Lumberjack);
+	actors.push_back(Grandma);
 
-	//Fate->Plan("Begin", Char1, Char2);
+	NPCs.push_back(Wolf);
+	NPCs.push_back(Lumberjack);
+	NPCs.push_back(Grandma);
 
-	/*Char1->SetPlanner(&planner);
-	Char2->SetPlanner(&planner);
-	Char1->SetWorldState(&worldstate);
-	Char2->SetWorldState(&worldstate);*/
+	Fate->SetCharacters(Protagonist, Wolf, Lumberjack, Grandma);
+	Fate->SetLocations(path, forest, cabin, lodge);
+	//Fate->Plan("Begin", Wolf, Lumberjack);
 
-	Char1->AddAction("OK");
-	Char1->AddAction("Travel");
-	Char1->AddAction("Eat");
-	Char1->AddAction("CookGood");
-	Char1->AddAction("CookBad");
-	Char1->AddAction("BuildStove");
-	Char1->AddAction("FetchWater", forest);
-	Char1->AddAction("FetchWood");
-	Char1->AddAction("Unpack");
+	/*Wolf->SetPlanner(&planner);
+	Lumberjack->SetPlanner(&planner);
+	Wolf->SetWorldState(&worldstate);
+	Lumberjack->SetWorldState(&worldstate);*/
 
-	Char1->AddAction("Insult", Protagonist);
-	Char1->AddAction("Punch", Protagonist);
-	Char1->AddAction("Greet", Protagonist);
-	Char1->AddAction("Hug", Protagonist);
-	
-	Char2->AddAction("OK");
+	Fate->InitLRR();
 
-	Char2->AddAction("Insult", Protagonist);
-	Char2->AddAction("Punch", Protagonist);
-	Char2->AddAction("Greet", Protagonist);
-	Char2->AddAction("Hug", Protagonist);
 
-	Protagonist->AddAction("Greet");
 
-	//Goal g(0.5, Char2);
+	//Goal g(0.5, Lumberjack);
 	//g.SetWSProperty(WSP_Punched, WST_bool, true);
-	//Char1->AddGoal(g);
-	//Char1->AcquireGoal(); //
+	//Wolf->AddGoal(g);
+	//Wolf->AcquireGoal(); //
 
-	//Char1->RePlan();
+	//Wolf->RePlan();
 
 	clock.restart();
 
@@ -81,7 +72,7 @@ void Engine::Operate()
 		clock.restart();
 
 		// the last moment has passed and next moment is occuring.
-		for (int actor_iter(0); actor_iter < MAX_ACTORS; actor_iter++){
+		for (unsigned actor_iter(0); actor_iter < actors.size(); actor_iter++){
 			actors[actor_iter]->TimeForward();
 		}
 		historyBook.TimeForward();
@@ -90,7 +81,7 @@ void Engine::Operate()
 		Fate->CheckForPlanning();
 
 		//  plans execute
-		for (int actor_iter(0); actor_iter < MAX_ACTORS; actor_iter++){ // every actor in Actors[]
+		for (unsigned actor_iter(0); actor_iter < actors.size(); actor_iter++){ // every actor in Actors[]
 
 			// relax actor moods
 
@@ -105,24 +96,24 @@ void Engine::Operate()
 
 					// store in history books
 					historyBook.EventHappened(actors[actor_iter]->GetPlan(plan_iter));
-
+					
 					// execute consequences
+					//!!!!!!!!!!!!!!!! LOOK INTO THIS
+					historyBook.GetLastEvent()->ExecuteConsequences(&worldstate);
+					
+					// all witnesses
+					for (unsigned i(0); i < NPCs.size(); i++){
+						if (historyBook.GetLastEvent()->Get_Location() == NPCs[i]->GetLocation()){
+							historyBook.GetLastEvent()->EmotionalReaction(NPCs[i]);
+						}
+					}
+
 					// fate react
 					Fate->React();
-					// player react ?? can the player not just react whenever to the last event?
-
-					historyBook.GetLastEvent()->React(); // replaces the below
-					//// Object react // might some actions not have objects?
-					//if (historyBook.GetLastEvent()->HasObject()){
-					//	historyBook.GetLastEvent()->GetObject()->React();
-					//}
-					//// Subject react
-					//if (historyBook.GetLastEvent()->HasSubject()){
-					//	historyBook.GetLastEvent()->GetSubject()->React();
-					//}
-
-					// discard plan
-					//actors[actor_iter]->DiscardPlan(plan_iter);
+					// action specific reactions
+					historyBook.GetLastEvent()->React();
+					//if actor is protagonist and reaction == true
+					//	player cant plan next turn
 				}
 			}
 
@@ -135,22 +126,22 @@ void Engine::Operate()
 		}// next actor
 
 		// after all actions have fired
-		if (Char1->GetNumPlans() == 0)
-			Char1->RemoveCurrentGoal();
-		if (Char1->GetNumGoals() == 0)
-			std::cout << "no goals remain 1" << std::endl;
-		if (Char1->AcquireGoal() == true) //if we find a more important goal
-			Char1->RePlan();
-		actors[2]->GetNumPlans();
+		for (unsigned i(0); i < NPCs.size(); i++){
+			if (NPCs[i]->IsGoalComplete())
+				NPCs[i]->RemoveCurrentGoal();
+			if (NPCs[i]->AcquireGoal() == true) //if we find a more important goal
+				NPCs[i]->RePlan();
+			if (NPCs[i]->GetNumGoals() == 0)
+				std::cout << "no goals remain " + NPCs[i]->GetName() << std::endl;
+			else if (NPCs[i]->GetNumPlans() == 0){
+				std::cout << "no plan remains " + NPCs[i]->GetName() << std::endl;
+				NPCs[i]->RePlan();
+			}
+		}
 
-		if (Char2->GetNumPlans() == 0)
-			Char2->RemoveCurrentGoal();
-		if (Char2->GetNumGoals() == 0)
-			std::cout << "no goals remain 2" << std::endl;
-		if (Char2->AcquireGoal() == true)
-			Char2->RePlan();
+		Protagonist->SetAvailableCharacters(NPCs);
 
-		menu.Reset(Protagonist->Get_AvailableActions());
+		menu.Reset(Protagonist->Get_AvailableActions(), Protagonist->Get_AvailableLocations(), Protagonist->Get_AvailableCharacters());
 	}
 
 	GetUserInput();
@@ -168,12 +159,31 @@ void Engine::GetUserInput()
 	if (menu.HandleMenu(input, action, target)){
 		executePlans = true;
 
-		if (target == "A")
-			Protagonist->Plan(action, Char1);
-		else if (target == "B")
-			Protagonist->Plan(action, Char2);
+		if (action == "Stray"){
+			Protagonist->Plan(action, forest);
+			Protagonist->RemoveAction("Stray");
+			Goal g(0.8f);
+			g.SetWSProperty(WSP_QueryRed, WST_bool, true);
+			Wolf->AddGoal(g);
+		}
+
+		if (target == "Wolf")
+			Protagonist->Plan(action, Wolf);
+		else if (target == "Lumberjack")
+			Protagonist->Plan(action, Lumberjack);
+		else if (target == "Grandma")
+			Protagonist->Plan(action, Grandma);
+		else if (target == "path")
+			Protagonist->Plan(action, path);
+		else if (target == "forest")
+			Protagonist->Plan(action, forest);
+		else if (target == "cabin")
+			Protagonist->Plan(action, cabin);
+		else if (target == "lodge")
+			Protagonist->Plan(action, lodge);
 		else
 			Protagonist->Plan(action);
+
 	}
 }
 
@@ -185,12 +195,13 @@ void Engine::Redraw(sf::RenderWindow &window)
 	Protagonist->GetLocation()->Draw(window);
 
 	//window.draw xxx
-	if (Char1->GetLocation() == Protagonist->GetLocation())
-		Char1->Draw(window);
-	if (Char2->GetLocation() == Protagonist->GetLocation())
-		Char2->Draw(window);
+	for (unsigned i = 0; i < NPCs.size(); i++){
+		if (NPCs[i]->GetLocation() == Protagonist->GetLocation())
+			NPCs[i]->Draw(window);
+	}
 
-	historyBook.Draw(window); //also pass in player location?
+
+	historyBook.Draw(window, Protagonist->GetLocation()); //also pass in player location?
 
 	menu.Draw(window);
 

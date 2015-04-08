@@ -11,7 +11,7 @@ public:
 	ActionTargeted();
 	~ActionTargeted();
 
-	void React();
+	//virtual bool React();
 
 	//virtual float CalculateInclination();
 };

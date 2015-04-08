@@ -16,7 +16,7 @@ Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int
 	
 	sf::IntRect textureRect_(x, y, width, MENU_ELEMENT_SIZE);
 	textureRect = textureRect_;
-	if (!texture.loadFromFile("menu.png", textureRect))
+	if (!texture.loadFromFile("Assets/menu.png", textureRect))
 	{
 		//error
 		std::cout << "error" << std::endl;
@@ -57,25 +57,27 @@ bool Option::Draw(sf::RenderWindow &window)
 {
 	//DrawTextW(hdc, name.c_str(), name.length(), &optionRect, DT_CENTER);
 	if (state == Selected)
-		texture.loadFromFile("menupressed.png", textureRect);
+		texture.loadFromFile("Assets/menupressed.png", textureRect);
 	if (state == Available)
-		texture.loadFromFile("menu.png", textureRect);
+		texture.loadFromFile("Assets/menu.png", textureRect);
 	if (state == Unavailable)
-		texture.loadFromFile("menuUnavailable.png", textureRect);
+		texture.loadFromFile("Assets/menuUnavailable.png", textureRect);
 
-	
+
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f((float)optionRect.left, (float)optionRect.top));
 	window.draw(sprite);
 
-	sf::Font tfont;
-	tfont.loadFromFile("arial.ttf");
-	sf::Text ttext;
-	ttext.setFont(tfont);
-	ttext.setString(name);
-	ttext.setCharacterSize(24);
-	ttext.setPosition(sf::Vector2f(optionRect.left+5, optionRect.top+10));
-	window.draw(ttext);
+	if (type >= Type_Act0Target){
+		sf::Font tfont;
+		tfont.loadFromFile("Assets/arial.ttf");
+		sf::Text ttext;
+		ttext.setFont(tfont);
+		ttext.setString(name);
+		ttext.setCharacterSize(24);
+		ttext.setPosition(sf::Vector2f(optionRect.left + 5, optionRect.top + 10));
+		window.draw(ttext);
+	}
 	
 	return true;
 }

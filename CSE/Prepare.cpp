@@ -27,10 +27,7 @@ void Prepare::ExecuteConsequences(WorldState* ws)
 
 void Prepare::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	Goal g;
-	g.SetRelevance(0.6f);
-	g.SetWSProperty(WSP_FoodEaten, WST_bool, true);
-	affectingActor->AddGoal(g);
+
 }
 
 std::string Prepare::GetSentence()

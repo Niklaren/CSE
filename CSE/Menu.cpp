@@ -9,15 +9,25 @@ Menu::Menu()
 	menuRect.top = 0;
 	
 	AddOption("OK", Type_OK,				0, 0, 1);
-	AddOption("A", Type_Character,			2, 0, 1);
-	AddOption("B", Type_Character,			3, 0, 1);
+	AddOption("Clear", Type_None,			1, 0, 1);
+	
+	AddOption("Wolf", Type_Character,		2, 0, 1);
+	AddOption("Lumberjack", Type_Character,	3, 0, 1);
+	AddOption("Grandma", Type_Character,	4, 0, 1);
 
-	AddOption("Do Nothing", Type_Act0Target, 0, 2, 3);
+	AddOption("forest", Type_Location,		0, 1, 1);
+	AddOption("cabin", Type_Location,		1, 1, 1);
+	AddOption("lodge", Type_Location,		2, 1, 1);
+	AddOption("path", Type_Location,		3, 1, 1);
+
+	AddOption("Travel", Type_ActLocation,	0, 2, 2);
+	AddOption("Observe", Type_Act0Target,	2, 2, 2);
+	AddOption("Stray", Type_Act0Target,		0, 3, 2);
 
 	AddOption("Hug", Type_Act1Target,		0, 4, 1);
 	AddOption("Apologize", Type_Act1Target, 1, 4, 3);
 	AddOption("Greet", Type_Act1Target,		0, 5, 2);
-	AddOption("Joke", Type_Act1Target,		2, 5, 2); // 0 or 1 ?
+	AddOption("Joke", Type_Act1Target,		2, 5, 2);
 	AddOption("Insult", Type_Act1Target,	2, 6, 2);
 	//AddOption("Intervene",	1, 4, 3);
 
@@ -64,10 +74,10 @@ bool Menu::OptionClicked(float mouseX_, float mouseY_, int& o)
 	return false;
 }
 
-void Menu::Reset(vector<string> availableActions)
+void Menu::Reset(vector<string> availableActions, vector<string> availableLocations, vector<string> availableCharacters)
 {
-	selected_act0Target = selected_act1Target = selected_character = false;
-	optionName = charName = "";
+	selected_act0Target = selected_act1Target = selected_actLocation = selected_location = selected_character = false;
+	optionName = locName = charName = "";
 
 	for (int optionNum = 0; optionNum < Get_NumberOfOptions(); optionNum++){
 		options[optionNum].SetAvailable();
@@ -78,13 +88,27 @@ void Menu::Reset(vector<string> availableActions)
 					options[optionNum].SetAvailable();
 			}
 		}
+		else if (options[optionNum].GetType() == Type_Location){ // if the option is an Location
+			options[optionNum].SetUnavailable();
+			for (unsigned i = 0; i < availableLocations.size(); i++){
+				if (options[optionNum].GetName() == availableLocations[i])
+					options[optionNum].SetAvailable();
+			}
+		}
+		else if (options[optionNum].GetType() == Type_Character){ // if the option is an Location
+			options[optionNum].SetUnavailable();
+			for (unsigned i = 0; i < availableCharacters.size(); i++){
+				if (options[optionNum].GetName() == availableCharacters[i])
+					options[optionNum].SetAvailable();
+			}
+		}
 	}
 }
 
 void Menu::DeselectAll()
 {
-	selected_act0Target = selected_act1Target = selected_character = false;
-	optionName = charName = "";
+	selected_act0Target = selected_act1Target = selected_actLocation = selected_location = selected_character = false;
+	optionName = locName = charName = "";
 
 	for (int optionNum = 0; optionNum < Get_NumberOfOptions(); optionNum++){
 		if (options[optionNum].IsSelected())
@@ -100,7 +124,13 @@ bool Menu::HandleMenu(Input input, string &option, string &target)
 
 			// switch statement better?
 			if (options[oIndex].GetType() == Type_None){ // no longer needed
-				return false;
+				DeselectAll();
+			}
+			if (options[oIndex].GetType() == Type_ActLocation){
+				DeselectAll();
+				options[oIndex].SetSelected();
+				selected_actLocation = true;
+				optionName = options[oIndex].GetName();
 			}
 			if (options[oIndex].GetType() == Type_Act0Target){
 				DeselectAll();
@@ -124,6 +154,13 @@ bool Menu::HandleMenu(Input input, string &option, string &target)
 					;// this action does not require a target
 				}
 			}
+			if (options[oIndex].GetType() == Type_Location){
+				if (selected_actLocation){
+					options[oIndex].SetSelected();
+					selected_location = true;
+					locName = options[oIndex].GetName();
+				}
+			}
 			if (options[oIndex].GetType() == Type_OK){
 				if (selected_act0Target){
 					option = optionName;
@@ -140,8 +177,13 @@ bool Menu::HandleMenu(Input input, string &option, string &target)
 					else
 						;//please select a target
 				}
-				else if (selected_act2Target){
-					;
+				else if (selected_actLocation){
+					if (selected_location){
+						option = optionName;
+						target = locName;
+						DeselectAll();
+						return true;
+					}
 				}
 				else{
 					DeselectAll();

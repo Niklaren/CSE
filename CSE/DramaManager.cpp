@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "DramaManager.h"
 #include "NPC_Actor.h"
+#include "Player_Actor.h"
 
-DramaManager::DramaManager(NPC_Actor * c1, NPC_Actor * c2, HistoryBook& hb)
-	: Actor("fate",hb)
+DramaManager::DramaManager(Stage* s, HistoryBook& hb)
+	: Actor("fate", s, hb)
 {
-	char1 = c1;
-	char2 = c2;
+
 }
 
 
@@ -14,19 +14,62 @@ DramaManager::~DramaManager()
 {
 }
 
-void DramaManager::React()
+void DramaManager::SetCharacters(Actor* p, Actor* w, Actor* l, Actor* g)
+{
+	red = p;
+	wolf = w;
+	lumberjack = l;
+	grandma = g;
+}
+
+void DramaManager::SetLocations(Stage* p, Stage* f, Stage* c, Stage* l)
+{
+	path = p;
+	forest = f;
+	cabin = c;
+	lodge = l;
+}
+
+void DramaManager::InitLRR()
+{
+	red->AddAction("Greet");
+	red->AddAction("Travel");
+	static_cast<Player_Actor*>(red)->AddLocation("cabin");
+
+	wolf->AddAction("OK");
+	wolf->AddAction("Travel");
+	wolf->AddAction("Eat");
+
+	wolf->AddAction("WolfGreetRed", red);
+	wolf->AddAction("QueryIdentity", red);
+	wolf->AddAction("QueryPurpose", red);
+	wolf->AddAction("QueryBasket", red);
+
+	lumberjack->AddAction("OK");
+
+	lumberjack->AddAction("ChopLog", cabin);
+	lumberjack->AddAction("LogOnstump", cabin);
+	lumberjack->AddAction("Grablog", cabin);
+	lumberjack->AddAction("Travel");
+	lumberjack->AddAction("Greet", red);
+	
+}
+
+bool DramaManager::React()
 {
 	//Action reactingEvent = historyBook->GetLastEvent(); //??
 
 	//reactingEvent.CalculateInclination(this);
+	return false;
 }
 
 void DramaManager::Plan(string action)
 {
 	if (action == "Begin")
-		plans.push_back(new BeginStory(this, char1, 0));
+		//plans.push_back(new BeginStory(this, wolf, 0));
+		plans.push_back(new BeginLRR(this, red, wolf, lumberjack, grandma, 0));
 	else if (action == "Prepare")
-		plans.push_back(new Prepare(char1, 1));
+		;//plans.push_back(new Prepare(char1, 1));
 	else{
 		// error
 	}
@@ -63,5 +106,11 @@ void DramaManager::CheckForPlanning()
 		Plan("Begin");
 	if (historyBook->TimeSinceStart() == 6)
 		Plan("Prepare");
+
+	//if ()
+
+	//if ((historyBook->TimeElapsedSince("QueryIdentity")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyIdentity"))
+	//if ((historyBook->TimeElapsedSince("QueryPurpose")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyPurpose"))
+	//if ((historyBook->TimeElapsedSince("QueryBasket")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyBasket"))
 
 }

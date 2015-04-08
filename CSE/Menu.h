@@ -25,8 +25,8 @@ class Menu
 	sf::Texture texture;
 	sf::IntRect menuRect;
 
-	string optionName, charName;
-	bool selected_act0Target, selected_act1Target, selected_act2Target, selected_character, selected_character2;
+	string optionName, locName, charName;
+	bool selected_act0Target, selected_act1Target, selected_actLocation, selected_location, selected_character, selected_character2;
 public:
 	Menu();
 	~Menu();
@@ -37,7 +37,7 @@ public:
 
 	bool OptionClicked(float mouseX, float mouseY, int& option_index);
 
-	void Reset(vector<string> availableActions);
+	void Reset(vector<string> availableActions, vector<string> availableLocations, vector<string> availableTargets);
 	void DeselectAll();
 
 	bool HandleMenu(Input input, string &action, string &target);

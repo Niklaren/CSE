@@ -31,7 +31,7 @@ public:
 	bool HaventDoneEventSince(std::string, int moments);
 	Action* GetLastEvent() { return eventHistory.back(); } //??
 
-	bool Draw(sf::RenderWindow &);
+	bool Draw(sf::RenderWindow &, Stage* s);
 
 	void TimeForward();
 };

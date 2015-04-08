@@ -14,31 +14,31 @@
 //#include "BoundedNum.h"
 
 
-NPC_Actor::NPC_Actor(string name, string FileName, int x, int y, HistoryBook& hb)
-	: Actor(name, hb)
-{
-	texture.loadFromFile(FileName);
-	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f((float)x, (float)y));
-
-	selfTraits[agreeable].setValue(0.0);
-	selfTraits[conscientious].setValue(0.0);
-	selfTraits[extraverted].setValue(0.0);
-	selfTraits[neurotic].setValue(0.0);
-	selfTraits[open].setValue(0.0);
-
-	perceivedTraits[agreeable].setValue(0.0);
-	perceivedTraits[conscientious].setValue(0.0);
-	perceivedTraits[extraverted].setValue(0.0);
-	perceivedTraits[neurotic].setValue(-0.0);
-	perceivedTraits[open].setValue(0.0);
-
-	perceivedPTraits[agreeable].setValue(0.0);
-	perceivedPTraits[conscientious].setValue(0.0);
-	perceivedPTraits[extraverted].setValue(0.0);
-	perceivedPTraits[neurotic].setValue(-0.0);
-	perceivedPTraits[open].setValue(0.0);
-}
+//NPC_Actor::NPC_Actor(string name, string FileName, int x, int y, HistoryBook& hb)
+//	: Actor(name, hb)
+//{
+//	texture.loadFromFile(FileName);
+//	sprite.setTexture(texture);
+//	sprite.setPosition(sf::Vector2f((float)x, (float)y));
+//
+//	selfTraits[agreeable].setValue(0.0);
+//	selfTraits[conscientious].setValue(0.0);
+//	selfTraits[extraverted].setValue(0.0);
+//	selfTraits[neurotic].setValue(0.0);
+//	selfTraits[open].setValue(0.0);
+//
+//	perceivedTraits[agreeable].setValue(0.0);
+//	perceivedTraits[conscientious].setValue(0.0);
+//	perceivedTraits[extraverted].setValue(0.0);
+//	perceivedTraits[neurotic].setValue(-0.0);
+//	perceivedTraits[open].setValue(0.0);
+//
+//	perceivedPTraits[agreeable].setValue(0.0);
+//	perceivedPTraits[conscientious].setValue(0.0);
+//	perceivedPTraits[extraverted].setValue(0.0);
+//	perceivedPTraits[neurotic].setValue(-0.0);
+//	perceivedPTraits[open].setValue(0.0);
+//}
 
 NPC_Actor::NPC_Actor(string FileName, WorldState* w, Planner* p, Stage* l, HistoryBook& hb)
 	: Actor(hb)
@@ -61,7 +61,7 @@ void NPC_Actor::LoadFromFile(string FileName)
 	string line;
 	string imgFileName;
 	double dInput;
-	int x, y;
+	int x(0), y(0);
 	while (getline(fin, line)) {
 		istringstream sin(line.substr(line.find("=") + 1));
 		if (line.find("name") != -1){
@@ -152,14 +152,14 @@ void NPC_Actor::LoadFromFile(string FileName)
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 }
 
-void NPC_Actor::React()
+bool NPC_Actor::React()
 {
 	//Action reactingEvent = historyBook.GetLastEvent();
 	
 	std::cout << GetName() + " r" << std::endl;
 	
-	historyBook->GetLastEvent()->ExecuteConsequences(ws);
-	historyBook->GetLastEvent()->EmotionalReaction(this);
+	//historyBook->GetLastEvent()->ExecuteConsequences(ws);
+	//historyBook->GetLastEvent()->EmotionalReaction(this);
 
 	// if we we are the object of the last event we have to replan.
 	if (historyBook->GetLastEvent()->HasObject()){
@@ -167,8 +167,11 @@ void NPC_Actor::React()
 		{
 			AcquireGoal();
 			RePlan();
+			return true;
 		}
 	}
+
+	return false;
 }
 
 void NPC_Actor::AddGoal(Goal newgoal)
@@ -197,13 +200,20 @@ bool NPC_Actor::AcquireGoal()
 
 void NPC_Actor::RemoveCurrentGoal()
 {
-	for (unsigned i = goals.size(); i-- > 0;){
-		if (goals[i] == current){
-			goals.erase(goals.begin()+i);
-			current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
-			current.SetRelevance(0);
+		for (unsigned i = goals.size(); i-- > 0;){
+			if (goals[i] == current){
+				goals.erase(goals.begin() + i);
+				current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
+				current.SetRelevance(0);
+			}
 		}
-	}
+}
+
+bool NPC_Actor::IsGoalComplete()
+{
+	if (ws->MeetsWorldState(current))
+		return true;
+	return false;
 }
 
 void NPC_Actor::ClearPlans()
@@ -229,23 +239,23 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new Travel(this, moments));
 	else if (action->GetVerb() == "Eat")
 		plans.push_back(new Eat(this, moments));
-	else if (action->GetVerb() == "CookGood")
-		plans.push_back(new CookGood(this, moments));
-	else if (action->GetVerb() == "CookBad")
-		plans.push_back(new CookBad(this, moments));
-	else if (action->GetVerb() == "Unpack")
-		plans.push_back(new Unpack(this, moments));
-	else if (action->GetVerb() == "BuildStove")
-		plans.push_back(new BuildStove(this, moments));
+	//else if (action->GetVerb() == "BuildStove")
+	//	plans.push_back(new BuildStove(this, moments));
 	else{
 		//error
 	}
 
 	//location specific
-	if (action->GetVerb() == "FetchWater")
+	if (action->GetVerb() == "ChopLog")
+		plans.push_back(new ChopLog(this, action->Get_Location(), moments));
+	else if (action->GetVerb() == "LogOnStump")
+		plans.push_back(new LogOnStump(this, action->Get_Location(), moments));
+	else if (action->GetVerb() == "GrabLog")
+		plans.push_back(new GrabLog(this, action->Get_Location(), moments));
+/*	if (action->GetVerb() == "FetchWater")
 		plans.push_back(new FetchWater(this, action->Get_Location(), moments));
 	else if (action->GetVerb() == "FetchWood")
-		plans.push_back(new FetchWood(this, moments));
+		plans.push_back(new FetchWood(this, moments))*/;
 
 	// actions that have an object;
 	if (!(action->HasObject()))
@@ -258,12 +268,14 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new Punch(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Hug")
 		plans.push_back(new Hug(this, action->Get_Object(), moments));
-	else if (action->GetVerb() == "Greet")
-		plans.push_back(new Greet(this, action->Get_Object(), moments));
-	if (action->GetVerb() == "Apologize")
-		plans.push_back(new Apologize(this, action->Get_Object(), moments));
-	else if (action->GetVerb() == "Insult")
-		plans.push_back(new Insult(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "WolfGreetRed")
+		plans.push_back(new WolfGreetRed(this, action->Get_Object(), moments));
+	if (action->GetVerb() == "QueryIdentity")
+		plans.push_back(new QueryIdentity(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "QueryPurpose")
+		plans.push_back(new QueryPurpose(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "QueryBasket")
+		plans.push_back(new QueryBasket(this, action->Get_Object(), moments));
 	else{
 		//error
 	}
@@ -284,18 +296,18 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		plans.push_back(new OK(this, moments));
 	else if (action == "Eat")
 		plans.push_back(new Eat(this, moments));
-	else if(action == "CookGood")
-		plans.push_back(new CookGood(this, moments));
-	else if(action == "CookBad")
-		plans.push_back(new CookBad(this, moments));
-	//else if(action == "FetchWater")
-	//	plans.push_back(new FetchWater(this, moments));
-	else if(action == "FetchWood")
-		plans.push_back(new FetchWood(this, moments));
-	else if(action == "Unpack")
-		plans.push_back(new Unpack(this, moments));
-	else if(action == "BuildStove")
-		plans.push_back(new BuildStove(this, moments));
+	//else if(action == "CookGood")
+	//	plans.push_back(new CookGood(this, moments));
+	//else if(action == "CookBad")
+	//	plans.push_back(new CookBad(this, moments));
+	////else if(action == "FetchWater")
+	////	plans.push_back(new FetchWater(this, moments));
+	//else if(action == "FetchWood")
+	//	plans.push_back(new FetchWood(this, moments));
+	//else if(action == "Unpack")
+	//	plans.push_back(new Unpack(this, moments));
+	//else if(action == "BuildStove")
+	//	plans.push_back(new BuildStove(this, moments));
 	else{
 		//error
 	}
@@ -307,16 +319,15 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		return;
 	}
 
-	if (action == "Punch")
-		plans.push_back(new Punch(this, object_, moments));
-	else if (action == "Hug")
-		plans.push_back(new Hug(this, object_, moments));
-	else if (action == "Greet")
+	if (action == "QueryIdentity")
+		plans.push_back(new QueryIdentity(this, object_, moments));
+	else if (action == "QueryPurpose")
+		plans.push_back(new QueryPurpose(this, object_, moments));
+	if (action == "QueryBasket")
+		plans.push_back(new QueryBasket(this, object_, moments));
+	else if (action == "WolfGreetRed")
 		plans.push_back(new Greet(this, object_, moments));
-	if (action == "Apologize")
-		plans.push_back(new Apologize(this, object_, moments));
-	else if (action == "Insult")
-		plans.push_back(new Insult(this, object_, moments));
+
 	else{
 		//error
 	}

@@ -28,19 +28,25 @@
     <Filter Include="Source Files\Actions\generic">
       <UniqueIdentifier>{84f0a760-1f40-4193-bbcc-6e85ad356ad3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Actions\campsite">
-      <UniqueIdentifier>{641af5cc-9aa5-45da-aed7-3d1b6cf5cec4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Actions\Riding Hood">
       <UniqueIdentifier>{7b20d362-3f39-456d-9ce5-dfcc85e0a9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\Riding Hood\Wolf">
+      <UniqueIdentifier>{7fb9c82b-fb4d-44fd-8152-54829ac87b04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\Riding Hood\Lumberjack">
+      <UniqueIdentifier>{73639851-9792-4ea0-b720-d7a5ee197740}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-    <Text Include="char1.txt">
+    <Text Include="Assets\c_lumberjack.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="char2.txt">
+    <Text Include="Assets\c_wolf.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Assets\c_grandma.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -117,27 +123,6 @@
     <ClInclude Include="Prepare.h">
       <Filter>Source Files\Actions\fate</Filter>
     </ClInclude>
-    <ClInclude Include="BuildStove.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="CookBad.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="CookGood.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="Eat.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="FetchWater.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="FetchWood.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="Unpack.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
     <ClInclude Include="Greet.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
@@ -147,23 +132,47 @@
     <ClInclude Include="BoundedNum.h">
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="Sleep.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="ErectTent.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="PrepareBeds.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
-    <ClInclude Include="Register.h">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClInclude>
     <ClInclude Include="Travel.h">
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BeginLRR.h">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClInclude>
+    <ClInclude Include="PickFlowers.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="Observe.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="Eat.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="LogOnStump.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="GrabLog.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="ChopLog.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryIdentity.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryPurpose.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryBasket.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfGreetRed.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkPath.h">
+      <Filter>Source Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,27 +245,6 @@
     <ClCompile Include="Prepare.cpp">
       <Filter>Source Files\Actions\fate</Filter>
     </ClCompile>
-    <ClCompile Include="BuildStove.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="CookBad.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="CookGood.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="Eat.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="FetchWater.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="FetchWood.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="Unpack.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
     <ClCompile Include="Greet.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
@@ -266,72 +254,93 @@
     <ClCompile Include="Bounded.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="Sleep.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="Register.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="PrepareBeds.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
-    <ClCompile Include="ErectTent.cpp">
-      <Filter>Source Files\Actions\campsite</Filter>
-    </ClCompile>
     <ClCompile Include="Travel.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="placeholder.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="menu.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="menupressed.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="stage.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="text frame2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="char1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="char2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="camp.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="menuUnavailable.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="huntsmanCabin.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="path.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="forest.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="grandmasLodge.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="arial.ttf">
-      <Filter>Resource Files</Filter>
-    </Font>
+    <ClCompile Include="BeginLRR.cpp">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClCompile>
+    <ClCompile Include="PickFlowers.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="Observe.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="Eat.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="LogOnStump.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClCompile>
+    <ClCompile Include="GrabLog.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClCompile>
+    <ClCompile Include="ChopLog.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryIdentity.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryPurpose.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryBasket.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="WolfGreetRed.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkPath.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\i_grandma.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\i_lumberjack.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\i_wolf.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\l_cabin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\l_forest.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\l_lodge.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\l_path.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\menu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\menupressed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\menuUnavailable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\stage.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\text frame2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\arial.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

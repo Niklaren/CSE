@@ -45,9 +45,9 @@ std::string Apologize::GetSentence()
 
 bool Apologize::GetUsable()
 {
-	if (!(subject->historyBook->HaventDoneEventBefore(subject, verb))) // if we've done it before
+	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
 		return false;
-	if (subject->historyBook->TimeSinceStart() > 5) // if we've moved passed Apologizeing stage
+	if (subject->GetHistory()->TimeSinceStart() > 5) // if we've moved passed Apologizeing stage
 		return false;
 	return true;
 }

@@ -16,10 +16,10 @@ ActionTargeted::~ActionTargeted()
 {
 }
 
-void ActionTargeted::React()
-{
-	if (HasSubject())
-		subject->React();
-	if (HasObject())
-		object->React();
-}
+//bool ActionTargeted::React()
+//{
+//	if (HasSubject())
+//		subject->React();
+//	if (HasObject())
+//		object->React();
+//}

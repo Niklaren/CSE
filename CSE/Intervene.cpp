@@ -17,10 +17,11 @@ Intervene::~Intervene()
 {
 }
 
-void Intervene::React()
+bool Intervene::React()
 {
-	a1->React();
-	a2->React();
+	if(a1->React() || a2->React())
+		return true;
+	return false;
 }
 
 void Intervene::ExecuteConsequences(WorldState* ws)

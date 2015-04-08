@@ -27,7 +27,7 @@ OK::OK()
 	//effects.push_back(effect7);
 
 	WorldStateProperty effect0;
-	effect0.SetWSProperty(WSP_Greeting, WST_bool, true);
+	//effect0.SetWSProperty(WSP_Greeting, WST_bool, true);
 
 	//no conditions
 }

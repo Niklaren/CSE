@@ -5,14 +5,20 @@
 class DramaManager : public Actor
 {
 private:
-	NPC_Actor* char1;
-	NPC_Actor* char2;
+	//vector<NPC_Actor*> NPCs;
+	Actor* red, *wolf, *lumberjack, *grandma;
+	Stage* path, *forest, *cabin, *lodge;
 
 public:
-	DramaManager(NPC_Actor* char1, NPC_Actor*char2, HistoryBook& hb);
+	DramaManager(Stage* s, HistoryBook& hb);
 	~DramaManager();
 
-	virtual void React();
+	void SetCharacters(Actor* p, Actor* w, Actor* l, Actor* g);
+	void SetLocations(Stage* path, Stage* forest, Stage* cabin, Stage* lodge);
+
+	void InitLRR();
+
+	virtual bool React();
 	virtual void Plan(string);
 	virtual void Plan(string, Actor*);
 	virtual void Plan(string, Actor*, Actor*);

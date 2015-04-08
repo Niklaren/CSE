@@ -39,7 +39,7 @@ private:
 	int screenPosx, screenPosy;
 
 public:
-	NPC_Actor(string name, string BitmapFilename, int x, int y, HistoryBook& hb);
+	//NPC_Actor(string name, string BitmapFilename, int x, int y, HistoryBook& hb);
 	NPC_Actor(string filename, WorldState* w, Planner* p, Stage* l, HistoryBook& hb);
 	~NPC_Actor();
 
@@ -47,7 +47,7 @@ public:
 
 	bool Draw(sf::RenderWindow&);
 
-	virtual void React();
+	virtual bool React();
 	//void EmotionalReaction(); // Not sure where this should be located???
 	
 	void SetWorldState(WorldState* w) { ws = w; }
@@ -55,6 +55,7 @@ public:
 	void AddGoal(Goal);
 	bool AcquireGoal();
 	void RemoveCurrentGoal();
+	bool IsGoalComplete();
 	int GetNumGoals() { return goals.size(); }
 
 	void ClearPlans();

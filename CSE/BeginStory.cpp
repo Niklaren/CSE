@@ -18,10 +18,11 @@
 BeginStory::BeginStory(Actor* subject_, Actor* object_, int moments_=0)
 	: ActionTargeted(subject_, object_, moments_)
 {
-	subject = subject_;
+	//subject = subject_;
 	verb = "Begin";
-	object = object_;
+	//object = object_;
 	//extraActor = extra_;
+
 }
 
 
@@ -31,7 +32,7 @@ BeginStory::~BeginStory()
 
 void BeginStory::ExecuteConsequences(WorldState* ws)
 {
-
+	Action::ExecuteConsequences(ws);
 }
 
 //float BeginStory::NPC_CalculateInclination()
@@ -53,10 +54,14 @@ void BeginStory::EmotionalReaction(NPC_Actor* affectingActor)
 		//g.SetRelevance(0.7f);
 		//g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
 		//affectingActor->AddGoal(g);
-		Goal g;
-		g.SetRelevance(0.7f);
-		g.SetWSProperty(WSP_WaterFetched, WST_int, 1);
-		affectingActor->AddGoal(g);
+		//Goal g;
+		//g.SetRelevance(0.7f);
+		//g.SetWSProperty(WSP_WaterFetched, WST_int, 1);
+		//affectingActor->AddGoal(g);
+		//Goal g;
+		//g.SetRelevance(0.7f);
+		//g.SetWSProperty(WSP_FoodEaten, WST_bool, true);
+		//affectingActor->AddGoal(g);
 	}
 }
 

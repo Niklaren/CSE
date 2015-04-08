@@ -78,8 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="char1.txt" />
-    <Text Include="char2.txt" />
+    <Text Include="Assets\c_grandma.txt" />
+    <Text Include="Assets\c_lumberjack.txt" />
+    <Text Include="Assets\c_wolf.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -87,40 +88,41 @@
     <ClInclude Include="ActionTargeted.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Apologize.h" />
+    <ClInclude Include="BeginLRR.h" />
     <ClInclude Include="BeginStory.h" />
     <ClInclude Include="BoundedNum.h" />
-    <ClInclude Include="BuildStove.h" />
-    <ClInclude Include="CookBad.h" />
-    <ClInclude Include="CookGood.h" />
+    <ClInclude Include="ChopLog.h" />
     <ClInclude Include="DramaManager.h" />
     <ClInclude Include="Eat.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="ErectTent.h" />
-    <ClInclude Include="FetchWater.h" />
-    <ClInclude Include="FetchWood.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="GrabLog.h" />
     <ClInclude Include="Greet.h" />
     <ClInclude Include="HistoryBook.h" />
     <ClInclude Include="Hug.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Insult.h" />
     <ClInclude Include="Intervene.h" />
+    <ClInclude Include="LogOnStump.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NPC_Actor.h" />
+    <ClInclude Include="Observe.h" />
     <ClInclude Include="OK.h" />
     <ClInclude Include="Option.h" />
+    <ClInclude Include="PickFlowers.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="Player_Actor.h" />
     <ClInclude Include="Prepare.h" />
-    <ClInclude Include="PrepareBeds.h" />
     <ClInclude Include="Punch.h" />
-    <ClInclude Include="Register.h" />
-    <ClInclude Include="Sleep.h" />
+    <ClInclude Include="QueryBasket.h" />
+    <ClInclude Include="QueryIdentity.h" />
+    <ClInclude Include="QueryPurpose.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Travel.h" />
-    <ClInclude Include="Unpack.h" />
+    <ClInclude Include="WalkPath.h" />
+    <ClInclude Include="WolfGreetRed.h" />
     <ClInclude Include="WorldState.h" />
     <ClInclude Include="WorldStateProperty.h" />
   </ItemGroup>
@@ -129,65 +131,65 @@
     <ClCompile Include="ActionTargeted.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Apologize.cpp" />
+    <ClCompile Include="BeginLRR.cpp" />
     <ClCompile Include="BeginStory.cpp" />
     <ClCompile Include="Bounded.cpp" />
-    <ClCompile Include="BuildStove.cpp" />
-    <ClCompile Include="CookBad.cpp" />
-    <ClCompile Include="CookGood.cpp" />
+    <ClCompile Include="ChopLog.cpp" />
     <ClCompile Include="CSE.cpp" />
     <ClCompile Include="DramaManager.cpp" />
     <ClCompile Include="Eat.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="ErectTent.cpp" />
-    <ClCompile Include="FetchWater.cpp" />
-    <ClCompile Include="FetchWood.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="GrabLog.cpp" />
     <ClCompile Include="Greet.cpp" />
     <ClCompile Include="HistoryBook.cpp" />
     <ClCompile Include="Hug.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Insult.cpp" />
     <ClCompile Include="Intervene.cpp" />
+    <ClCompile Include="LogOnStump.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NPC_Actor.cpp" />
+    <ClCompile Include="Observe.cpp" />
     <ClCompile Include="OK.cpp" />
     <ClCompile Include="Option.cpp" />
+    <ClCompile Include="PickFlowers.cpp" />
     <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Player_Actor.cpp" />
     <ClCompile Include="Prepare.cpp" />
-    <ClCompile Include="PrepareBeds.cpp" />
     <ClCompile Include="Punch.cpp" />
-    <ClCompile Include="Register.cpp" />
-    <ClCompile Include="Sleep.cpp" />
+    <ClCompile Include="QueryBasket.cpp" />
+    <ClCompile Include="QueryIdentity.cpp" />
+    <ClCompile Include="QueryPurpose.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Travel.cpp" />
-    <ClCompile Include="Unpack.cpp" />
+    <ClCompile Include="WalkPath.cpp" />
+    <ClCompile Include="WolfGreetRed.cpp" />
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="camp.bmp" />
-    <Image Include="char1.png" />
-    <Image Include="char2.png" />
-    <Image Include="forest.png" />
-    <Image Include="grandmasLodge.png" />
-    <Image Include="huntsmanCabin.png" />
-    <Image Include="menu.png" />
-    <Image Include="menupressed.png" />
-    <Image Include="menuUnavailable.png" />
-    <Image Include="path.png" />
-    <Image Include="placeholder.bmp" />
-    <Image Include="stage.png" />
-    <Image Include="text frame2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="arial.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\i_grandma.png" />
+    <Image Include="Assets\i_lumberjack.png" />
+    <Image Include="Assets\i_wolf.png" />
+    <Image Include="Assets\l_cabin.png" />
+    <Image Include="Assets\l_forest.png" />
+    <Image Include="Assets\l_lodge.png" />
+    <Image Include="Assets\l_path.png" />
+    <Image Include="Assets\menu.png" />
+    <Image Include="Assets\menupressed.png" />
+    <Image Include="Assets\menuUnavailable.png" />
+    <Image Include="Assets\stage.png" />
+    <Image Include="Assets\text frame2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

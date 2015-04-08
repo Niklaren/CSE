@@ -14,6 +14,18 @@ Stage::~Stage()
 {
 }
 
+void Stage::AddLocationActions(Player_Actor* p)
+{
+	if (name == "path"){
+
+	}
+}
+
+void Stage::RemoveLocationActions(Player_Actor* p)
+{
+
+}
+
 bool Stage::Draw(sf::RenderWindow &window)
 {
 	window.draw(sprite);

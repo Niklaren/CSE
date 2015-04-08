@@ -5,15 +5,20 @@
 WorldState::WorldState()
 {
 	WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Invalid);
-	WSProperties[WSP_FoodEaten].SetWSProperty(WSP_FoodEaten, WST_bool, false);
-	WSProperties[WSP_FoodCooked].SetWSProperty(WSP_FoodCooked, WST_bool, false);
-	WSProperties[WSP_Unpacked].SetWSProperty(WSP_Unpacked, WST_bool, false);
-	WSProperties[WSP_StoveReady].SetWSProperty(WSP_StoveReady, WST_bool, false);
-	WSProperties[WSP_FireBuilt].SetWSProperty(WSP_FireBuilt, WST_bool, false);
-	WSProperties[WSP_WoodCollected].SetWSProperty(WSP_WoodCollected, WST_bool, false);
-	WSProperties[WSP_WaterFetched].SetWSProperty(WSP_WaterFetched, WST_int, 0);
-	WSProperties[WSP_Greeting].SetWSProperty(WSP_Greeting, WST_bool, false);
-	WSProperties[WSP_Punched].SetWSProperty(WSP_Punched, WST_bool, false);
+	WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, true);
+	WSProperties[WSP_WolfHasLunch].SetWSProperty(WSP_WolfHasLunch, WST_bool, false);
+	WSProperties[WSP_RedPanicked].SetWSProperty(WSP_RedPanicked, WST_bool, false);
+	WSProperties[WSP_RedEaten].SetWSProperty(WSP_RedEaten, WST_bool, false);
+	WSProperties[WSP_GrandmaEaten].SetWSProperty(WSP_GrandmaEaten, WST_bool, false);
+	WSProperties[WSP_DoorOpen].SetWSProperty(WSP_DoorOpen, WST_bool, false);
+	WSProperties[WSP_FlowersPicked].SetWSProperty(WSP_FlowersPicked, WST_bool, false);
+	WSProperties[WSP_JackHasLumber].SetWSProperty(WSP_JackHasLumber, WST_bool, false);
+	WSProperties[WSP_LumberOnStump].SetWSProperty(WSP_LumberOnStump, WST_bool, false);
+	WSProperties[WSP_LumberChopped].SetWSProperty(WSP_LumberChopped, WST_int, 0);
+	WSProperties[WSP_WolfGreetRed].SetWSProperty(WSP_WolfGreetRed, WST_bool, false);
+	WSProperties[WSP_QueryRed].SetWSProperty(WSP_QueryRed, WST_bool, false);
+
+
 }
 
 WorldState::~WorldState()

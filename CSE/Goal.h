@@ -13,6 +13,8 @@ private:
 	float Relevance; // may be unecessary if we always have a value from calculate relevance
 public:
 	Goal();
+	//Goal(WorldStateProperty wsp);
+	Goal(float relevance);
 	Goal(float relevance, NPC_Actor*);
 	~Goal();
 

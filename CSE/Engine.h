@@ -15,6 +15,7 @@
 #include "Input.h"
 
 #include <queue>
+#include <vector>
 #include <assert.h>
 
 enum InputType {LDown, LUp, KeyDown, KeyUp, MouseMove};
@@ -35,21 +36,21 @@ protected:
 	WorldState worldstate;
 	Menu menu;
 
-	Stage* offStage = new Stage("stage.png", "offStage");
-	Stage* camp = new Stage("camp.bmp", "camp");
-	Stage* path = new Stage("path.png", "path");
-	Stage* forest = new Stage("forest.png", "forest");
-	Stage* cabin = new Stage("huntsmanCabin.png", "cabin");
-	Stage* lodge = new Stage("grandmasLodge.png", "lodge");
+	Stage* offStage = new Stage("Assets/l_stage.png", "offStage");
+	//Stage* camp = new Stage("camp.bmp", "camp");
+	Stage* path = new Stage("Assets/l_path.png", "path");
+	Stage* forest = new Stage("Assets/l_forest.png", "forest");
+	Stage* cabin = new Stage("Assets/l_cabin.png", "cabin");
+	Stage* lodge = new Stage("Assets/l_lodge.png", "lodge");
 	
 
 	Player_Actor *Protagonist = new Player_Actor("You", path, historyBook);
-	NPC_Actor* Char1 = new NPC_Actor("char1.txt", &worldstate, &planner, camp, historyBook);
-	NPC_Actor* Char2 = new NPC_Actor("char2.txt", &worldstate, &planner, camp, historyBook);
-	DramaManager *Fate = new DramaManager(Char1, Char2, historyBook);
-
-	//std::queue<Action> plans;
-	Actor *actors[MAX_ACTORS];	//Array of the 4 actors in the scene.
+	NPC_Actor* Wolf = new NPC_Actor("Assets/c_wolf.txt", &worldstate, &planner, forest, historyBook);
+	NPC_Actor* Lumberjack = new NPC_Actor("Assets/c_lumberjack.txt", &worldstate, &planner, cabin, historyBook);
+	NPC_Actor* Grandma = new NPC_Actor("Assets/c_grandma.txt", &worldstate, &planner, lodge, historyBook);
+	DramaManager *Fate = new DramaManager(offStage, historyBook);
+	vector<Actor*> actors;
+	vector<NPC_Actor*> NPCs;
 	
 	sf::Clock clock;
 	sf::Time time;

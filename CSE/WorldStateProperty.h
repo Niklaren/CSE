@@ -19,17 +19,20 @@ enum eWorldStateProperties_Key
 {
 	WSP_Invalid = -1,
 	WSP_ReactToWorldStateEvent, // ?
-	WSP_FoodEaten,
-	WSP_FoodCooked, //cook poorly or well
-	WSP_Unpacked,
-	WSP_StoveReady,
-	WSP_FireBuilt,
-	WSP_WoodCollected, // collect proper logs or just twigs
-	WSP_WaterFetched, // perhaps not enough?
+	WSP_WolfGreetRed,
 	WSP_Greeting,
-	WSP_Insulted,
-	WSP_Punched,
+	WSP_QueryRed,
+	WSP_WolfHungry,
+	WSP_WolfHasLunch,
+	WSP_RedPanicked,
+	WSP_RedEaten,
+	WSP_GrandmaEaten,
+	WSP_DoorOpen,
+	WSP_FlowersPicked,
 	WSP_Location,
+	WSP_JackHasLumber,
+	WSP_LumberOnStump,
+	WSP_LumberChopped,
 	WSP_Count
 };
 //const string WorldStateProperties_Key[WSP_Count]

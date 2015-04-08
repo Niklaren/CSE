@@ -16,16 +16,22 @@ Action::~Action()
 {
 }
 
-void Action::React()
+bool Action::React()
 {
-	if (HasSubject())
+	bool reaction = false;
+	if (HasSubject()){
 		subject->React();
-	if (HasObject())
+		reaction = true;
+	}
+	if (HasObject()){
 		object->React();
+		reaction = true;
+	}
 
+	return reaction;
 }
 
-void Action::ExecuteConsequences(WorldState*)
+void Action::ExecuteConsequences(WorldState* ws)
 {
 	if (!locationOccured)
 	{

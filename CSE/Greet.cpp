@@ -25,14 +25,16 @@ void Greet::Init()
 	verb = "Greet";
 
 	//effect
-	WorldStateProperty effect1, effect2;
+	WorldStateProperty effect1, effect2, effect3;
 	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
 	effects.push_back(effect1);
-	effect1.SetWSProperty(WSP_Greeting, WST_bool, true);
-	effects.push_back(effect1);
+	effect2.SetWSProperty(WSP_Greeting, WST_bool, true);
+	effects.push_back(effect2);
 
 	// conditions
-	// none
+	WorldStateProperty condition1;
+	condition1.SetWSProperty(WSP_Location, WST_variable);
+	conditions.push_back(condition1);
 
 }
 
@@ -55,9 +57,9 @@ std::string Greet::GetSentence()
 
 bool Greet::GetUsable()
 {
-	if (!(subject->historyBook->HaventDoneEventBefore(subject, verb))) // if we've done it before
+	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
 			return false;
-	if (subject->historyBook->TimeSinceStart() > 5) // if we've moved passed greeting stage
+	if (subject->GetHistory()->TimeSinceStart() > 5) // if we've moved passed greeting stage
 		return false;
 	return true;
 }
