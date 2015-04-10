@@ -24,8 +24,11 @@ void Actor::AddAction(string action)
 		availableActions.push_back(new OK(this, 0));
 	else if (action == "Travel")
 		availableActions.push_back(new Travel(this, 0));
-	else if (action == "Eat")
-		availableActions.push_back(new Eat(this, 0));
+	else if (action == "OpenDoor")
+		availableActions.push_back(new OpenDoor(this, 0));
+	//else if (action == "Eat")
+	//	availableActions.push_back(new Eat(this, 0));
+
 	//else if (action == "CookGood")
 	//	availableActions.push_back(new CookGood(this, 0));
 	//else if (action == "CookBad")
@@ -64,6 +67,12 @@ void Actor::AddAction(string action, Actor* object_ = NULL)
 		availableActions.push_back(new QueryPurpose(this, object_, 0));
 	else if (action == "QueryBasket")
 		availableActions.push_back(new QueryBasket(this, object_, 0));
+	else if (action == "WolfEat")
+		availableActions.push_back(new WolfEat(this, object_, 0));
+	else if (action == "RequestEntry")
+		availableActions.push_back(new RequestEntry(this, object_, 0));
+	else if (action == "Intimidate")
+		availableActions.push_back(new Intimidate(this, object_, 0));
 }
 
 void Actor::RemoveAction(string action)
@@ -94,6 +103,13 @@ void Actor::Plan(string action)
 	}
 	else{
 	//error
+	}
+}
+
+void Actor::Wait(int delay)
+{
+	for (int plan_iter(0); plan_iter < GetNumPlans(); plan_iter++){
+		GetPlan(plan_iter)->AddExecutiontime(delay);
 	}
 }
 

@@ -23,12 +23,14 @@ public:
 	~HistoryBook();
 
 	void EventHappened(Action*);
+
 	void LookupEvent(std::string);
 	int CountEvents() { return eventHistory.size(); }
 	int TimeElapsedSince(std::string);
 	int TimeSinceStart(){ return time; }
 	bool HaventDoneEventBefore(Actor*, std::string);
-	bool HaventDoneEventSince(std::string, int moments);
+	bool HaventDoneEventSince(Actor*, std::string, int moments);
+	bool EventJustHappened(std::string);
 	Action* GetLastEvent() { return eventHistory.back(); } //??
 
 	bool Draw(sf::RenderWindow &, Stage* s);

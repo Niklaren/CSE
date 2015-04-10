@@ -8,22 +8,13 @@ WalkPath::WalkPath(Actor* subject_, int moments_ = 1)
 	verb = "WalkPath";
 }
 
-WalkPath::WalkPath()
-{
-
-	WorldStateProperty effect0;
-	//effect0.SetWSProperty(WSP_Greeting, WST_bool, true);
-
-	//no conditions
-}
-
 WalkPath::~WalkPath()
 {
 }
 
 std::string WalkPath::GetSentence()
 {
-	return "no response.";
+	return "after walking down the path a bit you think you see grandma's lodge.";
 }
 
 bool WalkPath::GetUsable()
@@ -34,10 +25,11 @@ bool WalkPath::GetUsable()
 void WalkPath::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
-	//subject->AddLocation(lodge)
+	
+	subject->AddLocation("lodge");
 }
 
-void WalkPath::NPC_EmotionalReaction(NPC_Actor* affectingActor)
+void WalkPath::EmotionalReaction(NPC_Actor* affectingActor)
 {
 
 }

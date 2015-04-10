@@ -29,6 +29,7 @@ protected:
 	int momentsFromExecution;
 
 	//bool interruptable = true;
+	bool reusable = false;
 
 	virtual void Init() {}
 
@@ -51,7 +52,7 @@ public:
 
 	bool HasLocation(){ if (locationOccured != NULL) { return true; } return false; }
 	Stage* Get_Location() { assert(locationOccured != NULL); return locationOccured; }
-	void SetLocationt(Stage* l){ locationOccured = l; }
+	void SetLocation(Stage* l){ locationOccured = l; }
 
 	virtual std::string GetSentence();
 
@@ -72,4 +73,6 @@ public:
 
 	//bool Interruptable(){ return Interruptable; }
 	//void SetInterruptable(bool i){ Interruptable=i; }
+	bool Reusable(){ return reusable; }
+	void SetReusable(bool b){ reusable=b; }
 };

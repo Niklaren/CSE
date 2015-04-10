@@ -40,6 +40,7 @@ public:
 	~Planner();
 
 	std::vector<Action*> Plan(NPC_Actor*, /*available actions,*/ WorldState, WorldStateProperty);
+	bool Plan(NPC_Actor*, vector<Action*> &newplan, WorldState, WorldStateProperty);
 
 private:
 	bool BuildPaths(Node*, vector<Node*>&, vector<Action*>, WorldState);
@@ -47,8 +48,7 @@ private:
 	bool IsCloser();
 
 	bool Check_Conditions(vector<WorldStateProperty> a, vector<WorldStateProperty> b);
+	bool Compare_Conditions(WorldState ws_, vector<WorldStateProperty> a, vector<WorldStateProperty> b);
 	vector<WorldStateProperty> makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects);
-
-	
 };
 

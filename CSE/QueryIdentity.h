@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 class QueryIdentity :
-	public Action
+	public ActionTargeted
 {
 public:
 	QueryIdentity(Actor* subject_, Actor* object_, int moments_);

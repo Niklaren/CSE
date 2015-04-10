@@ -9,6 +9,7 @@ enum eWorldStateEvents
 	WSE_Invalid = -1,
 	WSE_MoodChange,			//may need ones for target & self??
 	WSE_PersonalityChange,
+	WSE_RequestEntry,
 	WSE_Punch,
 	WSE_Hug,
 	WSE_Apologize,
@@ -19,11 +20,14 @@ enum eWorldStateProperties_Key
 {
 	WSP_Invalid = -1,
 	WSP_ReactToWorldStateEvent, // ?
+	WSP_RedHome,
+	WSP_LunchDelivered,
 	WSP_WolfGreetRed,
 	WSP_Greeting,
 	WSP_QueryRed,
 	WSP_WolfHungry,
 	WSP_WolfHasLunch,
+	WSP_WolfKnowsGrandma,
 	WSP_RedPanicked,
 	WSP_RedEaten,
 	WSP_GrandmaEaten,
@@ -128,6 +132,24 @@ struct WorldStateProperty
 	{
 		Key = Key_;
 		Type = Type_;
+	}
+
+	void SetValue(bool b)
+	{
+		if (Type == WST_bool)
+			bvalue = b;
+	}
+
+	void SetValue(int i)
+	{
+		if (Type == WST_int)
+			ivalue = i;
+	}
+
+	void ChangeValue(int i)
+	{
+		if (Type == WST_int)
+			ivalue += i;
 	}
 
 	WorldStateProperty& operator=(const WorldStateProperty& other)

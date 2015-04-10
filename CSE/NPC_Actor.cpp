@@ -163,11 +163,12 @@ bool NPC_Actor::React()
 
 	// if we we are the object of the last event we have to replan.
 	if (historyBook->GetLastEvent()->HasObject()){
-		if (historyBook->GetLastEvent()->Get_Object()->GetName() == name)
-		{
-			AcquireGoal();
-			RePlan();
-			return true;
+		if (historyBook->GetLastEvent()->Get_Object()->GetName() == name){
+			Wait();
+			if (AcquireGoal()){
+				RePlan();
+				return true;
+			}
 		}
 	}
 
@@ -200,13 +201,13 @@ bool NPC_Actor::AcquireGoal()
 
 void NPC_Actor::RemoveCurrentGoal()
 {
-		for (unsigned i = goals.size(); i-- > 0;){
-			if (goals[i] == current){
-				goals.erase(goals.begin() + i);
-				current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
-				current.SetRelevance(0);
-			}
+	for (unsigned i = goals.size(); i-- > 0;){
+		if (goals[i] == current){
+			goals.erase(goals.begin() + i);
+			current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
+			current.SetRelevance(0);
 		}
+	}
 }
 
 bool NPC_Actor::IsGoalComplete()
@@ -224,10 +225,13 @@ void NPC_Actor::ClearPlans()
 void NPC_Actor::RePlan()
 {
 	ClearPlans();
-	std::vector<Action*> newplan = planner->Plan(this, *ws, current);
-	for (unsigned i = 0; i < newplan.size(); i++){
-		//Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
-		Plan(newplan[i], 1+i);
+	//std::vector<Action*> newplan = planner->Plan(this, *ws, current);
+	std::vector<Action*> newplan;
+	if (planner->Plan(this, newplan, *ws, current)){
+		for (unsigned i = 0; i < newplan.size(); i++){
+			//Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
+			Plan(newplan[i], 1 + i);
+		}
 	}
 }
 
@@ -237,8 +241,9 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new OK(this, moments));
 	else if (action->GetVerb() == "Travel")
 		plans.push_back(new Travel(this, moments));
-	else if (action->GetVerb() == "Eat")
-		plans.push_back(new Eat(this, moments));
+	else if (action->GetVerb() == "OpenDoor")
+		plans.push_back(new OpenDoor(this, moments));
+
 	//else if (action->GetVerb() == "BuildStove")
 	//	plans.push_back(new BuildStove(this, moments));
 	else{
@@ -276,6 +281,14 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new QueryPurpose(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "QueryBasket")
 		plans.push_back(new QueryBasket(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "WolfEatYou")
+		plans.push_back(new WolfEat(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "WolfEatGrandma")
+		plans.push_back(new WolfEat(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "RequestEntry")
+		plans.push_back(new RequestEntry(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Intimidate")
+		plans.push_back(new Intimidate(this, action->Get_Object(), moments));
 	else{
 		//error
 	}
@@ -294,20 +307,8 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 	// actions that do not have an object;
 	if (action == "OK")
 		plans.push_back(new OK(this, moments));
-	else if (action == "Eat")
-		plans.push_back(new Eat(this, moments));
-	//else if(action == "CookGood")
-	//	plans.push_back(new CookGood(this, moments));
-	//else if(action == "CookBad")
-	//	plans.push_back(new CookBad(this, moments));
-	////else if(action == "FetchWater")
-	////	plans.push_back(new FetchWater(this, moments));
-	//else if(action == "FetchWood")
-	//	plans.push_back(new FetchWood(this, moments));
-	//else if(action == "Unpack")
-	//	plans.push_back(new Unpack(this, moments));
-	//else if(action == "BuildStove")
-	//	plans.push_back(new BuildStove(this, moments));
+
+
 	else{
 		//error
 	}
@@ -327,6 +328,10 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		plans.push_back(new QueryBasket(this, object_, moments));
 	else if (action == "WolfGreetRed")
 		plans.push_back(new Greet(this, object_, moments));
+	else if (action == "WolfEat")
+		plans.push_back(new WolfEat(this, object_, moments));
+	else if (action == "RequestEntry")
+		plans.push_back(new RequestEntry(this, object_, moments));
 
 	else{
 		//error

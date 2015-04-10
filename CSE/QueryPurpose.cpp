@@ -5,9 +5,8 @@
 
 
 QueryPurpose::QueryPurpose(Actor* subject_, Actor* object_, int moments_ = 1)
-	: Action(subject_, moments_)
+	: ActionTargeted(subject_, object_, moments_)
 {
-	object = object_;
 	Init();
 }
 
@@ -27,15 +26,15 @@ void QueryPurpose::Init()
 
 	//effect
 	WorldStateProperty effect1;
-	effect1.SetWSProperty(WSP_QueryRed, WST_bool, true);
+	effect1.SetWSProperty(WSP_QueryRed, WST_int, +1);
 	effects.push_back(effect1);
 
 	// conditions
 	WorldStateProperty condition1, condition2;
 	condition1.SetWSProperty(WSP_WolfGreetRed, WST_bool, true);
 	conditions.push_back(condition1);
-	condition2.SetWSProperty(WSP_Location, WST_variable);
-	conditions.push_back(condition2);
+	//condition2.SetWSProperty(WSP_Location, WST_variable);
+	//conditions.push_back(condition2);
 }
 
 std::string QueryPurpose::GetSentence()
@@ -47,9 +46,9 @@ void QueryPurpose::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 
-	ws->WSProperties[WSP_QueryRed].SetWSProperty(WSP_QueryRed, WST_bool, true);
+	ws->WSProperties[WSP_QueryRed].ChangeValue(+1);
 
-	subject->AddAction("ReplyPurpose");
+	object->AddAction("Answer");
 
 }
 

@@ -16,10 +16,28 @@ ActionTargeted::~ActionTargeted()
 {
 }
 
-//bool ActionTargeted::React()
-//{
-//	if (HasSubject())
-//		subject->React();
-//	if (HasObject())
-//		object->React();
-//}
+bool ActionTargeted::ReadyToExecute()
+{
+	if (!Action::ReadyToExecute())
+		return false;
+
+	if (subject->GetLocation() != object->GetLocation()){
+		subject->Wait(2);
+		subject->Plan("Travel", object->GetLocation());
+		return false;
+	}
+
+	return true;
+}
+
+bool ActionTargeted::React()
+{
+	bool reaction = false;
+
+	if(Action::React())
+		reaction = true;
+	if(object->React())
+		reaction=true;
+
+	return reaction;
+}

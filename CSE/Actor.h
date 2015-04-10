@@ -3,16 +3,25 @@
 #include "BeginStory.h"
 #include "BeginLRR.h"
 #include "Prepare.h"
+#include "End.h"
 
 #include "OK.h"
 #include "Travel.h"
 #include "Observe.h"
+#include "GoHome.h"
 #include "WalkPath.h"
+#include "Answer.h"
+#include "RequestEntry.h"
+#include "GiveFood.h"
 
 #include "WolfGreetRed.h"
 #include "QueryIdentity.h"
 #include "QueryPurpose.h"
 #include "QueryBasket.h"
+#include "WolfEat.h"
+#include "Intimidate.h"
+
+#include "OpenDoor.h"
 
 #include "GrabLog.h"
 #include "LogOnStump.h"
@@ -24,13 +33,6 @@
 #include "Apologize.h"
 #include "Intervene.h"
 #include "Greet.h"
-#include "Eat.h"
-//#include "CookGood.h"
-//#include "CookBad.h"
-//#include "BuildStove.h"
-//#include "FetchWater.h"
-//#include "FetchWood.h"
-//#include "Unpack.h"
 
 
 //#include <string>
@@ -62,6 +64,7 @@ public:
 	virtual void AddAction(string ActionName);
 	virtual void AddAction(string ActionName, Actor* target);
 	virtual void AddAction(string ActionName, Stage* location_);
+	virtual void AddLocation(string locName){}
 
 	virtual void RemoveAction(string ActionName);
 
@@ -86,6 +89,7 @@ public:
 	Stage* GetLocation(){ return location; }
 	void MoveLocation(Stage* l){ location = l; }
 	
+	void Wait(int time = 1);
 	void TimeForward();
 
 	HistoryBook* GetHistory(){ return historyBook; }

@@ -1,7 +1,7 @@
 #pragma once
-#include "Action.h"
+#include "ActionTargeted.h"
 class QueryBasket :
-	public Action
+	public ActionTargeted
 {
 public:
 	QueryBasket(Actor* subject_, Actor* object_, int moments_);

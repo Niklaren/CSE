@@ -18,15 +18,7 @@ Action::~Action()
 
 bool Action::React()
 {
-	bool reaction = false;
-	if (HasSubject()){
-		subject->React();
-		reaction = true;
-	}
-	if (HasObject()){
-		object->React();
-		reaction = true;
-	}
+	bool reaction = subject->React();
 
 	return reaction;
 }
@@ -48,10 +40,22 @@ std::string Action::GetSentence(){
 	return eventText;
 }
 
-bool Action::ReadyToExecute() { 
-	if (momentsFromExecution == 0) 
-		{ return true; } 
-	return false; 
+bool Action::ReadyToExecute() 
+{ 
+	if (momentsFromExecution != 0)
+		return false;
+
+	if (!GetUsable())
+		return false;
+
+	if (locationOccured != nullptr){
+		if (subject->GetLocation() != locationOccured){
+
+		}
+	}
+		
+	return true; 
+	
 }
 
 void Action::MomentsPass() {

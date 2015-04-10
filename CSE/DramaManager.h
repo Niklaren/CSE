@@ -1,20 +1,22 @@
 #pragma once
 
-#include "Actor.h"
+#include "NPC_Actor.h"
+#include "Player_Actor.h"
 
 class DramaManager : public Actor
 {
 private:
 	//vector<NPC_Actor*> NPCs;
-	Actor* red, *wolf, *lumberjack, *grandma;
-	Stage* path, *forest, *cabin, *lodge;
-
+	Player_Actor* red;
+	NPC_Actor*wolf, *lumberjack, *grandma;
+	Stage* path, *forest, *cabin, *lodge, *offstage;
+	WorldState* ws;
 public:
-	DramaManager(Stage* s, HistoryBook& hb);
+	DramaManager(Stage* s, WorldState* ws_, HistoryBook& hb);
 	~DramaManager();
 
-	void SetCharacters(Actor* p, Actor* w, Actor* l, Actor* g);
-	void SetLocations(Stage* path, Stage* forest, Stage* cabin, Stage* lodge);
+	void SetCharacters(Player_Actor* p, NPC_Actor* w, NPC_Actor* l, NPC_Actor* g);
+	void SetLocations(Stage* path, Stage* forest, Stage* cabin, Stage* lodge, Stage* offstage);
 
 	void InitLRR();
 

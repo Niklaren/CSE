@@ -74,7 +74,7 @@ bool Option::Draw(sf::RenderWindow &window)
 		sf::Text ttext;
 		ttext.setFont(tfont);
 		ttext.setString(name);
-		ttext.setCharacterSize(24);
+		ttext.setCharacterSize(20);
 		ttext.setPosition(sf::Vector2f(optionRect.left + 5, optionRect.top + 10));
 		window.draw(ttext);
 	}

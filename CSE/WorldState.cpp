@@ -5,8 +5,16 @@
 WorldState::WorldState()
 {
 	WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Invalid);
+	WSProperties[WSP_Location].SetWSProperty(WSP_Location, WST_variable, WSE_Invalid);
+
+	WSProperties[WSP_RedHome].SetWSProperty(WSP_RedHome, WST_bool, false);
+	WSProperties[WSP_LunchDelivered].SetWSProperty(WSP_LunchDelivered, WST_bool, false);
+	WSProperties[WSP_WolfGreetRed].SetWSProperty(WSP_WolfGreetRed, WST_bool, false);
+	//wsp_greeting
+	WSProperties[WSP_QueryRed].SetWSProperty(WSP_QueryRed, WST_int, 0);
 	WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, true);
 	WSProperties[WSP_WolfHasLunch].SetWSProperty(WSP_WolfHasLunch, WST_bool, false);
+	WSProperties[WSP_WolfKnowsGrandma].SetWSProperty(WSP_WolfKnowsGrandma, WST_bool, false);
 	WSProperties[WSP_RedPanicked].SetWSProperty(WSP_RedPanicked, WST_bool, false);
 	WSProperties[WSP_RedEaten].SetWSProperty(WSP_RedEaten, WST_bool, false);
 	WSProperties[WSP_GrandmaEaten].SetWSProperty(WSP_GrandmaEaten, WST_bool, false);
@@ -15,8 +23,8 @@ WorldState::WorldState()
 	WSProperties[WSP_JackHasLumber].SetWSProperty(WSP_JackHasLumber, WST_bool, false);
 	WSProperties[WSP_LumberOnStump].SetWSProperty(WSP_LumberOnStump, WST_bool, false);
 	WSProperties[WSP_LumberChopped].SetWSProperty(WSP_LumberChopped, WST_int, 0);
-	WSProperties[WSP_WolfGreetRed].SetWSProperty(WSP_WolfGreetRed, WST_bool, false);
-	WSProperties[WSP_QueryRed].SetWSProperty(WSP_QueryRed, WST_bool, false);
+	
+
 
 
 }
@@ -59,14 +67,16 @@ bool WorldState::IsCloser(WorldStateProperty effect, WorldStateProperty goal)
 	if ((goal.Type == WST_bool) && (effect.bvalue == goal.bvalue) && (WSProperties[goal.Key].bvalue != goal.bvalue))
 		return true;
 	if (goal.Type == WST_int){
-		int real_diff = goal.ivalue - WSProperties[goal.Key].ivalue;
-		int eff_diff = goal.ivalue - (WSProperties[goal.Key].ivalue + effect.ivalue);
+		unsigned int real_diff = goal.ivalue - WSProperties[goal.Key].ivalue;
+		unsigned int eff_diff = goal.ivalue - (WSProperties[goal.Key].ivalue + effect.ivalue);
 		if (eff_diff < real_diff)
 			return true;
 	}
 	if ((goal.Type == WST_float) && (effect.fvalue == goal.fvalue) && (WSProperties[goal.Key].fvalue != goal.fvalue))
 		return true;
 	if ((goal.Type == WST_worldStateEvent) && (effect.evalue == goal.evalue))
+		return true;
+	if ((goal.Type == WST_variable))
 		return true;
 
 	return false;

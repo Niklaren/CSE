@@ -15,7 +15,7 @@ Planner::~Planner()
 {
 }
 
-std::vector<Action*> Planner::Plan(NPC_Actor* actor, WorldState ws, WorldStateProperty goal)
+bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState ws, WorldStateProperty goal)
 {
 	actor->Get_AvailableActions();
 	// reset/refresh variables/contents of available actions?
@@ -40,30 +40,33 @@ std::vector<Action*> Planner::Plan(NPC_Actor* actor, WorldState ws, WorldStatePr
 	if (!success)
 	{
 		vector<Action*> noresult;
-		return noresult;
+		//return noresult;
+		return success;
 	}
 
 	Node* cheapest = solutions.front();
 	for (unsigned int i(0); i < solutions.size(); i++)
 	{
-		if (solutions[i]->runningCost > cheapest->runningCost)
+		if (solutions[i]->runningCost < cheapest->runningCost)
 			cheapest = solutions[i];
 	}
 
-	vector<Action*> result;
+	//vector<Action*> result;
 	queue<Action*> qresult;
 	Node* n = cheapest;
 	while (n != nullptr)
 	{
 		if (n->action != nullptr)
 		{
-			result.emplace_back(n->action);
+			newplan.emplace_back(n->action);
+			//result.emplace_back(n->action);
 			qresult.push(n->action);
 		}
 		n = n->parent;
 	}
 
-	return result;
+	//return result;
+	return success;
 }
 
 bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*> actionPool, WorldState ws)
@@ -72,10 +75,12 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 	// if goal state != current world state
 	if (!(ws.MeetsWorldState(parent->goalState)))
 		// for every action
-		for (unsigned int index(0); index < actionPool.size(); index++){
+		for	(unsigned index = actionPool.size(); index-- > 0;){
 			// if actions effect meets an unsatisfied goal condition
-			if (Check_Conditions(actionPool[index]->GetEffects(), parent->goalState)){
-				// goal is now satisfied (??)
+			//if (Check_Conditions(actionPool[index]->GetEffects(), parent->goalState)){
+			if (Compare_Conditions(ws, actionPool[index]->GetEffects(), parent->goalState)){
+				// we could perform a check seeing if we expect/need to travel here and either plan that or add running cost				
+
 				// goal condition value = action effect value
 				// new goal condition = action condition
 				vector<WorldStateProperty> newGoal = makeNewGoal(parent->goalState, actionPool[index]->GetConditions(), actionPool[index]->GetEffects());
@@ -85,6 +90,13 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 
 				// new node with above
 				Node* nextStep = new Node(parent, cost, newGoal, actionPool[index]);
+
+				// if the action isnt reusable remove it from the pool
+				if (!actionPool[index]->Reusable()){
+					// if you want to keep it available for this search, and only remove it from child
+					// searches you could make a copy here.
+					actionPool.erase(index + actionPool.begin());
+				}
 
 				// build paths
 				bool success = BuildPaths(nextStep, solutions, actionPool, ws);
@@ -102,13 +114,25 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 }
 
 // function to check if the effect(s) of an action will fulfil at least one of the goal conditions
-
 bool Planner::Check_Conditions(vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
 {
 	bool match = false;
 	for (unsigned int ie(0); ie < effect.size(); ie++){
 		for (unsigned int ig(0); ig < goal.size(); ig++){
 			if (effect[ie] == goal[ig])
+				match = true;
+		}
+	}
+	return match;
+}
+
+// function to check if the effect(s) of an action will bring the world state closer to the goal
+bool Planner::Compare_Conditions(WorldState ws_, vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
+{
+	bool match = false;
+	for (unsigned int ie(0); ie < effect.size(); ie++){
+		for (unsigned int ig(0); ig < goal.size(); ig++){
+			if (ws_.IsCloser(effect[ie],goal[ig]))
 				match = true;
 		}
 	}
@@ -122,14 +146,33 @@ vector<WorldStateProperty> Planner::makeNewGoal(vector<WorldStateProperty> oldGo
 	//remove any goals that were met by effects.
 	for (unsigned int iAE(0); iAE < actionEffects.size(); iAE++){
 		for (int iG(newGoal.size()-1); iG >= 0; iG--){
-			if (newGoal[iG] == actionEffects[iAE]){
-				newGoal.erase(newGoal.begin()+iG);
+			if (newGoal[iG].Key == actionEffects[iAE].Key){
+				if (newGoal[iG].Type == WST_int){
+					newGoal[iG].ChangeValue(-actionEffects[iAE].ivalue);
+				}
+				else if (newGoal[iG].Type == WST_bool){
+					newGoal[iG].SetValue(!actionEffects[iAE].bvalue);
+				}
+				else
+				{
+					newGoal.erase(newGoal.begin() + iG);
+				}
 			}
 		}
 	}
 
 	// add new conditions
 	// if actionconditions??
+	/*for (unsigned int iAC(0); iAC < actionConditions.size(); iAC++){
+		bool alreadyPresent = false;
+		for (unsigned iG(0); iG < newGoal.size(); iG++){
+			if (newGoal[iG].Key == actionConditions[iAC].Key){
+				alreadyPresent = true;
+			}
+		}
+		if (!alreadyPresent)
+			newGoal.emplace_back(actionConditions[iAC]);
+	}	*/
 	newGoal.insert(newGoal.end(), actionConditions.begin(), actionConditions.end());
 
 	return newGoal;

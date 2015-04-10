@@ -21,14 +21,21 @@ Menu::Menu()
 	AddOption("path", Type_Location,		3, 1, 1);
 
 	AddOption("Travel", Type_ActLocation,	0, 2, 2);
-	AddOption("Observe", Type_Act0Target,	2, 2, 2);
-	AddOption("Stray", Type_Act0Target,		0, 3, 2);
+	AddOption("Go Home", Type_Act0Target,	2, 2, 2);
+	AddOption("Observe", Type_Act0Target,	0, 3, 2);
+	AddOption("Stray Off Path", Type_Act0Target, 2, 3, 3);
+	AddOption("Walk Path", Type_Act0Target, 0, 4, 2);
 
-	AddOption("Hug", Type_Act1Target,		0, 4, 1);
-	AddOption("Apologize", Type_Act1Target, 1, 4, 3);
 	AddOption("Greet", Type_Act1Target,		0, 5, 2);
-	AddOption("Joke", Type_Act1Target,		2, 5, 2);
-	AddOption("Insult", Type_Act1Target,	2, 6, 2);
+	AddOption("Answer", Type_Act1Target,	2, 5, 2);
+
+	AddOption("Request Entry", Type_Act1Target, 0, 6, 3);
+	AddOption("Give Food", Type_Act1Target, 3, 6, 2);
+	//AddOption("Hug", Type_Act1Target,		0, , 1);
+	//AddOption("Apologize", Type_Act1Target, 1, 4, 3);
+	
+	//AddOption("Joke", Type_Act1Target,		2, 5, 2);
+	//AddOption("Insult", Type_Act1Target,	2, 6, 2);
 	//AddOption("Intervene",	1, 4, 3);
 
 	selected_act0Target = selected_act1Target = selected_character = false;

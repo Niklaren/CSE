@@ -3,10 +3,10 @@
 #include "NPC_Actor.h"
 #include "Player_Actor.h"
 
-DramaManager::DramaManager(Stage* s, HistoryBook& hb)
+DramaManager::DramaManager(Stage* s, WorldState* ws_, HistoryBook& hb)
 	: Actor("fate", s, hb)
 {
-
+	ws = ws_;
 }
 
 
@@ -14,7 +14,7 @@ DramaManager::~DramaManager()
 {
 }
 
-void DramaManager::SetCharacters(Actor* p, Actor* w, Actor* l, Actor* g)
+void DramaManager::SetCharacters(Player_Actor* p, NPC_Actor* w, NPC_Actor* l, NPC_Actor* g)
 {
 	red = p;
 	wolf = w;
@@ -22,22 +22,25 @@ void DramaManager::SetCharacters(Actor* p, Actor* w, Actor* l, Actor* g)
 	grandma = g;
 }
 
-void DramaManager::SetLocations(Stage* p, Stage* f, Stage* c, Stage* l)
+void DramaManager::SetLocations(Stage* p, Stage* f, Stage* c, Stage* l, Stage* o)
 {
 	path = p;
 	forest = f;
 	cabin = c;
 	lodge = l;
+	offstage = o;
 }
 
 void DramaManager::InitLRR()
 {
+	//YOU
 	red->AddAction("Greet");
 	red->AddAction("Travel");
-	static_cast<Player_Actor*>(red)->AddLocation("cabin");
+	red->AddLocation("cabin");
 
+	// WOLF
 	wolf->AddAction("OK");
-	wolf->AddAction("Travel");
+	//wolf->AddAction("Travel");
 	wolf->AddAction("Eat");
 
 	wolf->AddAction("WolfGreetRed", red);
@@ -45,12 +48,24 @@ void DramaManager::InitLRR()
 	wolf->AddAction("QueryPurpose", red);
 	wolf->AddAction("QueryBasket", red);
 
+	wolf->AddAction("WolfEat", red);
+	wolf->AddAction("WolfEat", grandma);
+	wolf->AddAction("RequestEntry", grandma);
+
+	Goal g(0.6f);
+	g.SetWSProperty(WSP_WolfHungry, WST_bool, false);
+	wolf->AddGoal(g);
+
+	// GRANNY
+	grandma->AddAction("OpenDoor");
+
+	// LUMBERJACK
 	lumberjack->AddAction("OK");
 
 	lumberjack->AddAction("ChopLog", cabin);
 	lumberjack->AddAction("LogOnstump", cabin);
 	lumberjack->AddAction("Grablog", cabin);
-	lumberjack->AddAction("Travel");
+	//lumberjack->AddAction("Travel");
 	lumberjack->AddAction("Greet", red);
 	
 }
@@ -58,6 +73,31 @@ void DramaManager::InitLRR()
 bool DramaManager::React()
 {
 	//Action reactingEvent = historyBook->GetLastEvent(); //??
+
+	string reactEvent = historyBook->GetLastEvent()->GetVerb();
+
+	if (reactEvent == "Stray Off Path") // this could be done in emotional reaction: if(affectingactor == wolf)
+	{
+		red->RemoveAction("Stray Off Path");
+		Goal g(0.8f);
+		g.SetWSProperty(WSP_QueryRed, WST_int, 2);
+		wolf->AddGoal(g);
+	}
+
+	if (reactEvent == "WolfEatGrandma"){
+		grandma->MoveLocation(offstage);
+	}
+
+
+	//if (ws->WSProperties[WSP_QueryRed].ivalue > 0){
+	//	red->AddAction("Answer");
+	//}
+
+	if ((historyBook->EventJustHappened("QueryPurpose")) || (historyBook->EventJustHappened("QueryIdentity")) || (historyBook->EventJustHappened("QueryBasket"))){
+		;
+	}else{
+		red->RemoveAction("Answer");
+	}
 
 	//reactingEvent.CalculateInclination(this);
 	return false;
@@ -70,6 +110,11 @@ void DramaManager::Plan(string action)
 		plans.push_back(new BeginLRR(this, red, wolf, lumberjack, grandma, 0));
 	else if (action == "Prepare")
 		;//plans.push_back(new Prepare(char1, 1));
+	else if (action == "End"){
+		red->RemoveAllActions();
+		plans.push_back(new Travel(red, offstage, 1));
+		plans.push_back(new End(this, 2));
+	}
 	else{
 		// error
 	}
@@ -104,8 +149,8 @@ void DramaManager::CheckForPlanning()
 {
 	if (historyBook->TimeSinceStart() == 1)
 		Plan("Begin");
-	if (historyBook->TimeSinceStart() == 6)
-		Plan("Prepare");
+	//if (historyBook->TimeSinceStart() == 6)
+	//	Plan("Prepare");
 
 	//if ()
 
@@ -113,4 +158,10 @@ void DramaManager::CheckForPlanning()
 	//if ((historyBook->TimeElapsedSince("QueryPurpose")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyPurpose"))
 	//if ((historyBook->TimeElapsedSince("QueryBasket")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyBasket"))
 
+	if (ws->WSProperties[WSP_RedEaten].bvalue == true){
+		Plan("End");
+	}
+	if (ws->WSProperties[WSP_RedHome].bvalue == true){
+		Plan("End");
+	}
 }

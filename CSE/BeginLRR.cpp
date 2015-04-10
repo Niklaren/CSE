@@ -28,8 +28,10 @@ void BeginLRR::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 	player->AddAction("Observe");
 	player->AddAction("Eat Some Food");
-	player->AddAction("Walk Down Path");
-	player->AddAction("Stray");
+	player->AddAction("Walk Path");
+	player->AddAction("Stray Off Path");
+	player->AddAction("Go Home");
+	player->AddAction("Give Food");
 
 	Goal g(0.5f);
 	g.SetWSProperty(WSP_LumberChopped, WST_int, 1);

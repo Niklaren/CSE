@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Actions\Riding Hood\Lumberjack">
       <UniqueIdentifier>{73639851-9792-4ea0-b720-d7a5ee197740}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Actions\Riding Hood\Red">
+      <UniqueIdentifier>{f5f58f8b-52b8-4980-8607-03da242196f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions\Riding Hood\Grandma">
+      <UniqueIdentifier>{3995c0a1-448f-4fc5-ac34-33e7166ff5bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -141,15 +147,6 @@
     <ClInclude Include="BeginLRR.h">
       <Filter>Source Files\Actions\fate</Filter>
     </ClInclude>
-    <ClInclude Include="PickFlowers.h">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClInclude>
-    <ClInclude Include="Observe.h">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClInclude>
-    <ClInclude Include="Eat.h">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClInclude>
     <ClInclude Include="LogOnStump.h">
       <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
     </ClInclude>
@@ -168,11 +165,47 @@
     <ClInclude Include="QueryBasket.h">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClInclude>
+    <ClInclude Include="Observe.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="PickFlowers.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
     <ClInclude Include="WolfGreetRed.h">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClInclude>
     <ClInclude Include="WalkPath.h">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Answer.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfEat.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="SuggestFlowers.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfDisguise.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestEntry.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="Intimidate.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="End.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GoHome.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenDoor.h">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveFood.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,15 +296,6 @@
     <ClCompile Include="BeginLRR.cpp">
       <Filter>Source Files\Actions\fate</Filter>
     </ClCompile>
-    <ClCompile Include="PickFlowers.cpp">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClCompile>
-    <ClCompile Include="Observe.cpp">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClCompile>
-    <ClCompile Include="Eat.cpp">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClCompile>
     <ClCompile Include="LogOnStump.cpp">
       <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
     </ClCompile>
@@ -293,8 +317,44 @@
     <ClCompile Include="WolfGreetRed.cpp">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClCompile>
+    <ClCompile Include="Observe.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="PickFlowers.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
     <ClCompile Include="WalkPath.cpp">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="Answer.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="WolfEat.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="SuggestFlowers.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="RequestEntry.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="WolfDisguise.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="Intimidate.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="End.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GoHome.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenDoor.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveFood.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ private:
 	Stage* targetLocation;
 public:
 	Travel(Actor* subject_, int moments_);
-	Travel(Actor* subject_, Stage* s, int moments_);
+	Travel(Actor* subject_, Stage* s, int moments_=1, string verb_ = "Travel");
 	Travel();
 	~Travel();
 

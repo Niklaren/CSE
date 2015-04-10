@@ -48,7 +48,7 @@ protected:
 	NPC_Actor* Wolf = new NPC_Actor("Assets/c_wolf.txt", &worldstate, &planner, forest, historyBook);
 	NPC_Actor* Lumberjack = new NPC_Actor("Assets/c_lumberjack.txt", &worldstate, &planner, cabin, historyBook);
 	NPC_Actor* Grandma = new NPC_Actor("Assets/c_grandma.txt", &worldstate, &planner, lodge, historyBook);
-	DramaManager *Fate = new DramaManager(offStage, historyBook);
+	DramaManager *Fate = new DramaManager(offStage, &worldstate, historyBook);
 	vector<Actor*> actors;
 	vector<NPC_Actor*> NPCs;
 	

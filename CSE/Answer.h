@@ -1,18 +1,21 @@
 #pragma once
 #include "ActionTargeted.h"
-class QueryPurpose :
+
+class Answer :
 	public ActionTargeted
 {
+protected:
+	std::string query;
 public:
-	QueryPurpose(Actor* subject_, Actor* object_, int moments_);
-	QueryPurpose();
-	~QueryPurpose();
-
+	Answer(Actor* subject_, Actor* object_, int moments_);
+	Answer();
+	~Answer();
 	void Init();
 
 	std::string GetSentence();
 
+	virtual bool GetUsable();
+
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
 };

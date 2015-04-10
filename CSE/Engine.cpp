@@ -24,7 +24,7 @@ Engine::Engine()
 	NPCs.push_back(Grandma);
 
 	Fate->SetCharacters(Protagonist, Wolf, Lumberjack, Grandma);
-	Fate->SetLocations(path, forest, cabin, lodge);
+	Fate->SetLocations(path, forest, cabin, lodge, offStage);
 	//Fate->Plan("Begin", Wolf, Lumberjack);
 
 	/*Wolf->SetPlanner(&planner);
@@ -159,13 +159,12 @@ void Engine::GetUserInput()
 	if (menu.HandleMenu(input, action, target)){
 		executePlans = true;
 
-		if (action == "Stray"){
+		if (action == "Stray Off Path"){
 			Protagonist->Plan(action, forest);
-			Protagonist->RemoveAction("Stray");
-			Goal g(0.8f);
-			g.SetWSProperty(WSP_QueryRed, WST_bool, true);
-			Wolf->AddGoal(g);
 		}
+		//else if (action == "Answer"){
+		//	Protagonist->Plan(action, Wolf);
+		//}
 
 		if (target == "Wolf")
 			Protagonist->Plan(action, Wolf);

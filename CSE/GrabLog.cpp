@@ -30,8 +30,8 @@ void GrabLog::Init()
 
 	// conditions
 	WorldStateProperty condition1, condition2;
-	condition1.SetWSProperty(WSP_Location, WST_variable);
-	conditions.push_back(condition1);
+	//condition1.SetWSProperty(WSP_Location, WST_variable);
+	//conditions.push_back(condition1);
 
 }
 

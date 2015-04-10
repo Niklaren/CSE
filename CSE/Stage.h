@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class Player_Actor;
+class Actor;
 
 class Stage
 {
@@ -15,8 +15,8 @@ public:
 	Stage(std::string image, std::string name);
 	~Stage();
 
-	void AddLocationActions(Player_Actor* p);
-	void RemoveLocationActions(Player_Actor* p);
+	void AddLocationActions(Actor* p);
+	void RemoveLocationActions(Actor* p);
 
 	bool Draw(sf::RenderWindow &);
 

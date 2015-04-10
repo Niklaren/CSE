@@ -54,9 +54,18 @@ bool HistoryBook::HaventDoneEventBefore(Actor* a, std::string event)
 	return true;
 }
 
-bool HistoryBook::HaventDoneEventSince(std::string, int moments)
+bool HistoryBook::HaventDoneEventSince(Actor*, std::string event, int moments)
 {
 
+	return false;
+}
+
+bool HistoryBook::EventJustHappened(std::string event)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->MomentsSinceExecution() == 0 && eventHistory[i]->GetVerb() == event)
+			return true;
+	}
 	return false;
 }
 

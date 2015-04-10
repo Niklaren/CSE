@@ -14,5 +14,5 @@ public:
 	virtual bool GetUsable();
 
 	virtual void ExecuteConsequences(WorldState*);
-	virtual void NPC_EmotionalReaction(NPC_Actor*);
+	virtual void EmotionalReaction(NPC_Actor*);
 };

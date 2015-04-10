@@ -33,8 +33,8 @@ void Greet::Init()
 
 	// conditions
 	WorldStateProperty condition1;
-	condition1.SetWSProperty(WSP_Location, WST_variable);
-	conditions.push_back(condition1);
+	//condition1.SetWSProperty(WSP_Location, WST_variable);
+	//conditions.push_back(condition1);
 
 }
 
@@ -66,16 +66,16 @@ bool Greet::GetUsable()
 
 void Greet::ExecuteConsequences(WorldState* ws)
 {
-	
+	Action::ExecuteConsequences(ws);
 }
 
 void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
-		Goal g;
-		g.SetRelevance(0.7f);
-		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
-		affectingActor->AddGoal(g);
+		//Goal g;
+		//g.SetRelevance(0.7f);
+		//g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+		//affectingActor->AddGoal(g);
 	}
 	if (affectingActor == subject){
 		

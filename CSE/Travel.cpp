@@ -4,22 +4,25 @@
 #include "NPC_Actor.h"
 
 
-Travel::Travel(Actor* subject_, int moments_ = 0)
+Travel::Travel(Actor* subject_, int moments_)
 	: Action(subject_, moments_)
 {
 	Init();
+	verb = "Travel";
 }
 
-Travel::Travel(Actor* subject_, Stage* s, int moments_ = 0)
+Travel::Travel(Actor* subject_, Stage* s, int moments_, string v)
 	: Action(subject_, moments_)
 {
 	targetLocation = s;
 	Init();
+	verb = v;
 }
 
 Travel::Travel()
 {
 	Init();
+	verb = "Travel";
 }
 
 Travel::~Travel()
@@ -29,8 +32,6 @@ Travel::~Travel()
 
 void Travel::Init()
 {
-	verb = "Travel";
-
 	//effect
 	WorldStateProperty effect1;
 	effect1.SetWSProperty(WSP_Location, WST_variable);
@@ -59,10 +60,12 @@ void Travel::ExecuteConsequences(WorldState* ws)
 	//}
 
 	//subject->removeactions location actions
+	locationOccured->RemoveLocationActions(subject);
 
 	subject->MoveLocation(targetLocation);
 
 	//subject->addactions location actions
+	targetLocation->AddLocationActions(subject);
 }
 
 void Travel::EmotionalReaction(NPC_Actor* affectingActor)

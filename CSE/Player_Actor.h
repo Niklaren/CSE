@@ -16,6 +16,7 @@ public:
 
 	virtual void AddAction(string ActionName);
 	virtual void RemoveAction(string ActionName);
+	void RemoveAllActions();
 	vector<string> Get_AvailableActions() { return s_availableActions; }
 	void AddLocation(string LName) { s_availableLocations.push_back(LName); }
 	vector<string> Get_AvailableLocations() { return s_availableLocations; }
