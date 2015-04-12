@@ -88,6 +88,13 @@ bool DramaManager::React()
 		grandma->MoveLocation(offstage);
 	}
 
+	if (reactEvent == "OpenDoor"){
+		red->AddAction("Give Food");
+	}
+
+	if (ws->WSProperties[WSP_QueryRed].ivalue >= 2){
+		red->AddAction("Return To Path");
+	}
 
 	//if (ws->WSProperties[WSP_QueryRed].ivalue > 0){
 	//	red->AddAction("Answer");
@@ -113,7 +120,7 @@ void DramaManager::Plan(string action)
 	else if (action == "End"){
 		red->RemoveAllActions();
 		plans.push_back(new Travel(red, offstage, 1));
-		plans.push_back(new End(this, 2));
+		plans.push_back(new End(this, 1));
 	}
 	else{
 		// error
@@ -162,6 +169,9 @@ void DramaManager::CheckForPlanning()
 		Plan("End");
 	}
 	if (ws->WSProperties[WSP_RedHome].bvalue == true){
+		Plan("End");
+	}
+	if (ws->WSProperties[WSP_LunchDelivered].bvalue == true){
 		Plan("End");
 	}
 }

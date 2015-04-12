@@ -17,34 +17,37 @@ Player_Actor::~Player_Actor()
 
 void Player_Actor::AddAction(string action)
 {
-	if (action == "OK")
-		s_availableActions.push_back("OK");
-	else if (action == "Travel")
-		s_availableActions.push_back("Travel");
-	else if (action == "Stray Off Path")
-		s_availableActions.push_back("Stray Off Path");
-	else if (action == "Walk Path")
-		s_availableActions.push_back("Walk Path");
-	else if (action == "Request Entry")
-		s_availableActions.push_back("Request Entry");
-	else if (action == "Go Home")
-		s_availableActions.push_back("Go Home");
-	else if (action == "Observe")
-		s_availableActions.push_back("Observe");
-	else if (action == "Eat")
-		s_availableActions.push_back("Eat");
-	else if (action == "Answer")
-		s_availableActions.push_back("Answer");
-	else if (action == "Give Food")
-		s_availableActions.push_back("Give Food");
-	else if (action == "Greet")
-		s_availableActions.push_back("Greet");
-	else if (action == "Hug")
-		s_availableActions.push_back("Hug");
-	else if (action == "Insult")
-		s_availableActions.push_back("Insult");
-	else if (action == "Punch")
-		s_availableActions.push_back("Punch");
+	s_availableActions.push_back(action);
+	//if (action == "OK")
+	//	s_availableActions.push_back("OK");
+	//else if (action == "Travel")
+	//	s_availableActions.push_back("Travel");
+	//else if (action == "Stray Off Path")
+	//	s_availableActions.push_back("Stray Off Path");
+	//else if (action == "Walk Path")
+	//	s_availableActions.push_back("Walk Path");
+	//else if (action == "Go To Grandmas")
+	//	s_availableActions.push_back("Go To Grandmas");
+	//else if (action == "Request Entry")
+	//	s_availableActions.push_back("Request Entry");
+	//else if (action == "Go Home")
+	//	s_availableActions.push_back("Go Home");
+	//else if (action == "Observe")
+	//	s_availableActions.push_back("Observe");
+	//else if (action == "Eat")
+	//	s_availableActions.push_back("Eat");
+	//else if (action == "Answer")
+	//	s_availableActions.push_back("Answer");
+	//else if (action == "Give Food")
+	//	s_availableActions.push_back("Give Food");
+	//else if (action == "Greet")
+	//	s_availableActions.push_back("Greet");
+	//else if (action == "Hug")
+	//	s_availableActions.push_back("Hug");
+	//else if (action == "Insult")
+	//	s_availableActions.push_back("Insult");
+	//else if (action == "Punch")
+	//	s_availableActions.push_back("Punch");
 }
 
 void Player_Actor::RemoveAction(string action)

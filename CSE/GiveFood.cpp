@@ -22,17 +22,17 @@ GiveFood::~GiveFood()
 
 void GiveFood::Init()
 {
-	verb = "GiveFood";
+	verb = "GiveFood" + object->GetName();
 
 }
 
 std::string GiveFood::GetSentence()
 {
-	if (object->GetName() == "Wolf")
-		return "The wolf looks awfully hungry...";
-	if (object->GetName() == "Grandma")
+	if (verb == "GiveFoodWolf")
+		return "The wolf looks awfully hungry... you hand over the basket";
+	if (verb == "GiveFoodGrandma")
 		return "i brought food for you Grandma.";
-	if (object->GetName() == "Lumberjack")
+	if (verb == "GiveFoodLumberjack")
 		return "You give the lumberjack your food.";
 	return "GiveFood";
 }

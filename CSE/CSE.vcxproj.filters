@@ -354,7 +354,7 @@
       <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
     </ClCompile>
     <ClCompile Include="GiveFood.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

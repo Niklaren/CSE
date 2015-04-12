@@ -162,6 +162,9 @@ void Engine::GetUserInput()
 		if (action == "Stray Off Path"){
 			Protagonist->Plan(action, forest);
 		}
+		if (action == "Go To Grandmas"){
+			Protagonist->Plan("Travel", lodge);
+		}
 		//else if (action == "Answer"){
 		//	Protagonist->Plan(action, Wolf);
 		//}

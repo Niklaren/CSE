@@ -39,7 +39,7 @@ public:
 	Planner();
 	~Planner();
 
-	std::vector<Action*> Plan(NPC_Actor*, /*available actions,*/ WorldState, WorldStateProperty);
+	//std::vector<Action*> Plan(NPC_Actor*, /*available actions,*/ WorldState, WorldStateProperty);
 	bool Plan(NPC_Actor*, vector<Action*> &newplan, WorldState, WorldStateProperty);
 
 private:
