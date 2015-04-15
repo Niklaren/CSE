@@ -191,6 +191,9 @@ void Engine::GetUserInput()
 		else if (action == "Continue Forward"){
 			Protagonist->Plan("Travel", cabin);
 		}
+		else if (action == "Knock Door"){
+			Protagonist->Plan("Knock Door", Grandma);
+		}
 
 		//else if (action == "Answer"){
 		//	Protagonist->Plan(action, Wolf);
