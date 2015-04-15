@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Actions\Riding Hood\Grandma">
       <UniqueIdentifier>{3995c0a1-448f-4fc5-ac34-33e7166ff5bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Actions\travel">
+      <UniqueIdentifier>{4b20db17-0ce2-4783-bf97-0eaafe6fafaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -102,9 +105,6 @@
     <ClInclude Include="Goal.h">
       <Filter>Source Files\GOAP</Filter>
     </ClInclude>
-    <ClInclude Include="Apologize.h">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClInclude>
     <ClInclude Include="Insult.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
@@ -129,17 +129,11 @@
     <ClInclude Include="Prepare.h">
       <Filter>Source Files\Actions\fate</Filter>
     </ClInclude>
-    <ClInclude Include="Greet.h">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClInclude>
     <ClInclude Include="Hug.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="BoundedNum.h">
       <Filter>Source Files\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Travel.h">
-      <Filter>Source Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Source Files</Filter>
@@ -195,9 +189,6 @@
     <ClInclude Include="Intimidate.h">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClInclude>
-    <ClInclude Include="End.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GoHome.h">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClInclude>
@@ -206,6 +197,39 @@
     </ClInclude>
     <ClInclude Include="GiveFood.h">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfEatLunch.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="Apologize.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrive.h">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClInclude>
+    <ClInclude Include="Leave.h">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClInclude>
+    <ClInclude Include="End.h">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClInclude>
+    <ClInclude Include="Travel.h">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClInclude>
+    <ClInclude Include="AskDirections.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Greet.h">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveDirections.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkAway.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Ignore.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +275,6 @@
     <ClCompile Include="Goal.cpp">
       <Filter>Source Files\GOAP</Filter>
     </ClCompile>
-    <ClCompile Include="Apologize.cpp">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClCompile>
     <ClCompile Include="Insult.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
@@ -278,17 +299,11 @@
     <ClCompile Include="Prepare.cpp">
       <Filter>Source Files\Actions\fate</Filter>
     </ClCompile>
-    <ClCompile Include="Greet.cpp">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClCompile>
     <ClCompile Include="Hug.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Bounded.cpp">
       <Filter>Source Files\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Travel.cpp">
-      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>Source Files</Filter>
@@ -344,9 +359,6 @@
     <ClCompile Include="Intimidate.cpp">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClCompile>
-    <ClCompile Include="End.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GoHome.cpp">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClCompile>
@@ -355,6 +367,39 @@
     </ClCompile>
     <ClCompile Include="GiveFood.cpp">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="WolfEatLunch.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="Apologize.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="End.cpp">
+      <Filter>Source Files\Actions\fate</Filter>
+    </ClCompile>
+    <ClCompile Include="Leave.cpp">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrive.cpp">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClCompile>
+    <ClCompile Include="Travel.cpp">
+      <Filter>Source Files\Actions\travel</Filter>
+    </ClCompile>
+    <ClCompile Include="AskDirections.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="Greet.cpp">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveDirections.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkAway.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="Ignore.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -31,17 +31,19 @@ public:
 	Menu();
 	~Menu();
 
-	void AddOption(string name, OptionType t, int x, int y, int length); //position too??? probably calculate later?
-	void Menu::Draw(sf::RenderWindow&);
+	void AddOption(string name, OptionType t, int width, int x = 0, int y = 0); //position too??? probably calculate later?
 	int Get_NumberOfOptions(){ return options.size(); }
 
+	void Menu::Draw(sf::RenderWindow&);
+	
 	bool OptionClicked(float mouseX, float mouseY, int& option_index);
 
 	void Reset(vector<string> availableActions, vector<string> availableLocations, vector<string> availableTargets);
 	void DeselectAll();
+	void AllUnavailable();
 
 	bool HandleMenu(Input input, string &action, string &target);
-
+	void BuildMenu();
 
 };
 

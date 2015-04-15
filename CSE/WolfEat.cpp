@@ -45,19 +45,13 @@ void WolfEat::Init()
 		//condition2.SetWSProperty(WSP_Location, WST_variable);
 		//conditions.push_back(condition2);
 	}
-	else{
-		WorldStateProperty condition1;
-		condition1.SetWSProperty(WSP_WolfHasLunch, WST_bool, true);
-		conditions.push_back(condition1);
-	}
-
 }
 
 std::string WolfEat::GetSentence()
 {
 	if (HasObject())
 		return subject->GetName() + " slurps down " + object->GetName();
-	return subject->GetName() + " Wolf Eats greedily";
+	return "Wolf Eats greedily";
 }
 
 void WolfEat::ExecuteConsequences(WorldState* ws)
@@ -71,7 +65,7 @@ void WolfEat::ExecuteConsequences(WorldState* ws)
 		ws->WSProperties[WSP_RedEaten].SetWSProperty(WSP_RedEaten, WST_bool, true);
 	}
 	if (verb == "WolfEatGrandma"){
-		//ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, true);
+		ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, false);
 		ws->WSProperties[WSP_GrandmaEaten].SetWSProperty(WSP_GrandmaEaten, WST_bool, true);
 	}
 }
@@ -87,13 +81,15 @@ float WolfEat::NPC_CalculateInclination()
 {
 	if (verb == "WolfEatYou"){
 		double a = static_cast<NPC_Actor*>(subject)->Get_Angry();
-		double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
-		double result = Blend(a, b, 0);
+		double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
+		double result = Blend(a, -b, 0);
 		return float(result);
 	}
 	if (verb == "WolfEatGrandma"){
 		double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-		return float(a);
+		double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
+		double result = Blend(-a, -b, 0);
+		return float(result);
 	}
 	return 0;
 }

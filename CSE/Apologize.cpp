@@ -24,37 +24,19 @@ void Apologize::Init()
 {
 	verb = "Apologize";
 
-	//effect
-	WorldStateProperty effect1, effect2;
-	//effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
-	//effects.push_back(effect1);
-
-
-	// conditions
-	// none
-
 }
 
 std::string Apologize::GetSentence()
 {
-	if (subject->GetName() == "You"){
-		return "I'm sorry I was so late, I got totally lost.\nWhere is this place?";
-	}
-	return subject->GetName() + " Apologizes";
+	return "I'm so sorry. I couldn't deliver your Food";
 }
 
-bool Apologize::GetUsable()
-{
-	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
-		return false;
-	if (subject->GetHistory()->TimeSinceStart() > 5) // if we've moved passed Apologizeing stage
-		return false;
-	return true;
-}
 
 void Apologize::ExecuteConsequences(WorldState* ws)
 {
+	Action::ExecuteConsequences(ws);
 
+	ws->WSProperties[WSP_DeliveryFailed].SetValue(true);
 }
 
 void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
@@ -74,7 +56,7 @@ void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
 float Apologize::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double result = Blend(a, b, w);
 	return float(result);

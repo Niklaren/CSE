@@ -40,7 +40,7 @@ void WolfGreetRed::Init()
 
 std::string WolfGreetRed::GetSentence()
 {
-	return "A Wolf comes towards you through the trees. He speaks:\nhail stranger, odd to see someone travelling alone through here.";
+	return "A Wolf comes towards you through the trees. He speaks: hello stranger. Odd to see someone travelling alone through here.";
 }
 
 bool WolfGreetRed::GetUsable()
@@ -54,6 +54,7 @@ void WolfGreetRed::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 	ws->WSProperties[WSP_WolfGreetRed].SetValue(true);
+	
 }
 
 void WolfGreetRed::EmotionalReaction(NPC_Actor* affectingActor)
@@ -69,7 +70,7 @@ void WolfGreetRed::EmotionalReaction(NPC_Actor* affectingActor)
 float WolfGreetRed::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double result = Blend(a, b, w);
 	return float(result);

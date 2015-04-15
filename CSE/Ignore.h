@@ -1,18 +1,18 @@
 #pragma once
 #include "ActionTargeted.h"
 
-class Apologize :
+class Ignore :
 	public ActionTargeted
 {
+protected:
+
 public:
-	Apologize(Actor* subject_, Actor* object_, int moments_);
-	Apologize();
-	~Apologize();
-	void Init();
+	Ignore(Actor* subject_, Actor* object_, int moments_);
+	~Ignore();
 
 	std::string GetSentence();
 
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
 };
+

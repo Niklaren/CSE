@@ -72,7 +72,7 @@ void Hug::EmotionalReaction(NPC_Actor* affectingActor)
 
 float Hug::NPC_CalculateInclination()
 {
-	double a = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Extraverted();
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double r = Blend(a, b, w) / 2;

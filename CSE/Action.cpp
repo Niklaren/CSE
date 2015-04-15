@@ -49,8 +49,10 @@ bool Action::ReadyToExecute()
 		return false;
 
 	if (locationOccured != nullptr){
-		if (subject->GetLocation() != locationOccured){
-
+		if ((subject->GetLocation() != locationOccured) && (subject->GetName() != "fate")){
+			subject->Wait(1);
+			subject->Plan("Travel", object->GetLocation(), 0);
+			return false;
 		}
 	}
 		
@@ -62,6 +64,7 @@ void Action::MomentsPass() {
 	momentsFromExecution--;
 	return;
 }
+// - weights favor a, + weight favours b
 double Action::Blend(double a, double b, double weight)
 {
 	double uWeight = 1 - ((1 - weight) / 2);

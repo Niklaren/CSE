@@ -27,7 +27,8 @@ void WalkPath::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 	
 	subject->AddLocation("lodge");
-	subject->AddAction("Go To Grandmas");
+	subject->AddAction("Go To Lodge");
+	subject->RemoveAction("Walk Path");
 }
 
 void WalkPath::EmotionalReaction(NPC_Actor* affectingActor)

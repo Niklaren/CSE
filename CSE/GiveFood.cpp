@@ -48,11 +48,11 @@ void GiveFood::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 
-	subject->RemoveAction("GiveFood");
+	subject->RemoveAction("Give Food");
 
 	if (object->GetName() == "Wolf"){
 		ws->WSProperties[WSP_WolfHasLunch].SetValue(true);
-		ws->WSProperties[WSP_WolfHungry].SetValue(false);
+		//ws->WSProperties[WSP_WolfHungry].SetValue(false);
 	}
 	if (object->GetName() == "Grandma")
 		ws->WSProperties[WSP_LunchDelivered].SetValue(true);

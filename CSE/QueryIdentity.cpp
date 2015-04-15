@@ -49,13 +49,15 @@ void QueryIdentity::ExecuteConsequences(WorldState* ws)
 	ws->WSProperties[WSP_QueryRed].ChangeValue(+1);
 
 	object->AddAction("Answer");
+	object->AddAction("Ignore");
+	object->RemoveAction("Greet");
 
 }
 
 void QueryIdentity::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == subject){
-
+		affectingActor->Change_pAgreeable(-0.05, object->GetID());
 	}
 }
 

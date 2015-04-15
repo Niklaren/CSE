@@ -19,13 +19,32 @@ void Stage::AddLocationActions(Actor* a)
 	if (a->GetName() == "You"){
 		if (name == "path"){
 			a->AddAction("Go Home");
-			a->AddAction("Walk Path");
+			a->AddAction("Observe");
+
+			/*if (a->GetHistory()->HaventDoneEventBefore(a, "Stray Off Path"))
+				a->AddAction("Stray Off Path");*/
+
+			if (a->GetHistory()->HaventDoneEventBefore(a, "WalkPath")){
+				a->AddAction("Walk Path");
+			}else{
+				a->AddAction("Go To Lodge");
+			}
 		}
-		if (name == "forest"){
-			a->AddAction("");
+		else if (name == "forest"){
+			a->AddAction("Observe");
+			a->AddAction("Ask Directions");
+			a->AddAction("Greet");
+			a->AddAction("Walk Away");
 		}
-		if (name == "lodge"){
-			a->AddAction("Request Entry");
+		else if (name == "lodge"){
+			a->AddAction("Knock Door");
+			a->AddAction("Observe");
+		}
+		else if (name == "cabin"){
+			a->AddAction("Observe");
+			if (!(a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers"))){
+				a->AddAction("Give Flowers");
+			}
 		}
 	}
 }
@@ -37,13 +56,16 @@ void Stage::RemoveLocationActions(Actor* a)
 			a->RemoveAction("Go Home");
 			a->RemoveAction("Stray Off Path");
 			a->RemoveAction("Walk Path");
+			a->RemoveAction("Go To Lodge");
 			a->AddLocation("path");
 		}
 		if (name == "forest"){
-			a->RemoveAction("");
+			a->RemoveAction("Continue Forward");
+			a->RemoveAction("Turn Back");
+			a->RemoveAction("Pick Flowers");
 		}
 		if (name == "lodge"){
-			a->RemoveAction("Request Entry");
+			a->RemoveAction("Knock Door");
 		}
 	}
 }

@@ -19,6 +19,10 @@ Engine::Engine()
 	actors.push_back(Lumberjack);
 	actors.push_back(Grandma);
 
+	for (unsigned i(0); i < actors.size(); i++){
+		actors[i]->SetID(i);
+	}
+
 	NPCs.push_back(Wolf);
 	NPCs.push_back(Lumberjack);
 	NPCs.push_back(Grandma);
@@ -69,6 +73,7 @@ void Engine::Operate()
 
 	if (executePlans){
 		executePlans = false;
+		playerAct = true;
 		clock.restart();
 
 		// the last moment has passed and next moment is occuring.
@@ -108,12 +113,23 @@ void Engine::Operate()
 						}
 					}
 
+					// test if there is a reaction
+					bool reaction;
+
 					// fate react
-					Fate->React();
-					// action specific reactions
-					historyBook.GetLastEvent()->React();
+					reaction = Fate->React();
+					
+					if (!reaction)
+						// action specific reactions
+						reaction = historyBook.GetLastEvent()->React();
+
 					//if actor is protagonist and reaction == true
 					//	player cant plan next turn
+					if (reaction && (actors[actor_iter] == Protagonist))
+						playerAct = false;
+
+					if ((historyBook.GetLastEvent()->GetVerb() == "Arrive") && (actors[actor_iter] == Protagonist))
+						playerAct = false;
 				}
 			}
 
@@ -141,7 +157,7 @@ void Engine::Operate()
 
 		Protagonist->SetAvailableCharacters(NPCs);
 
-		menu.Reset(Protagonist->Get_AvailableActions(), Protagonist->Get_AvailableLocations(), Protagonist->Get_AvailableCharacters());
+		Protagonist->menu.Reset(Protagonist->Get_AvailableActions(), Protagonist->Get_AvailableLocations(), Protagonist->Get_AvailableCharacters());
 	}
 
 	GetUserInput();
@@ -156,15 +172,26 @@ void Engine::GetUserInput()
 	string action;
 	string target;
 	
-	if (menu.HandleMenu(input, action, target)){
+	// If we do not want the player to act all their options become unavailable
+	if (!playerAct)
+		Protagonist->menu.AllUnavailable();
+
+	if (Protagonist->menu.HandleMenu(input, action, target)){
 		executePlans = true;
 
 		if (action == "Stray Off Path"){
 			Protagonist->Plan(action, forest);
 		}
-		if (action == "Go To Grandmas"){
+		else if (action == "Go To Lodge"){
 			Protagonist->Plan("Travel", lodge);
 		}
+		else if (action == "Turn Back"){
+			Protagonist->Plan("Travel", path);
+		}
+		else if (action == "Continue Forward"){
+			Protagonist->Plan("Travel", cabin);
+		}
+
 		//else if (action == "Answer"){
 		//	Protagonist->Plan(action, Wolf);
 		//}
@@ -205,7 +232,7 @@ void Engine::Redraw(sf::RenderWindow &window)
 
 	historyBook.Draw(window, Protagonist->GetLocation()); //also pass in player location?
 
-	menu.Draw(window);
+	Protagonist->menu.Draw(window);
 
 	window.display();
 }

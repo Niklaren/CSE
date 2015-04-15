@@ -1,13 +1,17 @@
 #pragma once
-#include "ActionTargeted.h"
+#include "Action.h"
+#include "Stage.h"
 
-class Apologize :
-	public ActionTargeted
+class Leave :
+	public Action
 {
+private:
+
 public:
-	Apologize(Actor* subject_, Actor* object_, int moments_);
-	Apologize();
-	~Apologize();
+	Leave(Actor* subject_, int moments_);
+	Leave();
+	~Leave();
+
 	void Init();
 
 	std::string GetSentence();
@@ -15,4 +19,6 @@ public:
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
 	float NPC_CalculateInclination();
+
+	virtual bool ReadyToExecute();
 };

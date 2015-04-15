@@ -15,15 +15,15 @@ class Goal;
 class WorldState;
 
 enum Trait{ open, conscientious, extraverted, agreeable, neurotic };
+enum Chars{red = 1, wolf, lumberjack, grandma};
 
 class NPC_Actor : public Actor
 {
 private:	
+
 	BoundedNum selfTraits[5];
 
-	BoundedNum perceivedTraits[5];
-
-	BoundedNum perceivedPTraits[5];
+	BoundedNum perceivedTraits[5][5];
 
 	BoundedNum happy;
 	BoundedNum angry;
@@ -62,9 +62,7 @@ public:
 	void RePlan();
 	virtual void Plan(Action*, int );
 	virtual void Plan(string verb, int moments, Actor* target);
-	virtual void Plan(string action, Stage* l);
-
-	virtual string GetName() { return name; }
+	virtual void Plan(string action, Stage* l, int moments = 1);
 
 	void CoolMoods();
 	void Change_Happy(double);
@@ -85,26 +83,16 @@ public:
 	double Get_Neurotic() { return selfTraits[neurotic].Value(); }
 	double Get_Open() { return selfTraits[open].Value(); }
 
-	void Change_pConscientious(double);
-	void Change_pExtraverted(double);
-	void Change_pAgreeable(double);
-	void Change_pNeurotic(double);
-	void Change_pOpen(double);
-	double Get_pConscientious() { return perceivedTraits[conscientious].Value(); }
-	double Get_pExtraverted() { return perceivedTraits[extraverted].Value(); }
-	double Get_pAgreeable() { return perceivedTraits[agreeable].Value(); }
-	double Get_pNeurotic() { return perceivedTraits[neurotic].Value(); }
-	double Get_pOpen() { return perceivedTraits[open].Value(); }
+	void Change_pConscientious(double, int);
+	void Change_pExtraverted(double, int);
+	void Change_pAgreeable(double, int);
+	void Change_pNeurotic(double, int);
+	void Change_pOpen(double, int);
+	double Get_pConscientious(int charID) { return perceivedTraits[conscientious][charID].Value(); }
+	double Get_pExtraverted(int charID) { return perceivedTraits[extraverted][charID].Value(); }
+	double Get_pAgreeable(int charID) { return perceivedTraits[agreeable][charID].Value(); }
+	double Get_pNeurotic(int charID) { return perceivedTraits[neurotic][charID].Value(); }
+	double Get_pOpen(int charID) { return perceivedTraits[open][charID].Value(); }
 
-	void Change_pPConscientious(double);
-	void Change_pPExtraverted(double);
-	void Change_pPAgreeable(double);
-	void Change_pPNeurotic(double);
-	void Change_pPOpen(double);
-	double Get_pPConscientious() { return perceivedPTraits[conscientious].Value(); }
-	double Get_pPExtraverted() { return perceivedPTraits[extraverted].Value(); }
-	double Get_pPAgreeable() { return perceivedPTraits[agreeable].Value(); }
-	double Get_pPNeurotic() { return perceivedPTraits[neurotic].Value(); }
-	double Get_pPOpen() { return perceivedPTraits[open].Value(); }
 };
 

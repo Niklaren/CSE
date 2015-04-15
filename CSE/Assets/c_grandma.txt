@@ -12,14 +12,20 @@ sExtraverted = -0.1
 sNeurotic = -0.5
 sOpen = 0.1
 
-pAgreeable = 0.0
-pConscientious = 0.0
-pExtraverted = 0.0
-pNeurotic = 0.0
-pOpen = 0.0
+pRedAgreeable = 0.7
+pRedConscientious = 0.2
+pRedExtraverted = 0.0
+pRedNeurotic = 0.0
+pRedOpen = 0.0
 
-pPAgreeable = 0.0
-pPConscientious = 0.0
-pPExtraverted = 0.0
-pPNeurotic = 0.0
-pPOpen = 0.0
+pWolfAgreeable = -0.6
+pWolfConscientious = -0.2
+pWolfExtraverted = -0.5
+pWolfNeurotic = 0.6
+pWolfOpen = -0.5
+
+pLumberjackAgreeable = 0.2
+pLumberjackConscientious = 0.8
+pLumberjackExtraverted = -0.3
+pLumberjackNeurotic = -0.2
+pLumberjackOpen = -0.5

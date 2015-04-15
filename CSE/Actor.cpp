@@ -26,8 +26,8 @@ void Actor::AddAction(string action)
 		availableActions.push_back(new Travel(this, 0));
 	else if (action == "OpenDoor")
 		availableActions.push_back(new OpenDoor(this, 0));
-	//else if (action == "Eat")
-	//	availableActions.push_back(new Eat(this, 0));
+	else if (action == "WolfEatLunch")
+		availableActions.push_back(new WolfEatLunch(this, 0));
 
 	//else if (action == "CookGood")
 	//	availableActions.push_back(new CookGood(this, 0));
@@ -61,6 +61,8 @@ void Actor::AddAction(string action, Actor* object_ = NULL)
 
 	else if (action == "WolfGreetRed")
 		availableActions.push_back(new WolfGreetRed(this, object_, 0));
+	else if (action == "GiveDirections")
+		availableActions.push_back(new GiveDirections(this, object_, 0));
 	else if (action == "QueryIdentity")
 		availableActions.push_back(new QueryIdentity(this, object_, 0));
 	else if (action == "QueryPurpose")
@@ -73,6 +75,8 @@ void Actor::AddAction(string action, Actor* object_ = NULL)
 		availableActions.push_back(new RequestEntry(this, object_, 0));
 	else if (action == "Intimidate")
 		availableActions.push_back(new Intimidate(this, object_, 0));
+	else if (action == "SuggestFlowers")
+		availableActions.push_back(new SuggestFlowers(this, object_, 0));
 }
 
 void Actor::RemoveAction(string action)

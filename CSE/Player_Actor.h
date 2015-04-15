@@ -1,11 +1,25 @@
 #pragma once
 
 #include "Actor.h"
+#include "Menu.h"
 
+struct MenuOption
+{
+	string name;
+	enum {Locked, Unlocked, Available} availabilty;
+
+	MenuOption()
+	{
+
+	}
+};
 
 class Player_Actor : public Actor
 {
 public: // ??? for now
+	//vector<MenuOption> o_availableActions;
+	//vector<MenuOption> o_availableLocations;
+	//vector<MenuOption> o_availableCharacters;
 	vector<string> s_availableActions;
 	vector<string> s_availableLocations;
 	vector<string> s_availableCharacters;
@@ -27,9 +41,10 @@ public:
 	virtual void Plan(string);
 	virtual void Plan(string, Actor*);
 	virtual void Plan(string, NPC_Actor*, NPC_Actor*);
-	virtual void Plan(string action, Stage* l);
+	virtual void Plan(string action, Stage* l, int moments = 1);
 
-	virtual string GetName() { return name; }
 	//optionspicked()
+
+	Menu menu;
 };
 

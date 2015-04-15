@@ -89,18 +89,24 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Answer.h" />
     <ClInclude Include="Apologize.h" />
+    <ClInclude Include="Arrive.h" />
+    <ClInclude Include="AskDirections.h" />
     <ClInclude Include="BeginLRR.h" />
     <ClInclude Include="BeginStory.h" />
     <ClInclude Include="BoundedNum.h" />
     <ClInclude Include="ChopLog.h" />
     <ClInclude Include="DramaManager.h" />
     <ClInclude Include="End.h" />
+    <ClInclude Include="GiveDirections.h" />
     <ClInclude Include="GiveFood.h" />
     <ClInclude Include="GoHome.h" />
+    <ClInclude Include="Ignore.h" />
     <ClInclude Include="Intimidate.h" />
+    <ClInclude Include="Leave.h" />
     <ClInclude Include="OpenDoor.h" />
     <ClInclude Include="RequestEntry.h" />
     <ClInclude Include="SuggestFlowers.h" />
+    <ClInclude Include="WalkAway.h" />
     <ClInclude Include="WolfDisguise.h" />
     <ClInclude Include="WolfEat.h" />
     <ClInclude Include="Engine.h" />
@@ -131,6 +137,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Travel.h" />
     <ClInclude Include="WalkPath.h" />
+    <ClInclude Include="WolfEatLunch.h" />
     <ClInclude Include="WolfGreetRed.h" />
     <ClInclude Include="WorldState.h" />
     <ClInclude Include="WorldStateProperty.h" />
@@ -141,6 +148,8 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Answer.cpp" />
     <ClCompile Include="Apologize.cpp" />
+    <ClCompile Include="Arrive.cpp" />
+    <ClCompile Include="AskDirections.cpp" />
     <ClCompile Include="BeginLRR.cpp" />
     <ClCompile Include="BeginStory.cpp" />
     <ClCompile Include="Bounded.cpp" />
@@ -148,12 +157,16 @@
     <ClCompile Include="CSE.cpp" />
     <ClCompile Include="DramaManager.cpp" />
     <ClCompile Include="End.cpp" />
+    <ClCompile Include="GiveDirections.cpp" />
     <ClCompile Include="GiveFood.cpp" />
     <ClCompile Include="GoHome.cpp" />
+    <ClCompile Include="Ignore.cpp" />
     <ClCompile Include="Intimidate.cpp" />
+    <ClCompile Include="Leave.cpp" />
     <ClCompile Include="OpenDoor.cpp" />
     <ClCompile Include="RequestEntry.cpp" />
     <ClCompile Include="SuggestFlowers.cpp" />
+    <ClCompile Include="WalkAway.cpp" />
     <ClCompile Include="WolfDisguise.cpp" />
     <ClCompile Include="WolfEat.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -186,6 +199,7 @@
     </ClCompile>
     <ClCompile Include="Travel.cpp" />
     <ClCompile Include="WalkPath.cpp" />
+    <ClCompile Include="WolfEatLunch.cpp" />
     <ClCompile Include="WolfGreetRed.cpp" />
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>

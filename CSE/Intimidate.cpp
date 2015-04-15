@@ -68,9 +68,8 @@ void Intimidate::EmotionalReaction(NPC_Actor* affectingActor)
 float Intimidate::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
-	//double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
-	//double result = Blend(a, b, w);
-	double result = (-a / 2) + b;
+	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
+	double w = static_cast<NPC_Actor*>(subject)->Get_Angry();
+	double result = Blend(-a, -b, w);
 	return float(result);
 }

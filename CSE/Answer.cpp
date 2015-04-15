@@ -61,12 +61,16 @@ void Answer::ExecuteConsequences(WorldState* ws)
 	if (query == "purpose")
 		ws->WSProperties[WSP_WolfKnowsGrandma].SetValue(true);
 	if (query == "basket")
-		subject->AddAction("Give Food");
+		;
 }
 
 void Answer::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == subject){
 
+	}
+	if (affectingActor == object){
+		affectingActor->Change_pAgreeable(0.2, subject->GetID());
+		affectingActor->Change_pExtraverted(0.2, subject->GetID());
 	}
 }

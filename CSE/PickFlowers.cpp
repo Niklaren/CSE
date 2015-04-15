@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "PickFlowers.h"
+//#include "PickFlowers.h"
 #include "Actor.h"
 #include "NPC_Actor.h"
 
@@ -24,7 +24,8 @@ void PickFlowers::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 	ws->WSProperties[WSP_FlowersPicked].SetWSProperty(WSP_FlowersPicked, WST_bool, true);
-	subject->AddAction("Give Flowers");
+	//subject->AddAction("Give Flowers");
+	subject->RemoveAction("Pick Flowers");
 }
 
 void PickFlowers::EmotionalReaction(NPC_Actor* affectingActor)

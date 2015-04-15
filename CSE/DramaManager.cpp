@@ -34,7 +34,6 @@ void DramaManager::SetLocations(Stage* p, Stage* f, Stage* c, Stage* l, Stage* o
 void DramaManager::InitLRR()
 {
 	//YOU
-	red->AddAction("Greet");
 	red->AddAction("Travel");
 	red->AddLocation("cabin");
 
@@ -44,17 +43,16 @@ void DramaManager::InitLRR()
 	wolf->AddAction("Eat");
 
 	wolf->AddAction("WolfGreetRed", red);
+	wolf->AddAction("GiveDirections", red);
 	wolf->AddAction("QueryIdentity", red);
 	wolf->AddAction("QueryPurpose", red);
 	wolf->AddAction("QueryBasket", red);
 
 	wolf->AddAction("WolfEat", red);
 	wolf->AddAction("WolfEat", grandma);
+	wolf->AddAction("WolfEatLunch");
+	wolf->AddAction("SuggestFlowers", red);
 	wolf->AddAction("RequestEntry", grandma);
-
-	Goal g(0.6f);
-	g.SetWSProperty(WSP_WolfHungry, WST_bool, false);
-	wolf->AddGoal(g);
 
 	// GRANNY
 	grandma->AddAction("OpenDoor");
@@ -76,35 +74,59 @@ bool DramaManager::React()
 
 	string reactEvent = historyBook->GetLastEvent()->GetVerb();
 
-	if (reactEvent == "Stray Off Path") // this could be done in emotional reaction: if(affectingactor == wolf)
+	if (reactEvent == "Stray Off Path") // this could? be done in emotional reaction: if(affectingactor == wolf)
 	{
 		red->RemoveAction("Stray Off Path");
-		Goal g(0.8f);
-		g.SetWSProperty(WSP_QueryRed, WST_int, 2);
-		wolf->AddGoal(g);
+
+		Goal g1(0.8f);
+		g1.SetWSProperty(WSP_QueryRed, WST_int, 3);
+		wolf->AddGoal(g1);
+
+		Goal g2(0.6f);
+		g2.SetWSProperty(WSP_WolfHungry, WST_bool, false);
+		wolf->AddGoal(g2);
 	}
 
 	if (reactEvent == "WolfEatGrandma"){
 		grandma->MoveLocation(offstage);
 	}
 
-	if (reactEvent == "OpenDoor"){
-		red->AddAction("Give Food");
+	if ((reactEvent == "OpenDoor") && (red->GetLocation() == lodge)){
+		if (ws->WSProperties[WSP_WolfHasLunch].bvalue){
+			red->AddAction("Apologize");
+		}
+		else{
+			red->AddAction("Give Food");
+		}
 	}
 
-	if (ws->WSProperties[WSP_QueryRed].ivalue >= 2){
-		red->AddAction("Return To Path");
+	if ((ws->WSProperties[WSP_QueryRed].ivalue >= 3) && (red->GetLocation() == forest)){
+		red->RemoveAction("Ask Directions");
+		red->RemoveAction("Walk Away");
 	}
 
-	//if (ws->WSProperties[WSP_QueryRed].ivalue > 0){
-	//	red->AddAction("Answer");
-	//}
 
 	if ((historyBook->EventJustHappened("QueryPurpose")) || (historyBook->EventJustHappened("QueryIdentity")) || (historyBook->EventJustHappened("QueryBasket"))){
 		;
-	}else{
-		red->RemoveAction("Answer");
 	}
+	else{
+		red->RemoveAction("Answer");
+		red->RemoveAction("Ignore");
+	}
+
+	if (reactEvent == "WolfEatLunch"){
+		wolf->Plan("Travel", offstage);
+	}
+	
+	//if ((wolf->GetLocation() != red->GetLocation()) && (red->GetLocation() == forest)){
+	if ((reactEvent == "Travel") && (historyBook->GetLastEvent()->Get_Subject()==wolf) && (red->GetLocation() == forest)){
+		red->AddAction("Turn Back");
+		red->RemoveAction("Give Food");
+		if (ws->WSProperties[WSP_ReactToWorldStateEvent].evalue == WSE_AskDirections)
+			red->AddAction("Continue Forward");
+	}
+
+
 
 	//reactingEvent.CalculateInclination(this);
 	return false;
@@ -119,8 +141,8 @@ void DramaManager::Plan(string action)
 		;//plans.push_back(new Prepare(char1, 1));
 	else if (action == "End"){
 		red->RemoveAllActions();
-		plans.push_back(new Travel(red, offstage, 1));
-		plans.push_back(new End(this, 1));
+		red->MoveLocation(offstage);
+		plans.push_back(new End(this, 0));
 	}
 	else{
 		// error
@@ -164,14 +186,21 @@ void DramaManager::CheckForPlanning()
 	//if ((historyBook->TimeElapsedSince("QueryIdentity")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyIdentity"))
 	//if ((historyBook->TimeElapsedSince("QueryPurpose")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyPurpose"))
 	//if ((historyBook->TimeElapsedSince("QueryBasket")>2) && (historyBook->HaventDoneEventBefore(red,"ReplyBasket"))
-
-	if (ws->WSProperties[WSP_RedEaten].bvalue == true){
-		Plan("End");
-	}
-	if (ws->WSProperties[WSP_RedHome].bvalue == true){
-		Plan("End");
-	}
-	if (ws->WSProperties[WSP_LunchDelivered].bvalue == true){
-		Plan("End");
+	if (historyBook->HaventDoneEventBefore(this, "End")){
+		if (ws->WSProperties[WSP_RedEaten].bvalue == true){
+			Plan("End");
+		}
+		if (ws->WSProperties[WSP_RedHome].bvalue == true){
+			Plan("End");
+		}
+		if (ws->WSProperties[WSP_LunchDelivered].bvalue == true){
+			Plan("End");
+		}
+		if (ws->WSProperties[WSP_DeliveryFailed].bvalue == true){
+			Plan("End");
+		}
+		if ((ws->WSProperties[WSP_GrandmaEaten].bvalue == true) && (red->GetLocation() == lodge)){
+			Plan("End");
+		}
 	}
 }

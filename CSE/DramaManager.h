@@ -26,7 +26,5 @@ public:
 	virtual void Plan(string, Actor*, Actor*);
 	void CheckForPlanning();
 
-
-	string GetName() { return "Fate"; }
 };
 

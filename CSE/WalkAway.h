@@ -1,12 +1,11 @@
 #pragma once
 #include "Action.h"
-class End :
+class WalkAway :
 	public Action
 {
-	string ending;
 public:
-	End(Actor* subject_, int moments_);
-	~End();
+	WalkAway(Actor* subject_, int moments_);
+	~WalkAway();
 
 	std::string GetSentence();
 

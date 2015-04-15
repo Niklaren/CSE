@@ -33,8 +33,8 @@ void RequestEntry::Init()
 	WorldStateProperty condition1, condition2;
 	condition1.SetWSProperty(WSP_WolfKnowsGrandma, WST_bool, true);
 	conditions.push_back(condition1);
-	//condition2.SetWSProperty(WSP_Location, WST_variable);
-	//conditions.push_back(condition2);
+	condition2.SetWSProperty(WSP_RedDistracted, WST_bool, true);
+	conditions.push_back(condition2);
 }
 
 std::string RequestEntry::GetSentence()
@@ -46,7 +46,8 @@ void RequestEntry::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 
-	subject->RemoveAction("OpenDoor");
+	subject->RemoveAction("Request Entry");
+	subject->RemoveAction("Knock Door");
 }
 
 void RequestEntry::EmotionalReaction(NPC_Actor* affectingActor)
@@ -54,7 +55,7 @@ void RequestEntry::EmotionalReaction(NPC_Actor* affectingActor)
 	if (affectingActor == subject){
 
 	}
-	if (affectingActor == object){
+	else if (affectingActor == object){
 		Goal g(0.7f);
 		g.SetWSProperty(WSP_DoorOpen, WST_bool, true);
 		affectingActor->AddGoal(g);
@@ -63,5 +64,9 @@ void RequestEntry::EmotionalReaction(NPC_Actor* affectingActor)
 
 float RequestEntry::NPC_CalculateInclination()
 {
-	return 0;
+	double a = static_cast<NPC_Actor*>(subject)->Get_Open();
+	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
+	// w = static_cast<NPC_Actor*>(subject)->
+	double result = Blend(a, b, 0) + 0.15;
+	return float(result);
 }

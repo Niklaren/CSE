@@ -18,6 +18,7 @@ Player_Actor::~Player_Actor()
 void Player_Actor::AddAction(string action)
 {
 	s_availableActions.push_back(action);
+
 	//if (action == "OK")
 	//	s_availableActions.push_back("OK");
 	//else if (action == "Travel")
@@ -63,6 +64,7 @@ void Player_Actor::RemoveAllActions()
 {
 	s_availableActions.clear();
 	s_availableActions.push_back("OK");
+
 }
 
 void Player_Actor::SetAvailableCharacters(vector<NPC_Actor*> NPCs)
@@ -91,25 +93,18 @@ void Player_Actor::Plan(string action)
 		plans.push_back(new GoHome(this, 1));
 	else if (action == "Walk Path")
 		plans.push_back(new WalkPath(this, 1));
-	//else if (action == "Eat")
-	//	plans.push_back(new Eat(this, 1));
-	//else if (action == "CookGood")
-	//	plans.push_back(new CookGood(this, 1));
-	//else if (action == "CookBad")
-	//	plans.push_back(new CookBad(this, 1));
-	//else if (action == "Unpack")
-	//	plans.push_back(new Unpack(this, 1));
-	//else if (action == "BuildStove")
-	//	plans.push_back(new BuildStove(this, 1));
+	else if (action == "Walk Away")
+		plans.push_back(new WalkAway(this, 1));
+	else if (action == "Pick Flowers")
+		plans.push_back(new PickFlowers(this, 1));
 	else{
 		//error
 	}
 
 	//location actions
-	//if (action == "FetchWater")
-	//	plans.push_back(new FetchWater(this, location, 1));
-	//else if (action == "FetchWood")
-	//	plans.push_back(new FetchWood(this, 1));
+	//if (action == "A")
+	//	plans.push_back(new A(this, location, 1));
+
 }
 
 void Player_Actor::Plan(string action, Actor* object_)
@@ -129,7 +124,7 @@ void Player_Actor::Plan(string action, Actor* object_)
 		plans.push_back(new Hug(this, object_, 1));
 	else if (action == "Greet")
 		plans.push_back(new Greet(this, object_, 1));
-	else if (action == "Request Entry")
+	else if (action == "Knock Door")
 		plans.push_back(new RequestEntry(this, object_, 1));
 	else if (action == "Apologize")
 		plans.push_back(new Apologize(this, object_, 1));
@@ -137,8 +132,12 @@ void Player_Actor::Plan(string action, Actor* object_)
 		plans.push_back(new Insult(this, object_, 1));
 	else if (action == "Answer")
 		plans.push_back(new Answer(this, object_, 1));
+	else if (action == "Ignore")
+		plans.push_back(new Ignore(this, object_, 1));
 	else if (action == "Give Food")
 		plans.push_back(new GiveFood(this, object_, 1));
+	else if (action == "Ask Directions")
+		plans.push_back(new AskDirections(this, object_, 1));
 	else{
 		//error
 	}
@@ -152,10 +151,14 @@ void Player_Actor::Plan(string action, NPC_Actor* a1, NPC_Actor* a2)
 	}
 }
 
-void Player_Actor::Plan(string action, Stage* l)
+void Player_Actor::Plan(string action, Stage* l, int moments)
 {
 	if (action == "Travel")
-		plans.push_back(new Travel(this, l, 1));
+		plans.push_back(new Travel(this, l, moments));
+	if (action == "Leave")
+		plans.push_back(new Leave(this, moments));
+	if (action == "Arrive")
+		plans.push_back(new Arrive(this, l, moments));
 	else if (action == "Stray Off Path")
-		plans.push_back(new Travel(this, l, 1, "Stray Off Path"));
+		plans.push_back(new Travel(this, l, moments, "Stray Off Path"));
 }

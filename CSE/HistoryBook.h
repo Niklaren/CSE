@@ -14,7 +14,7 @@ class HistoryBook
 	int time = 0;
 
 	sf::Font font;
-	//sf::Text eventsText;
+	sf::Text eventsText;
 	sf::Texture texture;
 	sf::Sprite sprite;
 
@@ -29,9 +29,11 @@ public:
 	int TimeElapsedSince(std::string);
 	int TimeSinceStart(){ return time; }
 	bool HaventDoneEventBefore(Actor*, std::string);
+	bool HaventDoneEventToTargetBefore(Actor*, Actor*, std::string);
+	bool HaventDoneEventInLocationBefore(Actor*, Stage*, std::string);
 	bool HaventDoneEventSince(Actor*, std::string, int moments);
 	bool EventJustHappened(std::string);
-	Action* GetLastEvent() { return eventHistory.back(); } //??
+	Action* GetLastEvent() { return eventHistory.back(); }
 
 	bool Draw(sf::RenderWindow &, Stage* s);
 

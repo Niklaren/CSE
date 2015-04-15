@@ -7,19 +7,29 @@
 
 #include "OK.h"
 #include "Travel.h"
+#include "Leave.h"
+#include "Arrive.h"
+
 #include "Observe.h"
 #include "GoHome.h"
 #include "WalkPath.h"
+#include "AskDirections.h"
 #include "Answer.h"
 #include "RequestEntry.h"
 #include "GiveFood.h"
+#include "WalkAway.h"
+#include "Ignore.h"
+#include "PickFlowers.h"
 
 #include "WolfGreetRed.h"
+#include "GiveDirections.h"
 #include "QueryIdentity.h"
 #include "QueryPurpose.h"
 #include "QueryBasket.h"
 #include "WolfEat.h"
+#include "WolfEatLunch.h"
 #include "Intimidate.h"
+#include "SuggestFlowers.h"
 
 #include "OpenDoor.h"
 
@@ -48,6 +58,7 @@ class Actor
 {
 protected:
 	string name;
+	int ID;
 
 	Stage* location;
 
@@ -75,11 +86,13 @@ public:
 	virtual bool React() = 0;
 	virtual void Plan(string action);
 	virtual void Plan(string action, Actor* object){}
-	virtual void Plan(string action, Stage* l){}
+	virtual void Plan(string action, Stage* l, int moments = 1){}
 	virtual void Plan(string action, Actor*, Actor*){}
 
+	string GetName() { return name; }
+	int GetID() { return ID; }
+	void SetID(int id) { ID = id; }
 
-	virtual string GetName() { return "Base"; }
 	int GetNumPlans() { return plans.size(); }
 	Action* GetPlan(int index) { return plans[index]; }
 	Action* GetCurrentPlan() { return plans[0]; }

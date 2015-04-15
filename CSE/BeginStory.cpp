@@ -67,5 +67,5 @@ void BeginStory::EmotionalReaction(NPC_Actor* affectingActor)
 
 std::string BeginStory::GetSentence()
 {
-	return "You arrive late to the campsite. After driving\naround for what seemed forever, you finally\nfound the entrance. You get out of the car\nand see your friend ash come walking over.";
+	return "You arrive late to the campsite. After driving around for what seemed forever, you finally found the entrance. You get out of the car and see your friend ash come walking over.";
 }

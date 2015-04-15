@@ -55,6 +55,7 @@ protected:
 	sf::Clock clock;
 	sf::Time time;
 	bool executePlans = true;
+	bool playerAct = true;
 
 	sf::Sprite stageSprite;
 	sf::Texture stageTexture;

@@ -5,15 +5,62 @@
 
 
 #define WIDTH_PER_CHAR 15
-#define MENU_ELEMENT_SIZE 50
+
 //#define 
+
+//Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int width_)
+//{
+//	int x = x_ * MENU_ELEMENT_SIZE;
+//	int y = y_ * MENU_ELEMENT_SIZE;
+//	int width = width_ * MENU_ELEMENT_SIZE;
+//	
+//	sf::IntRect textureRect_(x, y, width, MENU_ELEMENT_SIZE);
+//	textureRect = textureRect_;
+//	if (!texture.loadFromFile("Assets/menu.png", textureRect))
+//	{
+//		//error
+//		std::cout << "error" << std::endl;
+//	}
+//
+//	name = name_;
+//	optionRect.left = menu.left + x;
+//	optionRect.top = menu.top + y;
+//	optionRect.width = width;
+//	optionRect.height = MENU_ELEMENT_SIZE;
+//
+//	type = t;
+//	state = Unavailable;
+//	//pressed = false;
+//
+//	//int width = name.size() * WIDTH_PER_CHAR;
+//
+//
+//	//TextOut(hdc, leftX, topY, action.c_str, action.size);
+//
+//	//if (!font.loadFromFile("arial.ttf"))
+//	//{	/*error;*/	}
+//	//text.setFont(font);
+//	//text.setString(name);
+//	//text.setCharacterSize(24);
+//	//text.setPosition(sf::Vector2f((float)x_,(float)y_));
+//}
 
 Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int width_)
 {
 	int x = x_ * MENU_ELEMENT_SIZE;
 	int y = y_ * MENU_ELEMENT_SIZE;
 	int width = width_ * MENU_ELEMENT_SIZE;
-	
+	if (t == Type_Act0Target){
+		x = 0;
+		y = (width_+1) * MENU_ELEMENT_SIZE;
+		width = width_ * MENU_ELEMENT_SIZE;
+	}
+	else if (t == Type_Act1Target){
+		x = (5 - width_) * MENU_ELEMENT_SIZE;
+		y = (5 - width_) * MENU_ELEMENT_SIZE;
+		width = width_ * MENU_ELEMENT_SIZE;
+	}
+
 	sf::IntRect textureRect_(x, y, width, MENU_ELEMENT_SIZE);
 	textureRect = textureRect_;
 	if (!texture.loadFromFile("Assets/menu.png", textureRect))
@@ -23,26 +70,14 @@ Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int
 	}
 
 	name = name_;
+	type = t;
+	state = Unavailable;
+
 	optionRect.left = menu.left + x;
 	optionRect.top = menu.top + y;
 	optionRect.width = width;
 	optionRect.height = MENU_ELEMENT_SIZE;
 
-	type = t;
-	state = Unavailable;
-	//pressed = false;
-
-	//int width = name.size() * WIDTH_PER_CHAR;
-
-
-	//TextOut(hdc, leftX, topY, action.c_str, action.size);
-
-	//if (!font.loadFromFile("arial.ttf"))
-	//{	/*error;*/	}
-	//text.setFont(font);
-	//text.setString(name);
-	//text.setCharacterSize(24);
-	//text.setPosition(sf::Vector2f((float)x_,(float)y_));
 }
 
 Option::Option()
@@ -53,6 +88,14 @@ Option::~Option()
 {
 }
 
+void Option::SetPosition(sf::IntRect menu, int x, int y)
+{
+	optionRect.left = menu.left + (x*MENU_ELEMENT_SIZE);
+	optionRect.top = menu.top + (y*MENU_ELEMENT_SIZE);
+	optionRect.width = textureRect.width;
+	optionRect.height = MENU_ELEMENT_SIZE;
+}
+
 bool Option::Draw(sf::RenderWindow &window)
 {
 	//DrawTextW(hdc, name.c_str(), name.length(), &optionRect, DT_CENTER);
@@ -60,7 +103,7 @@ bool Option::Draw(sf::RenderWindow &window)
 		texture.loadFromFile("Assets/menupressed.png", textureRect);
 	if (state == Available)
 		texture.loadFromFile("Assets/menu.png", textureRect);
-	if (state == Unavailable)
+	if (state == Locked ||	state == Unavailable || state == OnHold)
 		texture.loadFromFile("Assets/menuUnavailable.png", textureRect);
 
 

@@ -10,6 +10,7 @@ enum eWorldStateEvents
 	WSE_MoodChange,			//may need ones for target & self??
 	WSE_PersonalityChange,
 	WSE_RequestEntry,
+	WSE_AskDirections,
 	WSE_Punch,
 	WSE_Hug,
 	WSE_Apologize,
@@ -22,6 +23,7 @@ enum eWorldStateProperties_Key
 	WSP_ReactToWorldStateEvent, // ?
 	WSP_RedHome,
 	WSP_LunchDelivered,
+	WSP_DeliveryFailed,
 	WSP_WolfGreetRed,
 	WSP_Greeting,
 	WSP_QueryRed,
@@ -29,6 +31,7 @@ enum eWorldStateProperties_Key
 	WSP_WolfHasLunch,
 	WSP_WolfKnowsGrandma,
 	WSP_RedPanicked,
+	WSP_RedDistracted,
 	WSP_RedEaten,
 	WSP_GrandmaEaten,
 	WSP_DoorOpen,

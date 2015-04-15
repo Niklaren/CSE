@@ -22,8 +22,8 @@ bool ActionTargeted::ReadyToExecute()
 		return false;
 
 	if (subject->GetLocation() != object->GetLocation()){
-		subject->Wait(2);
-		subject->Plan("Travel", object->GetLocation());
+		subject->Wait(1);
+		subject->Plan("Travel", object->GetLocation(), 0);
 		return false;
 	}
 

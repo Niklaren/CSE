@@ -46,5 +46,5 @@ void BeginLRR::EmotionalReaction(NPC_Actor* affectingActor)
 
 std::string BeginLRR::GetSentence()
 {
-	return "Unfortunately your Grandmother fell ill recently. \nYou prepared a lunch for you both to share.";
+	return "Unfortunately your Grandmother fell ill recently. You prepared a lunch for you both to share.";
 }

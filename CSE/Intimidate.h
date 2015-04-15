@@ -17,4 +17,3 @@ public:
 	void EmotionalReaction(NPC_Actor*);
 	float NPC_CalculateInclination();
 };
-

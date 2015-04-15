@@ -1,13 +1,13 @@
 #pragma once
-#include "ActionTargeted.h"
-
-class Apologize :
-	public ActionTargeted
+#include "Action.h"
+class WolfEatLunch :
+	public Action
 {
 public:
-	Apologize(Actor* subject_, Actor* object_, int moments_);
-	Apologize();
-	~Apologize();
+	WolfEatLunch(Actor* subject_, int moments_);
+	WolfEatLunch();
+	~WolfEatLunch();
+
 	void Init();
 
 	std::string GetSentence();
@@ -16,3 +16,4 @@ public:
 	void EmotionalReaction(NPC_Actor*);
 	float NPC_CalculateInclination();
 };
+

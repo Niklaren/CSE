@@ -96,45 +96,85 @@ void NPC_Actor::LoadFromFile(string FileName)
 			sin >> dInput;
 			selfTraits[open].setValue(dInput);
 		}
-		else if (line.find("pAgreeable") != -1){
+		else if (line.find("pRedAgreeable") != -1){
 			sin >> dInput;
-			perceivedTraits[agreeable].setValue(dInput);
+			perceivedTraits[agreeable][red].setValue(dInput);
 		}
-		else if (line.find("pConscientious") != -1){
+		else if (line.find("pRedConscientious") != -1){
 			sin >> dInput;
-			perceivedTraits[conscientious].setValue(dInput);
+			perceivedTraits[conscientious][red].setValue(dInput);
 		}
-		else if (line.find("pExtraverted") != -1){
+		else if (line.find("pRedExtraverted") != -1){
 			sin >> dInput;
-			perceivedTraits[extraverted].setValue(dInput);
+			perceivedTraits[extraverted][red].setValue(dInput);
 		}
-		else if (line.find("pNeurotic") != -1){
+		else if (line.find("pRedNeurotic") != -1){
 			sin >> dInput;
-			perceivedTraits[neurotic].setValue(dInput);
+			perceivedTraits[neurotic][red].setValue(dInput);
 		}
-		else if (line.find("pOpen") != -1){
+		else if (line.find("pRedOpen") != -1){
 			sin >> dInput;
-			perceivedTraits[open].setValue(dInput);
+			perceivedTraits[open][red].setValue(dInput);
 		}
-		else if (line.find("pPAgreeable") != -1){
+		else if (line.find("pWolfAgreeable") != -1){
 			sin >> dInput;
-			perceivedPTraits[agreeable].setValue(dInput);
+			perceivedTraits[agreeable][wolf].setValue(dInput);
 		}
-		else if (line.find("pPConscientious") != -1){
+		else if (line.find("pWolfConscientious") != -1){
 			sin >> dInput;
-			perceivedPTraits[conscientious].setValue(dInput);
+			perceivedTraits[conscientious][wolf].setValue(dInput);
 		}
-		else if (line.find("pPExtraverted") != -1){
+		else if (line.find("pWolfExtraverted") != -1){
 			sin >> dInput;
-			perceivedPTraits[extraverted].setValue(dInput);
+			perceivedTraits[extraverted][wolf].setValue(dInput);
 		}
-		else if (line.find("pPNeurotic") != -1){
+		else if (line.find("pWolfNeurotic") != -1){
 			sin >> dInput;
-			perceivedPTraits[neurotic].setValue(dInput);
+			perceivedTraits[neurotic][wolf].setValue(dInput);
 		}
-		else if (line.find("pPOpen") != -1){
+		else if (line.find("pWolfOpen") != -1){
 			sin >> dInput;
-			perceivedPTraits[open].setValue(dInput);
+			perceivedTraits[open][wolf].setValue(dInput);
+		}
+		else if (line.find("pLumberjackAgreeable") != -1){
+			sin >> dInput;
+			perceivedTraits[agreeable][lumberjack].setValue(dInput);
+		}
+		else if (line.find("pLumberjackConscientious") != -1){
+			sin >> dInput;
+			perceivedTraits[conscientious][lumberjack].setValue(dInput);
+		}
+		else if (line.find("pLumberjackExtraverted") != -1){
+			sin >> dInput;
+			perceivedTraits[extraverted][lumberjack].setValue(dInput);
+		}
+		else if (line.find("pLumberjackNeurotic") != -1){
+			sin >> dInput;
+			perceivedTraits[neurotic][lumberjack].setValue(dInput);
+		}
+		else if (line.find("pLumberjackOpen") != -1){
+			sin >> dInput;
+			perceivedTraits[open][lumberjack].setValue(dInput);
+		}
+		else if (line.find("pGrandmaAgreeable") != -1){
+			sin >> dInput;
+			perceivedTraits[agreeable][grandma].setValue(dInput);
+		}
+		else if (line.find("pGrandmaConscientious") != -1){
+			sin >> dInput;
+			perceivedTraits[conscientious][grandma].setValue(dInput);
+		}
+		else if (line.find("pGrandmaExtraverted") != -1){
+			sin >> dInput;
+			perceivedTraits[extraverted][grandma].setValue(dInput);
+		}
+		else if (line.find("pGrandmaNeurotic") != -1){
+			sin >> dInput;
+			perceivedTraits[neurotic][grandma].setValue(dInput);
+		}
+		else if (line.find("pGrandmaOpen") != -1){
+			sin >> dInput;
+			perceivedTraits[open][grandma].setValue(dInput);
 		}
 		else if (line.find("image") != -1){
 			sin >> imgFileName;
@@ -164,11 +204,12 @@ bool NPC_Actor::React()
 	// if we we are the object of the last event we have to replan.
 	if (historyBook->GetLastEvent()->HasObject()){
 		if (historyBook->GetLastEvent()->Get_Object()->GetName() == name){
-			Wait();
-			if (AcquireGoal()){
+			//Wait();
+			//if (){
+				AcquireGoal();
 				RePlan();
 				return true;
-			}
+			//}
 		}
 	}
 
@@ -241,14 +282,12 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new OK(this, moments));
 	else if (action->GetVerb() == "Travel")
 		plans.push_back(new Travel(this, moments));
-	else if (action->GetVerb() == "OpenDoor")
-		plans.push_back(new OpenDoor(this, moments));
-
-	//else if (action->GetVerb() == "BuildStove")
-	//	plans.push_back(new BuildStove(this, moments));
+	else if (action->GetVerb() == "WolfEatLunch")
+		plans.push_back(new WolfEatLunch(this, moments));
 	else{
 		//error
 	}
+
 
 	//location specific
 	if (action->GetVerb() == "ChopLog")
@@ -257,24 +296,25 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new LogOnStump(this, action->Get_Location(), moments));
 	else if (action->GetVerb() == "GrabLog")
 		plans.push_back(new GrabLog(this, action->Get_Location(), moments));
-/*	if (action->GetVerb() == "FetchWater")
-		plans.push_back(new FetchWater(this, action->Get_Location(), moments));
-	else if (action->GetVerb() == "FetchWood")
-		plans.push_back(new FetchWood(this, moments))*/;
+	else if (action->GetVerb() == "OpenDoor")
+		plans.push_back(new OpenDoor(this, moments));
 
 	// actions that have an object;
 	if (!(action->HasObject()))
 	{
-		std::cout << "object null" << std::endl;
+		//std::cout << "no object given" << std::endl;
 		return;
 	}
-
-	if (action->GetVerb() == "Punch")
+	else if (action->GetVerb() == "Punch")
 		plans.push_back(new Punch(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Hug")
 		plans.push_back(new Hug(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "WolfGreetRed")
 		plans.push_back(new WolfGreetRed(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "SuggestFlowers")
+		plans.push_back(new SuggestFlowers(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "GiveDirections")
+		plans.push_back(new GiveDirections(this, action->Get_Object(), moments));
 	if (action->GetVerb() == "QueryIdentity")
 		plans.push_back(new QueryIdentity(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "QueryPurpose")
@@ -294,11 +334,15 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 	}
 }
 
-void NPC_Actor::Plan(string action, Stage* l)
+void NPC_Actor::Plan(string action, Stage* l, int moments)
 {
 	// actions that do not have an object;
 	if (action == "Travel")
-		plans.push_back(new Travel(this, l, 1));
+		plans.push_back(new Travel(this, l, moments));
+	else if (action == "Leave")
+		plans.push_back(new Leave(this, moments));
+	else if (action == "Arrive")
+		plans.push_back(new Arrive(this, l, moments));
 
 }
 
@@ -328,6 +372,8 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 		plans.push_back(new QueryBasket(this, object_, moments));
 	else if (action == "WolfGreetRed")
 		plans.push_back(new Greet(this, object_, moments));
+	else if (action == "SuggestFlowers")
+		plans.push_back(new SuggestFlowers(this, object_, moments));
 	else if (action == "WolfEat")
 		plans.push_back(new WolfEat(this, object_, moments));
 	else if (action == "RequestEntry")
@@ -386,62 +432,32 @@ void NPC_Actor::Change_Neurotic(double d)
 	std::cout << "neurotic: " << selfTraits[neurotic].Value() << std::endl;
 }
 
-void NPC_Actor::Change_pOpen(double d)
+void NPC_Actor::Change_pOpen(double d, int charID)
 {
-	perceivedTraits[open].change(d);
-	std::cout << "Popen: " << perceivedTraits[open].Value() << std::endl;
+	perceivedTraits[open][charID].change(d);
+	std::cout << "Popen: " << perceivedTraits[open][charID].Value() << std::endl;
 }
 
-void NPC_Actor::Change_pConscientious(double d)
+void NPC_Actor::Change_pConscientious(double d, int charID)
 {
-	perceivedTraits[conscientious].change(d);
-	std::cout << "Pconscientious: " << perceivedTraits[conscientious].Value() << std::endl;
+	perceivedTraits[conscientious][charID].change(d);
+	std::cout << "Pconscientious: " << perceivedTraits[conscientious][charID].Value() << std::endl;
 }
 
-void NPC_Actor::Change_pExtraverted(double d)
+void NPC_Actor::Change_pExtraverted(double d, int charID)
 {
-	perceivedTraits[extraverted].change(d);
-	std::cout << "Pextraverted: " << perceivedTraits[extraverted].Value() << std::endl;
+	perceivedTraits[extraverted][charID].change(d);
+	std::cout << "Pextraverted: " << perceivedTraits[extraverted][charID].Value() << std::endl;
 }
 
-void NPC_Actor::Change_pAgreeable(double d)
+void NPC_Actor::Change_pAgreeable(double d, int charID)
 {
-	perceivedTraits[agreeable].change(d);
-	std::cout << "Pagreeable: " << perceivedTraits[agreeable].Value() << std::endl;
+	perceivedTraits[agreeable][charID].change(d);
+	std::cout << "Pagreeable: " << perceivedTraits[agreeable][charID].Value() << std::endl;
 }
 
-void NPC_Actor::Change_pNeurotic(double d)
+void NPC_Actor::Change_pNeurotic(double d, int charID)
 {
-	perceivedTraits[neurotic].change(d);
-	std::cout << "Pneurotic: " << perceivedTraits[neurotic].Value() << std::endl;
-}
-
-void NPC_Actor::Change_pPOpen(double d)
-{
-	perceivedPTraits[open].change(d);
-	std::cout << "PPopen: " << perceivedPTraits[open].Value() << std::endl;
-}
-
-void NPC_Actor::Change_pPConscientious(double d)
-{
-	perceivedPTraits[conscientious].change(d);
-	std::cout << "PPconscientious: " << perceivedPTraits[conscientious].Value() << std::endl;
-}
-
-void NPC_Actor::Change_pPExtraverted(double d)
-{
-	perceivedPTraits[extraverted].change(d);
-	std::cout << "PPextraverted: " << perceivedPTraits[extraverted].Value() << std::endl;
-}
-
-void NPC_Actor::Change_pPAgreeable(double d)
-{
-	perceivedPTraits[agreeable].change(d);
-	std::cout << "PPagreeable: " << perceivedPTraits[agreeable].Value() << std::endl;
-}
-
-void NPC_Actor::Change_pPNeurotic(double d)
-{
-	perceivedPTraits[neurotic].change(d);
-	std::cout << "PPneurotic: " << happy.Value() << std::endl;
+	perceivedTraits[neurotic][charID].change(d);
+	std::cout << "Pneurotic: " << perceivedTraits[neurotic][charID].Value() << std::endl;
 }

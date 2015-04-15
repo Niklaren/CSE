@@ -43,29 +43,23 @@ void Travel::Init()
 
 std::string Travel::GetSentence()
 {
-	return subject->GetName() + " moves to " + targetLocation->GetName();
+	return subject->GetName() + " leaves the area.";
 }
 
 void Travel::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 
-	//ws->WSProperties[WSP_Location].SetWSProperty(WSP_Location, WST_variable);
-
-	//if ((!targetLocation) && (subject->GetNextPlan()->HasObject())){
-	//	targetLocation = subject->GetNextPlan()->Get_Object()->GetLocation();
-	//}
-	//else if ((!targetLocation) && (subject->GetNextPlan()->HasLocation())){
-	//	targetLocation = subject->GetNextPlan()->Get_Location();
-	//}
+	//subject->Plan("Leave", locationOccured);
+	subject->Plan("Arrive", targetLocation, 0);
 
 	//subject->removeactions location actions
 	locationOccured->RemoveLocationActions(subject);
 
-	subject->MoveLocation(targetLocation);
+	//subject->MoveLocation(targetLocation);
 
-	//subject->addactions location actions
-	targetLocation->AddLocationActions(subject);
+	////subject->addactions location actions
+	//targetLocation->AddLocationActions(subject);
 }
 
 void Travel::EmotionalReaction(NPC_Actor* affectingActor)

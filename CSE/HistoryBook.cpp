@@ -12,6 +12,10 @@ HistoryBook::HistoryBook()
 	//eventsText.setPosition(sf::Vector2f(50, 260));
 	//eventsText.setCharacterSize(24);
 
+	eventsText.setFont(font);
+	eventsText.setPosition(sf::Vector2f(10, 460));
+	eventsText.setCharacterSize(20);
+
 	//eventsRect.left = 50;
 	//eventsRect.right = 400;
 	//eventsRect.top = 250;
@@ -54,6 +58,24 @@ bool HistoryBook::HaventDoneEventBefore(Actor* a, std::string event)
 	return true;
 }
 
+bool HistoryBook::HaventDoneEventToTargetBefore(Actor* a, Actor* b, std::string event){
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->HasObject()){
+			if ((eventHistory[i]->GetVerb() == event) && (a->GetID() == eventHistory[i]->Get_Subject()->GetID()) && (b->GetID() == eventHistory[i]->Get_Object()->GetID()))
+				return false;
+		}
+	}
+	return true;
+}
+
+bool HistoryBook::HaventDoneEventInLocationBefore(Actor* a, Stage* l, std::string event){
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+			if ((eventHistory[i]->GetVerb() == event) && (a == eventHistory[i]->Get_Subject()) && (l == eventHistory[i]->Get_Location()))
+				return false;
+	}
+	return true;
+}
+
 bool HistoryBook::HaventDoneEventSince(Actor*, std::string event, int moments)
 {
 
@@ -77,12 +99,30 @@ bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 
 	for (unsigned i = eventHistory.size(); i-- > 0;){
 		if ((eventHistory[i]->MomentsSinceExecution() == 0) && (eventHistory[i]->Get_Location()==s)){
-			sf::Text eventsText;
-			eventsText.setFont(font);
+			//sf::Text eventsText;
+			//eventsText.setFont(font);
 			eventsText.setPosition(sf::Vector2f(10, textY));
-			eventsText.setCharacterSize(20);
+			//eventsText.setCharacterSize(20);
+			
+			sf::String s = eventHistory[i]->GetSentence();
+			unsigned offset(0);
+			for (std::size_t pos(0); pos < s.getSize(); ++pos) {
+				auto currentChar = s[pos];
+				offset++;
+				if ((currentChar == ' ') && (offset>50)) {
+					s[pos] = '\n';
+					offset = 0;
+					textY += 30;
+				}
+				else if (currentChar == '\n') {
+					offset = 0;
+					textY += 30;
+				}
+			}
 
-			eventsText.setString(eventHistory[i]->GetSentence());
+			eventsText.setString(s);
+			
+
 			window.draw(eventsText);
 			textY += 30;
 		}

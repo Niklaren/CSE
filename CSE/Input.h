@@ -20,6 +20,7 @@ public:
 	~Input();
 	void calculatemove();
 
+	bool LMPressed(){ return left == pressed; }
 	bool LMjustPressed() { return left == just_pressed; }
 	bool LMjustReleased() { return left == just_released;}
 

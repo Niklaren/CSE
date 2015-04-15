@@ -41,19 +41,19 @@ void Greet::Init()
 std::string Greet::GetSentence()
 {
 	if (subject->GetName() == "You"){
-		if (object->GetName() == "Ash")
-			return "Your old pal Ash, it's been awhile. Hi!";
-		else if (object->GetName() == "Brooke")
-			return "The friend Ash told you About, Brooke.";
+		if (object->GetName() == "Wolf")
+			return "You acknowledge the wolf.";
+		else if (object->GetName() == "Grandma")
+			return "Hello grandma.";
+		else if (object->GetName() == "Lumberjack")
+			return "You attract the lumberjack's attention.";
 	}
-	return "greetings";
+	return "Greetings";
 }
 
 bool Greet::GetUsable()
 {
 	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
-			return false;
-	if (subject->GetHistory()->TimeSinceStart() > 5) // if we've moved passed greeting stage
 		return false;
 	return true;
 }
@@ -61,6 +61,7 @@ bool Greet::GetUsable()
 void Greet::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
+	subject->RemoveAction("Greet");
 }
 
 void Greet::EmotionalReaction(NPC_Actor* affectingActor)
@@ -70,6 +71,8 @@ void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 		//g.SetRelevance(0.7f);
 		//g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
 		//affectingActor->AddGoal(g);
+		affectingActor->Change_pAgreeable(0.15, subject->GetID());
+		affectingActor->Change_Extraverted(0.01);
 	}
 	if (affectingActor == subject){
 		
@@ -79,7 +82,7 @@ void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 float Greet::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-	double b = static_cast<NPC_Actor*>(subject)->Get_pPAgreeable();
+	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double result = Blend(a, b, w);
 	return float(result);
