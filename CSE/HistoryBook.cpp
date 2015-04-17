@@ -2,6 +2,7 @@
 #include "HistoryBook.h"
 
 #include <string>
+#include "fstream"
 #include "Actor.h"
 
 HistoryBook::HistoryBook()
@@ -129,6 +130,21 @@ bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 	}
 
 	return false;
+}
+
+void HistoryBook::WriteToFile()
+{
+	ofstream myfile;
+	myfile.open("Assets/D_historybook.txt");
+	for (unsigned i(0); i < eventHistory.size(); i++){
+		myfile << eventHistory[i]->Get_Subject()->GetName() + " ";
+		myfile << eventHistory[i]->GetVerb() + " ";
+		if (eventHistory[i]->HasObject())
+			myfile << eventHistory[i]->Get_Object()->GetName() + " at ";
+		myfile << eventHistory[i]->Get_Location()->GetName() + ".    ";
+		myfile << eventHistory[i]->GetSentence() << std::endl;
+	}
+	myfile.close();
 }
 
 void HistoryBook::TimeForward()

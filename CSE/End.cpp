@@ -40,6 +40,8 @@ void End::ExecuteConsequences(WorldState* ws)
 		ending = "you successfully delivered lunch.";
 	}
 	
+	ws->WriteToFile();
+	subject->GetHistory()->WriteToFile();
 }
 
 void End::EmotionalReaction(NPC_Actor* affectingActor)
@@ -48,3 +50,4 @@ void End::EmotionalReaction(NPC_Actor* affectingActor)
 
 	}
 }
+

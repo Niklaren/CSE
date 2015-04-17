@@ -1,0 +1,20 @@
+WSP_ReactToWorldStateEvent: 
+WSP_RedHome: 1
+WSP_LunchDelivered: 0
+WSP_DeliveryFailed: 0
+WSP_WolfGreetRed: 0
+WSP_Greeting: 
+WSP_QueryRed: 0
+WSP_WolfHungry: 1
+WSP_WolfHasLunch: 0
+WSP_WolfKnowsGrandma: 0
+WSP_RedPanicked: 0
+WSP_RedDistracted: 0
+WSP_RedEaten: 0
+WSP_GrandmaEaten: 0
+WSP_DoorOpen: 0
+WSP_FlowersPicked: 0
+WSP_Location: 
+WSP_JackHasLumber: 0
+WSP_LumberOnStump: 0
+WSP_LumberChopped: 0

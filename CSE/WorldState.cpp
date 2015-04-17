@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "WorldState.h"
-
+#include "fstream"
 
 WorldState::WorldState()
 {
@@ -38,6 +38,16 @@ WorldState::~WorldState()
 void WorldState::LoadFromFile(string FileName)
 {
 
+}
+
+void WorldState::WriteToFile()
+{
+	ofstream myfile;
+	myfile.open("Assets/D_endworldstate.txt");
+	for (unsigned int i(0); i < WSP_Count; i++){
+		myfile << WSProperties[i].TextForOutput(i);
+	}
+	myfile.close();
 }
 
 bool WorldState::MeetsWorldState(vector<WorldStateProperty> wsp)

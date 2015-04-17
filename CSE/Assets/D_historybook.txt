@@ -1,0 +1,9 @@
+fate Begin path.    Unfortunately your Grandmother fell ill recently. You prepared a lunch for you both to share.
+You WalkPath path.    after walking down the path a bit you think you see grandma's lodge.
+Lumberjack GrabLog cabin.    Lumberjack grabs a log from the pile.
+You Observe path.    Despite the pleasant scenery of the woodland trail you can't help but feel uneasy, as if being watched.
+Lumberjack LogOnStump cabin.    Lumberjack places the log atop the wide tree stump.
+You  path.    Time to go home, you think.
+Lumberjack ChopLog cabin.    Lumberjack Chops the log and tosses the pieces on the pile
+fate End offStage.    you decided to scrap the whole thing and go home.
+The End.

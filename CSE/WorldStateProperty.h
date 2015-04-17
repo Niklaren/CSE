@@ -42,13 +42,29 @@ enum eWorldStateProperties_Key
 	WSP_LumberChopped,
 	WSP_Count
 };
-//const string WorldStateProperties_Key[WSP_Count]
-//{
-//	"WSP_ReactToWorldStateEvent",
-//	"WSP_Insulted",
-//	"WSP_Punched"
-//
-//};
+const string WorldStateProperties_Key[WSP_Count]
+{
+	"WSP_ReactToWorldStateEvent",
+	"WSP_RedHome",
+	"WSP_LunchDelivered",
+	"WSP_DeliveryFailed",
+	"WSP_WolfGreetRed",
+	"WSP_Greeting",
+	"WSP_QueryRed",
+	"WSP_WolfHungry",
+	"WSP_WolfHasLunch",
+	"WSP_WolfKnowsGrandma",
+	"WSP_RedPanicked",
+	"WSP_RedDistracted",
+	"WSP_RedEaten",
+	"WSP_GrandmaEaten",
+	"WSP_DoorOpen",
+	"WSP_FlowersPicked",
+	"WSP_Location",
+	"WSP_JackHasLumber",
+	"WSP_LumberOnStump",
+	"WSP_LumberChopped",
+};
 enum eWorldStateProperties_Type
 {
 	WST_Invalid = -1,
@@ -185,5 +201,20 @@ struct WorldStateProperty
 		return false;
 	}
 
+	string TextForOutput(int i)
+	{
+		
+		if (Type == WST_int)
+			return WorldStateProperties_Key[i] + ": " + std::to_string(ivalue) + "\n";
+		if (Type == WST_float)
+			return WorldStateProperties_Key[i] + ": " + std::to_string(fvalue) + "\n";
+		if (Type == WST_bool)
+			return WorldStateProperties_Key[i] + ": " + std::to_string(bvalue) + "\n";
+		if (Type == WST_worldStateEvent)
+			return WorldStateProperties_Key[i] + ": " + "\n";
+		if (Type == WST_variable)
+			return WorldStateProperties_Key[i] + ": " + "\n";
 
+		return WorldStateProperties_Key[i] + ": " + "\n";
+	}
 };

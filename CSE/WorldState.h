@@ -10,6 +10,8 @@ public:
 	~WorldState();
 
 	void LoadFromFile(string FileName);
+	void WriteToFile();
+
 	bool MeetsWorldState(vector<WorldStateProperty>);
 	bool MeetsWorldState(WorldStateProperty wsp);
 
