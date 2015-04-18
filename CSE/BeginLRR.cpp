@@ -33,9 +33,6 @@ void BeginLRR::ExecuteConsequences(WorldState* ws)
 	player->AddAction("Go Home");
 	//player->AddAction("Give Food");
 
-	Goal g(0.5f);
-	g.SetWSProperty(WSP_LumberChopped, WST_int, 1);
-	static_cast<NPC_Actor*>(lumberjack)->AddGoal(g);
 
 }
 

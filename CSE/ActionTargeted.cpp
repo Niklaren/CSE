@@ -26,7 +26,6 @@ bool ActionTargeted::ReadyToExecute()
 		subject->Plan("Travel", object->GetLocation(), 0);
 		return false;
 	}
-
 	return true;
 }
 

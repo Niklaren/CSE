@@ -222,13 +222,46 @@
     <ClInclude Include="Greet.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
-    <ClInclude Include="GiveDirections.h">
-      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
-    </ClInclude>
     <ClInclude Include="WalkAway.h">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClInclude>
+    <ClInclude Include="Forgive.h">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClInclude>
+    <ClInclude Include="Reprimand.h">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiss.h">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClInclude>
     <ClInclude Include="Ignore.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="Thank.h">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Flee.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveWrongDirections.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveDirections.h">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveFlowers.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestEscort.h">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClInclude>
+    <ClInclude Include="AgreeEscort.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="RefuseEscort.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="KillWolf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -392,13 +425,46 @@
     <ClCompile Include="Greet.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
-    <ClCompile Include="GiveDirections.cpp">
-      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
-    </ClCompile>
     <ClCompile Include="WalkAway.cpp">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClCompile>
+    <ClCompile Include="Forgive.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClCompile>
+    <ClCompile Include="Reprimand.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiss.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
+    </ClCompile>
     <ClCompile Include="Ignore.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="Thank.cpp">
+      <Filter>Source Files\Actions\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="Flee.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveWrongDirections.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveDirections.cpp">
+      <Filter>Source Files\Actions\Riding Hood</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveFlowers.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="RequestEscort.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Red</Filter>
+    </ClCompile>
+    <ClCompile Include="AgreeEscort.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClCompile>
+    <ClCompile Include="RefuseEscort.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClCompile>
+    <ClCompile Include="KillWolf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

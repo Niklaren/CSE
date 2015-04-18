@@ -7,6 +7,7 @@
 PickFlowers::PickFlowers(Actor* subject_, int moments_ = 1)
 	: Action(subject_, moments_)
 {
+	verb = "Pick Flowers";
 }
 
 
@@ -23,7 +24,7 @@ std::string PickFlowers::GetSentence()
 void PickFlowers::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
-	ws->WSProperties[WSP_FlowersPicked].SetWSProperty(WSP_FlowersPicked, WST_bool, true);
+	ws->WSProperties[WSP_HaveFlowers].SetValue(true);
 	//subject->AddAction("Give Flowers");
 	subject->RemoveAction("Pick Flowers");
 }

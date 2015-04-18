@@ -13,16 +13,20 @@
 #include "Observe.h"
 #include "GoHome.h"
 #include "WalkPath.h"
-#include "AskDirections.h"
-#include "Answer.h"
 #include "RequestEntry.h"
 #include "GiveFood.h"
+#include "AskDirections.h"
 #include "WalkAway.h"
+#include "Answer.h"
 #include "Ignore.h"
+#include "Flee.h"
 #include "PickFlowers.h"
+#include "GiveFlowers.h"
+#include "RequestEscort.h"
 
 #include "WolfGreetRed.h"
 #include "GiveDirections.h"
+#include "GiveWrongDirections.h"
 #include "QueryIdentity.h"
 #include "QueryPurpose.h"
 #include "QueryBasket.h"
@@ -36,14 +40,21 @@
 #include "GrabLog.h"
 #include "LogOnStump.h"
 #include "ChopLog.h"
+#include "AgreeEscort.h"
+#include "RefuseEscort.h"
+#include "KillWolf.h"
 
-#include "Punch.h"
-#include "Hug.h"
-#include "Insult.h"
-#include "Apologize.h"
-#include "Intervene.h"
 #include "Greet.h"
+#include "Hug.h"
+#include "Kiss.h"
+#include "Apologize.h"
+#include "Thank.h"
+#include "Forgive.h"
+#include "Reprimand.h"
 
+#include "Insult.h"
+#include "Punch.h"
+#include "Intervene.h"
 
 //#include <string>
 #include <list>
@@ -75,9 +86,11 @@ public:
 	virtual void AddAction(string ActionName);
 	virtual void AddAction(string ActionName, Actor* target);
 	virtual void AddAction(string ActionName, Stage* location_);
+	//virtual void AddAction(string ActionName, Actor* target, Stage* location_);
 	virtual void AddLocation(string locName){}
 
 	virtual void RemoveAction(string ActionName);
+	virtual void RemoveAction(string ActionName, Actor* target);
 
 	vector<Action*> Get_AvailableActions() { return availableActions; }
 	int Get_NumActions() { return availableActions.size(); }
@@ -87,7 +100,7 @@ public:
 	virtual void Plan(string action);
 	virtual void Plan(string action, Actor* object){}
 	virtual void Plan(string action, Stage* l, int moments = 1){}
-	virtual void Plan(string action, Actor*, Actor*){}
+	//virtual void Plan(string action, int m = 1, Actor* o = nullptr, Stage* s = nullptr){}
 
 	string GetName() { return name; }
 	int GetID() { return ID; }

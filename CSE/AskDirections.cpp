@@ -24,16 +24,6 @@ void AskDirections::Init()
 {
 	verb = "AskDirections";
 
-	//effect
-	WorldStateProperty effect1, effect2, effect3;
-	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_AskDirections);
-	effects.push_back(effect1);
-
-	// conditions
-	WorldStateProperty condition1;
-	//condition1.SetWSProperty(WSP_Location, WST_variable);
-	//conditions.push_back(condition1);
-
 }
 
 std::string AskDirections::GetSentence()

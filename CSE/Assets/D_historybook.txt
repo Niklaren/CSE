@@ -1,9 +1,38 @@
 fate Begin path.    Unfortunately your Grandmother fell ill recently. You prepared a lunch for you both to share.
-You WalkPath path.    after walking down the path a bit you think you see grandma's lodge.
+You Stray Off Path path.    You leaves the area.
+You Arrive forest.    You arrives at forest
+Wolf WolfGreetRed You at forest.    A Wolf comes towards you through the trees. He speaks: hello stranger. Odd to see someone travelling alone through here.
+You Greet Wolf at forest.    You move on over to the wolf and say hi.
+Wolf QueryIdentity You at forest.    And just who are you then?
+You AskDirections Wolf at forest.    You ask for the way to grandma's house
+Wolf GiveWrongDirections You at forest.    If you keep going this way I'm sure you'll make it.
+Wolf QueryPurpose You at forest.    Why are you out in the forest, alone?
+You Answer Wolf at forest.    You explain that your grandma is ill and you must deliver her food.
+Wolf QueryBasket You at forest.    What's in the basket? food?
+You Answer Wolf at forest.    You tell the wolf the basket you carry contains food.
+Wolf SuggestFlowers You at forest.    wouldn't it be nice to pick some flowers to give to your grandmother?
+Wolf Travel forest.    Wolf leaves the area.
+Wolf Arrive lodge.    Wolf arrives at lodge
+You Pick Flowers forest.    You spend a little time choosing & picking the nicest flowers.
+Wolf RequestEntry Grandma at lodge.    Wolf: May I come in?
+Wolf WolfEatGrandma Grandma at lodge.    Wolf slurps down Grandma
+You Travel forest.    You leaves the area.
+You Arrive cabin.    You arrives at cabin
+Grandma OpenDoor offStage.    Granny unlocks the door and opens it slowly.
 Lumberjack GrabLog cabin.    Lumberjack grabs a log from the pile.
-You Observe path.    Despite the pleasant scenery of the woodland trail you can't help but feel uneasy, as if being watched.
 Lumberjack LogOnStump cabin.    Lumberjack places the log atop the wide tree stump.
-You  path.    Time to go home, you think.
 Lumberjack ChopLog cabin.    Lumberjack Chops the log and tosses the pieces on the pile
-fate End offStage.    you decided to scrap the whole thing and go home.
+Lumberjack GrabLog cabin.    Lumberjack grabs a log from the pile.
+You Give Flowers Lumberjack at cabin.    You give the lumberjack the Flowers.
+Lumberjack LogOnStump cabin.    Lumberjack places the log atop the wide tree stump.
+You AskDirections Lumberjack at cabin.    You ask for the way to grandma's house
+Lumberjack GiveDirections You at cabin.    Head out down that path, its not too far
+You RequestEscort Lumberjack at cabin.    You explain you run in with the wolf, and ask if the lumberjack would be willing to accompany you back to Grandma's house.
+Lumberjack AgreeEscort You at cabin.    The Lumberjack thinks for a moment, then agrees to go with you to be sure you're safe.
+You Travel cabin.    You leaves the area.
+You Arrive lodge.    You arrives at lodge
+Lumberjack Travel cabin.    Lumberjack leaves the area.
+Lumberjack Arrive lodge.    Lumberjack arrives at lodge
+Lumberjack KillWolf Wolf at lodge.    The Lumberjack slices the wolf with his axe, killing it.
+fate End offStage.    The Lumberjack slew the wolf.
 The End.

@@ -36,7 +36,7 @@ void SuggestFlowers::Init()
 
 std::string SuggestFlowers::GetSentence()
 {
-	return "wouldn't it be nice to pick some flowers for her?";
+	return "wouldn't it be nice to pick some flowers to give to your grandmother?";
 }
 
 bool SuggestFlowers::GetUsable()
@@ -49,7 +49,7 @@ bool SuggestFlowers::GetUsable()
 void SuggestFlowers::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
-	object->AddAction("Pick Flowers");
+	//object->AddAction("Pick Flowers");
 }
 
 void SuggestFlowers::EmotionalReaction(NPC_Actor* affectingActor)

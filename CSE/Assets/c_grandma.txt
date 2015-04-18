@@ -1,22 +1,22 @@
 name = Grandma
 image = Assets/i_grandma.png
 x = 300
-y = 200
+y = 280
 
 angry = 0.0
 happy = 0.0
 
-sAgreeable = -0.4
-sConscientious = -0.3
+sAgreeable = -0.3
+sConscientious = 0.3
 sExtraverted = -0.1
 sNeurotic = -0.5
 sOpen = 0.1
 
-pRedAgreeable = 0.7
-pRedConscientious = 0.2
-pRedExtraverted = 0.0
+pRedAgreeable = 0.55
+pRedConscientious = -0.1
+pRedExtraverted = 0.1
 pRedNeurotic = 0.0
-pRedOpen = 0.0
+pRedOpen = 0.2
 
 pWolfAgreeable = -0.6
 pWolfConscientious = -0.2

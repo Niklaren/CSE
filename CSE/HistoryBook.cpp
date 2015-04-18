@@ -32,7 +32,7 @@ HistoryBook::~HistoryBook()
 {
 }
 
-void HistoryBook::EventHappened(Action* newestEvent_)
+void HistoryBook::ExecuteAction(Action* newestEvent_)
 {
 	Action* event = newestEvent_;
 	eventHistory.push_back(event);
@@ -45,6 +45,24 @@ int HistoryBook::TimeElapsedSince(std::string event)
 {
 	for (unsigned i = eventHistory.size(); i-- > 0;){
 		if (eventHistory[i]->GetVerb() == event)
+			return eventHistory[i]->MomentsSinceExecution();
+	}
+	return -1;
+}
+
+int HistoryBook::TimeElapsedSince(std::string event, Actor* a)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Subject() == a)
+			return eventHistory[i]->MomentsSinceExecution();
+	}
+	return -1;
+}
+
+int HistoryBook::TimeElapsedSince(std::string event, Stage* s)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Location() == s)
 			return eventHistory[i]->MomentsSinceExecution();
 	}
 	return -1;
@@ -87,6 +105,15 @@ bool HistoryBook::EventJustHappened(std::string event)
 {
 	for (unsigned i = eventHistory.size(); i-- > 0;){
 		if (eventHistory[i]->MomentsSinceExecution() == 0 && eventHistory[i]->GetVerb() == event)
+			return true;
+	}
+	return false;
+}
+
+bool HistoryBook::EventEverHappened(std::string event)
+{
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if (eventHistory[i]->GetVerb() == event)
 			return true;
 	}
 	return false;

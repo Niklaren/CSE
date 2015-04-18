@@ -251,6 +251,19 @@ void NPC_Actor::RemoveCurrentGoal()
 	}
 }
 
+void NPC_Actor::RemoveGoal(string toRemove)
+{
+	for (unsigned i = goals.size(); i-- > 0;){
+		if (goals[i].GetName() == toRemove){
+			if (goals[i] == current){
+				current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
+				current.SetRelevance(0);
+			}
+			goals.erase(goals.begin() + i);
+		}
+	}
+}
+
 bool NPC_Actor::IsGoalComplete()
 {
 	if (ws->MeetsWorldState(current))
@@ -266,13 +279,18 @@ void NPC_Actor::ClearPlans()
 void NPC_Actor::RePlan()
 {
 	ClearPlans();
-	//std::vector<Action*> newplan = planner->Plan(this, *ws, current);
+	
 	std::vector<Action*> newplan;
+
 	if (planner->Plan(this, newplan, *ws, current)){
 		for (unsigned i = 0; i < newplan.size(); i++){
 			//Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
 			Plan(newplan[i], 1 + i);
 		}
+	}
+	else{
+		//no plan
+		RemoveCurrentGoal();
 	}
 }
 
@@ -309,12 +327,24 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new Punch(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Hug")
 		plans.push_back(new Hug(this, action->Get_Object(), moments));
-	else if (action->GetVerb() == "WolfGreetRed")
-		plans.push_back(new WolfGreetRed(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Greet")
+		plans.push_back(new Greet(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Thank")
+		plans.push_back(new Thank(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Kiss")
+		plans.push_back(new Kiss(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Forgive")
+		plans.push_back(new Forgive(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "Reprimand")
+		plans.push_back(new Reprimand(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "SuggestFlowers")
 		plans.push_back(new SuggestFlowers(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "GiveDirections")
 		plans.push_back(new GiveDirections(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "GiveWrongDirections")
+		plans.push_back(new GiveWrongDirections(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "WolfGreetRed")
+		plans.push_back(new WolfGreetRed(this, action->Get_Object(), moments));
 	if (action->GetVerb() == "QueryIdentity")
 		plans.push_back(new QueryIdentity(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "QueryPurpose")
@@ -329,9 +359,19 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new RequestEntry(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Intimidate")
 		plans.push_back(new Intimidate(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "RefuseEscort")
+		plans.push_back(new RefuseEscort(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "AgreeEscort")
+		plans.push_back(new AgreeEscort(this, action->Get_Object(), moments));
+	else if (action->GetVerb() == "KillWolf")
+		plans.push_back(new KillWolf(this, action->Get_Object(), moments));
 	else{
 		//error
 	}
+
+	//Action* a = action;
+	//a->AddExecutiontime(moments);
+	//plans.push_back(a);
 }
 
 void NPC_Actor::Plan(string action, Stage* l, int moments)
@@ -371,14 +411,18 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 	if (action == "QueryBasket")
 		plans.push_back(new QueryBasket(this, object_, moments));
 	else if (action == "WolfGreetRed")
-		plans.push_back(new Greet(this, object_, moments));
+		//plans.push_back(new GreetRed(this, object_, moments));
+		plans.push_back(new WolfGreetRed(this, object_, moments));
 	else if (action == "SuggestFlowers")
 		plans.push_back(new SuggestFlowers(this, object_, moments));
 	else if (action == "WolfEat")
 		plans.push_back(new WolfEat(this, object_, moments));
 	else if (action == "RequestEntry")
 		plans.push_back(new RequestEntry(this, object_, moments));
-
+	else if (action == "RefuseEscort")
+		plans.push_back(new RefuseEscort(this, object_, moments));
+	else if (action == "AgreeEscort")
+		plans.push_back(new AgreeEscort(this, object_, moments));
 	else{
 		//error
 	}

@@ -85,6 +85,9 @@ void Engine::Operate()
 		// check termination conditions
 		Fate->CheckForPlanning();
 
+		// reset 'reaction' world property
+		worldstate.WSProperties[WSP_ReactToWorldStateEvent].SetValue(WSE_Invalid);
+
 		//  plans execute
 		for (unsigned actor_iter(0); actor_iter < actors.size(); actor_iter++){ // every actor in Actors[]
 
@@ -100,7 +103,7 @@ void Engine::Operate()
 					// yes? continue to execute plan
 
 					// store in history books
-					historyBook.EventHappened(actors[actor_iter]->GetPlan(plan_iter));
+					historyBook.ExecuteAction(actors[actor_iter]->GetPlan(plan_iter));
 					
 					// execute consequences
 					//!!!!!!!!!!!!!!!! LOOK INTO THIS
@@ -155,6 +158,9 @@ void Engine::Operate()
 			}
 		}
 
+		if (Protagonist->GetNumPlans() > 0)
+			playerAct = false;
+
 		Protagonist->SetAvailableCharacters(NPCs);
 
 		Protagonist->menu.Reset(Protagonist->Get_AvailableActions(), Protagonist->Get_AvailableLocations(), Protagonist->Get_AvailableCharacters());
@@ -190,6 +196,9 @@ void Engine::GetUserInput()
 		}
 		else if (action == "Continue Forward"){
 			Protagonist->Plan("Travel", cabin);
+		}
+		else if (action == "Flee"){
+			Protagonist->Plan("Flee", cabin);
 		}
 		else if (action == "Knock Door"){
 			Protagonist->Plan("Knock Door", Grandma);

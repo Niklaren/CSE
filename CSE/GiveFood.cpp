@@ -50,10 +50,8 @@ void GiveFood::ExecuteConsequences(WorldState* ws)
 
 	subject->RemoveAction("Give Food");
 
-	if (object->GetName() == "Wolf"){
-		ws->WSProperties[WSP_WolfHasLunch].SetValue(true);
-		//ws->WSProperties[WSP_WolfHungry].SetValue(false);
-	}
+	ws->WSProperties[WSP_WolfHasLunch].SetValue(true);
+
 	if (object->GetName() == "Grandma")
 		ws->WSProperties[WSP_LunchDelivered].SetValue(true);
 
@@ -61,7 +59,13 @@ void GiveFood::ExecuteConsequences(WorldState* ws)
 
 void GiveFood::EmotionalReaction(NPC_Actor* affectingActor)
 {
-	if (affectingActor == subject){
+	if (affectingActor == object){
+		affectingActor->Change_pAgreeable(0.075, subject->GetID());
 
+		if (object->GetName() == "Grandma")
+			affectingActor->Change_pConscientious(0.1, subject->GetID());
+
+		else if (object->GetName() == "Wolf")
+			affectingActor->Change_Angry(-0.1);
 	}
 }

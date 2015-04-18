@@ -3,49 +3,28 @@
   <Class Name="Action" Collapsed="true">
     <Position X="1.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAgAEAACAAMQoAAgABABCEEEAAjEEgAAACBACQQAY=</HashCode>
+      <HashCode>AgAAgAEAACAAEQoAAgABABCEEFAAjEEgEQACFAiYQJQ=</HashCode>
       <FileName>Action.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BeginStory" Collapsed="true">
     <Position X="0.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAgAAAAAAACAAAAAAAAQAAAAAABAEAAAAAAAAQAAA=</HashCode>
+      <HashCode>AgAAgAAAAAAACAAAAAAAAQAAAAAABAAAAAAAAAAQAAA=</HashCode>
       <FileName>BeginStory.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BuildStove" Collapsed="true">
-    <Position X="0.5" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgAAgAAAAAAAAAAAAAAAAIAAAAAABAEAAAACgAAAAAA=</HashCode>
-      <FileName>BuildStove.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CookBad" Collapsed="true">
-    <Position X="0.5" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgAAgAAAAAAAAAAAAAACAAAAAAAABAFAAAACAAAAAAA=</HashCode>
-      <FileName>CookBad.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CookGood" Collapsed="true">
-    <Position X="2.5" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AoAAgAAAAAAAAAAAAAAAACAAAAAABAEAAAACAAAAAAA=</HashCode>
-      <FileName>CookGood.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Actor" Collapsed="true">
     <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAgAAgQAEAAAAAAAAAABGAAABAAAAABAABAA=</HashCode>
+      <HashCode>AIAYAAiCAgAAgQAEARAAgABCAAxGAAABAAIIABAkBAA=</HashCode>
       <FileName>Actor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NPC_Actor" Collapsed="true">
     <Position X="6.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IIhAQOgQQpCEI4IIBBjBAADGgDAAEjAZCQKsAGAgFKA=</HashCode>
+      <HashCode>AAhAQOgQQpCEA4IABAjBAgBEgDAAEhAJAQCkAGAgEKA=</HashCode>
       <FileName>NPC_Actor.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -61,7 +40,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAQAQAAAAAAAAAAAAAAAAABAIAAAAAABAA=</HashCode>
+      <HashCode>ACCAAAAAAAAQEQAAABABAAhAAAgAAAABAIIAAAAmAAA=</HashCode>
       <FileName>Player_Actor.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -82,28 +61,28 @@
   <Class Name="Planner" Collapsed="true">
     <Position X="7.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAEAAAAAABAAAAAYAAAAA=</HashCode>
+      <HashCode>AAAAAAgQAAAAAAAAEAAAAEAAEAAAAAABAQAAAYAAAAA=</HashCode>
       <FileName>Planner.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WorldState" Collapsed="true">
     <Position X="10.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCABAAAAAAEAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQGABAAAAAAEAQ=</HashCode>
       <FileName>WorldState.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Engine" Collapsed="true">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQABBAmAAAQAgAAAgIAEBAgAIBACABAABADCgAAAAAA=</HashCode>
+      <HashCode>QQABBACAAAQAAAACgIEChAgBIBACABAABADGgAIQACA=</HashCode>
       <FileName>Engine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HistoryBook" Collapsed="true">
     <Position X="5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AUIAAACAAgBAAgAAAAAADAIAABAAAgAAAAAAAAQIAAQ=</HashCode>
+      <HashCode>AUJBAQCAQgBCAgAAAAAADAIAABAAAgAEAAAAAIQIAAQ=</HashCode>
       <FileName>HistoryBook.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -117,21 +96,21 @@
   <Class Name="Menu" Collapsed="true">
     <Position X="13" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAABABgAgAAAAAAABAAAIAgAQAAAAAAAAAAA=</HashCode>
+      <HashCode>AEAFAQCAAABABgAgAAACAAABAAAIQgAQAACAAIA0AAA=</HashCode>
       <FileName>Menu.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Option" Collapsed="true">
     <Position X="13" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAACAAAAgEAAAAACAAAABAFAgAAAAAAQAAABAA=</HashCode>
+      <HashCode>AAAAAAAACAAAEhEAAAQACAAAABANAgEEAYAAQMAABAA=</HashCode>
       <FileName>Option.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="WorldStateProperty" Collapsed="true">
     <Position X="8.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAEAAQAAAAAAQAIgAAAAEAAgQAgAAAAAAA=</HashCode>
+      <HashCode>AAAaAAAAAAAEAgQAAAAAAQAIgAAAAEAAgQAgAAAAAAA=</HashCode>
       <FileName>WorldStateProperty.h</FileName>
     </TypeIdentifier>
   </Struct>
@@ -145,14 +124,14 @@
   <Enum Name="eWorldStateEvents" Collapsed="true">
     <Position X="10" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ARAAEAAQAAAAABAAAAAAAAAAAAARAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QRAAEAAQAAAAABAAAAAIAAAAQAARAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WorldStateProperty.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eWorldStateProperties_Key" Collapsed="true">
     <Position X="10" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AhAAAAAgAAIAAAAAAAAACAIAQCAAADAAACAAAAAAIAA=</HashCode>
+      <HashCode>ABAgABAAAgAAAAigAAACAAIAIAAgADAgCIBBAIEAQAQ=</HashCode>
       <FileName>WorldStateProperty.h</FileName>
     </TypeIdentifier>
   </Enum>

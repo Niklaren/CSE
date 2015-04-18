@@ -56,7 +56,7 @@ void RequestEntry::EmotionalReaction(NPC_Actor* affectingActor)
 
 	}
 	else if (affectingActor == object){
-		Goal g(0.7f);
+		Goal g(0.7f, "openDoor");
 		g.SetWSProperty(WSP_DoorOpen, WST_bool, true);
 		affectingActor->AddGoal(g);
 	}

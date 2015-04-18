@@ -41,32 +41,36 @@ void Hug::Init()
 std::string Hug::GetSentence()
 {
 	if (subject->GetName() == "You"){
-		if (object->GetName() == "Ash")
-			return "You give Ash a hug.";
-		else if (object->GetName() == "Brooke")
-			return "You give Brooke a hug.";
+		if (object->GetName() == "Grandma")
+			return "You hug grandma tightly.";
 	}
-	else if (subject->GetName() == "Ash"){
-		return "Ash hugs you tightly.";
-	}
-	else{
-		return "Brooke hugs you.";
+	else if (subject->GetName() == "Grandma"){
+		if (object->GetName() == "You")
+			return "Grandma embraces you warmly.";
 	}
 	return "hugs!!!";
 }
 
 void Hug::ExecuteConsequences(WorldState* ws)
 {
+	Action::ExecuteConsequences(ws);
 
+	subject->RemoveAction("Hug");
+	if (subject->GetName() != "You")
+		ws->WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Hug);
 }
 
 void Hug::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
-
+		affectingActor->Change_pAgreeable(0.15,subject->GetID());
+		affectingActor->Change_pExtraverted(0.1,subject->GetID());
+		affectingActor->Change_Angry(-0.1);
+		affectingActor->Change_Happy(0.1);
 	}
 	if (affectingActor == subject){
-
+		affectingActor->Change_Happy(0.05);
+		affectingActor->Change_pAgreeable(0.1, object->GetID());
 	}
 }
 
@@ -75,8 +79,6 @@ float Hug::NPC_CalculateInclination()
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Extraverted();
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
-	double r = Blend(a, b, w) / 2;
-	if (!(subject->GetHistory()->HaventDoneEventBefore(object, "Hug")))	// if the object has hugged during the history we
-		r += 0.1;														// may be more inclined to hug
+	double r = Blend(a, b, w);
 	return r;
 }

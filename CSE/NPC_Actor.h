@@ -52,9 +52,11 @@ public:
 	
 	void SetWorldState(WorldState* w) { ws = w; }
 	void SetPlanner(Planner* p) { planner = p; }
+
 	void AddGoal(Goal);
 	bool AcquireGoal();
 	void RemoveCurrentGoal();
+	void RemoveGoal(string toRemove);
 	bool IsGoalComplete();
 	int GetNumGoals() { return goals.size(); }
 
@@ -63,6 +65,7 @@ public:
 	virtual void Plan(Action*, int );
 	virtual void Plan(string verb, int moments, Actor* target);
 	virtual void Plan(string action, Stage* l, int moments = 1);
+	//virtual void Plan(string action, int m = 1, Actor* t = nullptr, Stage* l = nullptr);
 
 	void CoolMoods();
 	void Change_Happy(double);

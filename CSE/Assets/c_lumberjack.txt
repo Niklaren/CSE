@@ -1,18 +1,18 @@
 name = Lumberjack
 image = Assets/i_lumberjack.png
 x = 150
-y = 200
+y = 300
 
 angry = 0.0
 happy = 0.0
 
-sAgreeable = 0.2
-sConscientious = 0.5
-sExtraverted = -0.2
+sAgreeable = 0.1
+sConscientious = 0.4
+sExtraverted = -0.35
 sNeurotic = -0.0
 sOpen = -0.1
 
-pRedAgreeable = 0.2
+pRedAgreeable = 0.0
 pRedConscientious = -0.2
 pRedExtraverted = 0.0
 pRedNeurotic = 0.0

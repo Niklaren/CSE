@@ -37,6 +37,8 @@ void Apologize::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 
 	ws->WSProperties[WSP_DeliveryFailed].SetValue(true);
+
+	subject->RemoveAction("Apologize");
 }
 
 void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
@@ -47,6 +49,11 @@ void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
 		g.SetRelevance(0.7f);
 		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
 		affectingActor->AddGoal(g);
+
+		affectingActor->Change_pConscientious(-0.3, object->GetID());
+		affectingActor->Change_pAgreeable(-0.1, object->GetID());
+		affectingActor->Change_Agreeable(-0.1);
+		affectingActor->Change_Angry(0.1);
 	}
 	if (affectingActor == subject){
 

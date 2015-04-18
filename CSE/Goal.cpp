@@ -4,19 +4,21 @@
 
 Goal::Goal()
 {
-	Relevance = 0.0f;
+	relevance = 0.0f;
 }
 
-Goal::Goal(float r)
+Goal::Goal(float r, string name_)
 {
 	if ((r >= 0) && (r <= 1))
-		Relevance = r;
+		relevance = r;
+
+	name = name_;
 }
 
 Goal::Goal(float r, NPC_Actor* t)
 {
 	if ((r >= 0) && (r<=1))
-		Relevance = r;
+		relevance = r;
 	target = t;
 }
 
@@ -27,12 +29,12 @@ Goal::~Goal()
 void Goal::SetGoal(Goal other)
 {
 	SetWSProperty(&other);
-	Relevance = other.Relevance;
+	relevance = other.relevance;
 	target = other.target;
 }
 
 float Goal::CalculateRelevance()
 {
-	return Relevance;
+	return relevance;
 }
 

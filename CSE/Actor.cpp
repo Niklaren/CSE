@@ -63,6 +63,8 @@ void Actor::AddAction(string action, Actor* object_ = NULL)
 		availableActions.push_back(new WolfGreetRed(this, object_, 0));
 	else if (action == "GiveDirections")
 		availableActions.push_back(new GiveDirections(this, object_, 0));
+	else if (action == "GiveWrongDirections")
+		availableActions.push_back(new GiveWrongDirections(this, object_, 0));
 	else if (action == "QueryIdentity")
 		availableActions.push_back(new QueryIdentity(this, object_, 0));
 	else if (action == "QueryPurpose")
@@ -77,6 +79,24 @@ void Actor::AddAction(string action, Actor* object_ = NULL)
 		availableActions.push_back(new Intimidate(this, object_, 0));
 	else if (action == "SuggestFlowers")
 		availableActions.push_back(new SuggestFlowers(this, object_, 0));
+	else if (action == "Greet")
+		availableActions.push_back(new Greet(this, object_, 0));
+	else if (action == "Thank")
+		availableActions.push_back(new Thank(this, object_, 0));
+	else if (action == "Hug")
+		availableActions.push_back(new Hug(this, object_, 0));
+	else if (action == "Kiss")
+		availableActions.push_back(new Kiss(this, object_, 0));
+	else if (action == "Forgive")
+		availableActions.push_back(new Forgive(this, object_, 0));
+	else if (action == "Reprimand")
+		availableActions.push_back(new Reprimand(this, object_, 0));
+	else if (action == "RefuseEscort")
+		availableActions.push_back(new RefuseEscort(this, object_, 0));
+	else if (action == "AgreeEscort")
+		availableActions.push_back(new AgreeEscort(this, object_, 0));
+	else if (action == "KillWolf")
+		availableActions.push_back(new KillWolf(this, object_, 0));
 }
 
 void Actor::RemoveAction(string action)
@@ -86,6 +106,15 @@ void Actor::RemoveAction(string action)
 	for (unsigned i = availableActions.size(); i-- > 0;)
 	{
 		if (availableActions[i]->GetVerb() == action)
+			availableActions.erase(availableActions.begin() + i);
+	}
+}
+
+void Actor::RemoveAction(string action, Actor* object_)
+{
+	for (unsigned i = availableActions.size(); i-- > 0;)
+	{
+		if ((availableActions[i]->GetVerb() == action) && (availableActions[i]->Get_Object() == object_))
 			availableActions.erase(availableActions.begin() + i);
 	}
 }

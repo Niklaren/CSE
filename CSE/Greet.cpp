@@ -28,8 +28,6 @@ void Greet::Init()
 	WorldStateProperty effect1, effect2, effect3;
 	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
 	effects.push_back(effect1);
-	effect2.SetWSProperty(WSP_Greeting, WST_bool, true);
-	effects.push_back(effect2);
 
 	// conditions
 	WorldStateProperty condition1;
@@ -42,18 +40,24 @@ std::string Greet::GetSentence()
 {
 	if (subject->GetName() == "You"){
 		if (object->GetName() == "Wolf")
-			return "You acknowledge the wolf.";
+			return "You move on over to the wolf and say hi.";
 		else if (object->GetName() == "Grandma")
 			return "Hello grandma.";
 		else if (object->GetName() == "Lumberjack")
-			return "You attract the lumberjack's attention.";
+			return "You introduce yourself to the lumberjack.";
+	}
+	if (subject->GetName() == "Grandma"){
+		return "Hello dearie.";
+	}
+	if (subject->GetName() == "Lumberjack"){
+		return "The lumberjack says hello.";
 	}
 	return "Greetings";
 }
 
 bool Greet::GetUsable()
 {
-	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
+	if (!(subject->GetHistory()->HaventDoneEventToTargetBefore(subject, object, verb))) // if we've done it before
 		return false;
 	return true;
 }
@@ -62,16 +66,18 @@ void Greet::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 	subject->RemoveAction("Greet");
+	if (subject->GetName() != "You")
+		ws->WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
 }
 
 void Greet::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
-		//Goal g;
-		//g.SetRelevance(0.7f);
-		//g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
-		//affectingActor->AddGoal(g);
-		affectingActor->Change_pAgreeable(0.15, subject->GetID());
+		Goal g;
+		g.SetRelevance(0.7f);
+		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+		affectingActor->AddGoal(g);
+		affectingActor->Change_pAgreeable(0.1, subject->GetID());
 		affectingActor->Change_Extraverted(0.01);
 	}
 	if (affectingActor == subject){

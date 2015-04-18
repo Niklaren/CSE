@@ -40,13 +40,14 @@ void GiveDirections::Init()
 
 std::string GiveDirections::GetSentence()
 {
-	return "If you keep going this way I'm sure you'll make it.";
+	if (subject->GetName() == "Wolf")
+		return "Well, there's a lodge back down th path if you turn back.";
+	else
+		return "Head out down that path, its not too far";
 }
 
 bool GiveDirections::GetUsable()
 {
-	if (!(subject->GetHistory()->HaventDoneEventBefore(subject, verb))) // if we've done it before
-		return false;
 	return true;
 }
 
@@ -55,6 +56,8 @@ void GiveDirections::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 	ws->WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_AskDirections);
 	
+	if (object->GetName() == "You" && subject->GetName() == "Lumberjack")
+		object->AddAction("Go To Lodge");
 }
 
 void GiveDirections::EmotionalReaction(NPC_Actor* affectingActor)
@@ -69,9 +72,9 @@ void GiveDirections::EmotionalReaction(NPC_Actor* affectingActor)
 
 float GiveDirections::NPC_CalculateInclination()
 {
-	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
-	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
+	double a = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
+	double b = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double w = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
-	double result = Blend(a, b, -w);
+	double result = Blend(a, b, w);
 	return float(result);
 }

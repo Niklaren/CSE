@@ -39,6 +39,8 @@ void Player_Actor::AddAction(string action)
 	//	s_availableActions.push_back("Eat");
 	//else if (action == "Answer")
 	//	s_availableActions.push_back("Answer");
+	//else if (action == "Ask Directions")
+	//	s_availableActions.push_back("Ask Directions");
 	//else if (action == "Give Food")
 	//	s_availableActions.push_back("Give Food");
 	//else if (action == "Greet")
@@ -49,6 +51,9 @@ void Player_Actor::AddAction(string action)
 	//	s_availableActions.push_back("Insult");
 	//else if (action == "Punch")
 	//	s_availableActions.push_back("Punch");
+	//else if (action == "Continue Forward")
+	//	s_availableActions.push_back("Continue Forward");
+
 }
 
 void Player_Actor::RemoveAction(string action)
@@ -136,8 +141,12 @@ void Player_Actor::Plan(string action, Actor* object_)
 		plans.push_back(new Ignore(this, object_, 1));
 	else if (action == "Give Food")
 		plans.push_back(new GiveFood(this, object_, 1));
+	else if (action == "Give Flowers")
+		plans.push_back(new GiveFlowers(this, object_, 1));
 	else if (action == "Ask Directions")
 		plans.push_back(new AskDirections(this, object_, 1));
+	else if (action == "Request Escort")
+		plans.push_back(new RequestEscort(this, object_, 1));
 	else{
 		//error
 	}
@@ -161,4 +170,7 @@ void Player_Actor::Plan(string action, Stage* l, int moments)
 		plans.push_back(new Arrive(this, l, moments));
 	else if (action == "Stray Off Path")
 		plans.push_back(new Travel(this, l, moments, "Stray Off Path"));
+	else if (action == "Flee"){
+		plans.push_back(new Flee(this, l, 1));
+	}
 }

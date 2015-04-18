@@ -15,10 +15,10 @@ Menu::Menu()
 	AddOption("Lumberjack", Type_Character,		1,		3, 0);
 	AddOption("Grandma", Type_Character,		1,		4, 0);
 
-	//AddOption("forest", Type_Location,			1,		0, 1);
-	//AddOption("cabin", Type_Location,			1,		1, 1);
-	//AddOption("lodge", Type_Location,			1,		2, 1);
-	//AddOption("path", Type_Location,			1,		3, 1);
+	/*AddOption("forest", Type_Location,			1,		0, 1);
+	AddOption("cabin", Type_Location,			1,		1, 1);
+	AddOption("lodge", Type_Location,			1,		2, 1);
+	AddOption("path", Type_Location,			1,		3, 1);*/
 
 	//AddOption("Travel", Type_ActLocation,	0, 2, 2);
 	AddOption("Go Home", Type_Act0Target,		2);
@@ -29,18 +29,21 @@ Menu::Menu()
 
 	AddOption("Greet", Type_Act1Target,			2);
 	AddOption("Answer", Type_Act1Target,		2);
-	AddOption("Walk Away", Type_Act0Target,		2);
 	AddOption("Ignore", Type_Act1Target,		2);
+	AddOption("Walk Away", Type_Act0Target,		2);
+	AddOption("Flee", Type_Act0Target,			2);
 	AddOption("Ask Directions", Type_Act1Target,3);
 	AddOption("Turn Back", Type_Act0Target,		3);
-	//AddOption("Continue Forward", Type_Act0Target, 3);
-	AddOption("Pick Flowers", Type_Act0Target,	2);
+	AddOption("Continue Forward", Type_Act0Target, 4);
+	AddOption("Pick Flowers", Type_Act0Target,	3);
+	AddOption("Give Flowers", Type_Act1Target,	3);
+	AddOption("Request Escort", Type_Act1Target,4);
 
 	AddOption("Knock Door", Type_Act0Target,	3);
 	AddOption("Enter Lodge", Type_Act0Target,	2);
 	AddOption("Give Food", Type_Act1Target,		2);
 	AddOption("Apologize", Type_Act1Target,		2);
-	
+	AddOption("Hug", Type_Act1Target,			1);
 	
 
 	//AddOption("Hug", Type_Act1Target,		0, , 1);

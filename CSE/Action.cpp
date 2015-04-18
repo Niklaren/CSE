@@ -51,7 +51,7 @@ bool Action::ReadyToExecute()
 	if (locationOccured != nullptr){
 		if ((subject->GetLocation() != locationOccured) && (subject->GetName() != "fate")){
 			subject->Wait(1);
-			subject->Plan("Travel", object->GetLocation(), 0);
+			subject->Plan("Travel", locationOccured, 0);
 			return false;
 		}
 	}

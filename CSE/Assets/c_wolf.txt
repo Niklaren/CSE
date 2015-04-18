@@ -1,7 +1,7 @@
 name = Wolf
 image = Assets/i_wolf.png
 x = 0
-y = 200
+y = 250
 
 angry = 0.0
 happy = 0.0

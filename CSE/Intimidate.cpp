@@ -31,8 +31,8 @@ void Intimidate::Init()
 
 	// conditions
 	WorldStateProperty condition1;
-	condition1.SetWSProperty(WSP_WolfGreetRed, WST_bool, true);
-	conditions.push_back(condition1);
+	//condition1.SetWSProperty(WSP_WolfGreetRed, WST_bool, true);
+	//conditions.push_back(condition1);
 
 }
 
@@ -53,6 +53,8 @@ void Intimidate::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 
 	ws->WSProperties[WSP_RedPanicked].SetValue(true);
+
+	object->AddAction("Flee");
 }
 
 void Intimidate::EmotionalReaction(NPC_Actor* affectingActor)

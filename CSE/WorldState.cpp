@@ -10,18 +10,23 @@ WorldState::WorldState()
 	WSProperties[WSP_RedHome].SetWSProperty(WSP_RedHome, WST_bool, false);
 	WSProperties[WSP_LunchDelivered].SetWSProperty(WSP_LunchDelivered, WST_bool, false);
 	WSProperties[WSP_DeliveryFailed].SetWSProperty(WSP_DeliveryFailed, WST_bool, false);
+	WSProperties[WSP_Forgiven].SetWSProperty(WSP_Forgiven, WST_bool, false);
+	WSProperties[WSP_Reprimanded].SetWSProperty(WSP_Reprimanded, WST_bool, false);
 	WSProperties[WSP_WolfGreetRed].SetWSProperty(WSP_WolfGreetRed, WST_bool, false);
 	//wsp_greeting
 	WSProperties[WSP_QueryRed].SetWSProperty(WSP_QueryRed, WST_int, 0);
 	WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, true);
+	WSProperties[WSP_WolfDead].SetWSProperty(WSP_WolfDead, WST_bool, false);
 	WSProperties[WSP_WolfHasLunch].SetWSProperty(WSP_WolfHasLunch, WST_bool, false);
 	WSProperties[WSP_WolfKnowsGrandma].SetWSProperty(WSP_WolfKnowsGrandma, WST_bool, false);
 	WSProperties[WSP_RedPanicked].SetWSProperty(WSP_RedPanicked, WST_bool, false);
 	WSProperties[WSP_RedDistracted].SetWSProperty(WSP_RedDistracted, WST_bool, false);
 	WSProperties[WSP_RedEaten].SetWSProperty(WSP_RedEaten, WST_bool, false);
 	WSProperties[WSP_GrandmaEaten].SetWSProperty(WSP_GrandmaEaten, WST_bool, false);
+	WSProperties[WSP_HaveEscort].SetWSProperty(WSP_HaveEscort, WST_bool, false);
 	WSProperties[WSP_DoorOpen].SetWSProperty(WSP_DoorOpen, WST_bool, false);
-	WSProperties[WSP_FlowersPicked].SetWSProperty(WSP_FlowersPicked, WST_bool, false);
+	WSProperties[WSP_HaveFlowers].SetWSProperty(WSP_HaveFlowers, WST_bool, false);
+	WSProperties[WSP_WrongDirections].SetWSProperty(WSP_WrongDirections, WST_bool, false);
 	WSProperties[WSP_JackHasLumber].SetWSProperty(WSP_JackHasLumber, WST_bool, false);
 	WSProperties[WSP_LumberOnStump].SetWSProperty(WSP_LumberOnStump, WST_bool, false);
 	WSProperties[WSP_LumberChopped].SetWSProperty(WSP_LumberChopped, WST_int, 0);

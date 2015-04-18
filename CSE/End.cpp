@@ -39,6 +39,10 @@ void End::ExecuteConsequences(WorldState* ws)
 	if (ws->WSProperties[WSP_LunchDelivered].bvalue == true){
 		ending = "you successfully delivered lunch.";
 	}
+
+	if (ws->WSProperties[WSP_WolfDead].bvalue == true){
+		ending = "The Lumberjack slew the wolf.";
+	}
 	
 	ws->WriteToFile();
 	subject->GetHistory()->WriteToFile();

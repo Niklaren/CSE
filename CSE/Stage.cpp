@@ -19,7 +19,6 @@ void Stage::AddLocationActions(Actor* a)
 	if (a->GetName() == "You"){
 		if (name == "path"){
 			a->AddAction("Go Home");
-			a->AddAction("Observe");
 
 			/*if (a->GetHistory()->HaventDoneEventBefore(a, "Stray Off Path"))
 				a->AddAction("Stray Off Path");*/
@@ -39,10 +38,17 @@ void Stage::AddLocationActions(Actor* a)
 		else if (name == "lodge"){
 			a->AddAction("Knock Door");
 			a->AddAction("Observe");
+			if ((!a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers")) && (a->GetHistory()->HaventDoneEventBefore(a, "Give Flowers"))){
+				a->AddAction("Give Flowers");
+			}
 		}
 		else if (name == "cabin"){
 			a->AddAction("Observe");
-			if (!(a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers"))){
+			a->AddAction("Greet");
+			a->AddAction("Ask Directions");
+			a->AddAction("Request Escort");
+			//if (ws->WSP_HaveFlowers == true)
+			if ((!a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers")) && (a->GetHistory()->HaventDoneEventBefore(a, "Give Flowers"))){
 				a->AddAction("Give Flowers");
 			}
 		}
@@ -59,13 +65,22 @@ void Stage::RemoveLocationActions(Actor* a)
 			a->RemoveAction("Go To Lodge");
 			a->AddLocation("path");
 		}
-		if (name == "forest"){
+		else if (name == "forest"){
 			a->RemoveAction("Continue Forward");
 			a->RemoveAction("Turn Back");
 			a->RemoveAction("Pick Flowers");
+			a->RemoveAction("Give Food");
+			a->RemoveAction("Flee");
 		}
-		if (name == "lodge"){
+		else if (name == "lodge"){
 			a->RemoveAction("Knock Door");
+		}
+		else if (name == "cabin"){
+			a->RemoveAction("Observe");
+			a->RemoveAction("Greet");
+			a->RemoveAction("Ask Directions");
+			a->RemoveAction("Request Escort");
+			a->RemoveAction("Go To Lodge");
 		}
 	}
 }

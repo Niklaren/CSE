@@ -35,11 +35,11 @@ void Answer::Init()
 std::string Answer::GetSentence()
 {
 	if (query == "identity")
-		return "I'm Red.";
+		return "You tell the wolf your name.";
 	if (query == "purpose")
-		return "I'm Going to Grandma's.";
+		return "You explain that your grandma is ill and you must deliver her food.";
 	if (query == "basket")
-		return "It's the Lunch I made.";
+		return "You tell the wolf the basket you carry contains food.";
 	return "answer";
 }
 

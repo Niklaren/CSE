@@ -57,7 +57,7 @@ Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int
 	}
 	else if (t == Type_Act1Target){
 		x = (5 - width_) * MENU_ELEMENT_SIZE;
-		y = (5 - width_) * MENU_ELEMENT_SIZE;
+		y = (6 - width_) * MENU_ELEMENT_SIZE;
 		width = width_ * MENU_ELEMENT_SIZE;
 	}
 
@@ -118,7 +118,7 @@ bool Option::Draw(sf::RenderWindow &window)
 		ttext.setFont(tfont);
 		ttext.setString(name);
 		ttext.setCharacterSize(20);
-		ttext.setPosition(sf::Vector2f(optionRect.left + 5, optionRect.top + 10));
+		ttext.setPosition(sf::Vector2f(optionRect.left + 3, optionRect.top + 10));
 		window.draw(ttext);
 	}
 	

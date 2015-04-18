@@ -54,6 +54,8 @@ void WolfGreetRed::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 	ws->WSProperties[WSP_WolfGreetRed].SetValue(true);
+
+	subject->RemoveAction("WolfGreetRed");
 	
 }
 
