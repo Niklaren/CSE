@@ -36,6 +36,8 @@ void Arrive::Init()
 
 std::string Arrive::GetSentence()
 {
+	if (subject->GetName() == "You")
+		return"You arrive at " + locationOccured->GetName();
 	return subject->GetName() + " arrives at " + locationOccured->GetName();
 }
 

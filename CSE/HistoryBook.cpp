@@ -16,6 +16,7 @@ HistoryBook::HistoryBook()
 	eventsText.setFont(font);
 	eventsText.setPosition(sf::Vector2f(10, 460));
 	eventsText.setCharacterSize(20);
+	eventsText.setColor(sf::Color::Black);
 
 	//eventsRect.left = 50;
 	//eventsRect.right = 400;

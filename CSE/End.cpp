@@ -25,23 +25,29 @@ void End::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 
 	if (ws->WSProperties[WSP_DeliveryFailed].bvalue)
-		ending = "you were unable to deliver lunch to grandma.";
+		ending.append("You were unable to deliver lunch to grandma. ");
 
-	if (ws->WSProperties[WSP_GrandmaEaten].bvalue)
-		ending = "the wolf had 'lunch' at grandma's.";
+	if (ws->WSProperties[WSP_Forgiven].bvalue)
+		ending.append("Grandma forgave you. ");
 
-	if (ws->WSProperties[WSP_RedEaten].bvalue)
-		ending = "you were able to deliver lunch... to the wolf..";
+	if (ws->WSProperties[WSP_Reprimanded].bvalue)
+		ending.append("Grandma did not forgive you. ");
 
 	if (ws->WSProperties[WSP_RedHome].bvalue)
-		ending = "you decided to scrap the whole thing and go home.";
+		ending.append("You decided to scrap the whole thing and go home. ");
+
+	if (ws->WSProperties[WSP_GrandmaEaten].bvalue)
+		ending.append("The wolf ate grandma for lunch. ");
+
+	if (ws->WSProperties[WSP_RedEaten].bvalue)
+		ending.append("You were able to deliver lunch... to the wolf... ");
 
 	if (ws->WSProperties[WSP_LunchDelivered].bvalue == true){
-		ending = "you successfully delivered lunch.";
+		ending.append("You successfully delivered lunch. ");
 	}
 
 	if (ws->WSProperties[WSP_WolfDead].bvalue == true){
-		ending = "The Lumberjack slew the wolf.";
+		ending.append("The Lumberjack slew the wolf.");
 	}
 	
 }

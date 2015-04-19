@@ -38,7 +38,7 @@ void Reprimand::Init()
 
 std::string Reprimand::GetSentence()
 {
-	return "Grandma lectures you about respecting your elders.";
+	return "Grandma lectures you for losing the food.";
 }
 
 bool Reprimand::GetUsable()
