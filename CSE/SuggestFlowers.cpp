@@ -50,6 +50,7 @@ void SuggestFlowers::ExecuteConsequences(WorldState* ws)
 {
 	Action::ExecuteConsequences(ws);
 	//object->AddAction("Pick Flowers");
+	ws->WSProperties[WSP_RedDistracted].SetValue(true);
 }
 
 void SuggestFlowers::EmotionalReaction(NPC_Actor* affectingActor)

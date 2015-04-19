@@ -13,33 +13,6 @@
 //#include "WorldState.h"
 //#include "BoundedNum.h"
 
-
-//NPC_Actor::NPC_Actor(string name, string FileName, int x, int y, HistoryBook& hb)
-//	: Actor(name, hb)
-//{
-//	texture.loadFromFile(FileName);
-//	sprite.setTexture(texture);
-//	sprite.setPosition(sf::Vector2f((float)x, (float)y));
-//
-//	selfTraits[agreeable].setValue(0.0);
-//	selfTraits[conscientious].setValue(0.0);
-//	selfTraits[extraverted].setValue(0.0);
-//	selfTraits[neurotic].setValue(0.0);
-//	selfTraits[open].setValue(0.0);
-//
-//	perceivedTraits[agreeable].setValue(0.0);
-//	perceivedTraits[conscientious].setValue(0.0);
-//	perceivedTraits[extraverted].setValue(0.0);
-//	perceivedTraits[neurotic].setValue(-0.0);
-//	perceivedTraits[open].setValue(0.0);
-//
-//	perceivedPTraits[agreeable].setValue(0.0);
-//	perceivedPTraits[conscientious].setValue(0.0);
-//	perceivedPTraits[extraverted].setValue(0.0);
-//	perceivedPTraits[neurotic].setValue(-0.0);
-//	perceivedPTraits[open].setValue(0.0);
-//}
-
 NPC_Actor::NPC_Actor(string FileName, WorldState* w, Planner* p, Stage* l, HistoryBook& hb)
 	: Actor(hb)
 {
@@ -276,6 +249,8 @@ void NPC_Actor::ClearPlans()
 
 void NPC_Actor::RePlan()
 {
+	Replans++;
+	
 	ClearPlans();
 	
 	std::vector<Action*> newplan;
@@ -524,7 +499,6 @@ void NPC_Actor::WriteToFile()
 		}
 
 	}
-
 	
 	for (unsigned j(1); j < 5; j++){
 		for (unsigned i(0); i < 5; i++){
@@ -535,6 +509,8 @@ void NPC_Actor::WriteToFile()
 
 		}
 	}
+
+	myfile << "replans: " + std::to_string(Replans) << std::endl;
 
 	myfile.close();
 }

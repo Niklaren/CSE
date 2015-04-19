@@ -25,7 +25,6 @@ class NPC_Actor : public Actor
 private:	
 
 	BoundedNum selfTraits[5];
-
 	BoundedNum perceivedTraits[5][5]; //can change this to [5][4] and use getID-1 is change_pTrait
 
 	BoundedNum happy;
@@ -35,6 +34,8 @@ private:
 	Goal current;
 	Planner* planner;
 	WorldState* ws;
+
+	int Replans;
 
 	sf::Texture texture;
 	sf::Sprite sprite;

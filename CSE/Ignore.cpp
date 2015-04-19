@@ -32,7 +32,7 @@ void Ignore::EmotionalReaction(NPC_Actor* affectingActor)
 	if (affectingActor == subject){
 
 	}
-	else if (affectingActor == subject){
+	else if (affectingActor == object){
 		affectingActor->Change_Happy(-0.1);
 		affectingActor->Change_Angry(0.2);
 		affectingActor->Change_pAgreeable(-0.1, subject->GetID());

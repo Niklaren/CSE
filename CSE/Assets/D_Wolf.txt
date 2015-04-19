@@ -4,3 +4,4 @@ extraverted-0.100000
 agreeable-0.400000
 neurotic-0.500000
 grandmaagreeable-0.400000
+replans: 0

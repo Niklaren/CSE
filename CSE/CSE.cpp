@@ -41,6 +41,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	//bool gameEnded = false;
 	state = menu;
 
+	std::cout << "Thanks for playing" << std::endl;
+	std::cout << "This is an interactive story game where the goal is to experience the story\nhowever you please.\n" << std::endl;
+
+	std::cout << "To act within the world choose an action from the menu in the top right." << std::endl;
+	std::cout << "Yellow actions can be performed right away." << std::endl;
+	std::cout << "Purple actions require a target, you can select from targets in the same\nlocation as you from the top row. (No available targets in the first scene)." << std::endl;
+	std::cout << "To clear your selection press the red X." << std::endl;
+	std::cout << "To lock in your choice and perform the action press OK" << std::endl;
+	std::cout << "At any time you have the option TO NOT ACT by choosing no options\nand only pressing OK" << std::endl;
+	std::cout << "You will see the results of actions in the text box along the bottom" << std::endl;
+	std::cout << "There will be times when you cannot act, to progess press OK." << std::endl;
+
+	std::cout << "\nbest of luck and we apologize in advances for any bugs, errors or misspellings." << std::endl;
+
 	while (window.isOpen())
 	{
 

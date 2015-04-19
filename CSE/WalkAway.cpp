@@ -17,7 +17,11 @@ WalkAway::~WalkAway()
 
 std::string WalkAway::GetSentence()
 {
-	return "you start walking away, but it's too late.";
+	if (subject->GetHistory()->EventJustHappened("Travel"))
+		return "you walk away from the wolf";
+	if (subject->GetHistory()->EventJustHappened("WolfEatYou"))
+		return "You try to walk away, but it's too late";
+	return "you start walking away, but the wolf follows.";
 }
 
 void WalkAway::ExecuteConsequences(WorldState* ws)

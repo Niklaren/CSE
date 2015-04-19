@@ -124,6 +124,10 @@ bool DramaManager::React()
 		red->RemoveAllActions();
 	}
 
+	if (reactEvent == "SuggestFlowers"){
+		red->RemoveAction("Give Food");
+	}
+
 	if (reactEvent == "GiveFoodWolf"){
 		red->RemoveAction("Flee");
 	}
@@ -133,6 +137,8 @@ bool DramaManager::React()
 		red->AddAction("Turn Back");
 		red->RemoveAction("Give Food");
 		red->RemoveAction("Flee");
+		red->RemoveAction("Ask Directions");
+		red->RemoveAction("Walk Away");
 		if (ws->WSProperties[WSP_WrongDirections].bvalue == true)
 			red->AddAction("Continue Forward");
 		if (historyBook->EventEverHappened("SuggestFlowers"))
@@ -159,13 +165,12 @@ bool DramaManager::React()
 
 	if (reactEvent == "KillWolf"){
 		wolf->MoveLocation(offstage);
+		red->RemoveAllActions();
 	}
 
 	if ((ws->WSProperties[WSP_QueryRed].ivalue >= 3) && (red->GetLocation() == forest)){
-		red->RemoveAction("Ask Directions");
-		red->RemoveAction("Walk Away");
+		
 	}
-
 
 	if ((historyBook->EventJustHappened("QueryPurpose")) || (historyBook->EventJustHappened("QueryIdentity")) || (historyBook->EventJustHappened("QueryBasket"))){
 		;
@@ -179,8 +184,6 @@ bool DramaManager::React()
 		red->RemoveAction("Observe");
 		red->RemoveAction("Greet");
 	}
-
-
 
 	if (lumberjack->GetLocation() == wolf->GetLocation()){
 		lumberjack->AddAction("KillWolf", wolf);
