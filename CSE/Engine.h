@@ -30,7 +30,7 @@ class Engine
 {
 protected:
 	
-	Input input;
+	Input* input;
 	HistoryBook historyBook;
 	Planner planner;
 	WorldState worldstate;
@@ -61,10 +61,12 @@ protected:
 	sf::Texture stageTexture;
 
 public:
-	Engine();
+	Engine(Input*);
 	~Engine();
 
-	void Operate();
+	void Init();
+
+	bool Operate();
 
 	void GetUserInput();
 

@@ -18,5 +18,6 @@ public:
 
 	double Value() { return value; }
 	void setValue(double d);
+	void DivideBy(double d);
 };
 

@@ -60,6 +60,11 @@ void BoundedNum::decrease(double decrease)
 	value += distance;
 }
 
+void BoundedNum::DivideBy(double d)
+{
+	value /= d;
+}
+
 double BoundedNum::BtoD(double Bounded)
 {
 	if (Bounded > 0.0){
@@ -79,3 +84,4 @@ double BoundedNum::DtoB(double unBounded)
 		return ((1 / (1 - unBounded)) - 1);
 	}
 }
+

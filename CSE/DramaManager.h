@@ -26,5 +26,6 @@ public:
 	virtual void Plan(string, Actor*, Actor*);
 	void CheckForPlanning();
 
+	bool ended = false;
 };
 

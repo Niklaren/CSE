@@ -269,4 +269,9 @@ void DramaManager::CheckForPlanning()
 			Plan("End");
 		}
 	}
+
+	if (historyBook->TimeElapsedSince("End") > 0)
+	{
+		ended = true;
+	}
 }

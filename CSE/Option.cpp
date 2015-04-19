@@ -132,7 +132,7 @@ bool Option::IsClicked(float cursor_x, float cursor_y)		//checks if cursor is in
 
 	if ((cursor_x > optionRect.left) && (cursor_x < (optionRect.left + optionRect.width))){	// if in the x bounds
 		if ((cursor_y <(optionRect.top + optionRect.height)) && (cursor_y > optionRect.top)){	// and y bounds
-			std::cout << name + " clicked" << std::endl;
+			//std::cout << name + " clicked" << std::endl;
 			return true;
 		}
 	}

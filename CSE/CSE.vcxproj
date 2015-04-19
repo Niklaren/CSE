@@ -115,6 +115,7 @@
     <ClInclude Include="RequestEntry.h" />
     <ClInclude Include="Flee.h" />
     <ClInclude Include="RequestEscort.h" />
+    <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="SuggestFlowers.h" />
     <ClInclude Include="Thank.h" />
     <ClInclude Include="WalkAway.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="RequestEntry.cpp" />
     <ClCompile Include="Flee.cpp" />
     <ClCompile Include="RequestEscort.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="SuggestFlowers.cpp" />
     <ClCompile Include="Thank.cpp" />
     <ClCompile Include="WalkAway.cpp" />
@@ -239,6 +241,7 @@
     <Image Include="Assets\menu.png" />
     <Image Include="Assets\menupressed.png" />
     <Image Include="Assets\menuUnavailable.png" />
+    <Image Include="Assets\splash.png" />
     <Image Include="Assets\stage.png" />
     <Image Include="Assets\text frame2.png" />
   </ItemGroup>

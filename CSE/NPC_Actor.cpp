@@ -66,7 +66,7 @@ void NPC_Actor::LoadFromFile(string FileName)
 		istringstream sin(line.substr(line.find("=") + 1));
 		if (line.find("name") != -1){
 			sin >> name;
-			std::cout << name << std::endl;
+			//std::cout << name << std::endl;
 		}
 		else if (line.find("happy") != -1){
 			sin >> dInput;
@@ -195,8 +195,6 @@ void NPC_Actor::LoadFromFile(string FileName)
 bool NPC_Actor::React()
 {
 	//Action reactingEvent = historyBook.GetLastEvent();
-	
-	std::cout << GetName() + " r" << std::endl;
 	
 	//historyBook->GetLastEvent()->ExecuteConsequences(ws);
 	//historyBook->GetLastEvent()->EmotionalReaction(this);
@@ -400,7 +398,7 @@ void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
 	// actions that have an object;
 	if (!object_)
 	{
-		std::cout << "object null" << std::endl;
+		//std::cout << "object null" << std::endl;
 		return;
 	}
 
@@ -434,74 +432,109 @@ bool NPC_Actor::Draw(sf::RenderWindow &window)
 	return true;
 }
 
+void NPC_Actor::CoolMoods()
+{
+	happy.DivideBy(10);
+	angry.DivideBy(10);
+}
+
 void NPC_Actor::Change_Happy(double d)
 {
 	happy.change(d);
-	std::cout << "happy: " << happy.Value() << std::endl;
+	//std::cout << "happy: " << happy.Value() << std::endl;
 }
 
 void NPC_Actor::Change_Angry(double d)
 {
 	angry.change(d);
-	std::cout << "angry: " << angry.Value() << std::endl;
+	//std::cout << "angry: " << angry.Value() << std::endl;
 }
 
 void NPC_Actor::Change_Open(double d)
 {
 	selfTraits[open].change(d);
-	std::cout << "open: " << selfTraits[open].Value() << std::endl;
+	//std::cout << "open: " << selfTraits[open].Value() << std::endl;
 }
 
 void NPC_Actor::Change_Conscientious(double d)
 {
 	selfTraits[conscientious].change(d);
-	std::cout << "conscientious: " << selfTraits[conscientious].Value() << std::endl;
+	//std::cout << "conscientious: " << selfTraits[conscientious].Value() << std::endl;
 }
 
 void NPC_Actor::Change_Extraverted(double d)
 {
 	selfTraits[extraverted].change(d);
-	std::cout << "extraverted: " << selfTraits[extraverted].Value() << std::endl;
+	//std::cout << "extraverted: " << selfTraits[extraverted].Value() << std::endl;
 }
 
 void NPC_Actor::Change_Agreeable(double d)
 {
 	selfTraits[agreeable].change(d);
-	std::cout << "agreeable: " << selfTraits[agreeable].Value() << std::endl;
+	//std::cout << "agreeable: " << selfTraits[agreeable].Value() << std::endl;
 }
 
 void NPC_Actor::Change_Neurotic(double d)
 {
 	selfTraits[neurotic].change(d);
-	std::cout << "neurotic: " << selfTraits[neurotic].Value() << std::endl;
+	//std::cout << "neurotic: " << selfTraits[neurotic].Value() << std::endl;
 }
 
 void NPC_Actor::Change_pOpen(double d, int charID)
 {
 	perceivedTraits[open][charID].change(d);
-	std::cout << "Popen: " << perceivedTraits[open][charID].Value() << std::endl;
+	//std::cout << "Popen: " << perceivedTraits[open][charID].Value() << std::endl;
 }
 
 void NPC_Actor::Change_pConscientious(double d, int charID)
 {
 	perceivedTraits[conscientious][charID].change(d);
-	std::cout << "Pconscientious: " << perceivedTraits[conscientious][charID].Value() << std::endl;
+	//std::cout << "Pconscientious: " << perceivedTraits[conscientious][charID].Value() << std::endl;
 }
 
 void NPC_Actor::Change_pExtraverted(double d, int charID)
 {
 	perceivedTraits[extraverted][charID].change(d);
-	std::cout << "Pextraverted: " << perceivedTraits[extraverted][charID].Value() << std::endl;
+	//std::cout << "Pextraverted: " << perceivedTraits[extraverted][charID].Value() << std::endl;
 }
 
 void NPC_Actor::Change_pAgreeable(double d, int charID)
 {
 	perceivedTraits[agreeable][charID].change(d);
-	std::cout << "Pagreeable: " << perceivedTraits[agreeable][charID].Value() << std::endl;
+	//std::cout << "Pagreeable: " << perceivedTraits[agreeable][charID].Value() << std::endl;
 }
 
 void NPC_Actor::Change_pNeurotic(double d, int charID)
 {
 	perceivedTraits[neurotic][charID].change(d);
-	std::cout << "Pneurotic: " << perceivedTraits[neurotic][charID].Value() << std::endl;
+	//std::cout << "Pneurotic: " << perceivedTraits[neurotic][charID].Value() << std::endl;
+}
+
+void NPC_Actor::WriteToFile()
+{
+	ofstream myfile;
+	string file = "Assets/D_" + name + ".txt";
+	myfile.open(file);
+
+	for (unsigned i(0); i < 5; i++){
+
+		if (selfTraits[i].Value() != 0){
+			string s = s_Traits[i] + std::to_string(selfTraits[i].Value());
+			myfile << s << std::endl;
+		}
+
+	}
+
+	
+	for (unsigned j(1); j < 5; j++){
+		for (unsigned i(0); i < 5; i++){
+			if (perceivedTraits[i][j].Value() != 0){
+				string s = s_Chars[j] + s_Traits[i] + std::to_string(perceivedTraits[i][j].Value());
+				myfile << s << std::endl;
+			}
+
+		}
+	}
+
+	myfile.close();
 }

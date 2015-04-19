@@ -14,8 +14,11 @@ class Planner;
 class Goal;
 class WorldState;
 
-enum Trait{ open, conscientious, extraverted, agreeable, neurotic };
-enum Chars{red = 1, wolf, lumberjack, grandma};
+enum Trait{ open, conscientious, extraverted, agreeable, neurotic, numTraits };
+const string s_Traits[5]{ "open", "conscientious", "extraverted", "agreeable", "neurotic" };
+enum Chars{ red = 1, wolf, lumberjack, grandma };
+const string s_Chars[5]{ "fate", "red", "wolf", "lumberjack", "grandma" };
+
 
 class NPC_Actor : public Actor
 {
@@ -23,7 +26,7 @@ private:
 
 	BoundedNum selfTraits[5];
 
-	BoundedNum perceivedTraits[5][5];
+	BoundedNum perceivedTraits[5][5]; //can change this to [5][4] and use getID-1 is change_pTrait
 
 	BoundedNum happy;
 	BoundedNum angry;
@@ -96,6 +99,8 @@ public:
 	double Get_pAgreeable(int charID) { return perceivedTraits[agreeable][charID].Value(); }
 	double Get_pNeurotic(int charID) { return perceivedTraits[neurotic][charID].Value(); }
 	double Get_pOpen(int charID) { return perceivedTraits[open][charID].Value(); }
+
+	void WriteToFile();
 
 };
 

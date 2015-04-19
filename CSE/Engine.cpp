@@ -3,16 +3,14 @@
 //#include <map>
 
 
-Engine::Engine()
+Engine::Engine(Input* input_)
 {
-	//input = input_;
+	input = input_;
+	Init();
+}
 
-
-	//Actor *Actors[4] = { Fate, &Protagonist, &Wolf, &Lumberjack };
-	//actors[0] = Fate;
-	//actors[1] = Protagonist;
-	//actors[2] = Wolf;
-	//actors[3] = Lumberjack;
+void Engine::Init()
+{
 	actors.push_back(Fate);
 	actors.push_back(Protagonist);
 	actors.push_back(Wolf);
@@ -29,28 +27,10 @@ Engine::Engine()
 
 	Fate->SetCharacters(Protagonist, Wolf, Lumberjack, Grandma);
 	Fate->SetLocations(path, forest, cabin, lodge, offStage);
-	//Fate->Plan("Begin", Wolf, Lumberjack);
-
-	/*Wolf->SetPlanner(&planner);
-	Lumberjack->SetPlanner(&planner);
-	Wolf->SetWorldState(&worldstate);
-	Lumberjack->SetWorldState(&worldstate);*/
 
 	Fate->InitLRR();
 
-
-
-	//Goal g(0.5, Lumberjack);
-	//g.SetWSProperty(WSP_Punched, WST_bool, true);
-	//Wolf->AddGoal(g);
-	//Wolf->AcquireGoal(); //
-
-	//Wolf->RePlan();
-
 	clock.restart();
-
-	//stageTexture.loadFromFile("camp.bmp");
-	//stageSprite.setTexture(stageTexture);
 }
 
 Engine::~Engine()
@@ -58,7 +38,7 @@ Engine::~Engine()
 
 }
 
-void Engine::Operate()
+bool Engine::Operate()
 {
 	// move time forward
 	time = sf::seconds(5.0f) - clock.getElapsedTime();
@@ -150,10 +130,10 @@ void Engine::Operate()
 				NPCs[i]->RemoveCurrentGoal();
 			if (NPCs[i]->AcquireGoal() == true) //if we find a more important goal
 				NPCs[i]->RePlan();
-			if (NPCs[i]->GetNumGoals() == 0)
-				std::cout << "no goals remain " + NPCs[i]->GetName() << std::endl;
-			else if (NPCs[i]->GetNumPlans() == 0){
-				std::cout << "no plan remains " + NPCs[i]->GetName() << std::endl;
+			if (NPCs[i]->GetNumGoals() == 0){
+				//std::cout << "no goals remain " + NPCs[i]->GetName() << std::endl;
+			}else if (NPCs[i]->GetNumPlans() == 0){
+				//std::cout << "no plan remains " + NPCs[i]->GetName() << std::endl;
 				NPCs[i]->RePlan();
 			}
 		}
@@ -168,9 +148,17 @@ void Engine::Operate()
 
 	GetUserInput();
 
-	input.update();
+	//input.update();
 
+	if (Fate->ended){
+		worldstate.WriteToFile();
+		historyBook.WriteToFile();
+		for (unsigned i(0); i < NPCs.size(); i++){
+			NPCs[i]->WriteToFile();
+		}
+	}
 
+	return Fate->ended;
 }
 
 void Engine::GetUserInput()
@@ -182,7 +170,7 @@ void Engine::GetUserInput()
 	if (!playerAct)
 		Protagonist->menu.AllUnavailable();
 
-	if (Protagonist->menu.HandleMenu(input, action, target)){
+	if (Protagonist->menu.HandleMenu(*input, action, target)){
 		executePlans = true;
 
 		if (action == "Stray Off Path"){
@@ -251,13 +239,13 @@ void Engine::Redraw(sf::RenderWindow &window)
 
 void Engine::HandleInput(InputType inputType)
 {
-	assert(inputType == LDown || inputType == LUp);
-	if (inputType == LDown) input.handleLMousePressed();
-	else if (inputType == LUp) input.handleLMouseReleased();
+	//assert(inputType == LDown || inputType == LUp);
+	//if (inputType == LDown) input.handleLMousePressed();
+	//else if (inputType == LUp) input.handleLMouseReleased();
 }
 void Engine::HandleInput(InputType inputType, float x, float y)
 {
-		assert(inputType == MouseMove);
-		input.MouseX = x;
-		input.MouseY = y;
+		//assert(inputType == MouseMove);
+		//input.MouseX = x;
+		//input.MouseY = y;
 }

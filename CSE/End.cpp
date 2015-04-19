@@ -44,8 +44,6 @@ void End::ExecuteConsequences(WorldState* ws)
 		ending = "The Lumberjack slew the wolf.";
 	}
 	
-	ws->WriteToFile();
-	subject->GetHistory()->WriteToFile();
 }
 
 void End::EmotionalReaction(NPC_Actor* affectingActor)
