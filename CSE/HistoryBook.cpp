@@ -159,10 +159,10 @@ bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 	return false;
 }
 
-void HistoryBook::WriteToFile()
+void HistoryBook::WriteToFile(int attempt)
 {
 	ofstream myfile;
-	myfile.open("Assets/D_historybook.txt");
+	myfile.open("Assets/D_historybook" + std::to_string(attempt)+ ".txt");
 	for (unsigned i(0); i < eventHistory.size(); i++){
 		myfile << eventHistory[i]->Get_Subject()->GetName() + " ";
 		myfile << eventHistory[i]->GetVerb() + " ";

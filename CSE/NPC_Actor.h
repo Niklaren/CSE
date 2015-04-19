@@ -101,7 +101,7 @@ public:
 	double Get_pNeurotic(int charID) { return perceivedTraits[neurotic][charID].Value(); }
 	double Get_pOpen(int charID) { return perceivedTraits[open][charID].Value(); }
 
-	void WriteToFile();
+	void WriteToFile(int);
 
 };
 

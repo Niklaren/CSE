@@ -3,8 +3,10 @@
 //#include <map>
 
 
-Engine::Engine(Input* input_)
+Engine::Engine(Input* input_, int attempt_)
 {
+	attempt = attempt_;
+
 	input = input_;
 	Init();
 }
@@ -151,10 +153,10 @@ bool Engine::Operate()
 	//input.update();
 
 	if (Fate->ended){
-		worldstate.WriteToFile();
-		historyBook.WriteToFile();
+		worldstate.WriteToFile(attempt);
+		historyBook.WriteToFile(attempt);
 		for (unsigned i(0); i < NPCs.size(); i++){
-			NPCs[i]->WriteToFile();
+			NPCs[i]->WriteToFile(attempt);
 		}
 	}
 

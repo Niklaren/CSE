@@ -39,7 +39,7 @@ public:
 	Action* GetLastEvent() { return eventHistory.back(); }
 
 	bool Draw(sf::RenderWindow &, Stage* s);
-	void WriteToFile();
+	void WriteToFile(int);
 
 	void TimeForward();
 };

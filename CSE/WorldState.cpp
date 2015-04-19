@@ -45,10 +45,10 @@ void WorldState::LoadFromFile(string FileName)
 
 }
 
-void WorldState::WriteToFile()
+void WorldState::WriteToFile(int attempt)
 {
 	ofstream myfile;
-	myfile.open("Assets/D_endworldstate.txt");
+	myfile.open("Assets/D_endworldstate" + std::to_string(attempt)+".txt");
 	for (unsigned int i(0); i < WSP_Count; i++){
 		myfile << WSProperties[i].TextForOutput(i);
 	}

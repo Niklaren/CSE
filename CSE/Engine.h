@@ -29,7 +29,8 @@ enum InputType {LDown, LUp, KeyDown, KeyUp, MouseMove};
 class Engine
 {
 protected:
-	
+	int attempt;
+
 	Input* input;
 	HistoryBook historyBook;
 	Planner planner;
@@ -61,7 +62,7 @@ protected:
 	sf::Texture stageTexture;
 
 public:
-	Engine(Input*);
+	Engine(Input*, int);
 	~Engine();
 
 	void Init();

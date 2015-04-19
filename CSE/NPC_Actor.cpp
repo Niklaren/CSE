@@ -485,10 +485,10 @@ void NPC_Actor::Change_pNeurotic(double d, int charID)
 	//std::cout << "Pneurotic: " << perceivedTraits[neurotic][charID].Value() << std::endl;
 }
 
-void NPC_Actor::WriteToFile()
+void NPC_Actor::WriteToFile(int attempt)
 {
 	ofstream myfile;
-	string file = "Assets/D_" + name + ".txt";
+	string file = "Assets/D_" + name + std::to_string(attempt) + ".txt" ;
 	myfile.open(file);
 
 	for (unsigned i(0); i < 5; i++){

@@ -10,7 +10,7 @@
 #include "Input.h"
 
 Input* input = new Input();
-Engine* engine = new Engine(input);
+Engine* engine;
 SplashScreen splash(input);
 
 //sf::RenderWindow window;
@@ -55,6 +55,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	std::cout << "\nbest of luck and we apologize in advances for any bugs, errors or misspellings." << std::endl;
 
+	int attempt = 0;
+
 	while (window.isOpen())
 	{
 
@@ -97,8 +99,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			splash.Redraw(window);
 			state = splash.Update();
 
-			if (state == game)
-				engine = new Engine(input);
+			if (state == game){
+				attempt++;
+				engine = new Engine(input, attempt);
+
+			}
 		}
 		
 		else if (state == game){
