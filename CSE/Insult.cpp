@@ -54,7 +54,7 @@ void Insult::EmotionalReaction(NPC_Actor* affectingActor)
 		//affectingActor->Change_pAgreeable(subject, -0.1)
 
 		affectingActor->Change_Agreeable(-0.15);
-		double angerChange = affectingActor->EmotionalCoefficient() * 0.15;
+		double angerChange = 0.15;
 		affectingActor->Change_Angry(angerChange);
 	}
 }

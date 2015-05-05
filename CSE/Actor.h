@@ -2,7 +2,6 @@
 
 #include "BeginStory.h"
 #include "BeginLRR.h"
-#include "Prepare.h"
 #include "End.h"
 
 #include "OK.h"
@@ -27,6 +26,7 @@
 #include "WolfGreetRed.h"
 #include "GiveDirections.h"
 #include "GiveWrongDirections.h"
+#include "WolfKnowsGrandmaReaction.h"
 #include "QueryIdentity.h"
 #include "QueryPurpose.h"
 #include "QueryBasket.h"
@@ -91,6 +91,7 @@ public:
 
 	virtual void RemoveAction(string ActionName);
 	virtual void RemoveAction(string ActionName, Actor* target);
+	virtual void RemoveAllActions();
 
 	vector<Action*> Get_AvailableActions() { return availableActions; }
 	int Get_NumActions() { return availableActions.size(); }
@@ -101,16 +102,18 @@ public:
 	virtual void Plan(string action, Actor* object){}
 	virtual void Plan(string action, Stage* l, int moments = 1){}
 	//virtual void Plan(string action, int m = 1, Actor* o = nullptr, Stage* s = nullptr){}
-
-	string GetName() { return name; }
-	int GetID() { return ID; }
-	void SetID(int id) { ID = id; }
-
+	
+	void ClearAllPlans();
+	void DiscardPlan(int index) { plans.erase(plans.begin() + index); }
+	
 	int GetNumPlans() { return plans.size(); }
 	Action* GetPlan(int index) { return plans[index]; }
 	Action* GetCurrentPlan() { return plans[0]; }
 	Action* GetNextPlan() { return plans[1]; }
-	void DiscardPlan(int index) { plans.erase(plans.begin()+index); }
+	
+	string GetName() { return name; }
+	int GetID() { return ID; }
+	void SetID(int id) { ID = id; }
 
 	Stage* GetLocation(){ return location; }
 	void MoveLocation(Stage* l){ location = l; }

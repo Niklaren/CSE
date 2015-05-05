@@ -51,6 +51,9 @@ void Stage::AddLocationActions(Actor* a)
 			if ((!a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers")) && (a->GetHistory()->HaventDoneEventBefore(a, "Give Flowers"))){
 				a->AddAction("Give Flowers");
 			}
+			if (a->GetHistory()->HaventDoneEventBefore(a, "Give Food")){
+				a->AddAction("Give Food");
+			}
 		}
 	}
 }
@@ -70,6 +73,7 @@ void Stage::RemoveLocationActions(Actor* a)
 			a->RemoveAction("Turn Back");
 			a->RemoveAction("Pick Flowers");
 			a->RemoveAction("Give Food");
+			a->RemoveAction("Walk Away");
 			a->RemoveAction("Flee");
 		}
 		else if (name == "lodge"){

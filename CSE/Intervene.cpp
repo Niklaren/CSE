@@ -38,7 +38,7 @@ void Intervene::EmotionalReaction(NPC_Actor* affectingActor)
 	if (affectingActor == a1 || affectingActor == a2)
 	{
 		affectingActor->Change_Agreeable(0.5);
-		double happyChange = affectingActor->EmotionalCoefficient() * 0.2;
+		double happyChange = 0.2;
 		affectingActor->Change_Happy(happyChange);
 	}
 }

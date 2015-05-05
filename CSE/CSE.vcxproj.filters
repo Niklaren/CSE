@@ -69,9 +69,6 @@
     <ClInclude Include="Actor.h">
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="DramaManager.h">
-      <Filter>Source Files\Actors</Filter>
-    </ClInclude>
     <ClInclude Include="NPC_Actor.h">
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
@@ -124,9 +121,6 @@
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="BeginStory.h">
-      <Filter>Source Files\Actions\fate</Filter>
-    </ClInclude>
-    <ClInclude Include="Prepare.h">
       <Filter>Source Files\Actions\fate</Filter>
     </ClInclude>
     <ClInclude Include="Hug.h">
@@ -261,11 +255,20 @@
     <ClInclude Include="RefuseEscort.h">
       <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
     </ClInclude>
-    <ClInclude Include="KillWolf.h">
-      <Filter>Source Files\Actions\Riding Hood</Filter>
-    </ClInclude>
     <ClInclude Include="SplashScreen.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KillWolf.h">
+      <Filter>Source Files\Actions\Riding Hood\Lumberjack</Filter>
+    </ClInclude>
+    <ClInclude Include="WolfKnowsGrandmaReaction.h">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClInclude>
+    <ClInclude Include="LRR_DramaManager.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="DramaManager.h">
+      <Filter>Source Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,9 +279,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Source Files\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="DramaManager.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
     <ClCompile Include="NPC_Actor.cpp">
@@ -330,9 +330,6 @@
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="BeginStory.cpp">
-      <Filter>Source Files\Actions\fate</Filter>
-    </ClCompile>
-    <ClCompile Include="Prepare.cpp">
       <Filter>Source Files\Actions\fate</Filter>
     </ClCompile>
     <ClCompile Include="Hug.cpp">
@@ -473,9 +470,19 @@
     <ClCompile Include="SplashScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WolfKnowsGrandmaReaction.cpp">
+      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
+    </ClCompile>
+    <ClCompile Include="LRR_DramaManager.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="DramaManager.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\i_grandma.png">

@@ -30,7 +30,7 @@ void Engine::Init()
 	Fate->SetCharacters(Protagonist, Wolf, Lumberjack, Grandma);
 	Fate->SetLocations(path, forest, cabin, lodge, offStage);
 
-	Fate->InitLRR();
+	Fate->Init();
 
 	clock.restart();
 }
@@ -88,7 +88,6 @@ bool Engine::Operate()
 					historyBook.ExecuteAction(actors[actor_iter]->GetPlan(plan_iter));
 					
 					// execute consequences
-					//!!!!!!!!!!!!!!!! LOOK INTO THIS
 					historyBook.GetLastEvent()->ExecuteConsequences(&worldstate);
 					
 					// all witnesses
@@ -108,11 +107,12 @@ bool Engine::Operate()
 						// action specific reactions
 						reaction = historyBook.GetLastEvent()->React();
 
-					//if actor is protagonist and reaction == true
+					// if actor is protagonist and reaction == true
 					//	player cant plan next turn
 					if (reaction && (actors[actor_iter] == Protagonist))
 						playerAct = false;
 
+					// if theplayer just arrived at a new location they can't immediately act
 					if ((historyBook.GetLastEvent()->GetVerb() == "Arrive") && (actors[actor_iter] == Protagonist))
 						playerAct = false;
 				}

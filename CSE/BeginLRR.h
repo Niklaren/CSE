@@ -3,14 +3,17 @@
 #include "Action.h"
 
 
+class Player_Actor;
+
 class BeginLRR : public Action
 {
 public:
-	Actor* player,* wolf,* lumberjack,* grandma;
-
+	Player_Actor* red;
+	NPC_Actor* wolf,* lumberjack,* grandma;
+	Stage* path, *forest, *cabin, *lodge, *offstage;
 
 	BeginLRR();
-	BeginLRR(Actor* subject_, Actor* p, Actor* w, Actor* l, Actor* g, int moments_);
+	BeginLRR(Actor* subject_, Player_Actor* p, NPC_Actor* w, NPC_Actor* l, NPC_Actor* g, int moments_=1);
 	~BeginLRR();
 
 	virtual std::string GetSentence();

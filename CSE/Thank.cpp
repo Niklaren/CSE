@@ -29,7 +29,6 @@ void Thank::Init()
 	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_FoodGiven);
 	effects.push_back(effect1);
 
-
 	// conditions
 	WorldStateProperty condition1;
 	//condition1.SetWSProperty(WSP_Location, WST_variable);

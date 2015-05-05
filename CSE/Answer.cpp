@@ -70,6 +70,13 @@ void Answer::EmotionalReaction(NPC_Actor* affectingActor)
 
 	}
 	if (affectingActor == object){
+		if (query == "purpose"){
+			Goal g;
+			g.SetRelevance(0.86f);
+			g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_WolfKnowsGrandma);
+			affectingActor->AddGoal(g);
+		}
+
 		affectingActor->Change_pAgreeable(0.2, subject->GetID());
 		affectingActor->Change_pExtraverted(0.2, subject->GetID());
 	}

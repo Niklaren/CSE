@@ -12,6 +12,7 @@ enum eWorldStateEvents
 	WSE_FoodGiven,
 	WSE_RequestEntry,
 	WSE_RequestEscort,
+	WSE_WolfKnowsGrandma,
 	WSE_AskDirections,
 	WSE_Punch,
 	WSE_Hug,

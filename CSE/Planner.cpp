@@ -17,7 +17,7 @@ Planner::~Planner()
 
 bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState ws, WorldStateProperty goal)
 {
-	actor->Get_AvailableActions();
+	//actor->Get_AvailableActions();
 	// reset/refresh variables/contents of available actions?
 
 	// get usable actions
@@ -39,7 +39,7 @@ bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState w
 
 	if (!success)
 	{
-		vector<Action*> noresult;
+		//vector<Action*> noresult;
 		//return noresult;
 		return success;
 	}

@@ -49,8 +49,16 @@ void WolfEat::Init()
 
 std::string WolfEat::GetSentence()
 {
-	if (HasObject())
-		return subject->GetName() + " slurps down " + object->GetName();
+	if (HasObject()){
+		if (object->GetName() == "Wolf"){
+			return "The wolf licks his lips and closes it. This doesn't end well for you.";
+		}
+		else
+		{
+			return subject->GetName() + " slurps down " + object->GetName();
+		}
+	}
+		
 	return "Wolf Eats greedily";
 }
 

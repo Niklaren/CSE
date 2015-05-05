@@ -38,6 +38,7 @@ Menu::Menu()
 	AddOption("Pick Flowers", Type_Act0Target,	3);
 	AddOption("Give Flowers", Type_Act1Target,	3);
 	AddOption("Request Escort", Type_Act1Target,4);
+	AddOption("Thank", Type_Act1Target,			2);
 
 	AddOption("Knock Door", Type_Act0Target,	3);
 	AddOption("Enter Lodge", Type_Act0Target,	2);

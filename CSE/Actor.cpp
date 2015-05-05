@@ -28,6 +28,8 @@ void Actor::AddAction(string action)
 		availableActions.push_back(new OpenDoor(this, 0));
 	else if (action == "WolfEatLunch")
 		availableActions.push_back(new WolfEatLunch(this, 0));
+	else if (action == "WolfKnowsGrandmaReaction")
+		availableActions.push_back(new WolfKnowsGrandmaReaction(this, 0));
 
 	//else if (action == "CookGood")
 	//	availableActions.push_back(new CookGood(this, 0));
@@ -116,6 +118,14 @@ void Actor::RemoveAction(string action, Actor* object_)
 	{
 		if ((availableActions[i]->GetVerb() == action) && (availableActions[i]->Get_Object() == object_))
 			availableActions.erase(availableActions.begin() + i);
+	}
+}
+
+void Actor::RemoveAllActions()
+{
+	for (unsigned i = availableActions.size(); i-- > 0;)
+	{
+		availableActions.erase(availableActions.begin() + i);
 	}
 }
 

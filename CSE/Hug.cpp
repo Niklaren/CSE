@@ -67,6 +67,11 @@ void Hug::EmotionalReaction(NPC_Actor* affectingActor)
 		affectingActor->Change_pExtraverted(0.1,subject->GetID());
 		affectingActor->Change_Angry(-0.1);
 		affectingActor->Change_Happy(0.1);
+
+		Goal g;
+		g.SetRelevance(0.7f);
+		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+		affectingActor->AddGoal(g);
 	}
 	if (affectingActor == subject){
 		affectingActor->Change_Happy(0.05);

@@ -9,6 +9,7 @@
 #include "NPC_Actor.h"
 #include "Player_Actor.h"
 #include "DramaManager.h"
+#include "LRR_DramaManager.h"
 #include "Menu.h"
 #include "Planner.h"
 
@@ -49,7 +50,7 @@ protected:
 	NPC_Actor* Wolf = new NPC_Actor("Assets/c_wolf.txt", &worldstate, &planner, forest, historyBook);
 	NPC_Actor* Lumberjack = new NPC_Actor("Assets/c_lumberjack.txt", &worldstate, &planner, cabin, historyBook);
 	NPC_Actor* Grandma = new NPC_Actor("Assets/c_grandma.txt", &worldstate, &planner, lodge, historyBook);
-	DramaManager *Fate = new DramaManager(offStage, &worldstate, historyBook);
+	LRR_DramaManager *Fate = new LRR_DramaManager(offStage, &worldstate, historyBook);
 	vector<Actor*> actors;
 	vector<NPC_Actor*> NPCs;
 	
@@ -73,10 +74,7 @@ public:
 
 	void HandleInput(InputType);
 	void HandleInput(InputType, float x, float y);
-	//void HandleInput(InputType,LPARAM);
-	//void HandleInput(InputType,WPARAM);
 
 	void Redraw(sf::RenderWindow&);
-	//bool BlitBitmap(HBITMAP hBitmap, HDC hWinDC, int x, int y);
 };
 

@@ -28,7 +28,7 @@ void BoundedNum::setValue(double d)
 
 void BoundedNum::change(double delta)
 {
-	double distance;
+	double distance(0);
 	if ( delta > 0.0)
 	{	distance = 1.0 - value;	}
 	else if ( delta < 0.0)

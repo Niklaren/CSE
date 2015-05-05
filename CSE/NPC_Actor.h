@@ -42,6 +42,8 @@ private:
 	sf::IntRect actorRect;
 	int screenPosx, screenPosy;
 
+	double EmotionalCoefficient() { return (selfTraits[neurotic].Value() + 1); }
+
 public:
 	//NPC_Actor(string name, string BitmapFilename, int x, int y, HistoryBook& hb);
 	NPC_Actor(string filename, WorldState* w, Planner* p, Stage* l, HistoryBook& hb);
@@ -76,8 +78,6 @@ public:
 	void Change_Angry(double);
 	double Get_Happy() { return happy.Value(); }
 	double Get_Angry() { return angry.Value(); }
-
-	double EmotionalCoefficient() { return (selfTraits[neurotic].Value() + 1); }
 
 	void Change_Conscientious(double);
 	void Change_Extraverted(double);

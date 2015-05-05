@@ -55,6 +55,11 @@ void AskDirections::EmotionalReaction(NPC_Actor* affectingActor)
 		g.SetRelevance(0.85f);
 		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_AskDirections);
 		affectingActor->AddGoal(g);
+
+		//Goal g2;
+		//g2.SetRelevance(0.86f);
+		//g2.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_WolfKnowsGrandma);
+		//affectingActor->AddGoal(g2);
 	}
 	if (affectingActor == subject){
 

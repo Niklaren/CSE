@@ -63,7 +63,7 @@ void Punch::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
 		affectingActor->Change_Agreeable(-0.15);
-		double angerChange = affectingActor->EmotionalCoefficient() * 0.15;
+		double angerChange = 0.15;
 		affectingActor->Change_Angry(angerChange);
 	}
 }

@@ -97,6 +97,7 @@
     <ClInclude Include="BoundedNum.h" />
     <ClInclude Include="ChopLog.h" />
     <ClInclude Include="DramaManager.h" />
+    <ClInclude Include="LRR_DramaManager.h" />
     <ClInclude Include="End.h" />
     <ClInclude Include="Forgive.h" />
     <ClInclude Include="GiveDirections.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="GiveFood.h" />
     <ClInclude Include="GiveWrongDirections.h" />
     <ClInclude Include="GoHome.h" />
+    <ClInclude Include="WolfKnowsGrandmaReaction.h" />
     <ClInclude Include="Ignore.h" />
     <ClInclude Include="Intimidate.h" />
     <ClInclude Include="KillWolf.h" />
@@ -139,7 +141,6 @@
     <ClInclude Include="PickFlowers.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="Player_Actor.h" />
-    <ClInclude Include="Prepare.h" />
     <ClInclude Include="Punch.h" />
     <ClInclude Include="QueryBasket.h" />
     <ClInclude Include="QueryIdentity.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="ChopLog.cpp" />
     <ClCompile Include="CSE.cpp" />
     <ClCompile Include="DramaManager.cpp" />
+    <ClCompile Include="LRR_DramaManager.cpp" />
     <ClCompile Include="End.cpp" />
     <ClCompile Include="Forgive.cpp" />
     <ClCompile Include="GiveDirections.cpp" />
@@ -176,6 +178,7 @@
     <ClCompile Include="GiveFood.cpp" />
     <ClCompile Include="GiveWrongDirections.cpp" />
     <ClCompile Include="GoHome.cpp" />
+    <ClCompile Include="WolfKnowsGrandmaReaction.cpp" />
     <ClCompile Include="Ignore.cpp" />
     <ClCompile Include="Intimidate.cpp" />
     <ClCompile Include="KillWolf.cpp" />
@@ -211,7 +214,6 @@
     <ClCompile Include="PickFlowers.cpp" />
     <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Player_Actor.cpp" />
-    <ClCompile Include="Prepare.cpp" />
     <ClCompile Include="Punch.cpp" />
     <ClCompile Include="QueryBasket.cpp" />
     <ClCompile Include="QueryIdentity.cpp" />
@@ -229,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\i_grandma.png" />

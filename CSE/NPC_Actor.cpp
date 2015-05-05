@@ -179,7 +179,7 @@ bool NPC_Actor::React()
 			//if (){
 				AcquireGoal();
 				RePlan();
-				return true;
+				return true; // !! should check if a new goal/plan is made before returning true
 			//}
 		}
 	}
@@ -251,11 +251,12 @@ void NPC_Actor::RePlan()
 {
 	Replans++;
 	
-	ClearPlans();
-	
 	std::vector<Action*> newplan;
 
 	if (planner->Plan(this, newplan, *ws, current)){
+		// scrap our old plan. we have a new one
+		ClearPlans();
+		// add all the actions of our new plan to our plan data structure
 		for (unsigned i = 0; i < newplan.size(); i++){
 			//Plan(newplan[i]->GetVerb(), 1+i, current.GetTarget());
 			Plan(newplan[i], 1 + i);
@@ -275,6 +276,8 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		plans.push_back(new Travel(this, moments));
 	else if (action->GetVerb() == "WolfEatLunch")
 		plans.push_back(new WolfEatLunch(this, moments));
+	else if (action->GetVerb() == "WolfKnowsGrandmaReaction")
+		plans.push_back(new WolfKnowsGrandmaReaction(this, 1));
 	else{
 		//error
 	}
@@ -415,12 +418,14 @@ void NPC_Actor::CoolMoods()
 
 void NPC_Actor::Change_Happy(double d)
 {
+	d *= EmotionalCoefficient();
 	happy.change(d);
 	//std::cout << "happy: " << happy.Value() << std::endl;
 }
 
 void NPC_Actor::Change_Angry(double d)
 {
+	d *= EmotionalCoefficient();
 	angry.change(d);
 	//std::cout << "angry: " << angry.Value() << std::endl;
 }
@@ -509,6 +514,12 @@ void NPC_Actor::WriteToFile(int attempt)
 
 		}
 	}
+
+	string s = "Angry" +  std::to_string(angry.Value());
+	myfile << s << std::endl;
+
+	s = "happy" + std::to_string(angry.Value());
+	myfile << s << std::endl;
 
 	myfile << "replans: " + std::to_string(Replans) << std::endl;
 
