@@ -5,6 +5,8 @@
 #include "Input.h"
 
 enum State { menu, game, close };
+
+// splash screen can choose to exit or play game
 class SplashScreen
 {
 private:

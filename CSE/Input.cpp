@@ -7,10 +7,8 @@
 
 Input::Input()		//constructor to initialise variables
 {
-	for (int i = 0; i<256; i++)	//all keys down by default
-	{
+	for (int i = 0; i<256; i++)	
 		keys[i] = not_pressed;
-	}
 
 	distanceMoved = 0;
 	left, right, middle = not_pressed;
@@ -18,7 +16,7 @@ Input::Input()		//constructor to initialise variables
 	MouseX, MouseY, oldMouseX, oldMouseY = 0;	//many of these are not rquired for this application
 }
 
-Input::~Input()		//constructor to initialise variables
+Input::~Input()
 {
 
 }

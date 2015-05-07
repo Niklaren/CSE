@@ -4,6 +4,7 @@
 
 class Actor;
 
+// A location within the scene that characters can move to and act in. Could later expand specific subclasses for specific stages.
 class Stage
 {
 private:
@@ -15,6 +16,7 @@ public:
 	Stage(std::string image, std::string name);
 	~Stage();
 
+	// Add and Remove actions as a result of entering or leaving the area
 	void AddLocationActions(Actor* p);
 	void RemoveLocationActions(Actor* p);
 

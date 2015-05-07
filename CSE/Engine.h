@@ -22,11 +22,8 @@
 enum InputType {LDown, LUp, KeyDown, KeyUp, MouseMove};
 
 #define MAX_ACTORS 4
-// would likely be better to have them start at 0 maybe? then have NPC_MAX
-// problem with this is it would put fate as no longer first. so for now:
-#define NPC_ACTOR_START 2
-//#define NPC_ACTOR_END 4
 
+// Engine class. encompasses the main game loop and everything required to operate this
 class Engine
 {
 protected:
@@ -36,26 +33,24 @@ protected:
 	HistoryBook historyBook;
 	Planner planner;
 	WorldState worldstate;
-	Menu menu;
 
+	// stages
 	Stage* offStage = new Stage("Assets/l_stage.png", "offStage");
-	//Stage* camp = new Stage("camp.bmp", "camp");
 	Stage* path = new Stage("Assets/l_path.png", "path");
 	Stage* forest = new Stage("Assets/l_forest.png", "forest");
 	Stage* cabin = new Stage("Assets/l_cabin.png", "cabin");
 	Stage* lodge = new Stage("Assets/l_lodge.png", "lodge");
-	
-
+	// characters
 	Player_Actor *Protagonist = new Player_Actor("You", path, historyBook);
 	NPC_Actor* Wolf = new NPC_Actor("Assets/c_wolf.txt", &worldstate, &planner, forest, historyBook);
 	NPC_Actor* Lumberjack = new NPC_Actor("Assets/c_lumberjack.txt", &worldstate, &planner, cabin, historyBook);
 	NPC_Actor* Grandma = new NPC_Actor("Assets/c_grandma.txt", &worldstate, &planner, lodge, historyBook);
 	LRR_DramaManager *Fate = new LRR_DramaManager(offStage, &worldstate, historyBook);
+	// list for actors + list for NPCs specifically
 	vector<Actor*> actors;
 	vector<NPC_Actor*> NPCs;
 	
-	sf::Clock clock;
-	sf::Time time;
+	// check for if the player is ready to act/is allowed act
 	bool executePlans = true;
 	bool playerAct = true;
 
@@ -71,9 +66,6 @@ public:
 	bool Operate();
 
 	void GetUserInput();
-
-	void HandleInput(InputType);
-	void HandleInput(InputType, float x, float y);
 
 	void Redraw(sf::RenderWindow&);
 };

@@ -9,38 +9,37 @@ HistoryBook::HistoryBook()
 {
 	if (!font.loadFromFile("Assets/arial.ttf"))
 	{	/*error;*/	}
-	//eventsText.setFont(font);
-	//eventsText.setPosition(sf::Vector2f(50, 260));
-	//eventsText.setCharacterSize(24);
 
 	eventsText.setFont(font);
 	eventsText.setPosition(sf::Vector2f(10, 460));
 	eventsText.setCharacterSize(20);
 	eventsText.setColor(sf::Color::Black);
 
-	//eventsRect.left = 50;
-	//eventsRect.right = 400;
-	//eventsRect.top = 250;
-	//eventsRect.bottom = 300;
-
 	texture.loadFromFile("Assets/text frame2.png");
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(0, 450));
 }
 
-
 HistoryBook::~HistoryBook()
 {
 }
-
+// push action to the history book
 void HistoryBook::ExecuteAction(Action* newestEvent_)
 {
 	Action* event = newestEvent_;
 	eventHistory.push_back(event);
 }
+// events become older as time moves forward
+void HistoryBook::TimeForward()
+{
+	for (unsigned int event_iter(0); event_iter < eventHistory.size(); event_iter++){
+		eventHistory[event_iter]->MomentsPass();
+	}
+	time++;
+}
 
-void HistoryBook::LookupEvent(string event)
-{}
+//void HistoryBook::LookupEvent(string event)
+//{}
 
 int HistoryBook::TimeElapsedSince(std::string event)
 {
@@ -51,19 +50,19 @@ int HistoryBook::TimeElapsedSince(std::string event)
 	return -1;
 }
 
-int HistoryBook::TimeElapsedSince(std::string event, Actor* a)
+int HistoryBook::TimeElapsedSince(std::string event, Stage* s)
 {
 	for (unsigned i = eventHistory.size(); i-- > 0;){
-		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Subject() == a)
+		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Location() == s)
 			return eventHistory[i]->MomentsSinceExecution();
 	}
 	return -1;
 }
 
-int HistoryBook::TimeElapsedSince(std::string event, Stage* s)
+int HistoryBook::TimeElapsedSinceSubject(std::string event, Actor* a)
 {
 	for (unsigned i = eventHistory.size(); i-- > 0;){
-		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Location() == s)
+		if (eventHistory[i]->GetVerb() == event && eventHistory[i]->Get_Subject() == a)
 			return eventHistory[i]->MomentsSinceExecution();
 	}
 	return -1;
@@ -90,16 +89,19 @@ bool HistoryBook::HaventDoneEventToTargetBefore(Actor* a, Actor* b, std::string 
 
 bool HistoryBook::HaventDoneEventInLocationBefore(Actor* a, Stage* l, std::string event){
 	for (unsigned i = eventHistory.size(); i-- > 0;){
-			if ((eventHistory[i]->GetVerb() == event) && (a == eventHistory[i]->Get_Subject()) && (l == eventHistory[i]->Get_Location()))
-				return false;
+		if ((eventHistory[i]->GetVerb() == event) && (a == eventHistory[i]->Get_Subject()) && (l == eventHistory[i]->Get_Location()))
+			return false;
 	}
 	return true;
 }
 
-bool HistoryBook::HaventDoneEventSince(Actor*, std::string event, int moments)
+bool HistoryBook::HaventDoneEventSince(Actor* a, std::string event, int moment)
 {
-
-	return false;
+	for (unsigned i = eventHistory.size(); i-- > 0;){
+		if ((eventHistory[i]->GetVerb() == event) && (a == eventHistory[i]->Get_Subject()) && ((time - eventHistory[i]->MomentsSinceExecution()) > moment))
+			return false;
+	}
+	return true;
 }
 
 bool HistoryBook::EventJustHappened(std::string event)
@@ -128,10 +130,7 @@ bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 
 	for (unsigned i = eventHistory.size(); i-- > 0;){
 		if ((eventHistory[i]->MomentsSinceExecution() == 0) && (eventHistory[i]->Get_Location()==s)){
-			//sf::Text eventsText;
-			//eventsText.setFont(font);
 			eventsText.setPosition(sf::Vector2f(10, textY));
-			//eventsText.setCharacterSize(20);
 			
 			sf::String s = eventHistory[i]->GetSentence();
 			unsigned offset(0);
@@ -150,7 +149,6 @@ bool HistoryBook::Draw(sf::RenderWindow &window, Stage* s)
 			}
 
 			eventsText.setString(s);
-			
 
 			window.draw(eventsText);
 			textY += 30;
@@ -173,12 +171,4 @@ void HistoryBook::WriteToFile(int attempt)
 		myfile << eventHistory[i]->GetSentence() << std::endl;
 	}
 	myfile.close();
-}
-
-void HistoryBook::TimeForward()
-{
-	for (unsigned int event_iter(0); event_iter < eventHistory.size(); event_iter++){
-		eventHistory[event_iter]->MomentsPass();
-	}
-	time++;
 }

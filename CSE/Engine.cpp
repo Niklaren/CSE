@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Engine.h"
-//#include <map>
 
 
 Engine::Engine(Input* input_, int attempt_)
@@ -31,8 +30,6 @@ void Engine::Init()
 	Fate->SetLocations(path, forest, cabin, lodge, offStage);
 
 	Fate->Init();
-
-	clock.restart();
 }
 
 Engine::~Engine()
@@ -40,23 +37,14 @@ Engine::~Engine()
 
 }
 
+// One engine loop
 bool Engine::Operate()
 {
-	// move time forward
-	time = sf::seconds(5.0f) - clock.getElapsedTime();
-
-	//
-
-	//if (time.asSeconds() < 0.0f)
-	//{
-	//	std::cout << "5" << endl;
-	//	executePlans = true;
-	//}
-
+	
 	if (executePlans){
 		executePlans = false;
 		playerAct = true;
-		clock.restart();
+		//clock.restart();
 
 		// the last moment has passed and next moment is occuring.
 		for (unsigned actor_iter(0); actor_iter < actors.size(); actor_iter++){
@@ -72,10 +60,6 @@ bool Engine::Operate()
 
 		//  plans execute
 		for (unsigned actor_iter(0); actor_iter < actors.size(); actor_iter++){ // every actor in Actors[]
-
-			// relax actor moods
-
-			// if actor is in the scene? // can do this in ready to execute??
 
 			// for every plan
 			for (int plan_iter = 0; plan_iter < actors[actor_iter]->GetNumPlans(); plan_iter++){
@@ -138,31 +122,36 @@ bool Engine::Operate()
 				//std::cout << "no plan remains " + NPCs[i]->GetName() << std::endl;
 				NPCs[i]->RePlan();
 			}
+			NPCs[i]->CoolMoods();
 		}
 
+		// if the player still has plans to execute they can't do more
 		if (Protagonist->GetNumPlans() > 0)
 			playerAct = false;
-
+		// set the characers the player can interact with
 		Protagonist->SetAvailableCharacters(NPCs);
-
+		// reset the choices menu
 		Protagonist->menu.Reset(Protagonist->Get_AvailableActions(), Protagonist->Get_AvailableLocations(), Protagonist->Get_AvailableCharacters());
 	}
+	// loop end
 
+	// look if user has chosen an action
 	GetUserInput();
 
-	//input.update();
-
-	if (Fate->ended){
-		worldstate.WriteToFile(attempt);
-		historyBook.WriteToFile(attempt);
-		for (unsigned i(0); i < NPCs.size(); i++){
-			NPCs[i]->WriteToFile(attempt);
-		}
-	}
+	// write output if and end is reached
+	// For testing only
+	//if (Fate->ended){
+	//	worldstate.WriteToFile(attempt);
+	//	historyBook.WriteToFile(attempt);
+	//	for (unsigned i(0); i < NPCs.size(); i++){
+	//		NPCs[i]->WriteToFile(attempt);
+	//	}
+	//}
 
 	return Fate->ended;
 }
 
+// get the user's choice of action
 void Engine::GetUserInput()
 {
 	string action;
@@ -172,52 +161,47 @@ void Engine::GetUserInput()
 	if (!playerAct)
 		Protagonist->menu.AllUnavailable();
 
+	// our player chose an option
 	if (Protagonist->menu.HandleMenu(*input, action, target)){
-		executePlans = true;
+		executePlans = true;	// choice made execute all plans next cycle.
 
-		if (action == "Stray Off Path"){
+		// special cases for travel. could improve this
+		if (action == "Stray Off Path")
 			Protagonist->Plan(action, forest);
-		}
-		else if (action == "Go To Lodge"){
+		else if (action == "Go To Lodge")
 			Protagonist->Plan("Travel", lodge);
-		}
-		else if (action == "Turn Back"){
+		else if (action == "Turn Back")
 			Protagonist->Plan("Travel", path);
-		}
-		else if (action == "Continue Forward"){
+		else if (action == "Continue Forward")
 			Protagonist->Plan("Travel", cabin);
-		}
-		else if (action == "Flee"){
+		else if (action == "Flee")
 			Protagonist->Plan("Flee", cabin);
-		}
-		else if (action == "Knock Door"){
+		else if (action == "Knock Door")
 			Protagonist->Plan("Knock Door", Grandma);
-		}
 
-		//else if (action == "Answer"){
-		//	Protagonist->Plan(action, Wolf);
-		//}
-
+		// plan action on target
 		if (target == "Wolf")
 			Protagonist->Plan(action, Wolf);
 		else if (target == "Lumberjack")
 			Protagonist->Plan(action, Lumberjack);
 		else if (target == "Grandma")
 			Protagonist->Plan(action, Grandma);
-		else if (target == "path")
-			Protagonist->Plan(action, path);
-		else if (target == "forest")
-			Protagonist->Plan(action, forest);
-		else if (target == "cabin")
-			Protagonist->Plan(action, cabin);
-		else if (target == "lodge")
-			Protagonist->Plan(action, lodge);
+		// these were removed for special cases. could re-implment later.
+		//else if (target == "path")
+		//	Protagonist->Plan(action, path);
+		//else if (target == "forest")
+		//	Protagonist->Plan(action, forest);
+		//else if (target == "cabin")
+		//	Protagonist->Plan(action, cabin);
+		//else if (target == "lodge")
+		//	Protagonist->Plan(action, lodge);
 		else
-			Protagonist->Plan(action);
+			Protagonist->Plan(action);	// normal targetless action
 
 	}
 }
 
+// redraw all the elements of the game
 void Engine::Redraw(sf::RenderWindow &window)
 {
 	window.clear();
@@ -237,17 +221,4 @@ void Engine::Redraw(sf::RenderWindow &window)
 	Protagonist->menu.Draw(window);
 
 	window.display();
-}
-
-void Engine::HandleInput(InputType inputType)
-{
-	//assert(inputType == LDown || inputType == LUp);
-	//if (inputType == LDown) input.handleLMousePressed();
-	//else if (inputType == LUp) input.handleLMouseReleased();
-}
-void Engine::HandleInput(InputType inputType, float x, float y)
-{
-		//assert(inputType == MouseMove);
-		//input.MouseX = x;
-		//input.MouseY = y;
 }

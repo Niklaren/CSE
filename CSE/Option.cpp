@@ -3,48 +3,9 @@
 #include <string>
 #include <iostream>
 
+//#define WIDTH_PER_CHAR 15
 
-#define WIDTH_PER_CHAR 15
-
-//#define 
-
-//Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int width_)
-//{
-//	int x = x_ * MENU_ELEMENT_SIZE;
-//	int y = y_ * MENU_ELEMENT_SIZE;
-//	int width = width_ * MENU_ELEMENT_SIZE;
-//	
-//	sf::IntRect textureRect_(x, y, width, MENU_ELEMENT_SIZE);
-//	textureRect = textureRect_;
-//	if (!texture.loadFromFile("Assets/menu.png", textureRect))
-//	{
-//		//error
-//		std::cout << "error" << std::endl;
-//	}
-//
-//	name = name_;
-//	optionRect.left = menu.left + x;
-//	optionRect.top = menu.top + y;
-//	optionRect.width = width;
-//	optionRect.height = MENU_ELEMENT_SIZE;
-//
-//	type = t;
-//	state = Unavailable;
-//	//pressed = false;
-//
-//	//int width = name.size() * WIDTH_PER_CHAR;
-//
-//
-//	//TextOut(hdc, leftX, topY, action.c_str, action.size);
-//
-//	//if (!font.loadFromFile("arial.ttf"))
-//	//{	/*error;*/	}
-//	//text.setFont(font);
-//	//text.setString(name);
-//	//text.setCharacterSize(24);
-//	//text.setPosition(sf::Vector2f((float)x_,(float)y_));
-//}
-
+// Initialize an option based on its position and width (and type)
 Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int width_)
 {
 	int x = x_ * MENU_ELEMENT_SIZE;
@@ -77,7 +38,6 @@ Option::Option(string name_, OptionType t, sf::IntRect menu, int x_, int y_, int
 	optionRect.top = menu.top + y;
 	optionRect.width = width;
 	optionRect.height = MENU_ELEMENT_SIZE;
-
 }
 
 Option::Option()
@@ -98,7 +58,7 @@ void Option::SetPosition(sf::IntRect menu, int x, int y)
 
 bool Option::Draw(sf::RenderWindow &window)
 {
-	//DrawTextW(hdc, name.c_str(), name.length(), &optionRect, DT_CENTER);
+	// load the correct menu asset
 	if (state == Selected)
 		texture.loadFromFile("Assets/menupressed.png", textureRect);
 	if (state == Available)
@@ -106,11 +66,11 @@ bool Option::Draw(sf::RenderWindow &window)
 	if (state == Locked ||	state == Unavailable || state == OnHold)
 		texture.loadFromFile("Assets/menuUnavailable.png", textureRect);
 
-
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f((float)optionRect.left, (float)optionRect.top));
 	window.draw(sprite);
 
+	// write text to display the name of named options
 	if (type >= Type_Act0Target){
 		sf::Font tfont;
 		tfont.loadFromFile("Assets/arial.ttf");

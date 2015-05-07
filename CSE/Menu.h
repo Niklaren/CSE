@@ -14,14 +14,11 @@ class Actor;
 class NPC_Actor;
 class Action;
 
-// for every action availabe to the player we must create an option
-// we should do this in code if possible
-
+// The menu displays all the options that the player can choose to act within the story
 class Menu
 {
-	std::vector<Option> options; // vector not strictly necessarry
-	//std::vector<Option> ActionOptions;
-	
+	std::vector<Option> options;
+
 	sf::Texture texture;
 	sf::IntRect menuRect;
 
@@ -31,7 +28,7 @@ public:
 	Menu();
 	~Menu();
 
-	void AddOption(string name, OptionType t, int width, int x = 0, int y = 0); //position too??? probably calculate later?
+	void AddOption(string name, OptionType t, int width, int x = 0, int y = 0);
 	int Get_NumberOfOptions(){ return options.size(); }
 
 	void Menu::Draw(sf::RenderWindow&);

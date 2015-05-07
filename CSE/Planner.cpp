@@ -17,9 +17,6 @@ Planner::~Planner()
 
 bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState ws, WorldStateProperty goal)
 {
-	//actor->Get_AvailableActions();
-	// reset/refresh variables/contents of available actions?
-
 	// get usable actions
 	vector<Action*> usableActions;
 	for (signed int action_iter(0); action_iter < actor->Get_NumActions(); action_iter++){
@@ -33,17 +30,15 @@ bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState w
 	vector<WorldStateProperty> goals;
 	goals.emplace_back(goal);
 
+	// start node
 	Node* start = new Node(nullptr, 0, goals, nullptr);
 
 	bool success = BuildPaths(start, solutions, usableActions, ws);
 
 	if (!success)
-	{
-		//vector<Action*> noresult;
-		//return noresult;
 		return success;
-	}
 
+	// find the cheapest plan
 	Node* cheapest = solutions.front();
 	for (unsigned int i(0); i < solutions.size(); i++)
 	{
@@ -51,21 +46,15 @@ bool Planner::Plan(NPC_Actor* actor, std::vector<Action*> &newplan, WorldState w
 			cheapest = solutions[i];
 	}
 
-	//vector<Action*> result;
-	queue<Action*> qresult;
 	Node* n = cheapest;
 	while (n != nullptr)
 	{
 		if (n->action != nullptr)
-		{
 			newplan.emplace_back(n->action);
-			//result.emplace_back(n->action);
-			qresult.push(n->action);
-		}
+
 		n = n->parent;
 	}
 
-	//return result;
 	return success;
 }
 
@@ -77,7 +66,6 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 		// for every action
 		for	(unsigned index = actionPool.size(); index-- > 0;){
 			// if actions effect meets an unsatisfied goal condition
-			//if (Check_Conditions(actionPool[index]->GetEffects(), parent->goalState)){
 			if (Compare_Conditions(ws, actionPool[index]->GetEffects(), parent->goalState)){
 				// we could perform a check seeing if we expect/need to travel here and either plan that or add running cost				
 
@@ -114,6 +102,7 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 }
 
 // function to check if the effect(s) of an action will fulfil at least one of the goal conditions
+// !! REPLACED BY CHECK CONDITIONS !!
 bool Planner::Check_Conditions(vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
 {
 	bool match = false;
@@ -127,6 +116,7 @@ bool Planner::Check_Conditions(vector<WorldStateProperty> effect, vector<WorldSt
 }
 
 // function to check if the effect(s) of an action will bring the world state closer to the goal
+// replaces Check Conditions
 bool Planner::Compare_Conditions(WorldState ws_, vector<WorldStateProperty> effect, vector<WorldStateProperty> goal)
 {
 	bool match = false;
@@ -147,23 +137,19 @@ vector<WorldStateProperty> Planner::makeNewGoal(vector<WorldStateProperty> oldGo
 	for (unsigned int iAE(0); iAE < actionEffects.size(); iAE++){
 		for (int iG(newGoal.size()-1); iG >= 0; iG--){
 			if (newGoal[iG].Key == actionEffects[iAE].Key){
-				if (newGoal[iG].Type == WST_int){
+				if (newGoal[iG].Type == WST_int)
 					newGoal[iG].ChangeValue(-actionEffects[iAE].ivalue);
-				}
-				else if (newGoal[iG].Type == WST_bool){
+				else if (newGoal[iG].Type == WST_bool)
 					newGoal[iG].SetValue(!actionEffects[iAE].bvalue);
-				}
 				else
-				{
 					newGoal.erase(newGoal.begin() + iG);
-				}
 			}
 		}
 	}
 
-	// add new conditions
-	// if actionconditions??
-	/*for (unsigned int iAC(0); iAC < actionConditions.size(); iAC++){
+	// add preconditions of our planned action to the goal
+	newGoal.insert(newGoal.end(), actionConditions.begin(), actionConditions.end()); // simple version just add all conditions
+	/*for (unsigned int iAC(0); iAC < actionConditions.size(); iAC++){	// complex version check if we already have a condition of this type.
 		bool alreadyPresent = false;
 		for (unsigned iG(0); iG < newGoal.size(); iG++){
 			if (newGoal[iG].Key == actionConditions[iAC].Key){
@@ -172,8 +158,7 @@ vector<WorldStateProperty> Planner::makeNewGoal(vector<WorldStateProperty> oldGo
 		}
 		if (!alreadyPresent)
 			newGoal.emplace_back(actionConditions[iAC]);
-	}	*/
-	newGoal.insert(newGoal.end(), actionConditions.begin(), actionConditions.end());
+	}*/
 
 	return newGoal;
 }

@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include <Windows.h>
 
 #include <SFML/Graphics.hpp>
 
@@ -34,13 +35,10 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "CSE", sf::Style::Titlebar | sf::Style::Close);
 	
-	//window.setPosition(sf::Vector2i(10, 50));
-	//window.setSize(sf::Vector2u(640, 480));
-	//window.setTitle("CSE");
-
 	//bool gameEnded = false;
 	state = menu;
 
+	// small instructions we can show on the console
 	std::cout << "Thanks for playing" << std::endl;
 	std::cout << "This is an interactive story game where the goal is to experience the story\nhowever you please.\n" << std::endl;
 
@@ -54,8 +52,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "There will be times when you cannot act, to progess press OK." << std::endl;
 
 	std::cout << "\nbest of luck and we apologize in advances for any bugs, errors or misspellings." << std::endl;
-
-	int attempt = 0;
+	// but we'll just hide the console
+	FreeConsole();
+	
+	int attempt = 0;	// calculate the number of playthroughs
 
 	while (window.isOpen())
 	{
@@ -75,7 +75,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			if (event.type == sf::Event::MouseButtonPressed){
 				if (event.mouseButton.button == sf::Mouse::Left)
-					//engine->HandleInput(LDown);
 					HandleInput(LDown);
 				if (event.mouseButton.button == sf::Mouse::Right)
 				{
@@ -83,17 +82,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			if (event.type == sf::Event::MouseButtonReleased){
 				if (event.mouseButton.button == sf::Mouse::Left)
-					//engine->HandleInput(LUp);
 					HandleInput(LUp);
 				if (event.mouseButton.button == sf::Mouse::Right)
 				{
 				}
 			}
 			if (event.type == sf::Event::MouseMoved)
-				//engine->HandleInput(MouseMove, float(event.mouseMove.x), float(event.mouseMove.y));
 				HandleInput(MouseMove, float(event.mouseMove.x), float(event.mouseMove.y));
 		}
 
+		// FSM for game/menu/exit
 		if (state == menu)
 		{
 			splash.Redraw(window);

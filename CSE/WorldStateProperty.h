@@ -4,10 +4,11 @@
 
 using namespace std;
 
+// possible events that need reaction. (not all get used)
 enum eWorldStateEvents
 {
 	WSE_Invalid = -1,
-	WSE_MoodChange,			//may need ones for target & self??
+	WSE_MoodChange,
 	WSE_PersonalityChange,
 	WSE_FoodGiven,
 	WSE_RequestEntry,
@@ -20,6 +21,7 @@ enum eWorldStateEvents
 	WSE_Greet,
 	WSE_Insult
 };
+// Enumeration of all the World State Properties
 enum eWorldStateProperties_Key
 {
 	WSP_Invalid = -1,
@@ -50,6 +52,7 @@ enum eWorldStateProperties_Key
 	WSP_LumberChopped,
 	WSP_Count
 };
+// Array for all the names of World State Properties. MUST MATCH ABOVE ENUMERATION
 const string WorldStateProperties_Key[WSP_Count]
 {
 	"WSP_ReactToWorldStateEvent",
@@ -78,6 +81,7 @@ const string WorldStateProperties_Key[WSP_Count]
 	"WSP_LumberOnStump",
 	"WSP_LumberChopped",
 };
+// Types of variable for World State Properties
 enum eWorldStateProperties_Type
 {
 	WST_Invalid = -1,
@@ -90,7 +94,7 @@ enum eWorldStateProperties_Type
 };
 
 
-//custom key/value Pair
+// A world State Property is essentially a custom key/value Pair
 struct WorldStateProperty
 {
 
@@ -128,8 +132,8 @@ struct WorldStateProperty
 		evalue = ws->evalue;
 	}
 
-	void SetWSProperty(eWorldStateProperties_Key Key_, eWorldStateProperties_Type Type_, int i_)
-	{
+	// different set methods depending on the type
+	void SetWSProperty(eWorldStateProperties_Key Key_, eWorldStateProperties_Type Type_, int i_){
 		Key = Key_;
 		Type = Type_;
 		if (Type == WST_int)
@@ -220,6 +224,7 @@ struct WorldStateProperty
 		return false;
 	}
 
+	// get the string value for the world property
 	string TextForOutput(int i)
 	{
 		

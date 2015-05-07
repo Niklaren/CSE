@@ -152,7 +152,7 @@ bool LRR_DramaManager::React()
 	}
 
 
-	if (historyBook->TimeElapsedSince("Arrive", red) > 4){
+	if (historyBook->TimeElapsedSinceSubject("Arrive", red) > 4){
 		red->RemoveAction("Observe");
 		red->RemoveAction("Greet");
 	}

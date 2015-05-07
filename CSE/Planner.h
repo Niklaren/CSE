@@ -3,20 +3,18 @@
 #include <queue>
 #include <vector>
 
-//#include "Action.h"
-//#include "WorldStateProperty.h"
-//#include "WorldState.h"
 #include "NPC_Actor.h"
 
 
-// forward declaration
+// forward declarations
 class Node;
 class Action;
-class Goal; //?
+class Goal;
 class NPC_Actor;
 class WorldState;
 struct WorldStateProperty;
 
+// A Node represents a point in the planners search. Nodes track the running costs, actions performed & the changing goal state
 class Node
 {
 public: 
@@ -33,22 +31,24 @@ public:
 	}
 };
 
+// The planner creates a plan to reach the given NPCs supplied goal.
 class Planner
 {
 public:
 	Planner();
 	~Planner();
 
-	//std::vector<Action*> Plan(NPC_Actor*, /*available actions,*/ WorldState, WorldStateProperty);
+	// Only plan is public everything else is hidden. returns true/false and modifies newplan if succesful.
 	bool Plan(NPC_Actor*, vector<Action*> &newplan, WorldState, WorldStateProperty);
 
 private:
 	bool BuildPaths(Node*, vector<Node*>&, vector<Action*>, WorldState);
-	bool IsInState(); // may not be necessary if world state class can check equality
-	bool IsCloser();
 
-	bool Check_Conditions(vector<WorldStateProperty> a, vector<WorldStateProperty> b);
+	// check or compare conditions to see if the effects of an action get us closer to the goal
+	bool Check_Conditions(vector<WorldStateProperty> a, vector<WorldStateProperty> b);	// replaced by compare.
 	bool Compare_Conditions(WorldState ws_, vector<WorldStateProperty> a, vector<WorldStateProperty> b);
+
+	// modifies the goal to incorporate the new pre-conditions
 	vector<WorldStateProperty> makeNewGoal(vector<WorldStateProperty> oldGoal, vector<WorldStateProperty> actionConditions, vector<WorldStateProperty> actionEffects);
 };
 

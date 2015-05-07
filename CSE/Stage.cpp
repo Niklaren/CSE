@@ -14,14 +14,14 @@ Stage::~Stage()
 {
 }
 
+// add the specific actions that can be done in the location
 void Stage::AddLocationActions(Actor* a)
 {
 	if (a->GetName() == "You"){
+		// different locations have different associated actions
+		// so it would be nice to split these up into subclasses
 		if (name == "path"){
 			a->AddAction("Go Home");
-
-			/*if (a->GetHistory()->HaventDoneEventBefore(a, "Stray Off Path"))
-				a->AddAction("Stray Off Path");*/
 
 			if (a->GetHistory()->HaventDoneEventBefore(a, "WalkPath")){
 				a->AddAction("Walk Path");
@@ -58,9 +58,12 @@ void Stage::AddLocationActions(Actor* a)
 	}
 }
 
+// add the specific actions that can be done in the location
 void Stage::RemoveLocationActions(Actor* a)
 {
 	if (a->GetName() == "You"){
+		// different locations have different associated actions
+		// so it would be nice to split these up into subclasses
 		if (name == "path"){
 			a->RemoveAction("Go Home");
 			a->RemoveAction("Stray Off Path");

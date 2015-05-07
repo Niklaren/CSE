@@ -2,6 +2,7 @@
 
 enum Pressed{ just_released = -1, not_pressed, just_pressed, pressed};
 
+// clas to track the user's input
 class Input
 {
 private:
@@ -23,7 +24,6 @@ public:
 	bool LMPressed(){ return left == pressed; }
 	bool LMjustPressed() { return left == just_pressed; }
 	bool LMjustReleased() { return left == just_released;}
-
 
 	void handleLMousePressed();
 	void handleLMouseReleased();
