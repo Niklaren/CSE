@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// apologize. in this scenario its for losing the food, but could be made to be more general.
 class Apologize :
 	public ActionTargeted
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// give the correct directions (to grandmas lodge)
 class GiveDirections :
 	public ActionTargeted
 {
@@ -14,7 +15,7 @@ public:
 
 	virtual bool GetUsable();
 
-	void ExecuteConsequences(WorldState*);
-	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
+	virtual void ExecuteConsequences(WorldState*);
+	virtual void EmotionalReaction(NPC_Actor*);
+	virtual float NPC_CalculateInclination();
 };

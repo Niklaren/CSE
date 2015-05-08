@@ -1,5 +1,9 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// wolf eats you/grandma.
+// depends on how you treat him how inclined he will be.
+// can only eat grandma if you mentioned her previously.
 class WolfEat :
 	public ActionTargeted
 {

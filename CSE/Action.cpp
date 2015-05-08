@@ -16,13 +16,14 @@ Action::~Action()
 {
 }
 
-bool Action::React()
+bool Action::React() // by default only subjects reacts.
 {
 	bool reaction = subject->React();
 
 	return reaction;
 }
 
+// default response is to set the location the action occured (if there was previoulsy none)
 void Action::ExecuteConsequences(WorldState* ws)
 {
 	if (!locationOccured)
@@ -31,6 +32,12 @@ void Action::ExecuteConsequences(WorldState* ws)
 	}
 }
 
+// by default no emotional reaction
+void Action::EmotionalReaction(NPC_Actor* affectedActor)
+{
+}
+
+// default = subject verbs. (eg Nick types)
 std::string Action::GetSentence(){
 	std::string eventText = "";
 	std::string ssubject = subject->GetName();
@@ -40,6 +47,7 @@ std::string Action::GetSentence(){
 	return eventText;
 }
 
+// check if action is ready to execute
 bool Action::ReadyToExecute() 
 { 
 	if (momentsFromExecution != 0)
@@ -48,8 +56,8 @@ bool Action::ReadyToExecute()
 	if (!GetUsable())
 		return false;
 
-	if (locationOccured != nullptr){
-		if ((subject->GetLocation() != locationOccured) && (subject->GetName() != "fate")){
+	if (locationOccured != nullptr){	// if its not at its required location we should delay this action & travel there.
+		if ((subject->GetLocation() != locationOccured) && (subject->GetName() != "fate")){ //can improve with planning travel upgrade.
 			subject->Wait(1);
 			subject->Plan("Travel", locationOccured, 0);
 			return false;
@@ -64,6 +72,7 @@ void Action::MomentsPass() {
 	momentsFromExecution--;
 	return;
 }
+
 // - weights favor a, + weight favours b
 double Action::Blend(double a, double b, double weight)
 {

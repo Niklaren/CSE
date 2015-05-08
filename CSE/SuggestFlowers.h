@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// suggest red pick flowers to buy time to eat grandma
 class SuggestFlowers :
 	public ActionTargeted
 {

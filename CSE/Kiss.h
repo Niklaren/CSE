@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// 
 class Kiss :
 	public ActionTargeted
 {

@@ -55,9 +55,7 @@ bool Player_Actor::React()
 void Player_Actor::Plan(string action)
 {
 	// actions that do not have an object;
-	if (action == "OK")
-		plans.push_back(new OK(this, 1));
-	else if (action == "Observe")
+	if (action == "Observe")
 		plans.push_back(new Observe(this, 1));
 	else if (action == "Go Home")
 		plans.push_back(new GoHome(this, 1));
@@ -119,20 +117,20 @@ void Player_Actor::Plan(string action, Actor* object_)
 	}
 }
 
-void Player_Actor::Plan(string action, NPC_Actor* a1, NPC_Actor* a2)
-{
-	if (action == "Intervene"){
-		Intervene* intervene_ = new Intervene(this, a1, a2, 1);
-		plans.push_back(intervene_);
-	}
-}
+//void Player_Actor::Plan(string action, NPC_Actor* a1, NPC_Actor* a2)
+//{
+//	if (action == "Intervene"){
+//		Intervene* intervene_ = new Intervene(this, a1, a2, 1);
+//		plans.push_back(intervene_);
+//	}
+//}
 
 void Player_Actor::Plan(string action, Stage* l, int moments)
 {
 	if (action == "Travel")
 		plans.push_back(new Travel(this, l, moments));
-	if (action == "Leave")
-		plans.push_back(new Leave(this, moments));
+	//if (action == "Leave")
+	//	plans.push_back(new Leave(this, moments));
 	if (action == "Arrive")
 		plans.push_back(new Arrive(this, l, moments));
 	else if (action == "Stray Off Path")

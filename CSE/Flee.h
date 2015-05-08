@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 
+// flee from the dangerous wolf if he looks to attack you.
 class Flee :
 	public Action
 {

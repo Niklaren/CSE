@@ -39,7 +39,7 @@ void ChopLog::Init()
 
 std::string ChopLog::GetSentence()
 {
-	return subject->GetName() + " Chops the log and tosses the pieces on the pile";
+	return subject->GetName() + " chops the log and tosses the pieces on the pile";
 }
 
 void ChopLog::ExecuteConsequences(WorldState* ws)

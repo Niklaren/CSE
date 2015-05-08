@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// grandma can choose to reprimand you for losing the food.
 class Reprimand :
 	public ActionTargeted
 {

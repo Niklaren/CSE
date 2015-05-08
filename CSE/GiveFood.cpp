@@ -31,7 +31,7 @@ std::string GiveFood::GetSentence()
 	if (verb == "GiveFoodWolf")
 		return "The wolf looks awfully hungry... you hand over the basket";
 	if (verb == "GiveFoodGrandma")
-		return "i brought food for you Grandma.";
+		return "I brought food for you Grandma.";
 	if (verb == "GiveFoodLumberjack")
 		return "You give the lumberjack your food.";
 	return "GiveFood";

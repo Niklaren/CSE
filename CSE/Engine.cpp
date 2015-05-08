@@ -180,7 +180,7 @@ void Engine::GetUserInput()
 			Protagonist->Plan("Knock Door", Grandma);
 
 		// plan action on target
-		if (target == "Wolf")
+		else if (target == "Wolf")
 			Protagonist->Plan(action, Wolf);
 		else if (target == "Lumberjack")
 			Protagonist->Plan(action, Lumberjack);

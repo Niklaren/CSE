@@ -8,10 +8,7 @@
 #include <queue>
 
 #include "NPC_Actor.h"
-//#include "Goal.h"
-//#include "Planner.h"
-//#include "WorldState.h"
-//#include "BoundedNum.h"
+
 
 NPC_Actor::NPC_Actor(string FileName, WorldState* w, Planner* p, Stage* l, HistoryBook& hb)
 	: Actor(hb)
@@ -165,22 +162,18 @@ void NPC_Actor::LoadFromFile(string FileName)
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 }
 
+// Actions will specify if an NPC may react. currently this is when its the object of anothers action. and needs to force replan
+// also it may not be necessary to perform the check of being the object. LEAVE FOR NOW though
 bool NPC_Actor::React()
 {
-	//Action reactingEvent = historyBook.GetLastEvent();
-	
-	//historyBook->GetLastEvent()->ExecuteConsequences(ws);
-	//historyBook->GetLastEvent()->EmotionalReaction(this);
-
 	// if we we are the object of the last event we have to replan.
 	if (historyBook->GetLastEvent()->HasObject()){
 		if (historyBook->GetLastEvent()->Get_Object()->GetName() == name){
-			//Wait();
-			//if (){
-				AcquireGoal();
-				RePlan();
-				return true; // !! should check if a new goal/plan is made before returning true
-			//}
+			Wait();
+			if(AcquireGoal()){
+				if(RePlan())
+					return true;
+			}
 		}
 	}
 
@@ -198,7 +191,7 @@ void NPC_Actor::AddGoal(Goal newgoal)
 	goals.emplace_back(newgoal);
 }
 
-bool NPC_Actor::AcquireGoal()
+bool NPC_Actor::AcquireGoal() // the most relevant goal becomes the current goal
 {
 	bool acquired = false;
 	//for (std::vector<Goal>::iterator i = goals.begin(); i!= goals.end(); i++){
@@ -211,6 +204,7 @@ bool NPC_Actor::AcquireGoal()
 	return acquired;
 }
 
+// erase the goal from our goals list and blank the current goal.
 void NPC_Actor::RemoveCurrentGoal()
 {
 	for (unsigned i = goals.size(); i-- > 0;){
@@ -222,11 +216,12 @@ void NPC_Actor::RemoveCurrentGoal()
 	}
 }
 
+// remove the specified goal
 void NPC_Actor::RemoveGoal(string toRemove)
 {
 	for (unsigned i = goals.size(); i-- > 0;){
 		if (goals[i].GetName() == toRemove){
-			if (goals[i] == current){
+			if (goals[i] == current){	//if its the current goal remove it from there also
 				current.SetWSProperty(WSP_Invalid, WST_Invalid, 0);
 				current.SetRelevance(0);
 			}
@@ -235,6 +230,7 @@ void NPC_Actor::RemoveGoal(string toRemove)
 	}
 }
 
+// if the world state is as we'd like then the goal is met.
 bool NPC_Actor::IsGoalComplete()
 {
 	if (ws->MeetsWorldState(current))
@@ -247,9 +243,10 @@ void NPC_Actor::ClearPlans()
 	plans.clear();
 }
 
-void NPC_Actor::RePlan()
+// something has happened and we need a new plan
+bool NPC_Actor::RePlan()
 {
-	Replans++;
+	//Replans++;
 	
 	std::vector<Action*> newplan;
 
@@ -265,14 +262,19 @@ void NPC_Actor::RePlan()
 	else{
 		//no plan
 		RemoveCurrentGoal();
+
+		if (AcquireGoal())
+			RePlan();
+		else
+			return false;
 	}
+	return true;
 }
 
+// plan any of our available actions
 void NPC_Actor::Plan(Action* action, int moments = 1)
 {
-	if (action->GetVerb() == "OK")
-		plans.push_back(new OK(this, moments));
-	else if (action->GetVerb() == "Travel")
+	if (action->GetVerb() == "Travel")
 		plans.push_back(new Travel(this, moments));
 	else if (action->GetVerb() == "WolfEatLunch")
 		plans.push_back(new WolfEatLunch(this, moments));
@@ -281,7 +283,6 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 	else{
 		//error
 	}
-
 
 	//location specific
 	if (action->GetVerb() == "ChopLog")
@@ -345,63 +346,23 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		//error
 	}
 
+	// this approach is nice but its preferable to new up an object. we could revisit this later.
 	//Action* a = action;
-	//a->AddExecutiontime(moments);
+	//a->AddExecutiontime(moments); // adding execution time to the pointed object is not good. could set execution time. still not ideal.
 	//plans.push_back(a);
 }
 
+// plan travel
 void NPC_Actor::Plan(string action, Stage* l, int moments)
 {
 	// actions that do not have an object;
 	if (action == "Travel")
 		plans.push_back(new Travel(this, l, moments));
-	else if (action == "Leave")
-		plans.push_back(new Leave(this, moments));
+	//else if (action == "Leave")
+	//	plans.push_back(new Leave(this, moments));
 	else if (action == "Arrive")
 		plans.push_back(new Arrive(this, l, moments));
 
-}
-
-void NPC_Actor::Plan(string action, int moments = 1, Actor* object_ = NULL)
-{
-	// actions that do not have an object;
-	if (action == "OK")
-		plans.push_back(new OK(this, moments));
-
-
-	else{
-		//error
-	}
-
-	// actions that have an object;
-	if (!object_)
-	{
-		//std::cout << "object null" << std::endl;
-		return;
-	}
-
-	if (action == "QueryIdentity")
-		plans.push_back(new QueryIdentity(this, object_, moments));
-	else if (action == "QueryPurpose")
-		plans.push_back(new QueryPurpose(this, object_, moments));
-	if (action == "QueryBasket")
-		plans.push_back(new QueryBasket(this, object_, moments));
-	else if (action == "WolfGreetRed")
-		//plans.push_back(new GreetRed(this, object_, moments));
-		plans.push_back(new WolfGreetRed(this, object_, moments));
-	else if (action == "SuggestFlowers")
-		plans.push_back(new SuggestFlowers(this, object_, moments));
-	else if (action == "WolfEat")
-		plans.push_back(new WolfEat(this, object_, moments));
-	else if (action == "RequestEntry")
-		plans.push_back(new RequestEntry(this, object_, moments));
-	else if (action == "RefuseEscort")
-		plans.push_back(new RefuseEscort(this, object_, moments));
-	else if (action == "AgreeEscort")
-		plans.push_back(new AgreeEscort(this, object_, moments));
-	else{
-		//error
-	}
 }
 
 bool NPC_Actor::Draw(sf::RenderWindow &window)
@@ -410,12 +371,14 @@ bool NPC_Actor::Draw(sf::RenderWindow &window)
 	return true;
 }
 
+// moods cool after every moment back towards 0
 void NPC_Actor::CoolMoods()
 {
 	happy.DivideBy(10);
 	angry.DivideBy(10);
 }
 
+// Change Personalities/Moods
 void NPC_Actor::Change_Happy(double d)
 {
 	d *= EmotionalCoefficient();
@@ -521,7 +484,7 @@ void NPC_Actor::WriteToFile(int attempt)
 	s = "happy" + std::to_string(angry.Value());
 	myfile << s << std::endl;
 
-	myfile << "replans: " + std::to_string(Replans) << std::endl;
+	//myfile << "replans: " + std::to_string(Replans) << std::endl;
 
 	myfile.close();
 }

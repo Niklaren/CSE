@@ -19,29 +19,33 @@ const string s_Traits[5]{ "open", "conscientious", "extraverted", "agreeable", "
 enum Chars{ red = 1, wolf, lumberjack, grandma };
 const string s_Chars[5]{ "fate", "red", "wolf", "lumberjack", "grandma" };
 
-
+// subclass of Actor is the NPC Actor
+// have to operate autonomously in response to the changing scenarios that could occur.
+// Has Personality & moods & perceptions to help decide action
 class NPC_Actor : public Actor
 {
 private:	
+	// bounded number for Traits
+	BoundedNum selfTraits[5];	// traits use Trait enumeration. currently 5 factor model
+	BoundedNum perceivedTraits[5][5];	//perceive every trait of every actor in the scene
+	BoundedNum happy;			// if more moods were introduced might like to have array for these too
+	BoundedNum angry;			// might alos be worthwhile to perceive moods.
 
-	BoundedNum selfTraits[5];
-	BoundedNum perceivedTraits[5][5]; //can change this to [5][4] and use getID-1 is change_pTrait
-
-	BoundedNum happy;
-	BoundedNum angry;
-
+	// NPCs need goals to act towards. they can have multiple goals. but only work towards 1 at any time.
+	// they need the planner to figure out how to get a plan that will lead from the world state to their goal
 	vector<Goal> goals;
 	Goal current;
 	Planner* planner;
 	WorldState* ws;
 
-	int Replans;
+	//int Replans;	// we just use this to keep track of how many times agents replan. no operational function
 
 	sf::Texture texture;
 	sf::Sprite sprite;
 	sf::IntRect actorRect;
 	int screenPosx, screenPosy;
 
+	// the neuroticism trait affects how greatly a characters mood will swing
 	double EmotionalCoefficient() { return (selfTraits[neurotic].Value() + 1); }
 
 public:
@@ -59,6 +63,7 @@ public:
 	void SetWorldState(WorldState* w) { ws = w; }
 	void SetPlanner(Planner* p) { planner = p; }
 
+	// goal related functionality
 	void AddGoal(Goal);
 	bool AcquireGoal();
 	void RemoveCurrentGoal();
@@ -67,12 +72,13 @@ public:
 	int GetNumGoals() { return goals.size(); }
 
 	void ClearPlans();
-	void RePlan();
-	virtual void Plan(Action*, int );
-	virtual void Plan(string verb, int moments, Actor* target);
+	bool RePlan();
+	void Plan(Action*, int );
 	virtual void Plan(string action, Stage* l, int moments = 1);
+	//virtual void Plan(string verb, int moments, Actor* target);
 	//virtual void Plan(string action, int m = 1, Actor* t = nullptr, Stage* l = nullptr);
 
+	// change of personality traits
 	void CoolMoods();
 	void Change_Happy(double);
 	void Change_Angry(double);

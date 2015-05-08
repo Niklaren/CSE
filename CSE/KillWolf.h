@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// lumberjack can slay the wolf with his axe. leads to wolf slain ending
 class KillWolf :
 	public ActionTargeted
 {

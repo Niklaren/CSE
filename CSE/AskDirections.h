@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// ask directions. prompts a response to this event
 class AskDirections :
 	public ActionTargeted
 {

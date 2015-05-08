@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 
+// grandma will open the door in response to a request for entry
 class OpenDoor :
 	public Action
 {

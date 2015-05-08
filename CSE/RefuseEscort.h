@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// lumberjack can refuse your escort request if it does not align with his inclinations.
 class RefuseEscort :
 	public ActionTargeted
 {

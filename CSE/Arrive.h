@@ -2,6 +2,8 @@
 #include "Action.h"
 #include "Stage.h"
 
+// after characters leave an area they arrive elsewhere (in the same moment (could be made to take more moments)).
+// since there's a leave and an arrive, events occur at both locations. meaning reactions can happen and sentences displayed for both.
 class Arrive :
 	public Action
 {
@@ -17,9 +19,9 @@ public:
 
 	std::string GetSentence();
 
-	void ExecuteConsequences(WorldState*);
-	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
+	virtual void ExecuteConsequences(WorldState*);
+	virtual void EmotionalReaction(NPC_Actor*);
+	virtual float NPC_CalculateInclination();
 
 	virtual bool ReadyToExecute();
 };

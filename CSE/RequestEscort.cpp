@@ -39,6 +39,7 @@ void RequestEscort::ExecuteConsequences(WorldState* ws)
 
 }
 
+// gives the target a goal of responding to the request.
 void RequestEscort::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){

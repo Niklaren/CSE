@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// can give flowers to somebody to increase their perception of you.
 class GiveFlowers :
 	public ActionTargeted
 {

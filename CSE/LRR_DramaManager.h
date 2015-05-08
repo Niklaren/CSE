@@ -4,10 +4,12 @@
 #include "Player_Actor.h"
 #include "DramaManager.h"
 
+// Drama Manager specifc to Little Red Riding Hood
+// So contains all the characters & locations required by the Story
+// Drama Manager is a special Actor with unique privileges and responsibilities in the story
 class LRR_DramaManager : public DramaManager
 {
 private:
-	//vector<NPC_Actor*> NPCs;
 	Player_Actor* red;
 	NPC_Actor*wolf, *lumberjack, *grandma;
 	Stage* path, *forest, *cabin, *lodge, *offstage;
@@ -24,8 +26,7 @@ public:
 
 	virtual bool React();
 	virtual void Plan(string);
-	virtual void Plan(string, Actor*);
-	virtual void Plan(string, Actor*, Actor*);
+	virtual void Plan(string, Actor*){}
 	virtual void CheckForPlanning();
 
 };

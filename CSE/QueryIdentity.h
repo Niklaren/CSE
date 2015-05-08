@@ -1,5 +1,8 @@
 #pragma once
 #include "Action.h"
+
+// wolf asks red whe she is.
+// part of the interrogation sequence
 class QueryIdentity :
 	public ActionTargeted
 {

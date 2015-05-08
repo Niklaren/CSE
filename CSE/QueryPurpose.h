@@ -1,5 +1,8 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// wolf asks red why shes in the forest.
+// part of the interrogation sequence.
 class QueryPurpose :
 	public ActionTargeted
 {

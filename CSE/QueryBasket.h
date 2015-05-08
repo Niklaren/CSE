@@ -1,5 +1,8 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// wolf asks red whats in the box.
+// part of the interrogation sequence
 class QueryBasket :
 	public ActionTargeted
 {

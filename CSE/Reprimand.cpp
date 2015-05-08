@@ -67,11 +67,12 @@ void Reprimand::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
+// inclination based off how mean she is and how lazy she perceives you to be. 
 float Reprimand::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double b = static_cast<NPC_Actor*>(subject)->Get_pConscientious(object->GetID());
-	double w = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
+	double w = static_cast<NPC_Actor*>(subject)->Get_Conscientious();	// weighting: the harderworking she is; the greater importance placed on you conscientiousness
 	double result = Blend(-a, -b, w);
 	return float(result);
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// ask for an escort home
+// can lead to wolf slain ending if successful
 class RequestEscort :
 	public ActionTargeted
 {

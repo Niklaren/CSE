@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 
+// lumberjack chops logs constantly
 class ChopLog :
 	public Action
 {

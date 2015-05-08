@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// walk down the path action from the first area.
 class WalkPath :
 	public Action
 {
@@ -14,5 +15,4 @@ public:
 	virtual bool GetUsable();
 
 	virtual void ExecuteConsequences(WorldState*);
-	virtual void EmotionalReaction(NPC_Actor*);
 };

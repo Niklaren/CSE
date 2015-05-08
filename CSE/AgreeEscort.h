@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// the lumberjack can agree to escort you, which leads to the wolf slain ending.
 class AgreeEscort :
 	public ActionTargeted
 {

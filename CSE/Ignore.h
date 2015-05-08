@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// ignore a question. rude, and so reflects poorly on the character.
 class Ignore :
 	public ActionTargeted
 {

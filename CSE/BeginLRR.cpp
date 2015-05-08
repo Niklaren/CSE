@@ -37,9 +37,9 @@ void BeginLRR::ExecuteConsequences(WorldState* ws)
 	//red->AddAction("Give Food");
 
 	// WOLF
-	wolf->AddAction("OK");
+	//wolf->AddAction("OK");
 	//wolf->AddAction("Travel");
-	wolf->AddAction("Eat");
+	//wolf->AddAction("Eat");
 
 	wolf->AddAction("WolfGreetRed", red);
 	wolf->AddAction("GiveDirections", red);
@@ -66,7 +66,7 @@ void BeginLRR::ExecuteConsequences(WorldState* ws)
 	grandma->AddAction("Forgive", red);
 
 	// LUMBERJACK
-	lumberjack->AddAction("OK");
+	//lumberjack->AddAction("OK");
 
 	lumberjack->AddAction("ChopLog", cabin);
 	lumberjack->AddAction("LogOnstump", cabin);

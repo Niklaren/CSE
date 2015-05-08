@@ -25,6 +25,7 @@ void WolfEat::Init()
 {
 	verb = "WolfEat" + object->GetName();
 
+	// eating solves the wolf hungry goal.
 	//effect
 	WorldStateProperty effect1;
 	effect1.SetWSProperty(WSP_WolfHungry, WST_bool, false);
@@ -35,15 +36,13 @@ void WolfEat::Init()
 		WorldStateProperty condition1, condition2;
 		condition1.SetWSProperty(WSP_RedPanicked, WST_bool, true);
 		conditions.push_back(condition1);
-		//condition2.SetWSProperty(WSP_Location, WST_variable);
-		//conditions.push_back(condition2);
+
 	}
 	else if (verb == "WolfEatGrandma"){
 		WorldStateProperty condition1, condition2;
 		condition1.SetWSProperty(WSP_DoorOpen, WST_bool, true);
 		conditions.push_back(condition1);
-		//condition2.SetWSProperty(WSP_Location, WST_variable);
-		//conditions.push_back(condition2);
+
 	}
 }
 
@@ -51,7 +50,7 @@ std::string WolfEat::GetSentence()
 {
 	if (HasObject()){
 		if (object->GetName() == "Wolf"){
-			return "The wolf licks his lips and closes it. This doesn't end well for you.";
+			return "The wolf closes in on you. And eats you down.";
 		}
 		else
 		{
@@ -69,22 +68,27 @@ void WolfEat::ExecuteConsequences(WorldState* ws)
 	//ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, false);
 
 	if (verb == "WolfEatYou"){
-		ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, false);
-		ws->WSProperties[WSP_RedEaten].SetWSProperty(WSP_RedEaten, WST_bool, true);
+		ws->WSProperties[WSP_WolfHungry].SetValue(false);
+		ws->WSProperties[WSP_RedEaten].SetValue(true);
 	}
 	if (verb == "WolfEatGrandma"){
-		ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, false);
-		ws->WSProperties[WSP_GrandmaEaten].SetWSProperty(WSP_GrandmaEaten, WST_bool, true);
+		ws->WSProperties[WSP_WolfHungry].SetValue(false);
+		ws->WSProperties[WSP_GrandmaEaten].SetValue(true);
 	}
 }
 
 void WolfEat::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == subject){
-
+		affectingActor->Change_Open(-0.1);
+	}
+	if (affectingActor == object){
+		// not much point since they're dead now.
 	}
 }
 
+// different inclination depending on target. could use the same formula.
+// but a calmer more conniving character would pick the easier meal (grandma). if he's angry he'll go for the target in front.
 float WolfEat::NPC_CalculateInclination()
 {
 	if (verb == "WolfEatYou"){

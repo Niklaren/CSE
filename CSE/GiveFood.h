@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// give food, to grandma is a successful delivery. to the wolf will sate his hunger. but result in a failed delivery.
 class GiveFood :
 	public ActionTargeted
 {

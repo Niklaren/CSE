@@ -60,13 +60,15 @@ void Intimidate::ExecuteConsequences(WorldState* ws)
 void Intimidate::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == object){
-
+		affectingActor->Change_pAgreeable(subject->GetID(),-0.1);
 	}
 	if (affectingActor == subject){
-
+		affectingActor->Change_Angry(0.1);
 	}
 }
 
+// inclination based on how much the subject dislikes the target. and how disagreeable they are.
+// higher anger means that what they think of the target becomes more important.
 float Intimidate::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();

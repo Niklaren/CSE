@@ -67,6 +67,7 @@ void Forgive::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
+// unlikey to forgive if angry or dislikes you.
 float Forgive::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Angry();

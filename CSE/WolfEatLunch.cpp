@@ -46,17 +46,17 @@ void WolfEatLunch::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 
 	//ws->WSProperties[WSP_WolfHungry].SetWSProperty(WSP_WolfHungry, WST_bool, false);
-
 	ws->WSProperties[WSP_WolfHungry].SetValue(false);
 }
 
 void WolfEatLunch::EmotionalReaction(NPC_Actor* affectingActor)
 {
 	if (affectingActor == subject){
-
+		affectingActor->Change_Happy(0.1);
 	}
 }
 
+// no personality associated with eating lunch. just something we are happy to do.
 float WolfEatLunch::NPC_CalculateInclination()
 {
 	return 0.3f;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 
+// lumberjack will constantly chop wood.
 class LogOnStump :
 	public Action
 {

@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// wolf intimidates the character to give them some warning they are about to be eaten
 class Intimidate :
 	public ActionTargeted
 {

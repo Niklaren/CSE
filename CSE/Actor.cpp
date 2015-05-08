@@ -18,11 +18,10 @@ Actor::~Actor()
 {
 }
 
+// add targetless/locationless actions
 void Actor::AddAction(string action)
 {
-	if (action == "OK")
-		availableActions.push_back(new OK(this, 0));
-	else if (action == "Travel")
+	if (action == "Travel")
 		availableActions.push_back(new Travel(this, 0));
 	else if (action == "OpenDoor")
 		availableActions.push_back(new OpenDoor(this, 0));
@@ -31,20 +30,8 @@ void Actor::AddAction(string action)
 	else if (action == "WolfKnowsGrandmaReaction")
 		availableActions.push_back(new WolfKnowsGrandmaReaction(this, 0));
 
-	//else if (action == "CookGood")
-	//	availableActions.push_back(new CookGood(this, 0));
-	//else if (action == "CookBad")
-	//	availableActions.push_back(new CookBad(this, 0));
-	////else if (action == "FetchWater")
-	////	availableActions.push_back(new FetchWater(this, 0));
-	//else if (action == "FetchWood")
-	//	availableActions.push_back(new FetchWood(this, 0));
-	//else if (action == "Unpack")
-	//	availableActions.push_back(new Unpack(this, 0));
-	//else if (action == "BuildStove")
-	//	availableActions.push_back(new BuildStove(this, 0));
 }
-
+//add location dependant actions
 void Actor::AddAction(string action, Stage* location_)
 {
 	if (action == "ChopLog")
@@ -55,7 +42,7 @@ void Actor::AddAction(string action, Stage* location_)
 		availableActions.push_back(new GrabLog(this, location, 0));
 
 }
-
+// add trgeted actions
 void Actor::AddAction(string action, Actor* object_ = NULL)
 {
 	if (!object_)
@@ -129,33 +116,15 @@ void Actor::RemoveAllActions()
 	}
 }
 
-void Actor::Plan(string action)
-{
-	// http://stackoverflow.com/questions/493490/converting-a-string-to-a-class-name
-	//Type elementType = Type.GetType("Customer");
-	//Type listType = typeof(List<>).MakeGenericType(new Type[] { elementType });
-	//object list = Activator.CreateInstance(listType);
-
-	// alternate/simpler approach
-	// probably be a switch instead but w/e
-	if (action == "OK"){
-		
-	}
-	else if (false){
-		//else if action == bla ...
-	}
-	else{
-	//error
-	}
-}
-
+// hold off on executing an action for the delay period
 void Actor::Wait(int delay)
 {
 	for (int plan_iter(0); plan_iter < GetNumPlans(); plan_iter++){
-		GetPlan(plan_iter)->AddExecutiontime(delay);
+		GetPlan(plan_iter)->AddExecutionTime(delay);
 	}
 }
 
+// a moment has passed, lower all the execution times of actions by 1
 void Actor::TimeForward()
 {
 	for (int plan_iter(0); plan_iter < GetNumPlans(); plan_iter++){

@@ -64,24 +64,28 @@ bool Arrive::ReadyToExecute()
 {
 	if (momentsFromExecution == 0)
 	{
-		if (!locationOccured){
+		// not really necassary since in most cases travel will tell us our target. but harmless to keep this in case.
+		if (!locationOccured){ // if we weren't already given a location we have to find out where we're going.
+			// first check if our next action requires a specific location
 			if (subject->GetNextPlan()->HasLocation()){
 				locationOccured = subject->GetNextPlan()->Get_Location();
 			}
+			// else check if it need to be done to a target we can travel to.
 			else if (subject->GetNextPlan()->HasObject()){
 				locationOccured = subject->GetNextPlan()->Get_Object()->GetLocation();
 			}
+			// else we don't know where were meant to be going, so cancel execution.
 			else{
 				return false;
 			}
 		}
 
-		if ((locationOccured == subject->GetLocation())){
+		if ((locationOccured == subject->GetLocation())){ // if we're already where we needed to be
 			subject->TimeForward();	// move all our plans forward one
 			return false;
 		}
 
-		return true;
+		return true; // if we got here then our destination is set and we can arrive.
 	}
 
 	return false;

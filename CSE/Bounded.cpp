@@ -26,6 +26,7 @@ void BoundedNum::setValue(double d)
 	value = d;
 }
 
+// change number based on the distance to the extreme
 void BoundedNum::change(double delta)
 {
 	double distance(0);
@@ -65,6 +66,7 @@ void BoundedNum::DivideBy(double d)
 	value /= d;
 }
 
+// convert bounded to double
 double BoundedNum::BtoD(double Bounded)
 {
 	if (Bounded > 0.0){
@@ -74,7 +76,7 @@ double BoundedNum::BtoD(double Bounded)
 		return (1- (1 / (1 + Bounded)));
 	}
 }
-
+// convert double to bounded
 double BoundedNum::DtoB(double unBounded)
 {
 	if (unBounded > 0.0){
@@ -84,4 +86,3 @@ double BoundedNum::DtoB(double unBounded)
 		return ((1 / (1 - unBounded)) - 1);
 	}
 }
-

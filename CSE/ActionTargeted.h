@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 
+// some action definitely have targets. should move some of the Actor* object over,but would require redoing some if(object) checks
 class ActionTargeted :
 	public Action
 {

@@ -19,7 +19,7 @@ void Stage::AddLocationActions(Actor* a)
 {
 	if (a->GetName() == "You"){
 		// different locations have different associated actions
-		// so it would be nice to split these up into subclasses
+		// it would be nice to split these up into subclasses, so each location had its own class
 		if (name == "path"){
 			a->AddAction("Go Home");
 
@@ -51,9 +51,9 @@ void Stage::AddLocationActions(Actor* a)
 			if ((!a->GetHistory()->HaventDoneEventBefore(a, "Pick Flowers")) && (a->GetHistory()->HaventDoneEventBefore(a, "Give Flowers"))){
 				a->AddAction("Give Flowers");
 			}
-			if (a->GetHistory()->HaventDoneEventBefore(a, "Give Food")){
-				a->AddAction("Give Food");
-			}
+			//if (a->GetHistory()->HaventDoneEventBefore(a, "Give Food")){
+			//	a->AddAction("Give Food");
+			//}
 		}
 	}
 }
@@ -69,7 +69,7 @@ void Stage::RemoveLocationActions(Actor* a)
 			a->RemoveAction("Stray Off Path");
 			a->RemoveAction("Walk Path");
 			a->RemoveAction("Go To Lodge");
-			a->AddLocation("path");
+			//a->AddLocation("path");
 		}
 		else if (name == "forest"){
 			a->RemoveAction("Continue Forward");

@@ -31,8 +31,7 @@ void WolfKnowsGrandmaReaction::Init()
 
 	// conditions
 	WorldStateProperty condition1;
-	//condition1.SetWSProperty(WSP_WolfHasLunch, WST_bool, true);
-	//conditions.push_back(condition1);
+	// no condition
 
 }
 
@@ -50,15 +49,4 @@ void WolfKnowsGrandmaReaction::ExecuteConsequences(WorldState* ws)
 	subject->RemoveAction("WolfKnowsGrandmaReaction");
 }
 
-void WolfKnowsGrandmaReaction::EmotionalReaction(NPC_Actor* affectingActor)
-{
-	if (affectingActor == subject){
 
-	}
-
-}
-
-float WolfKnowsGrandmaReaction::NPC_CalculateInclination()
-{
-	return 0.6f;
-}

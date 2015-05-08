@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// if you interact with her positively before telling her you lost the food grandma can forgive you.
 class Forgive :
 	public ActionTargeted
 {

@@ -21,7 +21,7 @@ bool ActionTargeted::ReadyToExecute()
 	if (!Action::ReadyToExecute())
 		return false;
 
-	if (subject->GetLocation() != object->GetLocation()){
+	if (subject->GetLocation() != object->GetLocation()){ // if we're not in the same place as the target. we should move there.
 		subject->Wait(1);
 		subject->Plan("Travel", object->GetLocation(), 0);
 		return false;
@@ -29,6 +29,7 @@ bool ActionTargeted::ReadyToExecute()
 	return true;
 }
 
+// default reaction (subject) and object reaction
 bool ActionTargeted::React()
 {
 	bool reaction = false;

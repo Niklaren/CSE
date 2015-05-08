@@ -1,5 +1,7 @@
 #pragma once
 #include "Action.h"
+
+// wolf eat lunch. requres wolf to be in possesion of the lunch.
 class WolfEatLunch :
 	public Action
 {

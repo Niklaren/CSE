@@ -25,7 +25,7 @@ void GiveWrongDirections::Init()
 	verb = "GiveWrongDirections";
 
 	//effect
-	WorldStateProperty effect1, effect2, effect3;
+	WorldStateProperty effect1, effect2; // can satisfy a goal of responding to askDirections, or specifically to give wrong directions.
 	effect1.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_AskDirections);
 	effects.push_back(effect1);
 	effect2.SetWSProperty(WSP_WrongDirections, WST_bool, true);
@@ -33,17 +33,16 @@ void GiveWrongDirections::Init()
 
 	// conditions
 	WorldStateProperty condition1;
-	//condition1.SetWSProperty(WSP_Location, WST_variable);
-	//conditions.push_back(condition1);
+	// no preconditions
 
 }
 
 std::string GiveWrongDirections::GetSentence()
 {
-	if (subject->GetName() == "Wolf")
+	if (subject->GetName() == "Wolf") // wolf will deliberately mislead you. others would just apologize for not knowing the way.
 		return "If you keep going this way I'm sure you'll make it.";
 	else
-		return "I'm sorry I don't know the way";
+		return "I'm sorry I don't know the way"; // would this be better suited to apologize???
 }
 
 bool GiveWrongDirections::GetUsable()
@@ -69,11 +68,12 @@ void GiveWrongDirections::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
+// inclination based upon how they dislike the asker, how lazy they are. weighted by how nice they are.
 float GiveWrongDirections::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
-	double w = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
+	double w = static_cast<NPC_Actor*>(subject)->Get_Agreeable(); // nicer = bigger weight on conscientious. meaner = bigger weight on dislike.
 	double result = Blend(-a, -b, w);
 	return float(result);
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "Action.h"
+
+// wolf reactions to hearing about grandma. makes motivation to eat grandma slighlty more transparent.
 class WolfKnowsGrandmaReaction :
 	public Action
 {
@@ -12,7 +14,7 @@ public:
 
 	std::string GetSentence();
 
-	void ExecuteConsequences(WorldState*);
-	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
+	virtual void ExecuteConsequences(WorldState*);
+	// no emotional reaction
+	// use default inclination. since no alternative choices
 };

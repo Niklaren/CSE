@@ -1,5 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
+
+// request entryto the lodge.
 class RequestEntry :
 	public ActionTargeted
 {
@@ -12,8 +14,8 @@ public:
 
 	std::string GetSentence();
 
-	void ExecuteConsequences(WorldState*);
-	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
+	virtual void ExecuteConsequences(WorldState*);
+	virtual void EmotionalReaction(NPC_Actor*);
+	virtual float NPC_CalculateInclination();
 };
 

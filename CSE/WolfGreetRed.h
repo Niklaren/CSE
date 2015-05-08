@@ -1,6 +1,7 @@
 #pragma once
 #include "ActionTargeted.h"
 
+// wolf greet player (red riding hood)
 class WolfGreetRed :
 	public ActionTargeted
 {

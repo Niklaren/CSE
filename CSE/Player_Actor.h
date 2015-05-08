@@ -3,47 +3,35 @@
 #include "Actor.h"
 #include "Menu.h"
 
-struct MenuOption
-{
-	string name;
-	enum {Locked, Unlocked, Available} availabilty;
-
-	MenuOption()
-	{
-
-	}
-};
-
+// player actor. the players avatar and character in the story.
+// the player class has a menu object, which the player uses to select actions to perform
 class Player_Actor : public Actor
 {
-public: // ??? for now
-	//vector<MenuOption> o_availableActions;
-	//vector<MenuOption> o_availableLocations;
-	//vector<MenuOption> o_availableCharacters;
+public:
+	// we can just use a string to represent available actions, locations & targets. less memory & easier to track.
 	vector<string> s_availableActions;
 	vector<string> s_availableLocations;
 	vector<string> s_availableCharacters;
-
+	// this does mean that adding and removing actions works a little differently.
 public:
 	Player_Actor(string name, Stage* startlocation, HistoryBook& hb);
 	~Player_Actor();
 
 	virtual void AddAction(string ActionName);
 	virtual void RemoveAction(string ActionName);
-	void RemoveAllActions();
-	vector<string> Get_AvailableActions() { return s_availableActions; }
-	void AddLocation(string LName) { s_availableLocations.push_back(LName); }
-	vector<string> Get_AvailableLocations() { return s_availableLocations; }
+	virtual void RemoveAllActions();
+	virtual vector<string> Get_AvailableActions() { return s_availableActions; }
+	
+	void AddLocation(string LName) { s_availableLocations.push_back(LName); }	// locations not needed here since movement is
+	vector<string> Get_AvailableLocations() { return s_availableLocations; }	// done through untargted actions such as 'flee'
 	void SetAvailableCharacters(vector<NPC_Actor*> NPCs);
 	vector<string> Get_AvailableCharacters() { return s_availableCharacters; }
 
 	virtual bool React();
 	virtual void Plan(string);
 	virtual void Plan(string, Actor*);
-	virtual void Plan(string, NPC_Actor*, NPC_Actor*);
+	//virtual void Plan(string, NPC_Actor*, NPC_Actor*);	// no actions in this story require this
 	virtual void Plan(string action, Stage* l, int moments = 1);
-
-	//optionspicked()
 
 	Menu menu;
 };

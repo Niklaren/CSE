@@ -120,9 +120,6 @@
     <ClInclude Include="ActionTargeted.h">
       <Filter>Source Files\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="BeginStory.h">
-      <Filter>Source Files\Actions\fate</Filter>
-    </ClInclude>
     <ClInclude Include="Hug.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
@@ -174,9 +171,6 @@
     <ClInclude Include="SuggestFlowers.h">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClInclude>
-    <ClInclude Include="WolfDisguise.h">
-      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
-    </ClInclude>
     <ClInclude Include="RequestEntry.h">
       <Filter>Source Files\Actions\Riding Hood</Filter>
     </ClInclude>
@@ -225,9 +219,6 @@
     <ClInclude Include="Reprimand.h">
       <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
     </ClInclude>
-    <ClInclude Include="Kiss.h">
-      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
-    </ClInclude>
     <ClInclude Include="Ignore.h">
       <Filter>Source Files\Actions\Riding Hood\Red</Filter>
     </ClInclude>
@@ -269,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="DramaManager.h">
       <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiss.h">
+      <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -326,9 +320,6 @@
     <ClCompile Include="ActionTargeted.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="BeginStory.cpp">
-      <Filter>Source Files\Actions\fate</Filter>
-    </ClCompile>
     <ClCompile Include="Hug.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
@@ -383,9 +374,6 @@
     <ClCompile Include="RequestEntry.cpp">
       <Filter>Source Files\Actions\Riding Hood</Filter>
     </ClCompile>
-    <ClCompile Include="WolfDisguise.cpp">
-      <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
-    </ClCompile>
     <ClCompile Include="Intimidate.cpp">
       <Filter>Source Files\Actions\Riding Hood\Wolf</Filter>
     </ClCompile>
@@ -429,9 +417,6 @@
       <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
     </ClCompile>
     <ClCompile Include="Reprimand.cpp">
-      <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
-    </ClCompile>
-    <ClCompile Include="Kiss.cpp">
       <Filter>Source Files\Actions\Riding Hood\Grandma</Filter>
     </ClCompile>
     <ClCompile Include="Ignore.cpp">
@@ -478,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiss.cpp">
+      <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
