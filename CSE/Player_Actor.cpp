@@ -86,9 +86,7 @@ void Player_Actor::Plan(string action, Actor* object_)
 		return;
 	}
 
-	if (action == "Joke")
-		plans.push_back(new Punch(this, object_, 1));
-	else if (action == "Hug")
+	if (action == "Hug")
 		plans.push_back(new Hug(this, object_, 1));
 	else if (action == "Greet")
 		plans.push_back(new Greet(this, object_, 1));

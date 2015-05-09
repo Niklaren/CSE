@@ -53,8 +53,6 @@
 #include "Thank.h"
 //#include "OK.h"
 #include "Insult.h"
-#include "Punch.h"
-#include "Intervene.h"
 
 // vector for data structures
 #include <vector>

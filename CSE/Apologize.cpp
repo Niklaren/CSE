@@ -46,7 +46,7 @@ void Apologize::EmotionalReaction(NPC_Actor* affectingActor)
 
 	if (affectingActor == object){
 		Goal g;
-		g.SetRelevance(0.7f);
+		g.SetRelevance(0.9f);
 		g.SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Apologize);
 		affectingActor->AddGoal(g);
 

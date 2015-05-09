@@ -300,8 +300,6 @@ void NPC_Actor::Plan(Action* action, int moments = 1)
 		//std::cout << "no object given" << std::endl;
 		return;
 	}
-	else if (action->GetVerb() == "Punch")
-		plans.push_back(new Punch(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Hug")
 		plans.push_back(new Hug(this, action->Get_Object(), moments));
 	else if (action->GetVerb() == "Greet")

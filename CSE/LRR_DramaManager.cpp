@@ -85,6 +85,7 @@ bool LRR_DramaManager::React()
 	// wolf moves offstage after eating
 	if (reactEvent == "WolfEatLunch"){
 		wolf->Plan("Travel", offstage);
+		if (red->GetLocation() == wolf->GetLocation())
 		red->RemoveAction("Ask Directions");
 	}
 

@@ -30,7 +30,7 @@ void BeginLRR::ExecuteConsequences(WorldState* ws)
 	
 	//YOU
 	red->AddAction("Observe");
-	red->AddAction("Eat Some Food");
+	//red->AddAction("Eat Some Food");
 	red->AddAction("Walk Path");
 	red->AddAction("Stray Off Path");
 	red->AddAction("Go Home");

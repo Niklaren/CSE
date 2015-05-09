@@ -129,7 +129,6 @@
     <ClInclude Include="Hug.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Insult.h" />
-    <ClInclude Include="Intervene.h" />
     <ClInclude Include="LogOnStump.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NPC_Actor.h" />
@@ -139,7 +138,6 @@
     <ClInclude Include="PickFlowers.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="Player_Actor.h" />
-    <ClInclude Include="Punch.h" />
     <ClInclude Include="QueryBasket.h" />
     <ClInclude Include="QueryIdentity.h" />
     <ClInclude Include="QueryPurpose.h" />
@@ -200,7 +198,6 @@
     <ClCompile Include="Hug.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Insult.cpp" />
-    <ClCompile Include="Intervene.cpp" />
     <ClCompile Include="LogOnStump.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NPC_Actor.cpp" />
@@ -210,7 +207,6 @@
     <ClCompile Include="PickFlowers.cpp" />
     <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Player_Actor.cpp" />
-    <ClCompile Include="Punch.cpp" />
     <ClCompile Include="QueryBasket.cpp" />
     <ClCompile Include="QueryIdentity.cpp" />
     <ClCompile Include="QueryPurpose.cpp" />

@@ -56,8 +56,10 @@ void Hug::ExecuteConsequences(WorldState* ws)
 	Action::ExecuteConsequences(ws);
 
 	subject->RemoveAction("Hug");
-	if (subject->GetName() != "You")
+	if (subject->GetName() != "You"){
 		ws->WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Hug);
+		ws->WSProperties[WSP_ReactToWorldStateEvent].SetWSProperty(WSP_ReactToWorldStateEvent, WST_worldStateEvent, WSE_Greet);
+	}
 }
 
 void Hug::EmotionalReaction(NPC_Actor* affectingActor)

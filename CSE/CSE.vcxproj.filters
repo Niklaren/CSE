@@ -105,13 +105,7 @@
     <ClInclude Include="Insult.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
-    <ClInclude Include="Intervene.h">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClInclude>
     <ClInclude Include="OK.h">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClInclude>
-    <ClInclude Include="Punch.h">
       <Filter>Source Files\Actions\generic</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
@@ -305,13 +299,7 @@
     <ClCompile Include="Insult.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
-    <ClCompile Include="Intervene.cpp">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClCompile>
     <ClCompile Include="OK.cpp">
-      <Filter>Source Files\Actions\generic</Filter>
-    </ClCompile>
-    <ClCompile Include="Punch.cpp">
       <Filter>Source Files\Actions\generic</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp">
