@@ -55,12 +55,10 @@ void KillWolf::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float KillWolf::NPC_CalculateInclination()
+double KillWolf::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Angry();
 	double result = Blend(-a, b, 0);
-	return float(-result);
-
-	return 0;
+	return -result;
 }

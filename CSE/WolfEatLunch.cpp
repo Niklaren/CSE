@@ -57,7 +57,7 @@ void WolfEatLunch::EmotionalReaction(NPC_Actor* affectingActor)
 }
 
 // no personality associated with eating lunch. just something we are happy to do.
-float WolfEatLunch::NPC_CalculateInclination()
+double WolfEatLunch::NPC_CalculateInclination()
 {
-	return 0.3f;
+	return 0.3;
 }

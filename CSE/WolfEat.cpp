@@ -89,19 +89,19 @@ void WolfEat::EmotionalReaction(NPC_Actor* affectingActor)
 
 // different inclination depending on target. could use the same formula.
 // but a calmer more conniving character would pick the easier meal (grandma). if he's angry he'll go for the target in front.
-float WolfEat::NPC_CalculateInclination()
+double WolfEat::NPC_CalculateInclination()
 {
 	if (verb == "WolfEatYou"){
 		double a = static_cast<NPC_Actor*>(subject)->Get_Angry();
 		double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 		double result = Blend(a, -b, 0);
-		return float(result);
+		return result;
 	}
 	if (verb == "WolfEatGrandma"){
 		double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 		double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 		double result = Blend(-a, -b, 0);
-		return float(result);
+		return result;
 	}
 	return 0;
 }

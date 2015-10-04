@@ -60,7 +60,7 @@ void QueryBasket::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float QueryBasket::NPC_CalculateInclination()
+double QueryBasket::NPC_CalculateInclination()
 {
 	return 0;
 }

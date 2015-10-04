@@ -19,11 +19,11 @@ class Node
 {
 public: 
 	Node* parent;
-	float runningCost;
+	double runningCost;
 	vector<WorldStateProperty> goalState; // list of WSPs
 	Action* action;
 
-	Node(Node* parent_, float runningCost_, vector<WorldStateProperty> goal_, Action* action_) {
+	Node(Node* parent_, double runningCost_, vector<WorldStateProperty> goal_, Action* action_) {
 		parent = parent_;
 		runningCost = runningCost_;
 		goalState = goal_;

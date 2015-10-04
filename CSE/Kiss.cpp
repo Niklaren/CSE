@@ -70,11 +70,11 @@ void Kiss::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float Kiss::NPC_CalculateInclination()
+double Kiss::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double w = static_cast<NPC_Actor*>(subject)->Get_Extraverted();;
 	double result = Blend(a, b, w);
-	return float(result);
+	return result;
 }

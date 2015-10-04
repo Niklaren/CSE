@@ -16,6 +16,6 @@ public:
 
 	virtual bool React();
 
-	//virtual float CalculateInclination();
+	//virtual double CalculateInclination();
 };
 

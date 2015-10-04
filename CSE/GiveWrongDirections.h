@@ -17,5 +17,5 @@ public:
 
 	virtual void ExecuteConsequences(WorldState*);
 	virtual void EmotionalReaction(NPC_Actor*);
-	virtual float NPC_CalculateInclination();
+	virtual double NPC_CalculateInclination();
 };

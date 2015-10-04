@@ -55,7 +55,7 @@ void GrabLog::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float GrabLog::NPC_CalculateInclination()
-{
-	return 0;
-}
+//double GrabLog::NPC_CalculateInclination()
+//{
+//	return 0;
+//}

@@ -24,10 +24,10 @@ public:
 
 	void Init();
 
-	virtual bool React();
-	virtual void Plan(string);
-	virtual void Plan(string, Actor*){}
-	virtual void CheckForPlanning();
+	bool React();
+	void Plan(string);
+	void Plan(string, Actor*){}
+	void CheckForPlanning();
 
 };
 

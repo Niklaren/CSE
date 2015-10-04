@@ -63,7 +63,7 @@ void Travel::EmotionalReaction(NPC_Actor* affectingActor)
 
 }
 
-float Travel::NPC_CalculateInclination()
+double Travel::NPC_CalculateInclination()
 {
 	return 0;
 }

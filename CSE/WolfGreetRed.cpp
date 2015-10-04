@@ -73,11 +73,11 @@ void WolfGreetRed::EmotionalReaction(NPC_Actor* affectingActor)
 // inclination to greet depends on how nice we are and how nice we think the other person to be.
 // if we're in a bad mood then higher weighting will be on our internal niceness. if we're nice we'greet anyway. if we're in a bad mood
 // and we're not nice we definitely dont want to do it. if we're in a good mood then it depends more on how the target is liked.
-float WolfGreetRed::NPC_CalculateInclination()
+double WolfGreetRed::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double result = Blend(a, b, w);
-	return float(result);
+	return result;
 }

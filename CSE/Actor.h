@@ -104,7 +104,6 @@ public:
 	virtual bool React() = 0;
 
 	// plan by putting an action to the plans vector
-	// do these need to be virtual? makes it look cleaner. but main difference is just the actions they perform. not how they're processed.
 	virtual void Plan(string action){}
 	virtual void Plan(string action, Actor* object){}
 	virtual void Plan(string action, Stage* l, int moments = 1){}

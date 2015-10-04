@@ -17,21 +17,21 @@ public:
 	Player_Actor(string name, Stage* startlocation, HistoryBook& hb);
 	~Player_Actor();
 
-	virtual void AddAction(string ActionName);
-	virtual void RemoveAction(string ActionName);
-	virtual void RemoveAllActions();
-	virtual vector<string> Get_AvailableActions() { return s_availableActions; }
+	void AddAction(string ActionName);
+	void RemoveAction(string ActionName);
+	void RemoveAllActions();
+	vector<string> Get_AvailableActions() { return s_availableActions; }
 	
 	void AddLocation(string LName) { s_availableLocations.push_back(LName); }	// locations not needed here since movement is
 	vector<string> Get_AvailableLocations() { return s_availableLocations; }	// done through untargted actions such as 'flee'
 	void SetAvailableCharacters(vector<NPC_Actor*> NPCs);
 	vector<string> Get_AvailableCharacters() { return s_availableCharacters; }
 
-	virtual bool React();
-	virtual void Plan(string);
-	virtual void Plan(string, Actor*);
-	//virtual void Plan(string, NPC_Actor*, NPC_Actor*);	// no actions in this story require this
-	virtual void Plan(string action, Stage* l, int moments = 1);
+	bool React();
+	void Plan(string);
+	void Plan(string, Actor*);
+	//void Plan(string, NPC_Actor*, NPC_Actor*);	// no actions in this story require this
+	void Plan(string action, Stage* l, int moments = 1);
 
 	Menu menu;
 };

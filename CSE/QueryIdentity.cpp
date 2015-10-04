@@ -61,7 +61,7 @@ void QueryIdentity::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float QueryIdentity::NPC_CalculateInclination()
+double QueryIdentity::NPC_CalculateInclination()
 {
 	return 0;
 }

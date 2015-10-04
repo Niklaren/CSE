@@ -59,7 +59,7 @@ void QueryPurpose::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float QueryPurpose::NPC_CalculateInclination()
+double QueryPurpose::NPC_CalculateInclination()
 {
 	return 0;
 }

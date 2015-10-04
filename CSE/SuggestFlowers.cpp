@@ -65,10 +65,10 @@ void SuggestFlowers::EmotionalReaction(NPC_Actor* affectingActor)
 }
 
 // inclination based on how outgoing and open to new experiences character is.
-float SuggestFlowers::NPC_CalculateInclination()
+double SuggestFlowers::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Extraverted();
 	double b = static_cast<NPC_Actor*>(subject)->Get_Open();
 	double result = a + b + 0.15; // increased the inclination to make this path happen more frequently. not ideal.
-	return float(result);
+	return result;
 }

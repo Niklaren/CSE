@@ -161,7 +161,7 @@
     <ClCompile Include="Arrive.cpp" />
     <ClCompile Include="AskDirections.cpp" />
     <ClCompile Include="BeginLRR.cpp" />
-    <ClCompile Include="Bounded.cpp" />
+    <ClCompile Include="BoundedNum.cpp" />
     <ClCompile Include="ChopLog.cpp" />
     <ClCompile Include="CSE.cpp" />
     <ClCompile Include="DramaManager.cpp" />

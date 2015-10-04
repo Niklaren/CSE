@@ -15,5 +15,5 @@ public:
 
 	void ExecuteConsequences(WorldState*);
 	void EmotionalReaction(NPC_Actor*);
-	float NPC_CalculateInclination();
+	double NPC_CalculateInclination();
 };

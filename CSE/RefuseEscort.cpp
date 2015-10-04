@@ -59,11 +59,11 @@ void RefuseEscort::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float RefuseEscort::NPC_CalculateInclination()
+double RefuseEscort::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());	// how they like the target
 	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();				// how lazy
 	double w = static_cast<NPC_Actor*>(subject)->Get_Extraverted();					// weighted by how shy
 	double result = Blend(-a, -b, w);
-	return float(result);
+	return result;
 }

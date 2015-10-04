@@ -68,12 +68,12 @@ void Thank::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float Thank::NPC_CalculateInclination()
+double Thank::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double b = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double w = static_cast<NPC_Actor*>(subject)->Get_Happy();
 	double result = Blend(a, b, w);
 	result += 0.2;
-	return float(result);
+	return result;
 }

@@ -70,11 +70,11 @@ void GiveDirections::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 // basically the opposite of give false direction. will help if conscientious or likes asker. weighted by how agreeable they are.
-float GiveDirections::NPC_CalculateInclination() //openness(sociability) could be considered a factor.
+double GiveDirections::NPC_CalculateInclination() //openness(sociability) could be considered a factor.
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
 	double b = static_cast<NPC_Actor*>(subject)->Get_Agreeable();
 	double w = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID()); // I think they're mean = weight on conscientious.
 	double result = Blend(a, b, w);												  // I think they're nice = weight on my niceness
-	return float(result);
+	return result;
 }

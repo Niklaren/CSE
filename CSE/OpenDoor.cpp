@@ -52,7 +52,7 @@ void OpenDoor::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float OpenDoor::NPC_CalculateInclination()
-{
-	return 0;
-}
+//double OpenDoor::NPC_CalculateInclination()
+//{
+//	return 0;
+//}

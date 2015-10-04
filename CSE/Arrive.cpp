@@ -55,7 +55,7 @@ void Arrive::EmotionalReaction(NPC_Actor* affectingActor)
 
 }
 
-float Arrive::NPC_CalculateInclination()
+double Arrive::NPC_CalculateInclination()
 {
 	return 0;
 }

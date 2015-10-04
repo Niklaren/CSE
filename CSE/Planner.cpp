@@ -74,7 +74,7 @@ bool Planner::BuildPaths(Node* parent, vector<Node*>& solutions, vector<Action*>
 				vector<WorldStateProperty> newGoal = makeNewGoal(parent->goalState, actionPool[index]->GetConditions(), actionPool[index]->GetEffects());
 
 				//calculate running cost
-				float cost = parent->runningCost + 1.0 - actionPool[index]->NPC_CalculateInclination();
+				double cost = parent->runningCost + 1.0 - actionPool[index]->NPC_CalculateInclination();
 
 				// new node with above
 				Node* nextStep = new Node(parent, cost, newGoal, actionPool[index]);

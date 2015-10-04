@@ -43,7 +43,7 @@
 //
 //}
 //
-//float Leave::NPC_CalculateInclination()
+//double Leave::NPC_CalculateInclination()
 //{
 //	return 0;
 //}

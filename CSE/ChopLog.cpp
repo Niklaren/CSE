@@ -57,7 +57,7 @@ void ChopLog::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float ChopLog::NPC_CalculateInclination()
-{
-	return 0;
-}
+//double ChopLog::NPC_CalculateInclination()
+//{
+//	return 0;
+//}

@@ -59,7 +59,7 @@ void Insult::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float Insult::NPC_CalculateInclination()
+double Insult::NPC_CalculateInclination()
 {
 	/*if (affectingActor == object){
 		double punch_inclination = -affectingActor->Get_Agreeable();//Blend(-affectingActor->Get_Agreeable())

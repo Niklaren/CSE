@@ -58,7 +58,7 @@ void LogOnStump::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float LogOnStump::NPC_CalculateInclination()
-{
-	return 0;
-}
+//double LogOnStump::NPC_CalculateInclination()
+//{
+//	return 0;
+//}

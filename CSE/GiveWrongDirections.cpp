@@ -69,11 +69,11 @@ void GiveWrongDirections::EmotionalReaction(NPC_Actor* affectingActor)
 }
 
 // inclination based upon how they dislike the asker, how lazy they are. weighted by how nice they are.
-float GiveWrongDirections::NPC_CalculateInclination()
+double GiveWrongDirections::NPC_CalculateInclination()
 {
 	double a = static_cast<NPC_Actor*>(subject)->Get_pAgreeable(object->GetID());
 	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
 	double w = static_cast<NPC_Actor*>(subject)->Get_Agreeable(); // nicer = bigger weight on conscientious. meaner = bigger weight on dislike.
 	double result = Blend(-a, -b, w);
-	return float(result);
+	return result;
 }

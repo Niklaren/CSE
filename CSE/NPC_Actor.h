@@ -57,7 +57,7 @@ public:
 
 	bool Draw(sf::RenderWindow&);
 
-	virtual bool React();
+	bool React();
 	//void EmotionalReaction(); // Not sure where this should be located???
 	
 	void SetWorldState(WorldState* w) { ws = w; }
@@ -74,9 +74,9 @@ public:
 	void ClearPlans();
 	bool RePlan();
 	void Plan(Action*, int );
-	virtual void Plan(string action, Stage* l, int moments = 1);
-	//virtual void Plan(string verb, int moments, Actor* target);
-	//virtual void Plan(string action, int m = 1, Actor* t = nullptr, Stage* l = nullptr);
+	void Plan(string action, Stage* l, int moments = 1);
+	//void Plan(string verb, int moments, Actor* target);
+	//void Plan(string action, int m = 1, Actor* t = nullptr, Stage* l = nullptr);
 
 	// change of personality traits
 	void CoolMoods();

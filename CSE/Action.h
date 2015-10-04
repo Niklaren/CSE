@@ -66,7 +66,7 @@ public:
 	virtual void EmotionalReaction(NPC_Actor*);
 
 	// actions should also specify how the actor is inclined to perform it. can range from -1(hate to do) to 1(love to do it)
-	virtual float NPC_CalculateInclination(){ return 0; } // 0 by default, ambivilent. most actions for NPCs should likely avoid this
+	virtual double NPC_CalculateInclination(){ return 0; } // 0 by default, ambivilent. most actions for NPCs should likely avoid this
 
 	virtual bool GetUsable() { return true; }	// actions can have conditions under which they're unusable. eg. shoot, with no gun
 	std::vector<WorldStateProperty> GetConditions() { return conditions; }

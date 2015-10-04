@@ -64,12 +64,12 @@ void RequestEntry::EmotionalReaction(NPC_Actor* affectingActor)
 	}
 }
 
-float RequestEntry::NPC_CalculateInclination()
+double RequestEntry::NPC_CalculateInclination()
 {
 	// a scociable and conscientious individual would prefer to politely request entry. +.15 for 'normality'/social acceptability.
 	double a = static_cast<NPC_Actor*>(subject)->Get_Open();
 	double b = static_cast<NPC_Actor*>(subject)->Get_Conscientious();
 	// w = static_cast<NPC_Actor*>(subject)->
 	double result = Blend(a, b, 0) + 0.15;
-	return float(result);
+	return result;
 }
