@@ -1,7 +1,7 @@
 # CSE
 hons work. Character Simulation Engine. using sfml & c++
 
-The largest solo prject I have worked on, CSE is a project that uses GOAP in conjuction with a personality model to detemine how NPC characters will act.
+The largest solo project I have worked on, CSE is a project that uses GOAP in conjuction with a personality model to detemine how NPC characters will act.
 
 For the project a specific story scenario was written in which the characters can act.
 This was the classic tale of Little Red Riding Hood.
